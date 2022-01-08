@@ -5,6 +5,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_intro/flutter_intro.dart';
@@ -37,11 +38,15 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     })..addListener(() {
 
     });
-    Future.delayed(Duration(milliseconds: 3000)).then((value) {
-      setState(() {
-        _isLoading=false;
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+
+      Future.delayed(Duration(milliseconds: 3000)).then((value) {
+        setState(() {
+          _isLoading=false;
+        });
       });
     });
+
 
   }
   @override
@@ -100,7 +105,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                           ),
                         ],
                       )
-                      ,child: Center(child: Text("دخول",style:S.h4(color:Colors.blue)),)),),
+                      ,child: Center(child: Text(tr("login"),style:S.h4(color:Colors.blue)),)),),
                 ),
                 Expanded(
                     key: intro!.keys[1],
@@ -121,7 +126,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                         ),
                       ],
                     )
-                    ,child: Center(child: Text("دخول",style:S.h4(color:Colors.blue)),)),)),
+                    ,child: Center(child: Text(tr("register"),style:S.h4(color:Colors.blue)),)),)),
                 Expanded(
                   key: intro!.keys[2],
                   flex: 1,child: InkWell(
@@ -142,15 +147,15 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
                         ),
                       ],
                     )
-                    ,child: Center(child: Text("تصفح التطبيق",style:S.h4(color:Colors.blue)),)),),)
+                    ,child: Center(child: Text(tr("brows_app_btn"),style:S.h4(color:Colors.blue)),)),),)
               ],)), opacity: _animation!);
   }
 
 Intro _myIntro(){
     List<String>descriptionsList=[
-      "يمكنك تصفح التطبيق دون تسجيل الدخول",
-      "اذا كان لديك حساب يمكنك تسجيل الدخول",
-      "تسجيل حساب جديد لدينا"
+      tr("into_brows_btn"),
+      tr("intro_login_btn"),
+      tr("intro_register_btn")
     ];
    return MyUtils.myIntro(descriptionsList);
 }

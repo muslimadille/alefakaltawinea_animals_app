@@ -1,3 +1,4 @@
+import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,7 +8,8 @@ import 'package:flutter/services.dart';
 
 class BaseScreen extends StatefulWidget {
   Widget body;
-   BaseScreen({required this.body});
+  bool showSettings;
+   BaseScreen({required this.body,this.showSettings=false});
 
 
   @override
@@ -31,7 +33,28 @@ class _BaseScreenState extends State<BaseScreen> {
       locale: context.locale,
       debugShowCheckedModeBanner: false,
       home:Scaffold(
-        body: widget.body,
+        body: SafeArea(child: Column(children: [
+          widget.showSettings?_actionBar():Container(),
+          Expanded(child: widget.body,)
+        ],),),
+      ),
+    );
+  }
+  Widget _actionBar(){
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(bottom: BorderSide(width: D.default_1,color: Colors.grey)),
+        color: Colors.white,
+      ),
+      child: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+          Center(
+            child:
+          IconButton(onPressed: (){}, icon: Icon(Icons.menu,color: Colors.grey,size: D.default_40,)),)
+        ],),
       ),
     );
   }

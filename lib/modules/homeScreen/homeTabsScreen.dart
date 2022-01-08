@@ -1,9 +1,12 @@
 
+import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/homeScreen/mainCategoriesScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/neerToYou/NearToyouScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/profile/profileScreen.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_intro/flutter_intro.dart';
@@ -27,7 +30,9 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> {
 }
   @override
   Widget build(BuildContext context) {
-    return PersistentTabView(
+    return BaseScreen(
+      showSettings: true,
+        body: PersistentTabView(
 
         context,
         controller: _controller,
@@ -43,10 +48,10 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> {
             borderRadius: BorderRadius.circular(0),
             colorBehindNavBar: Colors.black,
             boxShadow:[BoxShadow(
-                color: Colors.black54,
-                offset:Offset(-2,-2),
-                blurRadius:5.0,
-                spreadRadius: 0.5
+                color: Colors.grey,
+                offset:Offset(0,0),
+                blurRadius:D.default_1,
+                spreadRadius: D.default_1
             )]
         ),
         popAllScreensOnTapOfSelectedTab: true,
@@ -61,14 +66,14 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> {
           duration: Duration(milliseconds: 200),
         ),
         navBarStyle: NavBarStyle.style10 // Choose the nav bar style with this property.
-    );
+    ));
   }
   List<PersistentBottomNavBarItem> _navBarsItems(BuildContext context) {
     List<PersistentBottomNavBarItem>list=
     [
       PersistentBottomNavBarItem(
         icon: Icon(CupertinoIcons.home),
-        title: ("الرئيسة"),
+        title: (tr("home")),
         textStyle: S.h4(),
         activeColorPrimary: CupertinoColors.activeBlue,
         inactiveColorPrimary: CupertinoColors.systemGrey,
@@ -77,7 +82,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> {
       ),
       PersistentBottomNavBarItem(
           icon: Icon(CupertinoIcons.location_circle,),
-          title: ("الاقرب إليك"),
+          title: (tr("closest")),
           textStyle: S.h4(),
           activeColorPrimary: CupertinoColors.activeBlue,
           inactiveColorPrimary: CupertinoColors.systemGrey,
@@ -87,7 +92,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> {
       PersistentBottomNavBarItem(
 
           icon: Icon(CupertinoIcons.profile_circled),
-          title: ("الحساب"),
+          title: (tr("profile")),
           textStyle: S.h4(),
           activeColorPrimary: CupertinoColors.activeBlue,
           inactiveColorPrimary: CupertinoColors.systemGrey,

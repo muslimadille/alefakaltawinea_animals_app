@@ -1,5 +1,17 @@
 {
   "Next": "Next",
   "Previous": "Previous",
-  "Hide": "Hide"
+  "Hide": "Hide",
+  "into_brows_btn": "You can browse the application without logging in",
+  "intro_login_btn":"If you have an account, you can log in",
+  "intro_register_btn": "Register a new account with us",
+  "brows_app_btn": "Browse the app",
+  "login": "Login",
+  "register": "Register",
+  "home": "Home",
+  "profile": "Profile",
+  "closest":"Closest"
+
+
+
 }
