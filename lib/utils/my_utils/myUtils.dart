@@ -1,4 +1,6 @@
 
+import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_intro/flutter_intro.dart';
@@ -58,7 +60,7 @@ class MyUtils{
                               ),
                             ],
                           )
-                          ,child: Center(child: Text("التالي",style:S.h4(color:Colors.blue)),)),),
+                          ,child: Center(child: Text(tr("Next"),style:S.h4(color:Colors.blue)),)),),
                     ),
                     Expanded( flex: 1,child: InkWell(
                       onTap:(){
@@ -78,7 +80,7 @@ class MyUtils{
                             ),
                           ],
                         )
-                        ,child: Center(child: Text("السابق",style:S.h4(color:Colors.blue)),)),)),
+                        ,child: Center(child: Text(tr("Previous"),style:S.h4(color:Colors.blue)),)),)),
                     Expanded( flex: 1,child: InkWell(
                       onTap:(){
                         params.onFinish();
@@ -97,7 +99,7 @@ class MyUtils{
                             ),
                           ],
                         )
-                        ,child: Center(child: Text("إخفاء",style:S.h4(color:Colors.blue)),)),),)
+                        ,child: Center(child: Text(tr("Hide"),style:S.h4(color:Colors.blue)),)),),)
                   ],))
 
           ],),
@@ -106,4 +108,5 @@ class MyUtils{
     );
     return intro;
   }
+
 }

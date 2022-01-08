@@ -35,6 +35,7 @@ dependencies:
   avatar_glow: ^2.0.2
   persistent_bottom_nav_bar: ^4.0.2
   google_fonts: ^2.2.0
+  easy_localization: ^3.0.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -67,6 +68,8 @@ flutter:
   assets:
     - assets/images/logo_dark.png
     - assets/images/logo_name.png
+    - assets/strings/ar-EG.json
+    - assets/strings/en-US.json
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
