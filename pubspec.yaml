@@ -72,6 +72,11 @@ flutter:
     - assets/images/logo_name.png
     - assets/strings/ar-EG.json
     - assets/strings/en-US.json
+    - assets/fonts/cairo_font.ttf
+  fonts:
+    - family: Cairo
+      fonts:
+        - asset: assets/fonts/cairo_font.ttf
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

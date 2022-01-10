@@ -6,16 +6,23 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'modules/homeScreen/homeTabsScreen.dart';
+import 'modules/homeScreen/provider/intro_provider_model.dart';
 import 'modules/spalshScreen/spalshScreen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  runApp(EasyLocalization(
-      supportedLocales: [Locale('en', 'US'), Locale('ar', 'EG')],
-      path: 'assets/strings', // <-- change the path of the translation files
-      fallbackLocale: Locale('ar', 'EG'),
-      child: MyApp()
+  runApp(MultiProvider(
+    providers: [
+      ChangeNotifierProvider<IntroProviderModel>(create: (ctx) => IntroProviderModel(),),
+
+    ],
+    child: EasyLocalization(
+        supportedLocales: [Locale('en', 'US'), Locale('ar', 'EG')],
+        path: 'assets/strings', // <-- change the path of the translation files
+        fallbackLocale: Locale('ar', 'EG'),
+        child: MyApp()
+    ),
   ));
 }
 
