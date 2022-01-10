@@ -1,3 +1,4 @@
+import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
 import 'package:flutter/material.dart';
 
 class MainCategoriesScreen extends StatefulWidget {
@@ -10,6 +11,6 @@ class MainCategoriesScreen extends StatefulWidget {
 class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return LoadingProgress();
   }
 }
