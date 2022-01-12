@@ -1,6 +1,6 @@
 
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
-import 'package:alefakaltawinea_animals_app/modules/homeScreen/mainCategoriesScreen.dart';
+import 'package:alefakaltawinea_animals_app/modules/homeScreen/provider/bottom_bar_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/homeScreen/provider/intro_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/neerToYou/NearToyouScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/profile/profileScreen.dart';
@@ -8,6 +8,8 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +17,11 @@ import 'package:flutter_intro/flutter_intro.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 
+import 'home_screen/mainCategoriesScreen.dart';
+
 class HomeTabsScreen extends StatefulWidget {
   IntroProviderModel?introProviderModel;
+  
 
    HomeTabsScreen(this.introProviderModel) ;
 
@@ -28,6 +33,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
   PersistentTabController? _controller;
   AnimationController? _animationController;
   Animation<double>? _animation;
+  BottomBarProviderModel?bottomBarProviderModel;
 @override
   void initState() {
     super.initState();
@@ -36,82 +42,20 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
 }
   @override
   Widget build(BuildContext context) {
+    bottomBarProviderModel=Provider.of<BottomBarProviderModel>(context,listen: true);
     return BaseScreen(
       showSettings: true,
-        body: PersistentTabView(
-        context,
-        controller: _controller,
-        screens: _screens,
-        items: _navBarsItems(context),
-            padding:NavBarPadding.all(D.default_5),
-        confineInSafeArea: false,
-        backgroundColor: Colors.white, // Default is Colors.white.
-        handleAndroidBackButtonPress: true, // Default is true.
-        resizeToAvoidBottomInset: true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
-        stateManagement: true, // Default is true.
-        hideNavigationBarWhenKeyboardShows: true, // Recommended to set 'resizeToAvoidBottomInset' as true while using this argument. Default is true.
-        decoration: NavBarDecoration(
-            borderRadius: BorderRadius.circular(0),
-            colorBehindNavBar: Colors.black,
-            boxShadow:[BoxShadow(
-                color: Colors.grey,
-                offset:Offset(0,0),
-                blurRadius:D.default_1,
-                spreadRadius: D.default_1
-            )]
-        ),
-        popAllScreensOnTapOfSelectedTab: true,
-        popActionScreens: PopActionScreensType.all,
-        itemAnimationProperties: ItemAnimationProperties( // Navigation Bar's items animation properties.
-          duration: Duration(milliseconds: 200),
-          curve: Curves.ease,
-        ),
-        screenTransitionAnimation: ScreenTransitionAnimation( // Screen transition animation on change of selected tab.
-          animateTabTransition: true,
-          curve: Curves.ease,
-          duration: Duration(milliseconds: 200),
-        ),
-        navBarStyle: NavBarStyle.style10 // Choose the nav bar style with this property.
-    ));
+        body:Column(children: [
+          Expanded(child: _screens[bottomBarProviderModel!.selectedScreen!]),
+          _bottomBar()
+        ],));
   }
-  List<PersistentBottomNavBarItem> _navBarsItems(BuildContext context) {
-    List<PersistentBottomNavBarItem>list=
-    [
-      PersistentBottomNavBarItem(
-        icon: Icon(CupertinoIcons.home),
-        title: (tr("home")),
-        textStyle: S.h4(),
-        opacity: _animation!.value,
-        contentPadding: D.default_10,
-        activeColorPrimary: C.BASE_BLUE,
-        inactiveColorPrimary: CupertinoColors.systemGrey,
-        activeColorSecondary: CupertinoColors.white,
-
-      ),
-      PersistentBottomNavBarItem(
-          icon: Icon(CupertinoIcons.location_circle,key: widget.introProviderModel!.intro!.keys[1]),
-          title: (tr("closest")),
-          textStyle: S.h4(),
-          activeColorPrimary: C.BASE_BLUE,
-          inactiveColorPrimary: CupertinoColors.systemGrey,
-        activeColorSecondary: CupertinoColors.white,
-      ),
-      PersistentBottomNavBarItem(
-
-          icon: Icon(CupertinoIcons.profile_circled,key: widget.introProviderModel!.intro!.keys[2]),
-          title: (tr("profile")),
-          textStyle: S.h4(),
-          activeColorPrimary: C.BASE_BLUE,
-          inactiveColorPrimary: CupertinoColors.systemGrey,
-        activeColorSecondary: CupertinoColors.white,
-      ),
-
-    ];
-    return list;
-  }
-  List<Widget>_screens=[MainCategoriesScreen(),NearToYouScreen(),ProfileScreen()];
+ 
+  List<Widget>_screens=[MainCategoriesScreen(),NearToYouScreen(),ProfileScreen(),ProfileScreen(),ProfileScreen(),ProfileScreen()];
   Intro _myIntro(){
     List<String>descriptionsList=[
+      tr("intro_settings"),
+      tr("intro_settings"),
       tr("intro_settings"),
       tr("intro_closest_btn"),
       tr("intro_profile_btn"),
@@ -133,6 +77,106 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
       _animationController!.forward();
     });
+  }
+  Widget _bottomBar(){
+    return Container(
+      padding: EdgeInsets.all(D.default_10),
+      width: MediaQuery.of(context).size.width,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(0),
+          color: Colors.white,
+          boxShadow:[BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              offset:Offset(-2,-2),
+              blurRadius:2,
+              spreadRadius: 2
+          )]
+      ),
+      child: Row(
+        children: [
+          _homeBtn(),
+          _favBtn(),
+          _closestBtn(),
+          _notificationsBtn(),
+          _profileBtn()
+
+        ],
+      ),
+    ) ;
+  }
+  Widget _homeBtn(){
+    return Expanded(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:[
+          InkWell(onTap: (){
+            bottomBarProviderModel!.setSelectedScreen(0);
+
+          }
+            ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==0?Res.IC_HOME_BLUE:Res.IC_HOME_GREY,width: D.default_30,height: D.default_30,),),
+          Center(child:Text(tr("home"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==0?C.BASE_BLUE:Colors.grey),),)
+        ]
+    ),);
+  }
+  Widget _favBtn(){
+    return Expanded(
+      key: widget.introProviderModel!.intro!.keys[1],
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:[
+          InkWell(onTap: (){
+            bottomBarProviderModel!.setSelectedScreen(1);
+
+          }
+            ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==1?Res.IC_FAV_BLUE:Res.IC_FAV_GREY,width: D.default_30,height: D.default_30,),),
+          Center(child:Text(tr("fav"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==1?C.BASE_BLUE:Colors.grey),),)
+        ]
+    ),);
+  }
+  Widget _notificationsBtn(){
+    return Expanded(
+      key: widget.introProviderModel!.intro!.keys[3],
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:[
+          InkWell(onTap: (){
+            bottomBarProviderModel!.setSelectedScreen(3);
+
+          }
+            ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==3?Res.IC_NOTIFICATIONS_BLUE:Res.IC_NOTIFICATIONS_GREY,width: D.default_30,height: D.default_30,),),
+          Center(child:Text(tr("notifications"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==3?C.BASE_BLUE:Colors.grey),),)
+        ]
+    ),);
+  }
+  Widget _profileBtn(){
+    return Expanded(
+      key: widget.introProviderModel!.intro!.keys[4],
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children:[
+          InkWell(onTap: (){
+            bottomBarProviderModel!.setSelectedScreen(4);
+
+          }
+            ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==4?Res.IC_PROFILE_BLUE:Res.IC_PROFILE_GREY,width: D.default_30,height: D.default_30,),),
+          Center(child:Text(tr("profile"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==4?C.BASE_BLUE:Colors.grey),),)
+        ]
+    ),);
+  }
+  Widget _closestBtn(){
+    return Expanded(
+      key: widget.introProviderModel!.intro!.keys[2],
+      child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children:[
+            InkWell(onTap: (){
+              bottomBarProviderModel!.setSelectedScreen(2);
+
+            }
+              ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==2?Res.IC_NEAR_BLUE:Res.IC_NEAR_GREY,width: D.default_30,height: D.default_30,),),
+            Center(child:Text(tr("closest"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==2?C.BASE_BLUE:Colors.grey),),)
+          ]
+      ),);
   }
 
 }

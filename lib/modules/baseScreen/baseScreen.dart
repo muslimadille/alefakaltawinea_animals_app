@@ -1,7 +1,9 @@
+import 'package:alefakaltawinea_animals_app/modules/homeScreen/provider/bottom_bar_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/homeScreen/provider/intro_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
@@ -41,6 +43,7 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
   @override
   Widget build(BuildContext context) {
     introProviderModel =Provider.of<IntroProviderModel>(context, listen: true);
+
     context.setLocale(Locale('ar', 'EG')) ;
     return  MaterialApp(
       localizationsDelegates: context.localizationDelegates,
@@ -58,8 +61,14 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
   Widget _actionBar(){
     return Container(
       decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(width: D.default_1,color: Colors.grey)),
-        color: Colors.white,
+          borderRadius: BorderRadius.circular(0),
+          color: Colors.white,
+          boxShadow:[BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              offset:Offset(2,2),
+              blurRadius:2,
+              spreadRadius: 2
+          )]
       ),
       child: Center(
         child: Row(

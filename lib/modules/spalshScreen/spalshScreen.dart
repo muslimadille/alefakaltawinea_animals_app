@@ -88,63 +88,78 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
         child:Container(
             padding: EdgeInsets.only(bottom:D.default_10,top: D.default_10,left: D.default_5,right: D.default_5),
             margin: EdgeInsets.only(bottom:D.default_40,top: D.default_20,left: D.default_80,right: D.default_80),
-            child:Column(
+            child:Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                InkWell(
-                  key: intro!.keys[0],
-                  onTap:(){
-                    MyUtils.navigate(context, HomeTabsScreen(introProviderModel));
-                  },child: Container(
-                    padding: EdgeInsets.only(bottom:D.default_15,top: D.default_15,left: D.default_5,right: D.default_5),
-                    margin: EdgeInsets.all(D.default_5),
-                    decoration:  BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(D.default_5)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 1,
-                          blurRadius: 5,
-                          offset: Offset(1, 1), // changes position of shadow
-                        ),
-                      ],
-                    )
-                    ,child: Center(child: Text(tr("brows_app_btn"),style:S.h4(color:C.BASE_BLUE)),)),),
-                InkWell(
-                  key: intro!.keys[1],
-                  onTap:(){
-                  },child: Container(
-                    padding: EdgeInsets.only(bottom:D.default_15,top: D.default_15,left: D.default_5,right: D.default_5),
-                    margin: EdgeInsets.all(D.default_5),
-                    decoration:  BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(D.default_5)),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 1,
-                          blurRadius: 5,
-                          offset: Offset(1, 1), // changes position of shadow
-                        ),
-                      ],
-                    )
-                    ,child: Center(child: Text(tr("login"),style:S.h4(color:C.BASE_BLUE)),)),),
-                Container(
-                  padding: EdgeInsets.only(bottom:D.default_15,top: D.default_15,left: D.default_5,right: D.default_5),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                  Text(tr("Dont_have_account"),style:S.h2(color:Colors.grey[200])),
-                  InkWell(
-                  key: intro!.keys[2],
-                  onTap:(){
-
-                  },child: Text(tr("register"),style:S.h2(color:Colors.white)),)
-                ],),),
-                SizedBox(height: D.default_40,),
+                _browsApp(),
+                _loginBtn(),
+                _registerBtn(),
               ],)), opacity: _animation!);
+  }
+  Widget _browsApp(){
+    return  Expanded(child: InkWell(
+      key: intro!.keys[0],
+      onTap:(){
+        MyUtils.navigate(context, HomeTabsScreen(introProviderModel));
+      },child: Container(
+        padding: EdgeInsets.only(bottom:D.default_15,top: D.default_15,left: D.default_5,right: D.default_5),
+        margin: EdgeInsets.all(D.default_5),
+        decoration:  BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(D.default_5)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: Offset(1, 1), // changes position of shadow
+            ),
+          ],
+        )
+        ,child: Center(child: Text(tr("brows_app_btn"),style:S.h4(color:C.BASE_BLUE)),)),));
+  }
+  Widget _loginBtn(){
+    return  Expanded(child: InkWell(
+      key: intro!.keys[1],
+      onTap:(){
+      },child: Container(
+        padding: EdgeInsets.only(bottom:D.default_15,top: D.default_15,left: D.default_5,right: D.default_5),
+        margin: EdgeInsets.all(D.default_5),
+        decoration:  BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(D.default_5)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: Offset(1, 1), // changes position of shadow
+            ),
+          ],
+        )
+        ,child: Center(child: Text(tr("login"),style:S.h4(color:C.BASE_BLUE)),)),));
+  }
+  Widget _registerBtn(){
+    return  Expanded(child: InkWell(
+      key: intro!.keys[2],
+      onTap:(){
+      },child: Container(
+        padding: EdgeInsets.only(bottom:D.default_15,top: D.default_15,left: D.default_5,right: D.default_5),
+        margin: EdgeInsets.all(D.default_5),
+        decoration:  BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.all(Radius.circular(D.default_5)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: Offset(1, 1), // changes position of shadow
+            ),
+          ],
+        )
+        ,child: Center(child: Text(tr("register"),style:S.h4(color:C.BASE_BLUE)),)),),);
   }
 
 Intro _myIntro(){
