@@ -13,9 +13,10 @@ class AdsSlider extends StatefulWidget {
 
 class _AdsSliderState extends State<AdsSlider> {
   final _controller = PageController();
-  int _currentPosition=0;
   @override
   Widget build(BuildContext context) {
+    _outoslid();
+
     return Container(
       height: D.default_250,
       decoration: BoxDecoration(
@@ -32,10 +33,24 @@ class _AdsSliderState extends State<AdsSlider> {
         children: slids,
         controller: _controller,
         onPageChanged: (currentpage) {
-          setState(() => _currentPosition = currentpage);
+
+
         },
       )
       );
   }
-  List<Widget> slids=[ServiceProviderListItem(),ServiceProviderListItem(),ServiceProviderListItem()];
+  List<Widget> slids=[ServiceProviderListItem(),Container(),ServiceProviderListItem()];
+  void _outoslid(){
+    Future.delayed(Duration(milliseconds: 3000)).then((value) {
+    if(_controller.page!.toInt()<slids.length-1) {
+      setState(() {
+        _controller.animateToPage(_controller.page!.toInt()+1, duration: Duration(milliseconds: 1000), curve: Curves.ease);
+      });
+    }else{
+        setState(() {
+          _controller.animateToPage(0, duration: Duration(milliseconds: 1000), curve: Curves.ease);
+        });
+
+          }});
+  }
 }
