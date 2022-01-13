@@ -12,5 +12,12 @@ class Res{
   static String IC_NEAR_GREY="assets/images/ic_near_grey.png";
   static String IC_NEAR_BLUE="assets/images/ic_near_blue.png";
 
+  static String MARKET_IMG="assets/images/market_img.png";
+  static String CLINIC_IMG="assets/images/clinic_img.png";
+  static String CAR_IMG="assets/images/car_img.png";
+  static String CONSULTATION_IMG="assets/images/consultation_img.png";
+  static String ADOPTION_IMG="assets/images/adoption_img.png";
+
+
 
 }

@@ -86,6 +86,11 @@ flutter:
     - assets/images/ic_notifications_blue.png
     - assets/images/ic_profile_grey.png
     - assets/images/ic_profile_blue.png
+    - assets/images/market_img.png
+    - assets/images/adoption_img.png
+    - assets/images/car_img.png
+    - assets/images/clinic_img.png
+    - assets/images/consultation_img.png
     - assets/strings/ar-EG.json
     - assets/strings/en-US.json
     - assets/fonts/cairo_font.ttf

@@ -41,7 +41,7 @@ class _AdsSliderState extends State<AdsSlider> {
   }
   List<Widget> slids=[ServiceProviderListItem(),Container(),ServiceProviderListItem()];
   void _outoslid(){
-    Future.delayed(Duration(milliseconds: 3000)).then((value) {
+    Future.delayed(Duration(milliseconds: 4000)).then((value) {
     if(_controller.page!.toInt()<slids.length-1) {
       setState(() {
         _controller.animateToPage(_controller.page!.toInt()+1, duration: Duration(milliseconds: 1000), curve: Curves.ease);
