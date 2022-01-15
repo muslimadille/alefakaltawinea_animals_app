@@ -4,7 +4,7 @@ import 'package:alefakaltawinea_animals_app/modules/categories_screen/mainCatego
 import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/provider/bottom_bar_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/neerToYou/NearToyouScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/profile/profileScreen.dart';
-import 'package:alefakaltawinea_animals_app/modules/serviceProviders/service_providers_list_screen.dart';
+import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/service_providers_list_screen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
@@ -108,7 +108,9 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
           InkWell(onTap: (){
-            MyUtils.navigate(context, MainCategoriesScreen());
+            Navigator.of(context).pushAndRemoveUntil(
+                MaterialPageRoute(builder: (context) => MainCategoriesScreen()),
+                ModalRoute.withName('/'));
           }
             ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==0?Res.IC_HOME_BLUE:Res.IC_HOME_GREY,width: D.default_30,height: D.default_30,),),
           Center(child:Text(tr("home"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==0?C.BASE_BLUE:Colors.grey),),)

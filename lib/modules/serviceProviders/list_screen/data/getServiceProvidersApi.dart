@@ -2,8 +2,7 @@
 import 'dart:convert';
 import 'package:alefakaltawinea_animals_app/data/dio/dio_utils.dart';
 import 'package:alefakaltawinea_animals_app/data/dio/my_rasponce.dart';
-import 'package:alefakaltawinea_animals_app/modules/categories_screen/data/categories_model.dart';
-import 'package:alefakaltawinea_animals_app/modules/serviceProviders/data/serviceProvidersModel.dart';
+import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/data/serviceProvidersModel.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/apis.dart';
 
 class GetServiceProvidersApi{

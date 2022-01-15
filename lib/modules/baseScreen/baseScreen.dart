@@ -28,6 +28,8 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
   AnimationController? _controller;
   Animation<double>? _animation;
   IntroProviderModel?introProviderModel;
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
 
 
   @override
@@ -44,19 +46,14 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
     introProviderModel =Provider.of<IntroProviderModel>(context, listen: true);
 
     context.setLocale(Locale('ar', 'EG')) ;
-    return  MaterialApp(
-      localizationsDelegates: context.localizationDelegates,
-      supportedLocales: context.supportedLocales,
-      locale: context.locale,
-      debugShowCheckedModeBanner: false,
-      home:Scaffold(
-        body: SafeArea(child: Column(children: [
+    return SafeArea(child: Scaffold(
+        key: _scaffoldKey,
+        body: Column(children: [
           widget.showSettings?_actionBar():Container(height: 0,),
           Expanded(child: widget.body,),
           widget.showBottomBar?HomeTabsScreen(introProviderModel,widget.showIntro):Container()
-        ],)),
-      ),
-    );
+        ],),
+      ),);
   }
   Widget _actionBar(){
     return Container(

@@ -1,6 +1,6 @@
 
 import 'package:alefakaltawinea_animals_app/modules/categories_screen/data/categories_model.dart';
-import 'package:alefakaltawinea_animals_app/modules/serviceProviders/data/serviceProvidersModel.dart';
+import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/data/serviceProvidersModel.dart';
 
 class MyResponse<T> extends Object {
   final TAG = "MyResponse";

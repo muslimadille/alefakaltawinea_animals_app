@@ -1,5 +1,5 @@
 import 'package:alefakaltawinea_animals_app/modules/categories_screen/provider/categories_provider_model.dart';
-import 'package:alefakaltawinea_animals_app/modules/serviceProviders/service_providers_list_screen.dart';
+import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/service_providers_list_screen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';

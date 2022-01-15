@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'modules/categories_screen/provider/categories_provider_model.dart';
 import 'modules/homeTabsScreen/provider/bottom_bar_provider_model.dart';
 import 'modules/homeTabsScreen/provider/intro_provider_model.dart';
-import 'modules/serviceProviders/provider/sevice_providers_provicer_model.dart';
+import 'modules/serviceProviders/list_screen/provider/sevice_providers_provicer_model.dart';
 import 'modules/spalshScreen/spalshScreen.dart';
 
 void main() async{
@@ -36,10 +36,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     _initProviders(context);
-    return  BaseScreen(
+    return  MaterialApp(
+        localizationsDelegates: context.localizationDelegates,
+        supportedLocales: context.supportedLocales,
+        locale: context.locale,
+        debugShowCheckedModeBanner: false,
+        home: BaseScreen(
       showBottomBar: false,
         showSettings: false,
-        body: SplashScreen());
+        body: SplashScreen()));
   }
   void _initProviders(BuildContext context){
   }
