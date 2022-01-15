@@ -9,6 +9,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:multi_image_picker2/multi_image_picker2.dart';
+import 'package:shimmer/shimmer.dart';
 
 class TransitionImage extends StatefulWidget {
   TransitionImage(this.url,
@@ -157,23 +158,10 @@ class _TransitionImageState extends State<TransitionImage> {
           fit: widget.fit ?? BoxFit.contain,
           progressIndicatorBuilder:
               (context, url, progress) {
-            return Container(
-                width:widget.width,
-                height: widget.height,
-                child:SizedBox(
-                  child: Padding(
-                      padding:EdgeInsets.all(5),
-                      child:CircularProgressIndicator(
-                        strokeWidth: 7,
-                        valueColor:
-                        AlwaysStoppedAnimation<Color>(
-                            C.BASE_BLUE),
-                      )
-                  ),
-                  height: 80,
-                  width: 80,
-                )
-            );
+            return Shimmer.fromColors(
+                child: Container(width:widget.width, height: widget.height,),
+                baseColor: Colors.grey,
+                highlightColor: Colors.white);
           },
           /*placeholder: (context, url) {
                                       return widget.placeHolderImage != null

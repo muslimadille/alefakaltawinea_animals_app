@@ -4,14 +4,14 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:flutter/material.dart';
 
-class ServiceProviderListItem extends StatefulWidget {
-  const ServiceProviderListItem({Key? key}) : super(key: key);
+class AdsSliderItem extends StatefulWidget {
+  const AdsSliderItem({Key? key}) : super(key: key);
 
   @override
-  _ServiceProviderListItemState createState() => _ServiceProviderListItemState();
+  _AdsSliderItemState createState() => _AdsSliderItemState();
 }
 
-class _ServiceProviderListItemState extends State<ServiceProviderListItem> {
+class _AdsSliderItemState extends State<AdsSliderItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -29,8 +29,8 @@ class _ServiceProviderListItemState extends State<ServiceProviderListItem> {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-            Expanded(child: Text("عيادات رويال البطرية",style: S.h3(color:C.BASE_BLUE),))
-          ],),
+              Expanded(child: Text("عيادات رويال البطرية",style: S.h3(color:C.BASE_BLUE),))
+            ],),
         )
       ],),
     );

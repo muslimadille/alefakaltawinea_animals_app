@@ -1,7 +1,8 @@
 
 import 'dart:convert';
-
 import 'package:alefakaltawinea_animals_app/utils/my_utils/apis.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/appConfig.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
@@ -9,9 +10,7 @@ import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 class BaseDioUtils {
   static Dio? dio;
   static Options? authOptions;
-  static CacheOptions cacheOptions =
-  CacheOptions(store: MemCacheStore(), policy: CachePolicy.noCache);
-
+  static CacheOptions cacheOptions = CacheOptions(store: MemCacheStore(), policy: CachePolicy.noCache);
   static const String REQUEST_GET = "get";
   static const String REQUEST_POST = "post";
   static const String REQUEST_PUT = "put";
@@ -23,7 +22,7 @@ class BaseDioUtils {
       dio!.interceptors.add(DioCacheInterceptor(options: cacheOptions));
       dio!.interceptors.add(InterceptorsWrapper(onRequest:
           (RequestOptions options, RequestInterceptorHandler handler) async {
-        //options.queryParameters['appname'] = BaseConfig.APP_NAME;
+           options.headers['Accept-Language'] = Constants.SELECTED_LANGUAGE;
         //options.queryParameters['version'] = BaseConfig.APP_VERSION_NAME;
         var url = "${options.path}";
 
@@ -51,6 +50,7 @@ class BaseDioUtils {
         return handler.next(e);
       }));
     }
+    ///add token
     authOptions = Options(headers: {
       'authorization': 'Bearer ${Apis.TOKEN_VALUE}',
     });

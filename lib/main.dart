@@ -1,24 +1,26 @@
-import 'dart:developer';
+
+import 'dart:io';
 
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
-import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'modules/homeScreen/homeTabsScreen.dart';
-import 'modules/homeScreen/provider/bottom_bar_provider_model.dart';
-import 'modules/homeScreen/provider/intro_provider_model.dart';
+import 'modules/categories_screen/provider/categories_provider_model.dart';
+import 'modules/homeTabsScreen/provider/bottom_bar_provider_model.dart';
+import 'modules/homeTabsScreen/provider/intro_provider_model.dart';
+import 'modules/serviceProviders/provider/sevice_providers_provicer_model.dart';
 import 'modules/spalshScreen/spalshScreen.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
+  HttpOverrides.global =  MyHttpOverrides();//handel ssl shackoff error CERTIFICATE_VERIFY_FAILED
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider<IntroProviderModel>(create: (ctx) => IntroProviderModel(),),
       ChangeNotifierProvider<BottomBarProviderModel>(create: (ctx) => BottomBarProviderModel(),),
-
+      ChangeNotifierProvider<CategoriesProviderModel>(create: (ctx) => CategoriesProviderModel(),),
+      ChangeNotifierProvider<ServiceProvidersProviderModel>(create: (ctx) => ServiceProvidersProviderModel(),),
     ],
     child: EasyLocalization(
         supportedLocales: [Locale('en', 'US'), Locale('ar', 'EG')],
@@ -31,14 +33,21 @@ void main() async{
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
-
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     _initProviders(context);
-    return  BaseScreen(body: SplashScreen());
+    return  BaseScreen(
+      showBottomBar: false,
+        showSettings: false,
+        body: SplashScreen());
   }
   void _initProviders(BuildContext context){
+  }
+}
+class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
   }
 }
 

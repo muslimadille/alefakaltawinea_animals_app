@@ -1,7 +1,5 @@
-import 'package:alefakaltawinea_animals_app/modules/serviceProviders/service_provider_list_item.dart';
+import 'package:alefakaltawinea_animals_app/modules/ads/ads_slider_item.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
-import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
-import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 
 class AdsSlider extends StatefulWidget {
@@ -39,7 +37,7 @@ class _AdsSliderState extends State<AdsSlider> {
       )
       );
   }
-  List<Widget> slids=[ServiceProviderListItem(),Container(),ServiceProviderListItem()];
+  List<Widget> slids=[AdsSliderItem()];
   void _outoslid(){
     Future.delayed(Duration(milliseconds: 4000)).then((value) {
     if(_controller.page!.toInt()<slids.length-1) {

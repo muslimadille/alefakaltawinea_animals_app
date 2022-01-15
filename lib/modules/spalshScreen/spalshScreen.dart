@@ -1,7 +1,8 @@
 
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
-import 'package:alefakaltawinea_animals_app/modules/homeScreen/homeTabsScreen.dart';
-import 'package:alefakaltawinea_animals_app/modules/homeScreen/provider/intro_provider_model.dart';
+import 'package:alefakaltawinea_animals_app/modules/categories_screen/mainCategoriesScreen.dart';
+import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/homeTabsScreen.dart';
+import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/provider/intro_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
@@ -57,7 +58,11 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     introProviderModel =Provider.of<IntroProviderModel>(context, listen: true);
-    return AnimatedContainer(duration: Duration(milliseconds: 2000),
+    return BaseScreen(
+
+      showSettings: false,
+        showBottomBar: false,
+        body: AnimatedContainer(duration: Duration(milliseconds: 2000),
       height: double.infinity,
       color:_isLoading?Colors.white: C.BASE_BLUE,
       child: Column(
@@ -73,7 +78,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
           _controller!.forward();
         });
       },
-    );
+    ));
   }
   Widget _logoTitleItem(){
     return AnimatedSwitcher(
@@ -87,7 +92,6 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     return FadeTransition(
         child:Container(
             padding: EdgeInsets.only(bottom:D.default_10,top: D.default_10,left: D.default_5,right: D.default_5),
-            margin: EdgeInsets.only(bottom:D.default_40,top: D.default_20,left: D.default_80,right: D.default_80),
             child:Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -101,7 +105,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     return  Expanded(child: InkWell(
       key: intro!.keys[0],
       onTap:(){
-        MyUtils.navigate(context, HomeTabsScreen(introProviderModel));
+        MyUtils.navigate(context, MainCategoriesScreen());
       },child: Container(
         padding: EdgeInsets.only(bottom:D.default_15,top: D.default_15,left: D.default_5,right: D.default_5),
         margin: EdgeInsets.all(D.default_5),

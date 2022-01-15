@@ -1,9 +1,10 @@
 
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
-import 'package:alefakaltawinea_animals_app/modules/homeScreen/provider/bottom_bar_provider_model.dart';
-import 'package:alefakaltawinea_animals_app/modules/homeScreen/provider/intro_provider_model.dart';
+import 'package:alefakaltawinea_animals_app/modules/categories_screen/mainCategoriesScreen.dart';
+import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/provider/bottom_bar_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/neerToYou/NearToyouScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/profile/profileScreen.dart';
+import 'package:alefakaltawinea_animals_app/modules/serviceProviders/service_providers_list_screen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
@@ -14,16 +15,18 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_intro/flutter_intro.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
+import 'provider/intro_provider_model.dart';
 
-import 'home_screen/mainCategoriesScreen.dart';
 
 class HomeTabsScreen extends StatefulWidget {
   IntroProviderModel?introProviderModel;
+  bool showIntro;
   
 
-   HomeTabsScreen(this.introProviderModel) ;
+   HomeTabsScreen(this.introProviderModel,this.showIntro) ;
 
   @override
   _HomeTabsScreenState createState() => _HomeTabsScreenState();
@@ -43,12 +46,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
   @override
   Widget build(BuildContext context) {
     bottomBarProviderModel=Provider.of<BottomBarProviderModel>(context,listen: true);
-    return BaseScreen(
-      showSettings: true,
-        body:Column(children: [
-          Expanded(child: _screens[bottomBarProviderModel!.selectedScreen!]),
-          _bottomBar()
-        ],));
+    return _bottomBar();
   }
  
   List<Widget>_screens=[MainCategoriesScreen(),NearToYouScreen(),ProfileScreen(),ProfileScreen(),ProfileScreen(),ProfileScreen()];
@@ -68,7 +66,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
     _animation=Tween<double>(begin:0.0,end: 1.0 ).animate(_animationController!)..addStatusListener((status) {
       if(status==AnimationStatus.completed){
         setState(() {
-          widget.introProviderModel!.intro!.start(context);
+         if(widget.showIntro) widget.introProviderModel!.intro!.start(context);
         });
       }
     })..addListener(() {
@@ -110,8 +108,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
           InkWell(onTap: (){
-            bottomBarProviderModel!.setSelectedScreen(0);
-
+            MyUtils.navigate(context, MainCategoriesScreen());
           }
             ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==0?Res.IC_HOME_BLUE:Res.IC_HOME_GREY,width: D.default_30,height: D.default_30,),),
           Center(child:Text(tr("home"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==0?C.BASE_BLUE:Colors.grey),),)
@@ -125,8 +122,16 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
           InkWell(onTap: (){
-            bottomBarProviderModel!.setSelectedScreen(1);
-
+            //bottomBarProviderModel!.setSelectedScreen(1);
+            Fluttertoast.showToast(
+                msg: "قريبا",
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.CENTER,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0
+            );
           }
             ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==1?Res.IC_FAV_BLUE:Res.IC_FAV_GREY,width: D.default_30,height: D.default_30,),),
           Center(child:Text(tr("fav"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==1?C.BASE_BLUE:Colors.grey),),)
@@ -140,7 +145,15 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
           InkWell(onTap: (){
-            bottomBarProviderModel!.setSelectedScreen(3);
+            Fluttertoast.showToast(
+                msg: "قريبا",
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.CENTER,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0
+            );            // bottomBarProviderModel!.setSelectedScreen(3);
 
           }
             ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==3?Res.IC_NOTIFICATIONS_BLUE:Res.IC_NOTIFICATIONS_GREY,width: D.default_30,height: D.default_30,),),
@@ -155,8 +168,16 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
           InkWell(onTap: (){
-            bottomBarProviderModel!.setSelectedScreen(4);
-
+            //bottomBarProviderModel!.setSelectedScreen(4);
+            Fluttertoast.showToast(
+                msg: "قريبا",
+                toastLength: Toast.LENGTH_LONG,
+                gravity: ToastGravity.CENTER,
+                timeInSecForIosWeb: 1,
+                backgroundColor: Colors.red,
+                textColor: Colors.white,
+                fontSize: 16.0
+            );
           }
             ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==4?Res.IC_PROFILE_BLUE:Res.IC_PROFILE_GREY,width: D.default_30,height: D.default_30,),),
           Center(child:Text(tr("profile"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==4?C.BASE_BLUE:Colors.grey),),)
@@ -170,8 +191,17 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
           mainAxisAlignment: MainAxisAlignment.center,
           children:[
             InkWell(onTap: (){
-              bottomBarProviderModel!.setSelectedScreen(2);
-
+              //bottomBarProviderModel!.setSelectedScreen(2);
+              //Fluttertoast.showToast(msg:"قريبا");
+              Fluttertoast.showToast(
+                  msg: "قريبا",
+                  toastLength: Toast.LENGTH_LONG,
+                  gravity: ToastGravity.CENTER,
+                  timeInSecForIosWeb: 1,
+                  backgroundColor: Colors.red,
+                  textColor: Colors.white,
+                  fontSize: 16.0
+              );
             }
               ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==2?Res.IC_NEAR_BLUE:Res.IC_NEAR_GREY,width: D.default_30,height: D.default_30,),),
             Center(child:Text(tr("closest"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==2?C.BASE_BLUE:Colors.grey),),)

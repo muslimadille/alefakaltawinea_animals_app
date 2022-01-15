@@ -1,10 +1,8 @@
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_intro/flutter_intro.dart';
-
 import 'baseDimentions.dart';
 import 'baseTextStyle.dart';
 import 'myColors.dart';

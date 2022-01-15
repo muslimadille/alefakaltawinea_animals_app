@@ -1,14 +1,11 @@
-import 'package:alefakaltawinea_animals_app/modules/homeScreen/provider/bottom_bar_provider_model.dart';
-import 'package:alefakaltawinea_animals_app/modules/homeScreen/provider/intro_provider_model.dart';
+
+import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/homeTabsScreen.dart';
+import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/provider/intro_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
-import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
-import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_intro/flutter_intro.dart';
 import 'package:provider/provider.dart';
 
 
@@ -17,7 +14,9 @@ import 'package:provider/provider.dart';
 class BaseScreen extends StatefulWidget {
   Widget body;
   bool showSettings;
-   BaseScreen({required this.body,this.showSettings=false});
+  bool showBottomBar;
+  bool showIntro;
+   BaseScreen({required this.body,required this.showSettings,required this.showBottomBar,this.showIntro=false});
 
 
   @override
@@ -53,7 +52,8 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
       home:Scaffold(
         body: SafeArea(child: Column(children: [
           widget.showSettings?_actionBar():Container(height: 0,),
-          Expanded(child: widget.body,)
+          Expanded(child: widget.body,),
+          widget.showBottomBar?HomeTabsScreen(introProviderModel,widget.showIntro):Container()
         ],)),
       ),
     );
