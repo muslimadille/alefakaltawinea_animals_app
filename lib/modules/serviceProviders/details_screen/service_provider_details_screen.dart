@@ -101,7 +101,7 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
             children: [
               Expanded(child: Text(
                 widget.serviceProviderData.name!
-                ,style: S.h2(color:Colors.deepOrange),),),
+                ,style: S.h2(color:C.BASE_BLUE),),),
               TransitionImage(
                 Res.IC_FAV_GREY,
                 height: D.default_25,
