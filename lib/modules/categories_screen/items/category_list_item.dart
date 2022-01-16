@@ -51,8 +51,14 @@ class _CategoryListItemState extends State<CategoryListItem> {
           key: _keyRed,
             margin:EdgeInsets.only(left:D.default_5,right:D.default_5,top: D.default_10),
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(D.default_5),
+              borderRadius: BorderRadius.circular(D.default_10),
               color: Color(int.parse(widget.categoriesProviderModel!.categoriesList[widget.index].color!.replaceAll("#", "0xFF"))),
+                boxShadow:[BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    offset:Offset(1,1),
+                    blurRadius:1,
+                    spreadRadius: 1
+                )]
             ),
             child: Stack(
                 alignment:AlignmentDirectional.bottomCenter,
@@ -69,7 +75,7 @@ class _CategoryListItemState extends State<CategoryListItem> {
                       children: [
                         Center(child: Container(
                           padding:EdgeInsets.all(D.default_20)
-                          ,child: Text(widget.categoriesProviderModel!.categoriesList[widget.index].name!,style:S.h4(color: Colors.black)),),)
+                          ,child: Text(widget.categoriesProviderModel!.categoriesList[widget.index].name!,style:S.h3(color: Colors.black)),),)
                       ],) ,
                   ),
                 ])) ,),

@@ -9,6 +9,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import 'offers/offers_list/service_provider_offers_list_screen.dart';
+
 
 class ServiceProviderDetailsScreen extends StatefulWidget {
   Data serviceProviderData;
@@ -27,83 +29,90 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
       showBottomBar: true,
       showIntro: false,
       body:Column(children: [
-        Container(
-          height: D.default_200,
-          width: double.infinity,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(0),
-              color: Colors.white,
-              boxShadow:[BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  offset:Offset(3,3),
-                  blurRadius:3,
-                  spreadRadius: 0.5
-              )]
-          ),
-          child: Stack(children: [
-            Column(children: [
-              Expanded(child: TransitionImage(
-               widget.serviceProviderData.bannerPhoto!,
-                fit: BoxFit.cover,
-                width: double.infinity,
-              )),
-
-            ],),
-            Positioned(child: Container(
-              padding: EdgeInsets.all(D.default_5),
-              margin: EdgeInsets.all(D.default_10),
-              width: D.default_60,
-              height: D.default_60,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(D.default_10),
-                  color: Colors.white,
-                  boxShadow:[BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      offset:Offset(4,4),
-                      blurRadius:4,
-                      spreadRadius: 2
-                  )]
-              ),
-              child:TransitionImage(
-                widget.serviceProviderData.photo!,
-                radius: D.default_10,
-                fit: BoxFit.cover,
-                width: double.infinity,
-              ) ,
-            ),),
+        _infoCard(),
+        Expanded(child: ServiceProviderOffersScreen(widget.serviceProviderData))
+      ],)
+    );
+  }
+  Widget _infoCard(){
+    return Column(children: [
+      Container(
+        height: D.default_200,
+        width: double.infinity,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(0),
+            color: Colors.white,
+            boxShadow:[BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                offset:Offset(3,3),
+                blurRadius:3,
+                spreadRadius: 0.5
+            )]
+        ),
+        child: Stack(children: [
+          Column(children: [
+            Expanded(child: TransitionImage(
+              widget.serviceProviderData.bannerPhoto!,
+              fit: BoxFit.cover,
+              width: double.infinity,
+            )),
 
           ],),
-        ),
-        Container(
-          width: double.infinity,
-          padding: EdgeInsets.all(D.default_15),
-          decoration: BoxDecoration(
-            color: Colors.white,
-              boxShadow:[BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  offset:Offset(4,4),
-                  blurRadius:4,
-                  spreadRadius: 2
-              )]
-          ),
-          child: Column(children: [
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(child: Text(
-                  widget.serviceProviderData.name!
-                  ,style: S.h2(color:Colors.deepOrange),),),
-                TransitionImage(
-                  Res.IC_FAV_GREY,
-                  height: D.default_25,
-                  width: D.default_25,
-                )
+          Positioned(child: Container(
+            padding: EdgeInsets.all(D.default_5),
+            margin: EdgeInsets.all(D.default_10),
+            width: D.default_60,
+            height: D.default_60,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(D.default_10),
+                color: Colors.white,
+                boxShadow:[BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    offset:Offset(4,4),
+                    blurRadius:4,
+                    spreadRadius: 2
+                )]
+            ),
+            child:TransitionImage(
+              widget.serviceProviderData.photo!,
+              radius: D.default_10,
+              fit: BoxFit.cover,
+              width: double.infinity,
+            ) ,
+          ),),
 
-              ],),
-            SizedBox(height: D.default_10,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+        ],),
+      ),
+      Container(
+        width: double.infinity,
+        padding: EdgeInsets.all(D.default_15),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow:[BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                offset:Offset(4,4),
+                blurRadius:4,
+                spreadRadius: 2
+            )]
+        ),
+        child: Column(children: [
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(child: Text(
+                widget.serviceProviderData.name!
+                ,style: S.h2(color:Colors.deepOrange),),),
+              TransitionImage(
+                Res.IC_FAV_GREY,
+                height: D.default_25,
+                width: D.default_25,
+              )
+
+            ],),
+          SizedBox(height: D.default_10,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
               Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -111,9 +120,29 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
                       Row(children: [
                         Container(
                           child: Icon(Icons.add_location_alt,color: Colors.grey,size: D.default_20,),),
-                        Container(
+                        Expanded(child: Container(
                           padding:EdgeInsets.only(left:D.default_10,right:D.default_10,bottom: D.default_5),
-                          child: Text(widget.serviceProviderData.address!,style: S.h4(color: Colors.grey),),)
+                          child: Text(widget.serviceProviderData.address!,style: S.h4(color: Colors.grey),),)),
+                        Container(
+                          padding: EdgeInsets.only(left: D.default_10,right: D.default_10,top: D.default_5,bottom: D.default_5),
+                          decoration: BoxDecoration(
+                              color: Colors.black45,
+                              borderRadius: BorderRadius.circular(D.default_30),
+                              boxShadow:[BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  offset:Offset(2,2),
+                                  blurRadius:2,
+                                  spreadRadius: 0.5
+                              )]
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(Icons.share_location,color: Colors.white,size: D.default_25,),
+                              Text(tr("show_map"),style: S.h5(color: Colors.white),),
+
+                            ],),
+                        )
 
                       ],),
                       Row(children: [
@@ -127,38 +156,18 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
                         InkWell(onTap: (){
                           _launchURL("www.google.com");
                         },
-                        child: Container(
-                          padding:EdgeInsets.only(left:D.default_10,right:D.default_10),
-                          child: Text(widget.serviceProviderData.email!,style: S.h4(color: Colors.grey),),),)
+                          child: Container(
+                            padding:EdgeInsets.only(left:D.default_10,right:D.default_10),
+                            child: Text(widget.serviceProviderData.email!,style: S.h4(color: Colors.grey),),),)
 
                       ],)
 
-              ],)),
-              Container(
-                padding: EdgeInsets.only(left: D.default_10,right: D.default_10,top: D.default_5,bottom: D.default_5),
-                  decoration: BoxDecoration(
-                      color: Colors.black45,
-                      borderRadius: BorderRadius.circular(D.default_30),
-                      boxShadow:[BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          offset:Offset(2,2),
-                          blurRadius:2,
-                          spreadRadius: 0.5
-                      )]
-                  ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                  Icon(Icons.share_location,color: Colors.white,size: D.default_25,),
-                  Text(tr("show_map"),style: S.h5(color: Colors.white),),
-
-                ],),
-              )
+                    ],)),
+              
             ],)
-          ],),
-        )
-      ],),
-    );
+        ],),
+      )
+    ],);
   }
   _launchURL(String url) async {
     if (await canLaunch(url)) {
