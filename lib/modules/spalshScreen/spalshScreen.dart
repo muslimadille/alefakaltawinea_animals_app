@@ -1,4 +1,5 @@
 
+import 'package:alefakaltawinea_animals_app/modules/ads/provider/ads_slider_provider.dart';
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/categories_screen/mainCategoriesScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/homeTabsScreen.dart';
@@ -29,11 +30,15 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   Animation<double>? _animation;
   Intro? intro;
   IntroProviderModel?introProviderModel;
+  AdsSliderProviderModel?adsSliderProviderModel;
 
   @override
   void initState() {
     super.initState();
     intro=_myIntro();
+    introProviderModel =Provider.of<IntroProviderModel>(context, listen: false);
+    adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: false);
+    adsSliderProviderModel!.getAdsSlider();
     _controller=AnimationController(vsync: this,duration:Duration(milliseconds: 2000));
     _animation=Tween<double>(begin:0.0,end: 1.0 ).animate(_controller!)..addStatusListener((status) {
       if(status==AnimationStatus.completed){
@@ -57,9 +62,10 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   }
   @override
   Widget build(BuildContext context) {
+    adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: true);
     introProviderModel =Provider.of<IntroProviderModel>(context, listen: true);
     return BaseScreen(
-
+        tag: "SplashScreen",
       showSettings: false,
         showBottomBar: false,
         body: AnimatedContainer(duration: Duration(milliseconds: 2000),
@@ -86,7 +92,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       transitionBuilder: (Widget child, Animation<double> animation) {
         return  FadeTransition(child: child, opacity: animation);
       },
-        child:_isLoading?Center(key: Key("1"),child: Image.asset(Res.APP_LOGO_NAME,width: D.default_200,height: D.default_200),):Center(key:Key("2"),child: Image.asset(Res.APP_LOGO_DARK,width: D.default_150,height: D.default_150)));
+        child:adsSliderProviderModel!.isLoading&&_isLoading?Center(key: Key("1"),child: Image.asset(Res.APP_LOGO_NAME,width: D.default_200,height: D.default_200),):Center(key:Key("2"),child: Image.asset(Res.APP_LOGO_DARK,width: D.default_150,height: D.default_150)));
   }
   Widget _buttonsPart(){
     return FadeTransition(

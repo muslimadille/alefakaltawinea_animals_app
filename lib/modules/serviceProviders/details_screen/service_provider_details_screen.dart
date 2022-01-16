@@ -7,6 +7,8 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 class ServiceProviderDetailsScreen extends StatefulWidget {
   Data serviceProviderData;
@@ -20,6 +22,7 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
   @override
   Widget build(BuildContext context) {
     return BaseScreen(
+      tag: "ServiceProviderDetailsScreen",
       showSettings: true,
       showBottomBar: true,
       showIntro: false,
@@ -89,7 +92,7 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
               children: [
                 Expanded(child: Text(
                   widget.serviceProviderData.name!
-                  ,style: S.h2(color:C.BASE_BLUE),),),
+                  ,style: S.h2(color:Colors.deepOrange),),),
                 TransitionImage(
                   Res.IC_FAV_GREY,
                   height: D.default_25,
@@ -118,7 +121,15 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
                           child: Icon(Icons.local_phone,color: Colors.grey,size: D.default_20,),),
                         Container(
                           padding:EdgeInsets.only(left:D.default_10,right:D.default_10),
-                          child: Text(widget.serviceProviderData.phone!,style: S.h4(color: Colors.grey),),)
+                          child: Text(widget.serviceProviderData.phone!,style: S.h4(color: Colors.grey),),),
+                        Container(
+                          child: Icon(Icons.web_rounded,color: Colors.grey,size: D.default_20,),),
+                        InkWell(onTap: (){
+                          _launchURL("www.google.com");
+                        },
+                        child: Container(
+                          padding:EdgeInsets.only(left:D.default_10,right:D.default_10),
+                          child: Text(widget.serviceProviderData.email!,style: S.h4(color: Colors.grey),),),)
 
                       ],)
 
@@ -148,5 +159,12 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
         )
       ],),
     );
+  }
+  _launchURL(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
   }
 }

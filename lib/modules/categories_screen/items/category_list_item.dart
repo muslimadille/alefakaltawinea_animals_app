@@ -24,14 +24,22 @@ class CategoryListItem extends StatefulWidget {
 class _CategoryListItemState extends State<CategoryListItem> {
   _CategoryListItemState(this.index);
   int index;
-  GlobalKey? _key;
+  GlobalKey _keyRed = GlobalKey();
+  double height=0;
+
+  _getSizes() {
+    final RenderBox? renderBoxRed = _keyRed.currentContext?.findRenderObject() as RenderBox?;
+    final sizeRed = renderBoxRed!.size.height;
+    setState(() {
+      height=sizeRed;
+    });
+  }
 
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
-      setState(() {
-      });
+      _getSizes();
     });
   }
   @override
@@ -40,6 +48,7 @@ class _CategoryListItemState extends State<CategoryListItem> {
       onTap:widget.onItemClickListener,
         child: Directionality(textDirection: TextDirection.ltr,
         child:Container(
+          key: _keyRed,
             margin:EdgeInsets.only(left:D.default_5,right:D.default_5,top: D.default_10),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(D.default_5),
@@ -52,7 +61,7 @@ class _CategoryListItemState extends State<CategoryListItem> {
                   Positioned(child: TransitionImage(
                     widget.categoriesProviderModel!.categoriesList[widget.index].photo!,
                     fit: BoxFit.cover,
-                    height:D.default_160,
+                    height:height+D.default_10,
                   ),bottom: 0,right:-D.default_16,)
                   ,Container(
                     child:Row(

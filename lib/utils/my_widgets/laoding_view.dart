@@ -20,7 +20,7 @@ class LoadingProgress extends StatelessWidget {
           color: Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(D.default_5)),
         ),
-        child: const SpinKitWave(
+        child: const SpinKitCircle(
           color: C.BASE_BLUE,
         ),),) ,
     );

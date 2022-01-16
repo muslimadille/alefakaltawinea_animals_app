@@ -27,6 +27,7 @@ class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
     categoriesProviderModel=Provider.of<CategoriesProviderModel>(context,listen: true);
 
     return  BaseScreen(
+      tag: "MainCategoriesScreen",
       showBottomBar: true,
         showSettings: true,
         showIntro: true,

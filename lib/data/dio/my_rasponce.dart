@@ -69,6 +69,10 @@ class MyResponse<T> extends Object {
           .map((item) => CategoriesDataModel.fromJson(item))
           .toList() as T;
 
+    }else if("$T".contains("List<Data>")){
+      _data = (json as List)
+          .map((item) => Data.fromJson(item))
+          .toList() as T;
     }  else {
       _data = null;
       return false;

@@ -1,6 +1,8 @@
 import 'package:alefakaltawinea_animals_app/modules/ads/ads_slider_item.dart';
+import 'package:alefakaltawinea_animals_app/modules/ads/provider/ads_slider_provider.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AdsSlider extends StatefulWidget {
   const AdsSlider({Key? key}) : super(key: key);
@@ -10,11 +12,18 @@ class AdsSlider extends StatefulWidget {
 }
 
 class _AdsSliderState extends State<AdsSlider> {
+  AdsSliderProviderModel?adsSliderProviderModel;
   final _controller = PageController();
   @override
-  Widget build(BuildContext context) {
-    _outoslid();
+  void initState() {
+    super.initState();
+    adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: false);
 
+  }
+  @override
+  Widget build(BuildContext context) {
+    adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: true);
+    _outoslid();
     return Container(
       height: D.default_250,
       decoration: BoxDecoration(
@@ -28,7 +37,7 @@ class _AdsSliderState extends State<AdsSlider> {
           )]
       ),
       child:PageView(
-        children: slids,
+        children: sliderItems(),
         controller: _controller,
         onPageChanged: (currentpage) {
 
@@ -37,16 +46,22 @@ class _AdsSliderState extends State<AdsSlider> {
       )
       );
   }
-  List<Widget> slids=[AdsSliderItem()];
+  List<Widget> sliderItems(){
+    List<Widget> slids=[];
+    for(int i=0;i<adsSliderProviderModel!.adsSliderModelList.length;i++){
+      slids.add(AdsSliderItem(adsSliderProviderModel!.adsSliderModelList[i]));
+    }
+    return slids;
+  }
   void _outoslid(){
-    Future.delayed(Duration(milliseconds: 4000)).then((value) {
-    if(_controller.page!.toInt()<slids.length-1) {
+    Future.delayed(Duration(milliseconds: 5000)).then((value) {
+    if(_controller.page!.toInt()<adsSliderProviderModel!.adsSliderModelList.length-1) {
       setState(() {
-        _controller.animateToPage(_controller.page!.toInt()+1, duration: Duration(milliseconds: 1000), curve: Curves.ease);
+        _controller.animateToPage(_controller.page!.toInt()+1, duration: Duration(milliseconds: 500), curve: Curves.ease);
       });
     }else{
         setState(() {
-          _controller.animateToPage(0, duration: Duration(milliseconds: 1000), curve: Curves.ease);
+          _controller.animateToPage(0, duration: Duration(milliseconds: 500), curve: Curves.ease);
         });
 
           }});

@@ -61,7 +61,9 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
     return MyUtils.myIntro(descriptionsList);
   }
   void _handelIntro(){
-    widget.introProviderModel!.setIntro(_myIntro());
+    if(widget.showIntro) {
+      widget.introProviderModel!.setIntro(_myIntro());
+    }
     _animationController=AnimationController(vsync: this,duration:Duration(milliseconds: 1000));
     _animation=Tween<double>(begin:0.0,end: 1.0 ).animate(_animationController!)..addStatusListener((status) {
       if(status==AnimationStatus.completed){
@@ -119,7 +121,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
   }
   Widget _favBtn(){
     return Expanded(
-      key: widget.introProviderModel!.intro!.keys[1],
+      key:widget.showIntro? widget.introProviderModel!.intro!.keys[1]:Key("_favBtn"),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
@@ -142,7 +144,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
   }
   Widget _notificationsBtn(){
     return Expanded(
-      key: widget.introProviderModel!.intro!.keys[3],
+      key: widget.showIntro?widget.introProviderModel!.intro!.keys[3]:Key("_notificationsBtn"),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
@@ -165,7 +167,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
   }
   Widget _profileBtn(){
     return Expanded(
-      key: widget.introProviderModel!.intro!.keys[4],
+      key: widget.showIntro?widget.introProviderModel!.intro!.keys[4]:Key("_profileBtn"),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
@@ -188,7 +190,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
   }
   Widget _closestBtn(){
     return Expanded(
-      key: widget.introProviderModel!.intro!.keys[2],
+      key: widget.showIntro?widget.introProviderModel!.intro!.keys[2]:Key("_closestBtn"),
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children:[

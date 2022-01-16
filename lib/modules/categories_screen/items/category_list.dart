@@ -27,7 +27,7 @@ class _CategoryListState extends State<CategoryList> {
             crossAxisCount: 2,
             crossAxisSpacing: D.default_10,
             mainAxisSpacing: D.default_10,
-            childAspectRatio: 1.6,
+            childAspectRatio: 1.5,
           ),
           delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {

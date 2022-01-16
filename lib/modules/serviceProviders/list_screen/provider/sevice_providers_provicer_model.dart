@@ -16,7 +16,10 @@ class ServiceProvidersProviderModel with ChangeNotifier {
   /// ..........categories...........
   ServiceProviderModel? serviceProviderModel;
   GetServiceProvidersApi getServiceProvidersApi=GetServiceProvidersApi();
-  getCategoriesList(int categoryId,int page) async {
+  getServiceProvidersList(int categoryId,int page) async {
+    if(page==1) {
+      serviceProviderModel = null;
+    }
     setIsLoading(true);
     MyResponse<ServiceProviderModel> response =
     await getServiceProvidersApi.getServiceProviders(categoryId, page);

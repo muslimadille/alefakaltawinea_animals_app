@@ -2,6 +2,7 @@
 import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/homeTabsScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/provider/intro_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -12,11 +13,12 @@ import 'package:provider/provider.dart';
 
 
 class BaseScreen extends StatefulWidget {
+  String tag;
   Widget body;
   bool showSettings;
   bool showBottomBar;
   bool showIntro;
-   BaseScreen({required this.body,required this.showSettings,required this.showBottomBar,this.showIntro=false});
+   BaseScreen({required this.body,required this.showSettings,required this.showBottomBar,this.showIntro=false,required this.tag});
 
 
   @override
@@ -25,8 +27,6 @@ class BaseScreen extends StatefulWidget {
 
 class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
 
-  AnimationController? _controller;
-  Animation<double>? _animation;
   IntroProviderModel?introProviderModel;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -39,8 +39,13 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
-    _handelIntro();
   }
+  @override
+  void dispose() {
+    introProviderModel!.intro!.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     introProviderModel =Provider.of<IntroProviderModel>(context, listen: true);
@@ -51,7 +56,7 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
         body: Column(children: [
           widget.showSettings?_actionBar():Container(height: 0,),
           Expanded(child: widget.body,),
-          widget.showBottomBar?HomeTabsScreen(introProviderModel,widget.showIntro):Container()
+          widget.showBottomBar?HomeTabsScreen(introProviderModel,introProviderModel!=null&&widget.tag=="MainCategoriesScreen"):Container()
         ],),
       ),);
   }
@@ -74,24 +79,11 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
           children: [
           Center(
             child:
-        introProviderModel!.intro!=null?Opacity(opacity: _animation!.value,child:IconButton(key: introProviderModel!.intro!.keys[0],onPressed: (){}, splashColor:C.BASE_BLUE,icon: Icon(Icons.menu,color: Colors.grey,size: D.default_40)) ,):Container())
+        IconButton(key: introProviderModel!.intro!=null&&widget.tag=="MainCategoriesScreen"?introProviderModel!.intro!.keys[0]:Key("setting_btn"),onPressed: (){}, icon: Icon(Icons.menu,color: Colors.grey,size: D.default_40)))
         ],),
       ),
     );
   }
 
-  void _handelIntro(){
-    _controller=AnimationController(vsync: this,duration:Duration(milliseconds: 200));
-    _animation=Tween<double>(begin:0.0,end: 1.0 ).animate(_controller!)..addStatusListener((status) {
-      if(status==AnimationStatus.completed){
-        setState(() {
-        });
-      }
-    })..addListener(() {
 
-    });
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
-      _controller!.forward();
-    });
-  }
 }

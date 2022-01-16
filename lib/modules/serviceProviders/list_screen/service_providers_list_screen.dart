@@ -19,7 +19,7 @@ class ServiceProviderListScreen extends StatefulWidget {
 class _ServiceProviderListScreenState extends State<ServiceProviderListScreen> {
   BottomBarProviderModel?bottomBarProviderModel;
   ServiceProvidersProviderModel? serviceProvidersProviderModel;
-  int _currentLoadedPage=0;
+  int _currentLoadedPage=1;
 
   @override
   void initState() {
@@ -30,12 +30,13 @@ class _ServiceProviderListScreenState extends State<ServiceProviderListScreen> {
 
     ///service providers data
     serviceProvidersProviderModel=Provider.of<ServiceProvidersProviderModel>(context,listen: false);
-    serviceProvidersProviderModel!.getCategoriesList(widget.selectedCategory!.id!, _currentLoadedPage);
+    serviceProvidersProviderModel!.getServiceProvidersList(widget.selectedCategory!.id!, _currentLoadedPage);
   }
   @override
   Widget build(BuildContext context) {
     serviceProvidersProviderModel=Provider.of<ServiceProvidersProviderModel>(context,listen: true);
     return BaseScreen(
+      tag: "ServiceProviderListScreen",
       showBottomBar: true,
       showSettings: true,
         body: Column(children: [
