@@ -44,7 +44,7 @@ class _CategoryListState extends State<CategoryList> {
 
   }
   void _onItemClick(int index){
-    MyUtils.navigate(widget.ctx, ServiceProviderListScreen(widget.categoriesProviderModel!.categoriesList[index]));
+    MyUtils.navigate(widget.ctx, ServiceProviderListScreen(widget.categoriesProviderModel!.categoriesList[index],widget.categoriesProviderModel!.categoriesList[index].name!));
   }
 
 }

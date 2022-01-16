@@ -95,6 +95,8 @@ flutter:
     - assets/images/car_img.png
     - assets/images/clinic_img.png
     - assets/images/consultation_img.png
+    - assets/images/offer_icon.png
+
     - assets/strings/ar-EG.json
     - assets/strings/en-US.json
     - assets/fonts/cairo_font.ttf

@@ -15,6 +15,7 @@ class CategoriesProviderModel with ChangeNotifier {
   List<CategoriesDataModel> categoriesList=[];
   GetCategoriesListApi getCategoriesListApi=GetCategoriesListApi();
   getCategoriesList() async {
+    setIsLoading(true);
     categoriesList.clear();
     MyResponse<List<CategoriesDataModel>> response =
         await getCategoriesListApi.getCategoriesList();

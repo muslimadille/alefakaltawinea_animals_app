@@ -53,9 +53,9 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
   Intro _myIntro(){
     List<String>descriptionsList=[
       tr("intro_settings"),
-      tr("intro_settings"),
-      tr("intro_settings"),
+      tr("intro_fav"),
       tr("intro_closest_btn"),
+      tr("intro_notification_btn"),
       tr("intro_profile_btn"),
     ];
     return MyUtils.myIntro(descriptionsList);

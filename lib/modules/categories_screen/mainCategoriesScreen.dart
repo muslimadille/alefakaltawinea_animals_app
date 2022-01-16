@@ -34,10 +34,10 @@ class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
         body: Column(children: [
       AdsSlider(),
       Expanded(child:
-      !categoriesProviderModel!.isLoading?
-      Container(
+      categoriesProviderModel!.isLoading?LoadingProgress()
+      :Container(
         padding: EdgeInsets.all(D.default_20),
-        child: CategoryList(context,categoriesProviderModel),):LoadingProgress())
+        child: CategoryList(context,categoriesProviderModel),))
     ],));
   }
 }

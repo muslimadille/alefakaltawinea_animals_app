@@ -17,6 +17,8 @@ class Res{
   static String CAR_IMG="assets/images/car_img.png";
   static String CONSULTATION_IMG="assets/images/consultation_img.png";
   static String ADOPTION_IMG="assets/images/adoption_img.png";
+  static String OFFER_ICON="assets/images/offer_icon.png";
+
 
 
 
