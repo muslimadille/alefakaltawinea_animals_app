@@ -4,6 +4,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -28,13 +29,15 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
             _providerInfo(),
             _cobonInfo(),
             _cobonBtn(),
-            _offerText()
+            _offerText(),
+            _devider(),
+            Column(children: _benifitsList(),)
           ],),
         ),));
   }
   Widget _offerText(){
     return Container(
-      margin: EdgeInsets.all(D.default_5),
+      margin: EdgeInsets.only(bottom:D.default_20,left:D.default_10,right:D.default_10),
         child: Wrap(
       alignment:WrapAlignment.center,
       children: [
@@ -186,5 +189,27 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
     double raio=(discount/price)*100;
     return raio;
 
+  }
+ List<Widget>  _benifitsList(){
+   List<Widget> beni=[];
+   beni.add(
+     Container(
+       margin: EdgeInsets.only(left:D.default_10,right:D.default_10,top: D.default_5),
+       child: Row(
+       children: [
+         Expanded(child: Text("شروط الاإستخدام:",style: S.h1(color: C.BASE_BLUE),textAlign:TextAlign.start ,))
+       ],),)
+   );
+   for(int i=0;i<widget.serviceProviderData.offers![widget.index].features!.length;i++){
+     beni.add(
+         Container(
+           margin: EdgeInsets.only(left:D.default_10,right:D.default_10,top: D.default_5),
+           child: Row(
+             children: [
+               Expanded(child: Text("-${widget.serviceProviderData.offers![widget.index].features![i].ar}",style: S.h4(color:Colors.black87),textAlign:TextAlign.start ,))
+             ],),)
+     );
+   }
+   return beni ;
   }
 }
