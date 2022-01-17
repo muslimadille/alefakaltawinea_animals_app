@@ -163,14 +163,14 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
                         Container(
                           padding:EdgeInsets.only(left:D.default_10,right:D.default_10),
                           child: Text(widget.serviceProviderData.phone!,style: S.h4(color: Colors.grey),),),
-                        Container(
-                          child: Icon(Icons.web_rounded,color: Colors.grey,size: D.default_20,),),
-                        InkWell(onTap: (){
+                        widget.serviceProviderData.website!.isNotEmpty?Container(
+                          child: Icon(Icons.web_rounded,color: Colors.grey,size: D.default_20,),):Container(),
+                        widget.serviceProviderData.website!.isNotEmpty?InkWell(onTap: (){
                           _launchURL("www.google.com");
                         },
                           child: Container(
                             padding:EdgeInsets.only(left:D.default_10,right:D.default_10),
-                            child: Text(widget.serviceProviderData.email!,style: S.h4(color: Colors.grey),),),)
+                            child: Text(widget.serviceProviderData.website!,style: S.h4(color: Colors.grey),),),):Container()
 
                       ],)
 
