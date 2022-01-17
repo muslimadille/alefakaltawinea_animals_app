@@ -1,3 +1,5 @@
+import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/data/offer_model.dart';
+
 class ServiceProviderModel {
   int? currentPage;
   List<Data>? data;
@@ -93,6 +95,8 @@ class Data {
   String? stateName;
   String? isOnline;
   String? categoryId;
+  List<OfferModel>? offers;
+
 
   Data(
       {this.id,
@@ -109,7 +113,8 @@ class Data {
         this.stateId,
         this.stateName,
         this.isOnline,
-        this.categoryId});
+        this.categoryId,
+      this.offers});
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -127,6 +132,12 @@ class Data {
     stateName = json['state_name'];
     isOnline = json['is_online'];
     categoryId = json['category_id'];
+    if (json['offers'] != null) {
+      offers = <OfferModel>[];
+      json['offers'].forEach((v) {
+        offers!.add(new OfferModel.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -146,6 +157,9 @@ class Data {
     data['state_name'] = this.stateName;
     data['is_online'] = this.isOnline;
     data['category_id'] = this.categoryId;
+    if (this.offers != null) {
+      data['offers'] = this.offers!.map((v) => v.toJson()).toList();
+    }
     return data;
   }
 }

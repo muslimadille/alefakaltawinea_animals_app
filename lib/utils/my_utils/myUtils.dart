@@ -20,7 +20,7 @@ class MyUtils{
       onHighlightWidgetTap: (introStatus) {
         print(introStatus);
       },
-      padding: EdgeInsets.zero,
+      padding: EdgeInsets.all(D.default_2),
       borderRadius: BorderRadius.all(Radius.circular(D.default_5)),
       widgetBuilder: StepWidgetBuilder.useAdvancedTheme(widgetBuilder:(params){
         return Container(

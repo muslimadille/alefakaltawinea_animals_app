@@ -45,6 +45,9 @@ dependencies:
   shimmer: ^2.0.0
   fluttertoast: ^8.0.8
   url_launcher: ^6.0.18
+  pull_to_refresh: ^2.0.0
+
+
 
 
 

@@ -9,7 +9,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 
 class OfferDetailsScreen extends StatefulWidget {
   Data serviceProviderData;
-  OfferDetailsScreen(this.serviceProviderData);
+  int index;
+  OfferDetailsScreen(this.serviceProviderData,this.index);
 
   @override
   _OfferDetailsScreenState createState() => _OfferDetailsScreenState();
@@ -38,14 +39,14 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
       alignment:WrapAlignment.center,
       children: [
         Text("خصم ",style: S.h2(color: C.BASE_BLUE),),
-        Text("15%",style: S.h2(color: C.BASE_BLUE)),
+        Text("${_getDescoundRaio(widget.index)}%",style: S.h2(color: C.BASE_BLUE)),
         Text(" على ",style: S.h2(color: C.BASE_BLUE)),
-        Text("التطعيم ضد حشرات الفرو",style: S.h2(color: C.BASE_BLUE)),
+        Text("${widget.serviceProviderData.offers![widget.index].title}",style: S.h2(color: C.BASE_BLUE)),
         Text(" بـ ",style: S.h2(color: C.BASE_BLUE)),
-        Text("120",style: S.h2(color: C.BASE_BLUE)),
+        Text("${widget.serviceProviderData.offers![widget.index]!.discountValue!}",style: S.h2(color: C.BASE_BLUE)),
         Text(" ريال ",style: S.h2(color: C.BASE_BLUE)),
         Text("بدلا من ",style: S.h2(color: C.BASE_BLUE)),
-        Text("260",style: S.h2(color: C.BASE_BLUE)),
+        Text("${widget.serviceProviderData.offers![widget.index]!.price!}",style: S.h2(color: C.BASE_BLUE)),
         Text(" ريال ",style: S.h2(color: C.BASE_BLUE)),
       ],));
   }
@@ -81,9 +82,9 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
     return Container(
       child: Column(
         children: [
-          _cobonInfoItem("قيمة التوفير:","25 ريال"),
+          _cobonInfoItem("قيمة التوفير:","${widget.serviceProviderData.offers![widget.index]!.discountValue!} ${"ريال"}"),
           _devider(),
-          _cobonInfoItem("صالح لغاية:","30-01-2022"),
+          _cobonInfoItem("صالح لغاية:","${widget.serviceProviderData.offers![widget.index]!.expirationDate!}"),
           _devider(),
           _cobonInfoItem("هذا الكوبون متاح فقط لمستخدمي البطاقة",""),
           _devider()
@@ -177,5 +178,13 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
         ],),
       )
     ],);
+  }
+
+  double _getDescoundRaio(int index){
+    double price=double.parse(widget.serviceProviderData.offers![index]!.price!);
+    double discount=double.parse(widget.serviceProviderData.offers![index]!.discountValue!);
+    double raio=(discount/price)*100;
+    return raio;
+
   }
 }

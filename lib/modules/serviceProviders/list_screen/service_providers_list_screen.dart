@@ -11,6 +11,8 @@ import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
+
 
 class ServiceProviderListScreen extends StatefulWidget {
   CategoriesDataModel? selectedCategory;
@@ -21,10 +23,14 @@ class ServiceProviderListScreen extends StatefulWidget {
   _ServiceProviderListScreenState createState() => _ServiceProviderListScreenState();
 }
 
-class _ServiceProviderListScreenState extends State<ServiceProviderListScreen> {
+class _ServiceProviderListScreenState extends State<ServiceProviderListScreen>  {
   BottomBarProviderModel?bottomBarProviderModel;
   ServiceProvidersProviderModel? serviceProvidersProviderModel;
   int _currentLoadedPage=1;
+  RefreshController _refreshController =
+  RefreshController(initialRefresh: false);
+  GlobalKey _contentKey = GlobalKey();
+  GlobalKey _refresherKey = GlobalKey();
 
   @override
   void initState() {
@@ -46,22 +52,46 @@ class _ServiceProviderListScreenState extends State<ServiceProviderListScreen> {
       showSettings: false,
         body: Column(children: [
           _actionBar(),
-      Expanded(child:serviceProvidersProviderModel!.isLoading?LoadingProgress(): serviceProvidersProviderModel!.serviceProviderModel!.data!.isNotEmpty?ListView.builder(
-          itemCount: serviceProvidersProviderModel!.serviceProviderModel!.data!.length,
-          padding: EdgeInsets.all(D.default_10),
-          itemBuilder: (context,index){
-            return  ServiceProviderListItem(index,serviceProvidersProviderModel);
-          }):Center(child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-            TransitionImage(Res.OFFER_ICON,
-            width: D.default_80,
-              height: D.default_80,
-            ),
+      Expanded(child:serviceProvidersProviderModel!.isLoading?LoadingProgress():SmartRefresher(
+        key: _refresherKey,
+        controller: _refreshController,
+        enablePullUp: true,
+        child: _listitem(),
+        physics: BouncingScrollPhysics(),
+        footer: ClassicFooter(
+          loadStyle: LoadStyle.ShowWhenLoading,
+          completeDuration: Duration(milliseconds: 500),
+        ),
+        onRefresh: () async {
+          _currentLoadedPage=1;
+          serviceProvidersProviderModel!.getServiceProvidersList(widget.selectedCategory!.id!, _currentLoadedPage);
+        },
+        onLoading: () async {
+          _currentLoadedPage=_currentLoadedPage+1;
+          serviceProvidersProviderModel!.getServiceProvidersList(widget.selectedCategory!.id!, _currentLoadedPage);
+
+          //_refreshController.loadFailed();
+        },
+      )
+      ,)
+    ],));
+  }
+  Widget _listitem(){
+    return serviceProvidersProviderModel!.serviceProviderModel!.data!.isNotEmpty?ListView.builder(
+        itemCount: serviceProvidersProviderModel!.serviceProviderModel!.data!.length,
+        padding: EdgeInsets.all(D.default_10),
+        itemBuilder: (context,index){
+          return  ServiceProviderListItem(index,serviceProvidersProviderModel);
+        }):Center(child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        TransitionImage(Res.OFFER_ICON,
+          width: D.default_80,
+          height: D.default_80,
+        ),
         SizedBox(height: D.default_20,),
         Text("لا توجد عروض متاحة حاليا في هذا القسم",style: S.h3(color: C.BASE_BLUE),)
-      ],),),)
-    ],));
+      ],),);
   }
   Widget _actionBar(){
     return Container(

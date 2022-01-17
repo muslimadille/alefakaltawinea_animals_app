@@ -7,6 +7,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'offers/offers_list/service_provider_offers_list_screen.dart';
@@ -123,7 +124,18 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
                         Expanded(child: Container(
                           padding:EdgeInsets.only(left:D.default_10,right:D.default_10,bottom: D.default_5),
                           child: Text(widget.serviceProviderData.address!,style: S.h4(color: Colors.grey),),)),
-                        Container(
+                        InkWell(onTap: (){
+                          Fluttertoast.showToast(
+                              msg: "قريبا",
+                              toastLength: Toast.LENGTH_LONG,
+                              gravity: ToastGravity.CENTER,
+                              timeInSecForIosWeb: 1,
+                              backgroundColor: Colors.red,
+                              textColor: Colors.white,
+                              fontSize: 16.0
+                          );
+                        },
+                        child: Container(
                           padding: EdgeInsets.only(left: D.default_10,right: D.default_10,top: D.default_5,bottom: D.default_5),
                           decoration: BoxDecoration(
                               color: Colors.black45,
@@ -142,7 +154,7 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
                               Text(tr("show_map"),style: S.h5(color: Colors.white),),
 
                             ],),
-                        )
+                        ),)
 
                       ],),
                       Row(children: [

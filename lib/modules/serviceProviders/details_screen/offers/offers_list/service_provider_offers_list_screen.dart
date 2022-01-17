@@ -4,6 +4,8 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:flutter/material.dart';
 
 class ServiceProviderOffersScreen extends StatefulWidget {
@@ -20,17 +22,19 @@ class _ServiceProviderOffersScreenState extends State<ServiceProviderOffersScree
     return Container(
       margin: EdgeInsets.only(top: D.default_10),
       child: Column(children: [
-      Expanded(child:ListView.builder(
-          itemCount: 4,
-          padding: EdgeInsets.all(D.default_10),
+      Expanded(child:
+      widget.serviceProviderData.offers!.isNotEmpty?ListView.builder(
+          itemCount: widget.serviceProviderData.offers!.length,
+          padding: EdgeInsets.only(top:D.default_10,bottom:D.default_10),
           itemBuilder: (context,index){
             return  MaterialButton(onPressed: (){
-              MyUtils.navigate(context, OfferDetailsScreen(widget.serviceProviderData));
+              MyUtils.navigate(context, OfferDetailsScreen(widget.serviceProviderData,index));
             },
               padding: EdgeInsets.zero,
             child: Container(
-              padding: EdgeInsets.only(left:D.default_15,right:D.default_10,top:D.default_20,bottom:D.default_20),
-              margin: EdgeInsets.all(D.default_10),
+              width: double.infinity,
+              margin: EdgeInsets.only(left:D.default_15,right:D.default_10),
+              padding: EdgeInsets.only(left:D.default_10,right:D.default_10,top:D.default_20,bottom:D.default_20),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(D.default_10),
                   border: Border.all(color: C.BASE_BLUE,width: D.default_1),
@@ -44,18 +48,37 @@ class _ServiceProviderOffersScreenState extends State<ServiceProviderOffersScree
               ),
               child: Wrap(children: [
                 Text("خصم ",style: S.h4(color: C.BASE_BLUE),),
-                Text("15%",style: S.h4(color: C.BASE_BLUE)),
+                Text("${_getDescoundRaio(index)}%",style: S.h4(color: C.BASE_BLUE)),
                 Text(" على ",style: S.h4(color: C.BASE_BLUE)),
-                Text("التطعيم ضد حشرات الفرو",style: S.h4(color: C.BASE_BLUE)),
+                Text("${widget.serviceProviderData.offers![index].title}",style: S.h4(color: C.BASE_BLUE)),
                 Text(" بـ ",style: S.h4(color: C.BASE_BLUE)),
-                Text("120",style: S.h4(color: C.BASE_BLUE)),
+                Text("${widget.serviceProviderData.offers![index]!.discountValue!}",style: S.h4(color: C.BASE_BLUE)),
                 Text(" ريال ",style: S.h4(color: C.BASE_BLUE)),
                 Text("بدلا من ",style: S.h4(color: C.BASE_BLUE)),
-                Text("260",style: S.h4(color: C.BASE_BLUE)),
+                Text("${widget.serviceProviderData.offers![index]!.price!}",style: S.h4(color: C.BASE_BLUE)),
                 Text(" ريال ",style: S.h4(color: C.BASE_BLUE)),
               ],),
             ),);
-          }),)
+          }):_noData())
+    ],),);
+  }
+  double _getDescoundRaio(int index){
+    double price=double.parse(widget.serviceProviderData.offers![index]!.price!);
+    double discount=double.parse(widget.serviceProviderData.offers![index]!.discountValue!);
+    double raio=(discount/price)*100;
+    return raio;
+
+  }
+  Widget _noData(){
+    return Container(child: Column(
+    mainAxisAlignment: MainAxisAlignment.center,
+    children: [
+    TransitionImage(Res.OFFER_ICON,
+    width: D.default_60,
+        height: D.default_60,
+    ),
+    SizedBox(height: D.default_20,),
+    Text("لا توجد عروض متاحة حاليا",style: S.h3(color: C.BASE_BLUE),)
     ],),);
   }
 }
