@@ -33,7 +33,7 @@ class _ServiceProviderOffersScreenState extends State<ServiceProviderOffersScree
               padding: EdgeInsets.zero,
             child: Container(
               width: double.infinity,
-              margin: EdgeInsets.only(left:D.default_15,right:D.default_10),
+              margin: EdgeInsets.only(left:D.default_15,right:D.default_15,top:D.default_5,bottom:D.default_5),
               padding: EdgeInsets.only(left:D.default_10,right:D.default_10,top:D.default_20,bottom:D.default_20),
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(D.default_10),

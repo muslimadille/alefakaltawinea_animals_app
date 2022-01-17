@@ -1,4 +1,5 @@
 import 'package:alefakaltawinea_animals_app/modules/ads/ads_slider.dart';
+import 'package:alefakaltawinea_animals_app/modules/ads/provider/ads_slider_provider.dart';
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/categories_screen/provider/categories_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
@@ -15,11 +16,15 @@ class MainCategoriesScreen extends StatefulWidget {
 }
 
 class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
+  AdsSliderProviderModel?adsSliderProviderModel;
+
   CategoriesProviderModel?categoriesProviderModel;
   @override
   void initState() {
     super.initState();
     var _categoriesProviderModel=Provider.of<CategoriesProviderModel>(context,listen: false);
+    adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: false);
+    adsSliderProviderModel!.getAdsSlider();
     _categoriesProviderModel.getCategoriesList();
   }
   @override

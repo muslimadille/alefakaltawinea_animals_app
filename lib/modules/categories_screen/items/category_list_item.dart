@@ -64,14 +64,14 @@ class _CategoryListItemState extends State<CategoryListItem> {
                 alignment:AlignmentDirectional.bottomCenter,
                 clipBehavior: Clip.none,
                 children: [
-                  Positioned(child: TransitionImage(
+                  Positioned(child:widget.categoriesProviderModel!.categoriesList[widget.index].photo!.isNotEmpty? TransitionImage(
                     widget.categoriesProviderModel!.categoriesList[widget.index].photo!,
                     fit: BoxFit.cover,
                     height:height+D.default_10,
-                  ),bottom: 0,right:-D.default_16,)
+                  ):Container(),bottom: 0,right:-D.default_16,)
                   ,Container(
                     child:Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment:widget.categoriesProviderModel!.categoriesList[widget.index].photo!.isNotEmpty? MainAxisAlignment.start:MainAxisAlignment.center,
                       children: [
                         Center(child: Container(
                           padding:EdgeInsets.all(D.default_20)

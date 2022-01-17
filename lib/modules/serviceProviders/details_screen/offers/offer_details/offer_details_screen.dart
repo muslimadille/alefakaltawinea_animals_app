@@ -89,6 +89,8 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
           _devider(),
           _cobonInfoItem("صالح لغاية:","${widget.serviceProviderData.offers![widget.index]!.expirationDate!}"),
           _devider(),
+          _cobonInfoItem("عدد مرات الأستخدام:","${widget.serviceProviderData.offers![widget.index]!.usageTimes!}"),
+          _devider(),
           _cobonInfoItem("هذا الكوبون متاح فقط لمستخدمي البطاقة",""),
           _devider()
 
