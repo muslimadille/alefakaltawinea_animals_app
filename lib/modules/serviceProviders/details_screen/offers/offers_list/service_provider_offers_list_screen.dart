@@ -46,17 +46,18 @@ class _ServiceProviderOffersScreenState extends State<ServiceProviderOffersScree
                       spreadRadius: 2
                   )]
               ),
-              child: Wrap(children: [
-                Text("خصم ",style: S.h4(color: C.BASE_BLUE),),
-                Text("${_getDescoundRaio(index)}%",style: S.h4(color: C.BASE_BLUE)),
-                Text(" على ",style: S.h4(color: C.BASE_BLUE)),
-                Text("${widget.serviceProviderData.offers![index].title}",style: S.h4(color: C.BASE_BLUE)),
-                Text(" بـ ",style: S.h4(color: C.BASE_BLUE)),
-                Text("${widget.serviceProviderData.offers![index]!.discountValue!}",style: S.h4(color: C.BASE_BLUE)),
-                Text(" ريال ",style: S.h4(color: C.BASE_BLUE)),
-                Text("بدلا من ",style: S.h4(color: C.BASE_BLUE)),
-                Text("${widget.serviceProviderData.offers![index]!.price!}",style: S.h4(color: C.BASE_BLUE)),
-                Text(" ريال ",style: S.h4(color: C.BASE_BLUE)),
+              child: Wrap(alignment:WrapAlignment.center
+                  ,children: [
+                //Text("خصم ",style: S.h4(color: C.BASE_BLUE),),
+                //Text("${_getDescoundRaio(index)}%",style: S.h4(color: C.BASE_BLUE)),
+                //Text(" على ",style: S.h4(color: C.BASE_BLUE)),
+                Text("${widget.serviceProviderData.offers![index].title}",style: S.h4(color: C.BASE_BLUE),textAlign: TextAlign.center,),
+               // Text(" بـ ",style: S.h4(color: C.BASE_BLUE)),
+                //Text("${widget.serviceProviderData.offers![index]!.discountValue!}",style: S.h4(color: C.BASE_BLUE)),
+               // Text(" ريال ",style: S.h4(color: C.BASE_BLUE)),
+               // Text("بدلا من ",style: S.h4(color: C.BASE_BLUE)),
+               // Text("${widget.serviceProviderData.offers![index]!.price!}",style: S.h4(color: C.BASE_BLUE)),
+               // Text(" ريال ",style: S.h4(color: C.BASE_BLUE)),
               ],),
             ),);
           }):_noData())

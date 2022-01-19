@@ -1,28 +1,40 @@
+import 'package:alefakaltawinea_animals_app/modules/ads/provider/ads_slider_provider.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class AdsSliderDots extends StatelessWidget {
-  const AdsSliderDots({Key? key}) : super(key: key);
+  int _itemCount;
+  int _position;
+   AdsSliderDots(this._itemCount,this._position) ;
+  AdsSliderProviderModel?adsSliderProviderModel;
+
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: true);
+
+    return adsSliderProviderModel!.adsSliderModelList.isNotEmpty?Container(
+      height: D.default_27,
+      child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         DotsIndicator(
-          dotsCount: 3,
-          position: 0,
+          dotsCount: adsSliderProviderModel!.adsSliderModelList.length,
+          position: _position.toDouble(),
           decorator: DotsDecorator(
-            color: Colors.grey, // Inactive color
-            activeColor: C.BASE_BLUE,
-            size: Size(D.default_5,D.default_5)
+              color: Colors.grey,
+              activeColor: C.BASE_BLUE,
+              activeSize:Size(D.default_10,D.default_10),
+              size:Size(D.default_10,D.default_10),
+              spacing:EdgeInsets.all(D.default_5)
           ),
         )
 
       ],
-    );
+    ),):Container();
   }
 }

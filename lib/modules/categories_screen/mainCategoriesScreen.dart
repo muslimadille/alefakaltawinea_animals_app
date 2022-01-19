@@ -36,13 +36,12 @@ class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
       showBottomBar: true,
         showSettings: true,
         showIntro: true,
-        body: Column(children: [
-      AdsSlider(),
-      Expanded(child:
-      categoriesProviderModel!.isLoading?LoadingProgress()
-      :Container(
-        padding: EdgeInsets.all(D.default_20),
-        child: CategoryList(context,categoriesProviderModel),))
+        body: categoriesProviderModel!.isLoading?LoadingProgress():Column(children: [
+      Container(height: MediaQuery.of(context).size.height*0.30,child: AdsSlider(),),
+          Container(
+          height: MediaQuery.of(context).size.height*0.5,
+            padding: EdgeInsets.all(D.default_20),
+            child: CategoryList(context,categoriesProviderModel),)
     ],));
   }
 }

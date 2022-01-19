@@ -28,7 +28,7 @@ class _ServiceProviderListItemState extends State<ServiceProviderListItem> {
       },
     child: Container(
       margin: EdgeInsets.all(D.default_10),
-      height: D.default_200,
+      height: D.default_230,
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(D.default_10),
@@ -42,13 +42,37 @@ class _ServiceProviderListItemState extends State<ServiceProviderListItem> {
       ),
       child: Stack(children: [
         Column(children: [
-          Expanded(child: TransitionImage(
-            widget.serviceProvidersProviderModel!.serviceProviderModel!.data![widget.index].bannerPhoto!,
-            radius: D.default_10,
-            fit: BoxFit.cover,
+          Expanded(child:
+          Container(
+          padding: EdgeInsets.all(D.default_10),
+      decoration: BoxDecoration(
+        image: DecorationImage(image: NetworkImage(widget.serviceProvidersProviderModel!.serviceProviderModel!.data![widget.index].bannerPhoto!,
+        ),fit:BoxFit.cover),
+        borderRadius: BorderRadius.only(topLeft: Radius.circular(D.default_10),topRight: Radius.circular(D.default_10)),
+        color: Colors.white,
+      ),)),
+          Container(
+            height: D.default_50,
             width: double.infinity,
-          )),
+            padding: EdgeInsets.all(D.default_10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(D.default_10),bottomRight: Radius.circular(D.default_10)),
+              color: Colors.white,
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(child: Text(
+                  widget.serviceProvidersProviderModel!.serviceProviderModel!.data![widget.index].name!
+                  ,style: S.h3(color:C.BASE_BLUE),),),
+                TransitionImage(
+                  Res.IC_FAV_GREY,
+                  height: D.default_25,
+                  width: D.default_25,
+                )
 
+              ],),
+          )
         ],),
         Positioned(child: Container(
           padding: EdgeInsets.all(D.default_5),
@@ -72,28 +96,6 @@ class _ServiceProviderListItemState extends State<ServiceProviderListItem> {
             width: double.infinity,
           ) ,
         ),),
-        Positioned(child: Container(
-          height: D.default_60,
-          width: double.infinity,
-          padding: EdgeInsets.all(D.default_10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(bottomLeft: Radius.circular(D.default_10),bottomRight: Radius.circular(D.default_10)),
-            color: Colors.white,
-          ),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(child: Text(
-                widget.serviceProvidersProviderModel!.serviceProviderModel!.data![widget.index].name!
-                ,style: S.h3(color:C.BASE_BLUE),),),
-              TransitionImage(
-                Res.IC_FAV_GREY,
-                height: D.default_25,
-                width: D.default_25,
-              )
-
-            ],),
-        ),bottom: 0,left: 0,right: 0,)
       ],),
     ),);
   }

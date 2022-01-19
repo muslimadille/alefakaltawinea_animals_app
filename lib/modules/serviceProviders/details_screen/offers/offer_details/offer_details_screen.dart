@@ -31,7 +31,8 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
             _cobonBtn(),
             _offerText(),
             _devider(),
-            Column(children: _benifitsList(),)
+            Column(children: _benifitsList(),),
+            SizedBox(height: D.default_20,)
           ],),
         ),));
   }
@@ -41,16 +42,16 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
         child: Wrap(
       alignment:WrapAlignment.center,
       children: [
-        Text("خصم ",style: S.h2(color: C.BASE_BLUE),),
-        Text("${_getDescoundRaio(widget.index)}%",style: S.h2(color: C.BASE_BLUE)),
-        Text(" على ",style: S.h2(color: C.BASE_BLUE)),
-        Text("${widget.serviceProviderData.offers![widget.index].title}",style: S.h2(color: C.BASE_BLUE)),
-        Text(" بـ ",style: S.h2(color: C.BASE_BLUE)),
-        Text("${widget.serviceProviderData.offers![widget.index]!.discountValue!}",style: S.h2(color: C.BASE_BLUE)),
-        Text(" ريال ",style: S.h2(color: C.BASE_BLUE)),
-        Text("بدلا من ",style: S.h2(color: C.BASE_BLUE)),
-        Text("${widget.serviceProviderData.offers![widget.index]!.price!}",style: S.h2(color: C.BASE_BLUE)),
-        Text(" ريال ",style: S.h2(color: C.BASE_BLUE)),
+        //Text("خصم ",style: S.h2(color: C.BASE_BLUE),),
+       // Text("${_getDescoundRaio(widget.index)}%",style: S.h2(color: C.BASE_BLUE)),
+       // Text(" على ",style: S.h2(color: C.BASE_BLUE)),
+        Text("${widget.serviceProviderData.offers![widget.index].title}",style: S.h2(color: C.BASE_BLUE),textAlign: TextAlign.center,),
+       // Text(" بـ ",style: S.h2(color: C.BASE_BLUE)),
+       // Text("${widget.serviceProviderData.offers![widget.index]!.discountValue!}",style: S.h2(color: C.BASE_BLUE)),
+       // Text(" ريال ",style: S.h2(color: C.BASE_BLUE)),
+       // Text("بدلا من ",style: S.h2(color: C.BASE_BLUE)),
+       // Text("${widget.serviceProviderData.offers![widget.index]!.price!}",style: S.h2(color: C.BASE_BLUE)),
+      //  Text(" ريال ",style: S.h2(color: C.BASE_BLUE)),
       ],));
   }
   Widget _cobonBtn(){
@@ -85,11 +86,11 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
     return Container(
       child: Column(
         children: [
-          _cobonInfoItem("قيمة التوفير:","${widget.serviceProviderData.offers![widget.index]!.discountValue!} ${"ريال"}"),
+          _cobonInfoItem("قيمة التوفير:","${double.parse(widget.serviceProviderData.offers![widget.index]!.price!)-double.parse(widget.serviceProviderData.offers![widget.index]!.discountValue!)} ${"ريال"}"),
           _devider(),
           _cobonInfoItem("صالح لغاية:","${widget.serviceProviderData.offers![widget.index]!.expirationDate!}"),
           _devider(),
-          _cobonInfoItem("عدد مرات الأستخدام:","${widget.serviceProviderData.offers![widget.index]!.usageTimes!}"),
+          _cobonInfoItem("عدد مرات الإستخدام:","${widget.serviceProviderData.offers![widget.index]!.usageTimes!}"),
           _devider(),
           _cobonInfoItem("هذا الكوبون متاح فقط لمستخدمي البطاقة",""),
           _devider()
@@ -199,7 +200,7 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
        margin: EdgeInsets.only(left:D.default_10,right:D.default_10,top: D.default_5),
        child: Row(
        children: [
-         Expanded(child: Text("شروط الاإستخدام:",style: S.h1(color: C.BASE_BLUE),textAlign:TextAlign.start ,))
+         Expanded(child: Text("شروط الإستخدام:",style: S.h1(color: C.BASE_BLUE),textAlign:TextAlign.start ,))
        ],),)
    );
    for(int i=0;i<widget.serviceProviderData.offers![widget.index].features!.length;i++){

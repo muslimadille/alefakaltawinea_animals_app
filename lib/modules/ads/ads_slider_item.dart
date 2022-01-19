@@ -39,19 +39,32 @@ class _AdsSliderItemState extends State<AdsSliderItem> {
           Column(children: [
             Expanded(child: TransitionImage(
               widget.AdsItem.bannerPhoto!,
-              radius: D.default_10,
               fit: BoxFit.cover,
               width: double.infinity,
             )),
-
+            Container(
+              height: D.default_50,
+              width: double.infinity,
+              padding: EdgeInsets.all(D.default_10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Expanded(child: Text(
+                    widget.AdsItem.name!
+                    ,style: S.h3(color:C.BASE_BLUE),),),
+                ],),
+            )
           ],),
-          Positioned(child: Container(
+          widget.AdsItem.photo!.isNotEmpty? Positioned(child: Container(
             padding: EdgeInsets.all(D.default_5),
-            margin: EdgeInsets.all(D.default_10),
+            margin: EdgeInsets.only(left:D.default_10,right:D.default_10),
             width: D.default_60,
             height: D.default_60,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(D.default_10),
+                borderRadius: BorderRadius.only(bottomRight: Radius.circular(D.default_5),bottomLeft:Radius.circular(D.default_5) ),
                 color: Colors.white,
                 boxShadow:[BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
@@ -66,29 +79,7 @@ class _AdsSliderItemState extends State<AdsSliderItem> {
               fit: BoxFit.cover,
               width: double.infinity,
             ) ,
-          ),),
-          Positioned(child: Container(
-            height: D.default_60,
-            width: double.infinity,
-            padding: EdgeInsets.all(D.default_10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(bottomLeft: Radius.circular(D.default_10),bottomRight: Radius.circular(D.default_10)),
-              color: Colors.white,
-            ),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Expanded(child: Text(
-                  widget.AdsItem.name!
-                  ,style: S.h3(color:C.BASE_BLUE),),),
-                TransitionImage(
-                  Res.IC_FAV_GREY,
-                  height: D.default_25,
-                  width: D.default_25,
-                )
-
-              ],),
-          ),bottom: 0,left: 0,right: 0,)
+          ),):Container(),
         ],),
       ),);
   }
