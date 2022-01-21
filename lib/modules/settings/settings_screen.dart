@@ -8,6 +8,8 @@ import 'package:alefakaltawinea_animals_app/utils/my_widgets/action_bar_widget.d
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({Key? key}) : super(key: key);
@@ -89,10 +91,6 @@ class _SettingScreenState extends State<SettingScreen> {
                         _itemText(tr("about_app"), () {}),
                         _itemText(tr("contact_us"), () {}),
                         _itemText(tr("Terms_and_Conditions"), (){}),*/
-
-
-
-
                       ],
                     ),
                   ),

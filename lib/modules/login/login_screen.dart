@@ -1,0 +1,171 @@
+import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
+  @override
+  _LoginScreenState createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
+  TextEditingController _phoneController=TextEditingController();
+  TextEditingController _passwordController=TextEditingController();
+  final _loginFormGlobalKey = GlobalKey < FormState > ();
+
+
+  @override
+  Widget build(BuildContext context) {
+    return BaseScreen( showSettings: false, showBottomBar: false, tag: "LoginScreen",
+      body: SingleChildScrollView(child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Container(
+              height: D.default_250,
+              child: Center(child: Text(tr("welcome_back"),style: S.h1(color: C.BASE_BLUE),textAlign: TextAlign.center,),)),
+          _header(),
+          Container(
+            padding: EdgeInsets.all(D.default_20),
+            child: Form(
+              key: _loginFormGlobalKey,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  _phone(),
+                  _password(),
+                  SizedBox(height: D.default_10,),
+                  _forgetPassword(),
+                  _loginBtn()
+
+                ],),),)
+        ],),));
+  }
+  Widget _loginBtn(){
+    return Center(child: InkWell(
+      onTap: (){
+        _onLoginClicked();
+      },
+      child: Container(
+        width: D.default_200,
+        margin: EdgeInsets.all(D.default_30),
+        padding: EdgeInsets.only(left:D.default_20,right: D.default_20,top: D.default_10,bottom: D.default_10),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(D.default_10),
+            color: C.BASE_BLUE,
+            boxShadow:[BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                offset:Offset(2,2),
+                blurRadius:4,
+                spreadRadius: 2
+            )]
+        ),
+        child: Text(tr("login"),style: S.h2(color: Colors.white),textAlign:TextAlign.center ,),),),);
+  }
+  Widget _header(){
+    return Container(
+      padding: EdgeInsets.all(D.default_10),
+      color: C.BASE_BLUE,
+      child: Center(child: Text(tr("login_header"),style: S.h1(color: Colors.white),textAlign: TextAlign.center,),),);
+  }
+  Widget _password(){
+    return Container(
+        width: double.infinity,
+        child: TextFormField(
+          validator:(password){
+            if(isFieldNotEmpty(password!)){
+              return null;
+            }else{
+              return tr("enter_password");
+            }
+          } ,
+          style: S.h4(color: Colors.black),
+          decoration:  InputDecoration(
+            hintText: tr("enter_password"),
+            hintStyle:S.h2(color: Colors.grey) ,
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey),
+            ) ,
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: C.BASE_BLUE),
+            ) ,
+            border: UnderlineInputBorder(
+                borderSide: BorderSide(color: C.BASE_BLUE)
+            ),
+            errorStyle: S.h4(color: Colors.red),
+            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          ),
+          keyboardType: TextInputType.text,
+          obscureText: false,
+          cursorColor: C.BASE_BLUE,
+          autofocus: false,
+        )
+    );
+  }
+  Widget _phone(){
+    return Container(
+        width: double.infinity,
+        child: TextFormField(
+          validator: (phone){
+            if(isFieldNotEmpty(phone!)){
+              if(isPhoneValide(phone)){
+              }else{
+                return tr("enter_10_numbers");
+              }
+            }else{
+              return tr("enter_phone");
+            }
+          },
+          decoration:  InputDecoration(
+            hintText: tr("enter_phone"),
+            hintStyle:S.h2(color: Colors.grey) ,
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey),
+            ) ,
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: C.BASE_BLUE),
+            ) ,
+            border: UnderlineInputBorder(
+                borderSide: BorderSide(color: C.BASE_BLUE)
+            ),
+            errorStyle: S.h4(color: Colors.red),
+            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          ),
+          keyboardType: TextInputType.text,
+          obscureText: false,
+          cursorColor: C.BASE_BLUE,
+          autofocus: false,
+        )
+    );
+  }
+  Widget _forgetPassword(){
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.all(D.default_10),
+      child: Text(tr("forget_password"),style: S.h4(color: Colors.black),textAlign:TextAlign.end,),);
+  }
+  void _onLoginClicked(){
+    if (_loginFormGlobalKey.currentState!.validate()) {
+      _loginFormGlobalKey.currentState!.save();
+      //call login api
+    }
+  }
+
+}
+mixin InputValidationMixin {
+  bool isFieldNotEmpty(String field) => field.isNotEmpty;
+  bool isPhoneValide(String value)=>value.length<10;
+
+}
+
+class RegistrationDataModel{
+ static String? name;
+ static String? email;
+ static String? phone;
+ static String? password;
+}
+

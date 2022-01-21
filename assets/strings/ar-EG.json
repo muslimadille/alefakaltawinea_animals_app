@@ -28,10 +28,12 @@
  "select_language": "تغيير اللغة",
  "select_city": "تغيير المدينة",
  "confirm": "تأكيد",
- "cancel": "إلغاء"
-
-
-
-
-
+ "cancel": "إلغاء",
+ "registration_header": "أهلا بك \n إملأ المعلومات الخاصة بك أدناه وانشئ حسابك الخاص",
+ "enter_password": "أدخل كلمة المرور",
+ "enter_10_numbers": "يجب أن يتكون رقم الهاتف من 10 أرقام",
+ "enter_phone": "أدخل رقم الهاتف",
+ "login_header": "تسجيل الدخول",
+ "welcome_back": "مرحبا بعودتك",
+ "forget_password": "هل نسيت كلمة المرور؟"
 }

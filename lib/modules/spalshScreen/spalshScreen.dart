@@ -4,16 +4,21 @@ import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/categories_screen/mainCategoriesScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/homeTabsScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/provider/intro_provider_model.dart';
+import 'package:alefakaltawinea_animals_app/modules/login/login_screen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_intro/flutter_intro.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 
 class SplashScreen extends StatefulWidget{
@@ -31,11 +36,28 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   Intro? intro;
   IntroProviderModel?introProviderModel;
   AdsSliderProviderModel?adsSliderProviderModel;
+  SharedPreferences? prefs;
+  UtilsProviderModel? utilsProviderModel;
+
+
+  void _initPref(BuildContext ctx)async{
+    utilsProviderModel=Provider.of<UtilsProviderModel>(ctx,listen: false);
+    prefs =  await SharedPreferences.getInstance();
+    Constants.prefs=prefs;
+    if(prefs!.get(Constants.LANGUAGE_KEY!)!=null){
+      if(prefs!.get(Constants.LANGUAGE_KEY!)=="ar"){
+        utilsProviderModel!.setCurrentLocal(ctx, Locale("ar","EG"));
+      }else{
+        utilsProviderModel!.setCurrentLocal(ctx, Locale("en","US"));
+      }
+    }
+  }
 
   @override
   void initState() {
     super.initState();
     intro=_myIntro();
+    _initPref(context);
     introProviderModel =Provider.of<IntroProviderModel>(context, listen: false);
     adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: false);
     adsSliderProviderModel!.getAdsSlider();
@@ -133,6 +155,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     return  Expanded(child: InkWell(
       key: intro!.keys[1],
       onTap:(){
+        MyUtils.navigate(context, LoginScreen());
       },child: Container(
         padding: EdgeInsets.only(bottom:D.default_15,top: D.default_15,left: D.default_5,right: D.default_5),
         margin: EdgeInsets.all(D.default_5),

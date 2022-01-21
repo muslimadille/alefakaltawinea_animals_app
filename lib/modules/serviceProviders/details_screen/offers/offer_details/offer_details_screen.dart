@@ -86,11 +86,11 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
     return Container(
       child: Column(
         children: [
-          _cobonInfoItem("قيمة التوفير:","${double.parse(widget.serviceProviderData.offers![widget.index]!.price!)-double.parse(widget.serviceProviderData.offers![widget.index]!.discountValue!)} ${"ريال"}"),
+          _cobonInfoItem("قيمة التوفير:","${double.parse(widget.serviceProviderData.offers![widget.index].price!)-double.parse(widget.serviceProviderData.offers![widget.index].discountValue!)} ${"ريال"}"),
           _devider(),
-          _cobonInfoItem("صالح لغاية:","${widget.serviceProviderData.offers![widget.index]!.expirationDate!}"),
+          _cobonInfoItem("صالح لغاية:","${widget.serviceProviderData.offers![widget.index].expirationDate!}"),
           _devider(),
-          _cobonInfoItem("عدد مرات الإستخدام:","${widget.serviceProviderData.offers![widget.index]!.usageTimes!}"),
+          _cobonInfoItem("عدد مرات الإستخدام:","${widget.serviceProviderData.offers![widget.index].usageTimes!}"),
           _devider(),
           _cobonInfoItem("هذا الكوبون متاح فقط لمستخدمي البطاقة",""),
           _devider()
@@ -187,8 +187,8 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
   }
 
   double _getDescoundRaio(int index){
-    double price=double.parse(widget.serviceProviderData.offers![index]!.price!);
-    double discount=double.parse(widget.serviceProviderData.offers![index]!.discountValue!);
+    double price=double.parse(widget.serviceProviderData.offers![index].price!);
+    double discount=double.parse(widget.serviceProviderData.offers![index].discountValue!);
     double raio=(discount/price)*100;
     return raio;
 

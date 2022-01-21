@@ -28,7 +28,19 @@
   "select_language": "Change the language",
   "select_city": "Change the city",
   "confirm": "Confirm",
-  "cancel": "Cancel"
+  "cancel": "Cancel",
+  "enter_password": "Enter the password",
+  "enter_10_numbers": "Phone number must be 10 numbers",
+  "enter_phone": "Enter a phone number",
+  "welcome_back": "Welcome back",
+  "forget_password": "Did you forget your password?"
+
+
+
+
+
+
+
 
 
 

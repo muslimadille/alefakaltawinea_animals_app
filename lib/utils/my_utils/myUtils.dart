@@ -145,7 +145,7 @@ class MyUtils{
                           child: Row(children: [
                             Radio(value: true, groupValue:utilsProviderModel!.isArabic,toggleable: true,activeColor:C.BASE_BLUE, onChanged: ( val ){
                               bool currentValue=val as bool ;
-                              currentValue?utilsProviderModel!.setLanguageState("ar"):utilsProviderModel!.setLanguageState("en");
+                              currentValue?utilsProviderModel.setLanguageState("ar"):utilsProviderModel.setLanguageState("en");
 
                             }),
                             Text("العربية", style: S.h2(color: Colors.black))
@@ -154,9 +154,9 @@ class MyUtils{
                       Container(
                           padding: EdgeInsets.all(D.default_10),
                           child: Row(children: [
-                            Radio(value: true, groupValue:utilsProviderModel!.isEnglish, toggleable: true,activeColor:C.BASE_BLUE,onChanged: ( val ){
+                            Radio(value: true, groupValue:utilsProviderModel.isEnglish, toggleable: true,activeColor:C.BASE_BLUE,onChanged: ( val ){
                               bool currentValue=val as bool ;
-                              currentValue?utilsProviderModel!.setLanguageState("en"):utilsProviderModel!.setLanguageState("ar");
+                              currentValue?utilsProviderModel.setLanguageState("en"):utilsProviderModel.setLanguageState("ar");
                             }),
                             Text("English", style: S.h2(color: Colors.black))
                           ],)),

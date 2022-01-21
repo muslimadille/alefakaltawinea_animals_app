@@ -64,8 +64,8 @@ class _ServiceProviderOffersScreenState extends State<ServiceProviderOffersScree
     ],),);
   }
   double _getDescoundRaio(int index){
-    double price=double.parse(widget.serviceProviderData.offers![index]!.price!);
-    double discount=double.parse(widget.serviceProviderData.offers![index]!.discountValue!);
+    double price=double.parse(widget.serviceProviderData.offers![index].price!);
+    double discount=double.parse(widget.serviceProviderData.offers![index].discountValue!);
     double raio=(discount/price)*100;
     return raio;
 
