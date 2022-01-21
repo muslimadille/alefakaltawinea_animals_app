@@ -6,6 +6,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AdsSliderItem extends StatefulWidget {
@@ -23,7 +24,10 @@ class _AdsSliderItemState extends State<AdsSliderItem> {
       onTap: (){
         MyUtils.navigate(context, ServiceProviderDetailsScreen(widget.AdsItem));
       },
-      child: Container(
+      child: Stack(
+        alignment:AlignmentDirectional.bottomCenter ,
+        children: [
+        Container(
         width: double.infinity,
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(0),
@@ -42,21 +46,7 @@ class _AdsSliderItemState extends State<AdsSliderItem> {
               fit: BoxFit.cover,
               width: double.infinity,
             )),
-            Container(
-              height: D.default_50,
-              width: double.infinity,
-              padding: EdgeInsets.all(D.default_10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Expanded(child: Text(
-                    widget.AdsItem.name!
-                    ,style: S.h3(color:C.BASE_BLUE),),),
-                ],),
-            )
+
           ],),
           widget.AdsItem.photo!.isNotEmpty? Positioned(child: Container(
             padding: EdgeInsets.all(D.default_5),
@@ -81,6 +71,22 @@ class _AdsSliderItemState extends State<AdsSliderItem> {
             ) ,
           ),):Container(),
         ],),
-      ),);
+      ),
+        TransitionImage(Res.HOME_CURVE,fit: BoxFit.cover,width: double.infinity,height: D.default_80,),
+        Container(
+          height: D.default_50,
+          width: double.infinity,
+          padding: EdgeInsets.all(D.default_10),
+
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Expanded(child: Text(
+                widget.AdsItem.name!
+                ,style: S.h3(color:C.BASE_BLUE),textAlign: TextAlign.center,),),
+            ],),
+        )
+      ],),);
   }
 }

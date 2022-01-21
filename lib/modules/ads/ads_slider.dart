@@ -28,16 +28,7 @@ class _AdsSliderState extends State<AdsSlider> {
     adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: true);
     return Container(child: Column(children: [
       Expanded(child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(0),
-              color: Colors.white,
-              boxShadow:[BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  offset:Offset(2,2),
-                  blurRadius:2,
-                  spreadRadius: 2
-              )]
-          ),
+
           child:PageView(
             children: sliderItems(),
             controller: _controller,

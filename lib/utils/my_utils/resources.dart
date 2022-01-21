@@ -18,6 +18,11 @@ class Res{
   static String CONSULTATION_IMG="assets/images/consultation_img.png";
   static String ADOPTION_IMG="assets/images/adoption_img.png";
   static String OFFER_ICON="assets/images/offer_icon.png";
+  static String HOME_CURVE="assets/images/home_curve.png";
+  static String SHOP_IC="assets/images/shop_ic.png";
+
+
+
 
 
 

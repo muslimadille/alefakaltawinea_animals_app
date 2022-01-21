@@ -18,15 +18,18 @@ class AdsSliderDots extends StatelessWidget {
     adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: true);
 
     return adsSliderProviderModel!.adsSliderModelList.isNotEmpty?Container(
+      color: Colors.white,
+      width: double.infinity,
       height: D.default_27,
       child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         DotsIndicator(
+
           dotsCount: adsSliderProviderModel!.adsSliderModelList.length,
           position: _position.toDouble(),
           decorator: DotsDecorator(
-              color: Colors.grey,
+              color: C.BASE_BLUE.withOpacity(0.3),
               activeColor: C.BASE_BLUE,
               activeSize:Size(D.default_10,D.default_10),
               size:Size(D.default_10,D.default_10),

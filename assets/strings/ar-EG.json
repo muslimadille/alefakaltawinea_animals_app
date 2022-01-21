@@ -20,7 +20,18 @@
  "show_map": "عرض الخريطة",
  "intro_settings": "إعدادات التطبيق",
  "intro_fav": "يمكنك الإتطلاع علي عروضك المفضلة",
- "intro_notification_btn": "يمكنك الإتطلاع علي اخر الاإشعارات"
+ "intro_notification_btn": "يمكنك الإتطلاع علي اخر الاإشعارات",
+ "Settings_title":"الإعدادات",
+ "about_app": "حول التطبيق",
+ "contact_us": "إتصل بنا",
+ "Terms_and_Conditions":"الشروط والأحكام",
+ "select_language": "تغيير اللغة",
+ "select_city": "تغيير المدينة",
+ "confirm": "تأكيد",
+ "cancel": "إلغاء"
+
+
+
 
 
 }

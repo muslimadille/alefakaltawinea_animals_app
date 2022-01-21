@@ -7,8 +7,10 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_widgets/action_bar_widget.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
@@ -51,7 +53,7 @@ class _ServiceProviderListScreenState extends State<ServiceProviderListScreen>  
       showBottomBar: true,
       showSettings: false,
         body: Column(children: [
-          _actionBar(),
+          ActionBarWidget(widget.title, context),
       Expanded(child:serviceProvidersProviderModel!.isLoading?LoadingProgress():SmartRefresher(
         key: _refresherKey,
         controller: _refreshController,

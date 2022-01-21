@@ -99,6 +99,8 @@ flutter:
     - assets/images/clinic_img.png
     - assets/images/consultation_img.png
     - assets/images/offer_icon.png
+    - assets/images/home_curve.png
+    - assets/images/shop_ic.png
 
     - assets/strings/ar-EG.json
     - assets/strings/en-US.json

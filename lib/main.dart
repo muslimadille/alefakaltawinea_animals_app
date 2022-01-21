@@ -2,6 +2,10 @@
 import 'dart:io';
 
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -12,6 +16,7 @@ import 'modules/homeTabsScreen/provider/intro_provider_model.dart';
 import 'modules/serviceProviders/list_screen/provider/sevice_providers_provicer_model.dart';
 import 'modules/spalshScreen/spalshScreen.dart';
 
+typedef dynamic OnItemClickListener();
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
@@ -23,6 +28,8 @@ void main() async{
       ChangeNotifierProvider<CategoriesProviderModel>(create: (ctx) => CategoriesProviderModel(),),
       ChangeNotifierProvider<ServiceProvidersProviderModel>(create: (ctx) => ServiceProvidersProviderModel(),),
       ChangeNotifierProvider<AdsSliderProviderModel>(create: (ctx) => AdsSliderProviderModel(),),
+      ChangeNotifierProvider<UtilsProviderModel>(create: (ctx) => UtilsProviderModel(),),
+
 
     ],
     child: EasyLocalization(
@@ -38,19 +45,22 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    UtilsProviderModel utilsProviderModel;
+    utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: true);
     _initProviders(context);
-    return  MaterialApp(
+    return  utilsProviderModel.currentLocalName.isNotEmpty? MaterialApp(
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
-        locale: context.locale,
+        locale: utilsProviderModel.currentLocal,
         debugShowCheckedModeBanner: false,
         home: BaseScreen(
           tag: "SplashScreen",
       showBottomBar: false,
         showSettings: false,
-        body: SplashScreen()));
+        body: SplashScreen())):Container();
   }
   void _initProviders(BuildContext context){
+
   }
 }
 class MyHttpOverrides extends HttpOverrides{

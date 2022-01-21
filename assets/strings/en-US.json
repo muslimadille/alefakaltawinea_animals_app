@@ -20,7 +20,16 @@
   "show_map": "Show On Map",
   "intro_settings": "Application settings ",
   "intro_fav": "You can view your favorite offers",
-  "intro_notification_btn": "You can view the latest notifications"
+  "intro_notification_btn": "You can view the latest notifications",
+  "Settings_title":"Settings",
+  "about_app": "About Application",
+  "contact_us": "Contact Us",
+  "Terms_and_Conditions":"Terms and Conditions",
+  "select_language": "Change the language",
+  "select_city": "Change the city",
+  "confirm": "Confirm",
+  "cancel": "Cancel"
+
 
 
 

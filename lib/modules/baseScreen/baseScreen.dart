@@ -1,9 +1,11 @@
 
 import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/homeTabsScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/provider/intro_provider_model.dart';
+import 'package:alefakaltawinea_animals_app/modules/settings/settings_screen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -64,7 +66,7 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
     return Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(0),
-          color: Colors.white,
+          color: C.BASE_BLUE,
           boxShadow:[BoxShadow(
               color: Colors.grey.withOpacity(0.5),
               offset:Offset(2,2),
@@ -79,7 +81,9 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
           children: [
           Center(
             child:
-        IconButton(key: introProviderModel!.intro!=null&&widget.tag=="MainCategoriesScreen"?introProviderModel!.intro!.keys[0]:Key("setting_btn"),onPressed: (){}, icon: Icon(Icons.menu,color: Colors.grey,size: D.default_40)))
+        IconButton(key: introProviderModel!.intro!=null&&widget.tag=="MainCategoriesScreen"?introProviderModel!.intro!.keys[0]:Key("setting_btn"),onPressed: (){
+          MyUtils.navigate(context, SettingScreen());
+        }, icon: Icon(Icons.menu,color: Colors.white,size: D.default_40)))
         ],),
       ),
     );
