@@ -11,10 +11,19 @@ import 'myColors.dart';
 
 class MyUtils{
 
-
+  /// ........... navigation utils................................
   static void navigate(BuildContext context,Widget screen){
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => screen));
   }
+  static void navigateAsFirstScreen(BuildContext context,Widget screen){
+    Navigator.of(context).popUntil((route) => route.isFirst);
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => screen));
+  }
+
+  static void navigateReplaceCurrent(BuildContext context,Widget screen){
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => screen));
+  }
+  ///========================intor utils===================================================
   static  Intro myIntro(List<String> descriptionsList){
     Intro? intro;
      intro = Intro(

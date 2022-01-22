@@ -178,7 +178,7 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
     if (_loginFormGlobalKey.currentState!.validate()) {
       _loginFormGlobalKey.currentState!.save();
       //call login api
-      userProviderModel!.login(_phoneController.text, _passwordController.text);
+      userProviderModel!.login(_phoneController.text, _passwordController.text,context);
     }
   }
 
