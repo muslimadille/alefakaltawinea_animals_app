@@ -41,6 +41,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
     _controller = PersistentTabController(initialIndex: 0);
     _handelIntro();
 }
+
   @override
   Widget build(BuildContext context) {
     bottomBarProviderModel=Provider.of<BottomBarProviderModel>(context,listen: true);
@@ -108,9 +109,8 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
           InkWell(onTap: (){
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(builder: (context) => MainCategoriesScreen()),
-                ModalRoute.withName('/'));
+            bottomBarProviderModel!.setSelectedScreen(0);
+            MyUtils.navigateAsFirstScreen(context, MainCategoriesScreen());
           }
             ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==0?Res.IC_HOME_BLUE:Res.IC_HOME_GREY,width: D.default_30,height: D.default_30,),),
           Center(child:Text(tr("home"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==0?C.BASE_BLUE:Colors.grey),),)
@@ -170,16 +170,10 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
           InkWell(onTap: (){
+            bottomBarProviderModel!.setSelectedScreen(4);
+            MyUtils.navigate(context, ProfileScreen());
             //bottomBarProviderModel!.setSelectedScreen(4);
-            Fluttertoast.showToast(
-                msg: "قريبا",
-                toastLength: Toast.LENGTH_LONG,
-                gravity: ToastGravity.CENTER,
-                timeInSecForIosWeb: 1,
-                backgroundColor: Colors.red,
-                textColor: Colors.white,
-                fontSize: 16.0
-            );
+
           }
             ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==4?Res.IC_PROFILE_BLUE:Res.IC_PROFILE_GREY,width: D.default_30,height: D.default_30,),),
           Center(child:Text(tr("profile"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==4?C.BASE_BLUE:Colors.grey),),)

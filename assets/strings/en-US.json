@@ -43,7 +43,11 @@
   "accept_terms": "Agree to the terms and conditions",
   "terms_error": "Please you must agree to the terms and conditions",
   "create_new_account": "Create a new account",
-  "password_length": "Password must be 8 characters or more"
+  "password_length": "Password must be 8 characters or more",
+  "full_name": "Full name",
+  "email": "Email",
+  "phone": "Phone"
+
 
 
 
