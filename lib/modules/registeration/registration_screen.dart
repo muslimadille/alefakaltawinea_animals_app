@@ -1,10 +1,13 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
+import 'package:alefakaltawinea_animals_app/modules/login/provider/user_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/input%20_validation_mixing.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
@@ -23,13 +26,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
   bool confirmpasswordobsecure=true;
   bool _accept=false;
   bool _showTermsError=false;
-
+  UserProviderModel?userProviderModel;
   final _registerFormGlobalKey = GlobalKey < FormState > ();
+@override
+  void initState() {
+    super.initState();
+    userProviderModel=Provider.of<UserProviderModel>(context,listen: false);
 
+}
   @override
   Widget build(BuildContext context) {
+    userProviderModel=Provider.of<UserProviderModel>(context,listen: true);
+
     return BaseScreen( showSettings: false, showBottomBar: false, tag: "RegistrationScreen",
-        body: SingleChildScrollView(child: Column(
+        body: userProviderModel!.isLoading?LoadingProgress():SingleChildScrollView(child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             Container(
@@ -151,7 +161,11 @@ Widget _coditions(){
           controller: _passwordController,
           validator:(password){
             if(isFieldNotEmpty(password!)){
-              return null;
+              if(isPasswordValide(password)){
+                return null;
+              }else{
+                return tr("password_length");
+              }
             }else{
               return tr("enter_password");
             }
@@ -305,9 +319,13 @@ Widget _coditions(){
           _showTermsError=true;
         });
       }
-
-
       //call register api
+      userProviderModel!.register(
+          _nameController.text,
+          _emailController.text,
+          _phoneController.text,
+          _passwordController.text,
+          _confirmPasswordController.text);
     }else{
       if(_accept){
         setState(() {

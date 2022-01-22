@@ -92,7 +92,11 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
           controller: _passwordController,
           validator:(password){
             if(isFieldNotEmpty(password!)){
-              return null;
+              if(isPasswordValide(password)){
+                return null;
+              }else{
+                return tr("password_length");
+              }
             }else{
               return tr("enter_password");
             }
