@@ -1,10 +1,8 @@
 
-import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/categories_screen/mainCategoriesScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/provider/bottom_bar_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/neerToYou/NearToyouScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/profile/profileScreen.dart';
-import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/service_providers_list_screen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
@@ -115,7 +113,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
                 ModalRoute.withName('/'));
           }
             ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==0?Res.IC_HOME_BLUE:Res.IC_HOME_GREY,width: D.default_30,height: D.default_30,),),
-          Center(child:Text(tr("home"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==0?C.BASE_BLUE:Colors.grey),),)
+          Center(child:Text(tr("home"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==0?C.BASE_BLUE:Colors.grey),),)
         ]
     ),);
   }
@@ -138,7 +136,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
             );
           }
             ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==1?Res.IC_FAV_BLUE:Res.IC_FAV_GREY,width: D.default_30,height: D.default_30,),),
-          Center(child:Text(tr("fav"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==1?C.BASE_BLUE:Colors.grey),),)
+          Center(child:Text(tr("fav"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==1?C.BASE_BLUE:Colors.grey),),)
         ]
     ),);
   }
@@ -161,7 +159,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
 
           }
             ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==3?Res.IC_NOTIFICATIONS_BLUE:Res.IC_NOTIFICATIONS_GREY,width: D.default_30,height: D.default_30,),),
-          Center(child:Text(tr("notifications"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==3?C.BASE_BLUE:Colors.grey),),)
+          Center(child:Text(tr("notifications"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==3?C.BASE_BLUE:Colors.grey),),)
         ]
     ),);
   }
@@ -184,7 +182,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
             );
           }
             ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==4?Res.IC_PROFILE_BLUE:Res.IC_PROFILE_GREY,width: D.default_30,height: D.default_30,),),
-          Center(child:Text(tr("profile"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==4?C.BASE_BLUE:Colors.grey),),)
+          Center(child:Text(tr("profile"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==4?C.BASE_BLUE:Colors.grey),),)
         ]
     ),);
   }
@@ -208,7 +206,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
               );
             }
               ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==2?Res.IC_NEAR_BLUE:Res.IC_NEAR_GREY,width: D.default_30,height: D.default_30,),),
-            Center(child:Text(tr("closest"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==2?C.BASE_BLUE:Colors.grey),),)
+            Center(child:Text(tr("closest"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==2?C.BASE_BLUE:Colors.grey),),)
           ]
       ),);
   }

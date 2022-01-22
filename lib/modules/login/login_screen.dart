@@ -1,6 +1,7 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/input%20_validation_mixing.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,8 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
   TextEditingController _phoneController=TextEditingController();
   TextEditingController _passwordController=TextEditingController();
   final _loginFormGlobalKey = GlobalKey < FormState > ();
+  bool passwordobsecure=true;
+
 
 
   @override
@@ -76,6 +79,7 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
     return Container(
         width: double.infinity,
         child: TextFormField(
+          controller: _passwordController,
           validator:(password){
             if(isFieldNotEmpty(password!)){
               return null;
@@ -96,11 +100,16 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
             border: UnderlineInputBorder(
                 borderSide: BorderSide(color: C.BASE_BLUE)
             ),
+              suffixIcon: IconButton(onPressed: (){
+                setState(() {
+                  passwordobsecure?passwordobsecure=false:passwordobsecure=true;
+                });
+              },icon: Icon((passwordobsecure??false) ? Icons.visibility_off : Icons.visibility,color: Colors.grey,),),
             errorStyle: S.h4(color: Colors.red),
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           ),
           keyboardType: TextInputType.text,
-          obscureText: false,
+          obscureText: passwordobsecure,
           cursorColor: C.BASE_BLUE,
           autofocus: false,
         )
@@ -110,9 +119,11 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
     return Container(
         width: double.infinity,
         child: TextFormField(
+          controller: _phoneController,
           validator: (phone){
             if(isFieldNotEmpty(phone!)){
               if(isPhoneValide(phone)){
+                return null;
               }else{
                 return tr("enter_10_numbers");
               }
@@ -134,8 +145,9 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
             ),
             errorStyle: S.h4(color: Colors.red),
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+
           ),
-          keyboardType: TextInputType.text,
+          keyboardType: TextInputType.phone,
           obscureText: false,
           cursorColor: C.BASE_BLUE,
           autofocus: false,
@@ -156,16 +168,6 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
   }
 
 }
-mixin InputValidationMixin {
-  bool isFieldNotEmpty(String field) => field.isNotEmpty;
-  bool isPhoneValide(String value)=>value.length<10;
 
-}
 
-class RegistrationDataModel{
- static String? name;
- static String? email;
- static String? phone;
- static String? password;
-}
 

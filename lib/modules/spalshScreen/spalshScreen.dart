@@ -5,6 +5,7 @@ import 'package:alefakaltawinea_animals_app/modules/categories_screen/mainCatego
 import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/homeTabsScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/provider/intro_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/login_screen.dart';
+import 'package:alefakaltawinea_animals_app/modules/registeration/registration_screen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
@@ -177,6 +178,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     return  Expanded(child: InkWell(
       key: intro!.keys[2],
       onTap:(){
+        MyUtils.navigate(context, RegistrationScreen());
       },child: Container(
         padding: EdgeInsets.only(bottom:D.default_15,top: D.default_15,left: D.default_5,right: D.default_5),
         margin: EdgeInsets.all(D.default_5),

@@ -33,7 +33,20 @@
   "enter_10_numbers": "Phone number must be 10 numbers",
   "enter_phone": "Enter a phone number",
   "welcome_back": "Welcome back",
-  "forget_password": "Did you forget your password?"
+  "forget_password": "Did you forget your password?",
+  "register_header":"Welcome \n Fill in your information below \n and create your own account",
+  "profile_info": "Your account information",
+  "confirm_password": "Confirm password",
+  "not_confirm":"Password does not match",
+  "enter_name": "Enter your name",
+  "enter_email": "Enter your email",
+  "accept_terms": "Agree to the terms and conditions",
+  "terms_error": "Please you must agree to the terms and conditions",
+  "create_new_account": "Create a new account"
+
+
+
+
 
 
 
