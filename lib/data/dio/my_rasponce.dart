@@ -1,5 +1,6 @@
 
 import 'package:alefakaltawinea_animals_app/modules/categories_screen/data/categories_model.dart';
+import 'package:alefakaltawinea_animals_app/modules/login/data/user_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/data/serviceProvidersModel.dart';
 
 class MyResponse<T> extends Object {
@@ -58,8 +59,11 @@ class MyResponse<T> extends Object {
       case ServiceProviderModel:
         _data = ServiceProviderModel.fromJson(json) as T;
         break;
-      default:
-        _data = null;
+      case UserDataModel:
+        _data = UserDataModel.fromJson(json) as T;
+        break;
+
+      default:_data = null;
     }
   }
 

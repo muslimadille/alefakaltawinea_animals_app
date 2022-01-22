@@ -15,6 +15,7 @@ import 'modules/ads/provider/ads_slider_provider.dart';
 import 'modules/categories_screen/provider/categories_provider_model.dart';
 import 'modules/homeTabsScreen/provider/bottom_bar_provider_model.dart';
 import 'modules/homeTabsScreen/provider/intro_provider_model.dart';
+import 'modules/login/provider/user_provider_model.dart';
 import 'modules/serviceProviders/list_screen/provider/sevice_providers_provicer_model.dart';
 import 'modules/spalshScreen/spalshScreen.dart';
 
@@ -31,8 +32,7 @@ void main() async{
       ChangeNotifierProvider<ServiceProvidersProviderModel>(create: (ctx) => ServiceProvidersProviderModel(),),
       ChangeNotifierProvider<AdsSliderProviderModel>(create: (ctx) => AdsSliderProviderModel(),),
       ChangeNotifierProvider<UtilsProviderModel>(create: (ctx) => UtilsProviderModel(),),
-
-
+      ChangeNotifierProvider<UserProviderModel>(create: (ctx) => UserProviderModel(),),
     ],
     child: EasyLocalization(
         supportedLocales: [Locale('en', 'US'), Locale('ar', 'EG')],

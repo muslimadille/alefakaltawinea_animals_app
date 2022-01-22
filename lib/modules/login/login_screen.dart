@@ -1,10 +1,13 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
+import 'package:alefakaltawinea_animals_app/modules/login/provider/user_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/input%20_validation_mixing.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -18,13 +21,20 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
   TextEditingController _passwordController=TextEditingController();
   final _loginFormGlobalKey = GlobalKey < FormState > ();
   bool passwordobsecure=true;
-
+  UserProviderModel?userProviderModel;
+@override
+  void initState() {
+    super.initState();
+    userProviderModel=Provider.of<UserProviderModel>(context,listen: false);
+  }
 
 
   @override
   Widget build(BuildContext context) {
+    userProviderModel=Provider.of<UserProviderModel>(context,listen: true);
+
     return BaseScreen( showSettings: false, showBottomBar: false, tag: "LoginScreen",
-      body: SingleChildScrollView(child: Column(
+      body: userProviderModel!.isLoading?LoadingProgress():SingleChildScrollView(child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
@@ -164,6 +174,7 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
     if (_loginFormGlobalKey.currentState!.validate()) {
       _loginFormGlobalKey.currentState!.save();
       //call login api
+      userProviderModel!.login(_phoneController.text, _passwordController.text);
     }
   }
 

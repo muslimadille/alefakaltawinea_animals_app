@@ -18,6 +18,4 @@ class GetCategoriesListApi{
       return MyResponse<List<CategoriesDataModel>>.init(Apis.CODE_ERROR, "", null);
     }
   }
-
-
 }
