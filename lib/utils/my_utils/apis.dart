@@ -20,8 +20,10 @@ class Apis{
   static String LOGIN="${BASE_URL}/login";
   static String REGISTER="${BASE_URL}/register";
   static String ACTIVE_ACCOUNT="${BASE_URL}/activate";
-  static String GET_AUTH_CODE="${BASE_URL}/get-code";
+  static String GET_AUTH_CODE_TO_SET_PASSWORD="${BASE_URL}/get-code";
   static String FORGET_PASSWORD="${BASE_URL}/set-new-password";//used after GET_AUTH_CODE
+  static String UPDATE_PROFILE="${BASE_URL}/update-profile";//used after GET_AUTH_CODE
+
 
 
 

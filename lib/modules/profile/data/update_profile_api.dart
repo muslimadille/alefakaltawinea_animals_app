@@ -5,13 +5,16 @@ import 'package:alefakaltawinea_animals_app/data/dio/my_rasponce.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/data/user_data.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/apis.dart';
 
-class LoginApi{
+class UpdateProfileApi{
 
-  Future<MyResponse<UserData>> login(String phone,String password) async {
-    final url = "${Apis.LOGIN}";
+  Future<MyResponse<UserData>> updateProfile(String name,String email,String phone,int regionId,stateId) async {
+    final url = "${Apis.REGISTER}";
     Map<String,dynamic>body={
+      "username":name,
+      "email":email,
       "phone":phone,
-      "password":password
+      "region_id":regionId,
+      "state_id":stateId,
     };
     final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_POST, url,body: body);
     if (response != null && response.statusCode == 200) {

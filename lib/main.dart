@@ -16,6 +16,7 @@ import 'modules/categories_screen/provider/categories_provider_model.dart';
 import 'modules/homeTabsScreen/provider/bottom_bar_provider_model.dart';
 import 'modules/homeTabsScreen/provider/intro_provider_model.dart';
 import 'modules/login/provider/user_provider_model.dart';
+import 'modules/otp/provider/otp_provider_model.dart';
 import 'modules/serviceProviders/list_screen/provider/sevice_providers_provicer_model.dart';
 import 'modules/spalshScreen/spalshScreen.dart';
 
@@ -33,6 +34,9 @@ void main() async{
       ChangeNotifierProvider<AdsSliderProviderModel>(create: (ctx) => AdsSliderProviderModel(),),
       ChangeNotifierProvider<UtilsProviderModel>(create: (ctx) => UtilsProviderModel(),),
       ChangeNotifierProvider<UserProviderModel>(create: (ctx) => UserProviderModel(),),
+      ChangeNotifierProvider<OtpProviderModel>(create: (ctx) => OtpProviderModel(),),
+
+
     ],
     child: EasyLocalization(
         supportedLocales: [Locale('en', 'US'), Locale('ar', 'EG')],
@@ -50,6 +54,7 @@ class MyApp extends StatelessWidget {
     UtilsProviderModel utilsProviderModel;
     utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: true);
     _initProviders(context);
+
 
 
     return  utilsProviderModel.currentLocalName.isNotEmpty? MaterialApp(

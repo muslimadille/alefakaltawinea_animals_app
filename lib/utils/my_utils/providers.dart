@@ -8,8 +8,12 @@ class UtilsProviderModel with ChangeNotifier{
   bool isEnglish=false;
   Locale currentLocal =Locale('ar', 'EG');
   String currentLocalName="العربية";
+  int currentRegionIndex=0;
 
-
+setCurrentRegionIndex(int value){
+  currentRegionIndex=value;
+  notifyListeners();
+}
   setCurrentLocal(BuildContext ctx,Locale locale)  async {
     await ctx.setLocale(locale);
     await EasyLocalization.of(ctx)!.setLocale(locale);

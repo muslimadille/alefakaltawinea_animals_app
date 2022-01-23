@@ -46,7 +46,17 @@
   "password_length": "Password must be 8 characters or more",
   "full_name": "Full name",
   "email": "Email",
-  "phone": "Phone"
+  "phone": "Phone",
+  "register_otp": "Activate the account",
+  "otp_phon":"A confirmation number will be sent to the mobile phone registered to your account",
+  "try_again": "An error occurred try again",
+  "logout": "Logout",
+  "city": "City",
+  "send":"Send"
+
+
+
+
 
 
 

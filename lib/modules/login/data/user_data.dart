@@ -1,28 +1,6 @@
 import 'dart:convert';
 
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/data/offer_model.dart';
-/// id : 28
-/// name : "user test1"
-/// address : ""
-/// phone : "551234567"
-/// whatsapp : "966551234567"
-/// email : "user@test1.com"
-/// website : ""
-/// photo : ""
-/// banner_photo : ""
-/// longitude : ""
-/// latitude : ""
-/// region_id : ""
-/// region_name : ""
-/// state_id : ""
-/// state_name : ""
-/// is_online : "0"
-/// category_id : "0"
-/// offers : []
-/// color : ""
-/// user_type_id : "5"
-/// token : null
-
 UserData userDataFromJson(String str) => UserData.fromJson(json.decode(str));
 String userDataToJson(UserData data) => json.encode(data.toJson());
 class UserData {
@@ -47,9 +25,8 @@ class UserData {
       this.offers, 
       this.color, 
       this.userTypeId, 
-      this.token,
-    this.isActive
-  });
+      this.token, 
+      this.activate,});
 
   UserData.fromJson(dynamic json) {
     id = json['id'];
@@ -78,7 +55,7 @@ class UserData {
     color = json['color'];
     userTypeId = json['user_type_id'];
     token = json['token'];
-    isActive=json['isActive'];
+    activate = json['activate'];
   }
   int? id;
   String? name;
@@ -101,7 +78,7 @@ class UserData {
   String? color;
   String? userTypeId;
   String? token;
-  bool?isActive;
+  String? activate;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -128,7 +105,7 @@ class UserData {
     map['color'] = color;
     map['user_type_id'] = userTypeId;
     map['token'] = token;
-    map['isActive']=isActive;
+    map['activate'] = activate;
     return map;
   }
 

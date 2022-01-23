@@ -51,7 +51,6 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
 
   @override
   void dispose() {
-    introProviderModel!.intro!.dispose();
     super.dispose();
   }
 

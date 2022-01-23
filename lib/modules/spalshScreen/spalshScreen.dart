@@ -5,6 +5,7 @@ import 'package:alefakaltawinea_animals_app/modules/categories_screen/mainCatego
 import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/homeTabsScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/provider/intro_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/login_screen.dart';
+import 'package:alefakaltawinea_animals_app/modules/login/provider/user_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/registeration/registration_screen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
@@ -19,6 +20,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_intro/flutter_intro.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'data/regions_api.dart';
+import 'data/regions_api.dart';
+import 'data/regions_api.dart';
 
 
 
@@ -39,12 +44,14 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   AdsSliderProviderModel?adsSliderProviderModel;
   SharedPreferences? prefs;
   UtilsProviderModel? utilsProviderModel;
-
+  UserProviderModel?userProviderModel;
+  RegionsApi regionsApi=RegionsApi();
 
   void _initPref(BuildContext ctx)async{
     utilsProviderModel=Provider.of<UtilsProviderModel>(ctx,listen: false);
     prefs =  await SharedPreferences.getInstance();
     Constants.prefs=prefs;
+
     if(prefs!.get(Constants.LANGUAGE_KEY!)!=null){
       if(prefs!.get(Constants.LANGUAGE_KEY!)=="ar"){
         utilsProviderModel!.setCurrentLocal(ctx, Locale("ar","EG"));
@@ -52,11 +59,15 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
         utilsProviderModel!.setCurrentLocal(ctx, Locale("en","US"));
       }
     }
+    initSavedUser();
   }
 
   @override
   void initState() {
     super.initState();
+    getRegions();
+    userProviderModel=Provider.of<UserProviderModel>(context,listen: false);
+
     intro=_myIntro();
     _initPref(context);
     introProviderModel =Provider.of<IntroProviderModel>(context, listen: false);
@@ -87,6 +98,8 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   Widget build(BuildContext context) {
     adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: true);
     introProviderModel =Provider.of<IntroProviderModel>(context, listen: true);
+    userProviderModel=Provider.of<UserProviderModel>(context,listen: true);
+
     return BaseScreen(
         tag: "SplashScreen",
       showSettings: false,
@@ -205,5 +218,15 @@ Intro _myIntro(){
     ];
    return MyUtils.myIntro(descriptionsList);
 }
+  initSavedUser(){
+    if( Constants.prefs!.get(Constants.SAVED_PHONE_KEY!)!=null&&Constants.prefs!.get(Constants.SAVED_PASSWORD_KEY!)!=null){
+      userProviderModel!.login(Constants.prefs!.get(Constants.SAVED_PHONE_KEY!).toString(),Constants.prefs!.get(Constants.SAVED_PASSWORD_KEY!).toString(),context);
+    }
+  }
+  void getRegions(){
+    regionsApi.getRegions().then((value) {
+      Constants.REGIONS=value.data;
+    });
 
+  }
 }

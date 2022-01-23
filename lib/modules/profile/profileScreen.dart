@@ -1,13 +1,18 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/provider/bottom_bar_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/provider/user_provider_model.dart';
+import 'package:alefakaltawinea_animals_app/modules/spalshScreen/data/regions_model.dart';
+import 'package:alefakaltawinea_animals_app/modules/spalshScreen/spalshScreen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/input%20_validation_mixing.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/action_bar_widget.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -32,14 +37,18 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
   bool _showTermsError = false;
   UserProviderModel? userProviderModel;
   bool _isLogin=false;
+  RegionsModel? currentRegion;
   final _profileFormGlobalKey = GlobalKey<FormState>();
   BottomBarProviderModel?bottomBarProviderModel;
+  UtilsProviderModel?utilsProviderModel;
 
 
   @override
   void initState() {
     super.initState();
     bottomBarProviderModel=Provider.of<BottomBarProviderModel>(context,listen: false);
+    utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: false);
+
 
     if(Constants.currentUser!=null){
       userProviderModel = Provider.of<UserProviderModel>(context, listen: false);
@@ -56,6 +65,8 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
   Widget build(BuildContext context) {
     bottomBarProviderModel=Provider.of<BottomBarProviderModel>(context,listen: true);
     userProviderModel = Provider.of<UserProviderModel>(context, listen: true);
+    utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: true);
+
     return BaseScreen(
       showSettings: false,
       showBottomBar: true,
@@ -67,13 +78,14 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
 
   Widget _ProfileScreen(){
     return Column(
-
       children:[
         ActionBarWidget(tr("profile"),context),
-        Expanded(flex:0,child: SingleChildScrollView(
+        Expanded(child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              _Logout(),
+              Container(height: D.default_1,color: Colors.grey[200],),
               Container(
                 padding: EdgeInsets.all(D.default_20),
                 child: Form(
@@ -84,6 +96,8 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
                     children: [
                       _name(),
                       _phone(),
+                      _region(),
+                      Container(height: D.default_1,color: Colors.grey,),
                       _email(),
 
                     ],
@@ -99,12 +113,41 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
     return Container();
   }
   void _initUserData(){
-    _nameController.text=Constants.currentUser!.name!;
-    _phoneController.text=Constants.currentUser!.phone!;
-    _emailController.text=Constants.currentUser!.email!;
-    _currentRegionName=Constants.currentUser!.regionName!;
+    _nameController.text=userProviderModel!.currentUser!.name!;
+    _phoneController.text=userProviderModel!.currentUser!.phone!;
+    _emailController.text=userProviderModel!.currentUser!.email!;
   }
+  Widget _region(){
+    return Container(
+      padding: EdgeInsets.all(D.default_30),
+      child:Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(tr("city"),style: S.h4(color: Colors.black87),),
+        Container(
+            padding: EdgeInsets.only(left:D.default_10,right: D.default_10,top: D.default_5,bottom: D.default_5),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(D.default_100),
+                color: C.BASE_BLUE,
+                boxShadow:[BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    offset:Offset(1,1),
+                    blurRadius:1,
+                    spreadRadius: 0.5
+                )]
+            ),
+            child: InkWell(
+              onTap: (){
+                MyUtils.regionsDialog(context,utilsProviderModel,userProviderModel,isDismissible:true);
+              },
+              child: Center(child: Text(
+                userProviderModel!.currentUser!.regionId!.isNotEmpty?Constants.REGIONS.firstWhere((element) => element.id.toString()==userProviderModel!.currentUser!.regionId!).name!
+                    :RegionsModel(id: -1,name: tr("select_city")).name!
+    ,style: S.h3(color: Colors.white),),),)
 
+        )
+      ],), );
+  }
   Widget _name() {
     return Container(
         width: double.infinity,
@@ -347,5 +390,35 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
         ),
       ),
     );
+  }
+  Widget _Logout(){
+    return Container(
+      margin: EdgeInsets.all(D.default_15),
+      child: Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+      Icon(Icons.person_pin,color: C.BASE_BLUE,size: D.default_80,),
+       InkWell(onTap: (){
+         Constants.prefs!.clear();
+         MyUtils.navigateAsFirstScreen(context, SplashScreen());
+       },child:  Container(
+         margin: EdgeInsets.all(D.default_10),
+         child: Column(children: [
+           Text(Constants.currentUser!.name!,style: S.h1(color: Colors.black87),),
+           Container(
+             padding: EdgeInsets.only(left:D.default_10,right:D.default_10,top:D.default_5,bottom:D.default_5),
+             decoration: BoxDecoration(
+               borderRadius: BorderRadius.circular(D.default_5),
+               color: C.BASE_BLUE,
+
+             ),
+             child: Row(children: [
+               Text(tr("logout"),style: S.h4(color:Colors.white),),
+               Icon(Icons.logout,color: Colors.white,size: D.default_20,)
+             ],),)
+
+         ],),),)
+    ],),);
   }
 }

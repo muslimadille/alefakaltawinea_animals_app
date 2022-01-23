@@ -1,8 +1,8 @@
 
 import 'package:alefakaltawinea_animals_app/modules/categories_screen/data/categories_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/data/user_data.dart';
-import 'package:alefakaltawinea_animals_app/modules/login/data/user_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/data/serviceProvidersModel.dart';
+import 'package:alefakaltawinea_animals_app/modules/spalshScreen/data/regions_model.dart';
 
 class MyResponse<T> extends Object {
   final TAG = "MyResponse";
@@ -10,10 +10,13 @@ class MyResponse<T> extends Object {
   String? _status = "";
   String? _msg = "";
   var _data;
+  int?_activation_code;
 
   MyResponse.fromJson(Map<String, dynamic> json) {
     print("$TAG: ${json.toString()}");
-
+    if (json.containsKey("activation_code")) {
+      _activation_code = json['activation_code'];
+    }
     if (json.containsKey("status")) {
       _status = json['status'].toString();
     }
@@ -31,11 +34,13 @@ class MyResponse<T> extends Object {
       _checkType(json['data']);
     }
 
+
   }
 
-  MyResponse.init(String status, String msg, dynamic data) {
+  MyResponse.init(String status, String msg, dynamic data, {int? code}) {
     _status = status;
     _msg = msg;
+    _activation_code=code;
     if (data is int) {
       _status = "$data";
     } else {
@@ -78,6 +83,10 @@ class MyResponse<T> extends Object {
       _data = (json as List)
           .map((item) => Data.fromJson(item))
           .toList() as T;
+    }else if("$T".contains("List<RegionsModel>")){
+      _data = (json as List)
+          .map((item) => RegionsModel.fromJson(item))
+          .toList() as T;
     }  else {
       _data = null;
       return false;
@@ -89,6 +98,7 @@ class MyResponse<T> extends Object {
   String? get status => _status;
 
   String? get msg => _msg;
+  int? get code => _activation_code;
 
   get data => _data;
   set data(value) => _data = value;

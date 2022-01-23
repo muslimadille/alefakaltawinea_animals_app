@@ -40,7 +40,6 @@ class _CategoryListItemState extends State<CategoryListItem> {
   void initState() {
     super.initState();
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
-      _getSizes();
     });
   }
   @override

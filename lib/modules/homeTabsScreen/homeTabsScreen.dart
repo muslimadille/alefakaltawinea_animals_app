@@ -45,7 +45,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
   @override
   Widget build(BuildContext context) {
     bottomBarProviderModel=Provider.of<BottomBarProviderModel>(context,listen: true);
-    return _bottomBar();
+    return widget.introProviderModel!.intro!=null? _bottomBar():Container();
   }
  
   List<Widget>_screens=[MainCategoriesScreen(),NearToYouScreen(),ProfileScreen(),ProfileScreen(),ProfileScreen(),ProfileScreen()];
@@ -59,22 +59,14 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
     ];
     return MyUtils.myIntro(descriptionsList);
   }
-  void _handelIntro(){
+  void _handelIntro()async{
     if(widget.showIntro) {
-      widget.introProviderModel!.setIntro(_myIntro());
+      await widget.introProviderModel!.setIntro(_myIntro());
     }
-    _animationController=AnimationController(vsync: this,duration:Duration(milliseconds: 1000));
-    _animation=Tween<double>(begin:0.0,end: 1.0 ).animate(_animationController!)..addStatusListener((status) {
-      if(status==AnimationStatus.completed){
-        setState(() {
-         if(widget.showIntro) widget.introProviderModel!.intro!.start(context);
-        });
-      }
-    })..addListener(() {
-
-    });
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
-      _animationController!.forward();
+      setState(() {
+        if(widget.showIntro) widget.introProviderModel!.intro!.start(context);
+      });
     });
   }
   Widget _bottomBar(){

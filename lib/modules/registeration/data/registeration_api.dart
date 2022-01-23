@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:alefakaltawinea_animals_app/data/dio/dio_utils.dart';
 import 'package:alefakaltawinea_animals_app/data/dio/my_rasponce.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/data/user_data.dart';
-import 'package:alefakaltawinea_animals_app/modules/login/data/user_model.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/apis.dart';
 
 class RegisterationApi{

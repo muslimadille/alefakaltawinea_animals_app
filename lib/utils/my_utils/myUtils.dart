@@ -1,4 +1,7 @@
 
+import 'package:alefakaltawinea_animals_app/modules/login/data/user_data.dart';
+import 'package:alefakaltawinea_animals_app/modules/login/provider/user_provider_model.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -179,6 +182,70 @@ class MyUtils{
                             await utilsProviderModel.setCurrentLocal(context, Locale("en","US"));
                             Navigator.pop(context);
                           }
+                        },child: Container(
+                            padding: EdgeInsets.all(D.default_15),
+                            child: Text(tr("confirm"), style: S.h2(color: C.BASE_BLUE))),),
+                        InkWell(onTap: (){
+                          Navigator.pop(context);
+                        },child: Container(
+                            padding: EdgeInsets.all(D.default_15),
+                            child: Text(tr("cancel"), style: S.h2(color: C.BASE_BLUE))),)
+                      ],))
+
+                    ],)),
+            ));
+      },
+    );
+  }
+  static regionsDialog(BuildContext context,UtilsProviderModel? utilsProviderModel,
+  UserProviderModel?userProviderModel,
+
+      {bool isDismissible = true,}) {
+    userProviderModel=Provider.of<UserProviderModel>(context,listen: false);
+    // flutter defined function
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (BuildContext context) {
+        // return object of type Dialog
+        return WillPopScope(
+            onWillPop: isDismissible ? _onWillPop : _onWillNotPop,
+            child: AlertDialog(
+              contentPadding: EdgeInsets.all(0),
+              content:Container(
+                width:D.default_200,
+                  height: D.default_400,
+                  child:Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(D.default_10),
+                        child: Text(tr("select_city"),style: S.h1(color: C.BASE_BLUE),textAlign:TextAlign.center ,),),
+                      Container(width: double.infinity,height: D.default_1,color: Colors.grey,),
+                      Container(
+                        height: D.default_260,
+                        width:D.default_300 ,
+                        child: ListView.builder(
+                            itemCount: Constants.REGIONS.length,
+                            itemBuilder:(context,index){
+                              return Container(
+                                  child: Row(children: [
+                                    Radio(value: true, groupValue:utilsProviderModel!.currentRegionIndex==index,toggleable: true,activeColor:C.BASE_BLUE, onChanged: ( val ){
+                                      bool currentValue=val as bool ;
+                                      currentValue?utilsProviderModel.setCurrentRegionIndex(index):(){};
+                                    }),
+                                    Text(Constants.REGIONS[index].name!, style: S.h2(color: Colors.black))
+                                  ],));
+                            }),),
+                      Container(width: double.infinity,height: D.default_1,color: Colors.grey,),
+                      Container(
+                          child:Row(mainAxisAlignment: MainAxisAlignment.end,children: [
+                        InkWell(onTap: ()async{
+                          UserData user=userProviderModel!.currentUser!;
+                          user.regionId=Constants.REGIONS[utilsProviderModel!.currentRegionIndex].id.toString();
+                          userProviderModel.setCurrentUserData(user);
+                            Navigator.pop(context);
                         },child: Container(
                             padding: EdgeInsets.all(D.default_15),
                             child: Text(tr("confirm"), style: S.h2(color: C.BASE_BLUE))),),
