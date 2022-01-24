@@ -24,6 +24,15 @@ class Apis{
   static String FORGET_PASSWORD="${BASE_URL}/set-new-password";//used after GET_AUTH_CODE
   static String UPDATE_PROFILE="${BASE_URL}/update-profile";//used after GET_AUTH_CODE
 
+///......... adoption...............................
+  static String GET_ADOPTION_CATEGORIES="${BASE_URL}/sub-categories";
+  static String GET_ADOPTION_ANIMALS="${BASE_URL}/animals";//?category_id=1
+  static String ADD_ADOPTION_ANIMALS="${BASE_URL}/add-animal";
+
+
+
+
+
 
 
 

@@ -2,6 +2,8 @@ import 'package:alefakaltawinea_animals_app/data/dio/my_rasponce.dart';
 import 'package:alefakaltawinea_animals_app/modules/categories_screen/data/categories_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/categories_screen/data/get_categories_list_api.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/apis.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 
 class CategoriesProviderModel with ChangeNotifier {
@@ -32,6 +34,8 @@ class CategoriesProviderModel with ChangeNotifier {
   }
   void setCategoriesList(List<CategoriesDataModel> value){
     categoriesList.addAll(value);
+    CategoriesDataModel adaption=CategoriesDataModel(id:-1,name:tr("adoption"),photo: Res.ADOPTION_IMG);
+    categoriesList.add(adaption);
     notifyListeners();
   }
 

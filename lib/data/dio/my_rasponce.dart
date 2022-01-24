@@ -1,4 +1,6 @@
 
+import 'package:alefakaltawinea_animals_app/modules/adoption/data/adoption_categories_model.dart';
+import 'package:alefakaltawinea_animals_app/modules/adoption/data/animal_pager_list_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/categories_screen/data/categories_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/data/user_data.dart';
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/data/serviceProvidersModel.dart';
@@ -68,6 +70,9 @@ class MyResponse<T> extends Object {
       case UserData:
         _data = UserData.fromJson(json) as T;
         break;
+      case AnimalPagerListModel:
+        _data = AnimalPagerListModel.fromJson(json) as T;
+        break;
 
       default:_data = null;
     }
@@ -83,7 +88,13 @@ class MyResponse<T> extends Object {
       _data = (json as List)
           .map((item) => Data.fromJson(item))
           .toList() as T;
-    }else if("$T".contains("List<RegionsModel>")){
+    }
+    else if("$T".contains("List<AdoptionCategoriesModel>")){
+      _data = (json as List)
+          .map((item) => AdoptionCategoriesModel.fromJson(item))
+          .toList() as T;
+    }
+    else if("$T".contains("List<RegionsModel>")){
       _data = (json as List)
           .map((item) => RegionsModel.fromJson(item))
           .toList() as T;

@@ -52,7 +52,20 @@
   "try_again": "An error occurred try again",
   "logout": "Logout",
   "city": "City",
-  "send":"Send"
+  "send":"Send",
+  "adoption": "Adoption",
+  "add_adoption":"Add adoption form",
+  "details": "Details",
+  "no_animals": "There are no animals currently available in this section",
+  "age": "Age",
+  "gendar": "Gender",
+  "type": "Type",
+  "vaccation": "Vaccination",
+  "reason": "Reason to give up",
+  "status": "Health status",
+  "condition": "Conditions"
+
+
 
 
 

@@ -67,8 +67,7 @@ setCurrentUserData(UserData user){
   register(BuildContext ctx,String name,String email,String phone,String password,String confirmPass,{int regionId=1,int stateId=1}) async {
     setIsLoading(true);
     MyResponse<UserData> response =
-    await registerationApi.register( name, email, phone, password, confirmPass, regionId:1, stateId:1);
-
+    await registerationApi.register( name, email, phone, password, confirmPass, regionId:3, stateId:3155);
     if (response.status == Apis.CODE_SUCCESS &&response.data!=null){
       UserData user=response.data;
       setCurrentUserData(user);

@@ -11,6 +11,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'modules/adoption/provider/adoption_provider_model.dart';
 import 'modules/ads/provider/ads_slider_provider.dart';
 import 'modules/categories_screen/provider/categories_provider_model.dart';
 import 'modules/homeTabsScreen/provider/bottom_bar_provider_model.dart';
@@ -35,7 +36,7 @@ void main() async{
       ChangeNotifierProvider<UtilsProviderModel>(create: (ctx) => UtilsProviderModel(),),
       ChangeNotifierProvider<UserProviderModel>(create: (ctx) => UserProviderModel(),),
       ChangeNotifierProvider<OtpProviderModel>(create: (ctx) => OtpProviderModel(),),
-
+      ChangeNotifierProvider<AdoptionProviderModel>(create: (ctx) => AdoptionProviderModel(),),
 
     ],
     child: EasyLocalization(

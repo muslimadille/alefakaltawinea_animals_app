@@ -1,3 +1,4 @@
+import 'package:alefakaltawinea_animals_app/modules/adoption/adpotion_screen.dart';
 import 'package:alefakaltawinea_animals_app/modules/categories_screen/provider/categories_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/service_providers_list_screen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
@@ -44,7 +45,12 @@ class _CategoryListState extends State<CategoryList> {
 
   }
   void _onItemClick(int index){
-    MyUtils.navigate(widget.ctx, ServiceProviderListScreen(widget.categoriesProviderModel!.categoriesList[index],widget.categoriesProviderModel!.categoriesList[index].name!));
+    if(widget.categoriesProviderModel!.categoriesList[index].id==-1){
+      /// navigate to adoption
+      MyUtils.navigate(context, AdoptionScreen());
+    }else{
+      MyUtils.navigate(widget.ctx, ServiceProviderListScreen(widget.categoriesProviderModel!.categoriesList[index],widget.categoriesProviderModel!.categoriesList[index].name!));
+    }
   }
 
 }
