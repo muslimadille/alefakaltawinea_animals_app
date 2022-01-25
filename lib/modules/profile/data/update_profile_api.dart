@@ -39,4 +39,22 @@ class UpdateProfileApi{
       return MyResponse<dynamic>.init(response!.statusCode.toString(),response.statusMessage!, null);
     }
   }
+
+  Future<MyResponse<dynamic>> resetPassword(String newPassword,String confPassword,String code,String phone) async {
+    final url = "${Apis.FORGET_PASSWORD}";
+    Map<String,dynamic>body={
+      "password":newPassword,
+      "password_confirmation":confPassword,
+      "activation_code":code,
+      "phone":phone
+    };
+    final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_POST, url,body: body);
+    if (response != null && response.statusCode == 200) {
+      return MyResponse<dynamic>.fromJson(
+          json.decode(jsonEncode(response.data)));
+    } else {
+      return MyResponse<dynamic>.init(response!.statusCode.toString(),response.statusMessage!, null);
+    }
+  }
+
 }

@@ -134,5 +134,23 @@ setCurrentUserData(UserData user){
     notifyListeners();
 
   }
+  resetPassword(BuildContext ctx,String newPassword,String confPassword,String code,String phone) async {
+    setIsLoading(true);
+    MyResponse<dynamic> response =
+    await updateProfileApi.resetPassword(newPassword, confPassword,code,phone);
+    if (response.status == Apis.CODE_SUCCESS){
+      setIsLoading(false);
+      Constants.prefs!.clear();
+      MyUtils.navigate(ctx, LoginScreen());
+
+    }else if(response.status == Apis.CODE_SHOW_MESSAGE ){
+      print("login error: ${response.msg}");
+      setIsLoading(false);
+      await Fluttertoast.showToast(msg: "${response.msg}");
+    }
+    notifyListeners();
+
+  }
+
 
 }

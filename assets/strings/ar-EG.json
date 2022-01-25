@@ -68,7 +68,10 @@
  "condition": "الشروط",
  "edit": "حفظ التعديل",
  "enter_old_password": "كلمة المرور القديمة",
- "enter__new_password": "كلمة المرور الجديدة"
+ "enter__new_password": "كلمة المرور الجديدة",
+ "forget_password_title": "إضافة كلمة مرور جديدة",
+ "submit": "تأكيد"
+
 
 
 

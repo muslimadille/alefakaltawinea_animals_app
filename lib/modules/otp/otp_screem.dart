@@ -1,5 +1,7 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/categories_screen/mainCategoriesScreen.dart';
+import 'package:alefakaltawinea_animals_app/modules/login/forget_password/forget_password_screen.dart';
+import 'package:alefakaltawinea_animals_app/modules/login/provider/user_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/otp/provider/otp_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
@@ -29,34 +31,38 @@ class OtpScreen extends StatefulWidget {
 class _OtpScreenState extends State<OtpScreen> {
   String _userCode="";
   OtpProviderModel? otpProviderModel;
+  UserProviderModel? userProviderModel;
   @override
   void initState() {
     super.initState();
     otpProviderModel=Provider.of<OtpProviderModel>(context,listen: false);
+    userProviderModel=Provider.of<UserProviderModel>(context,listen: false);
     _getCode();
   }
   @override
   Widget build(BuildContext context) {
     otpProviderModel=Provider.of<OtpProviderModel>(context,listen: true);
+    userProviderModel=Provider.of<UserProviderModel>(context,listen: true);
+
     return BaseScreen(
       showSettings: false,
       showBottomBar: false,
       tag: "OtpScreen",
-      body:  Container(
+      body:  SingleChildScrollView(child: Container(
           child:Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-            SizedBox(height: D.default_150,),
-            _header(),
-            _operationMessage(),
+              SizedBox(height: D.default_150,),
+              _header(),
+              _operationMessage(),
               SizedBox(height: D.default_100,),
               _otpField(),
-            _useCodeBtn(),
+              _useCodeBtn(),
               SizedBox(height: D.default_10,),
               Center(child:Text("${widget.code}",style: S.h4(color:Colors.grey),textAlign:TextAlign.center ,))
 
-          ],)
-      ),);
+            ],)
+      ),),);
   }
   Widget _header(){
     return Container(
@@ -69,11 +75,16 @@ class _OtpScreenState extends State<OtpScreen> {
   }
   Widget _useCodeBtn(){
     return InkWell(onTap: (){
-      if(widget.code==_userCode){
+      if(otpProviderModel!.activation_code.toString()==_userCode){
+        if(widget.otpFalge=="ForgetPasswordScreen"){
+          MyUtils.navigate(context, ForgetPasswordScreen(widget.phone!, _userCode));
+        }else{
+          otpProviderModel!.activeAccount(Constants.currentUser!.phone!, widget.code, context, Constants.currentUser!);
+        }
         //MyUtils.navigateAsFirstScreen(context, MainCategoriesScreen());
-        otpProviderModel!.activeAccount(Constants.currentUser!.phone!, widget.code, context, Constants.currentUser!);
         ///call api here
       }
+
     }
     ,child: Container(
         width: D.default_200,
@@ -88,7 +99,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   spreadRadius: 2
               )]
           ),
-        child: Center(child: Text(widget.title,style: S.h1(color: Colors.white),textAlign: TextAlign.center,),)),);
+        child: Center(child: Text(tr("submit"),style: S.h1(color: Colors.white),textAlign: TextAlign.center,),)),);
   }
 Widget _otpField(){
     return Directionality(textDirection: TextDirection.ltr, child: Container(
@@ -122,6 +133,11 @@ Widget _otpField(){
       otpProviderModel!.getCode(widget.phone!, context);
     }else{
       otpProviderModel!.getCode(Constants.currentUser!.phone!, context);
+    }
+  }
+  void _resetPassword(){
+    if(widget.otpFalge=="ForgetPasswordScreen"){
+      _resendCode();
     }
   }
 

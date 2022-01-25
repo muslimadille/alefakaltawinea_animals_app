@@ -66,7 +66,10 @@
   "condition": "Conditions",
   "edit": "Save Edits",
   "enter_old_password": "Old Password",
-  "enter__new_password": "New password"
+  "enter__new_password": "New password",
+  "forget_password_title": "Add a new password",
+  "submit":"Submit"
+
 
 
 

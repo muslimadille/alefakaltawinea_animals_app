@@ -1,10 +1,13 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
+import 'package:alefakaltawinea_animals_app/modules/login/forget_password/forget_password_screen.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/provider/user_provider_model.dart';
+import 'package:alefakaltawinea_animals_app/modules/otp/phone_screen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/input%20_validation_mixing.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -170,10 +173,12 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
     );
   }
   Widget _forgetPassword(){
-    return Container(
+    return InkWell(onTap: (){
+      MyUtils.navigate(context, PhoneScreen(tr("forget_password_title"),"ForgetPasswordScreen" ));
+    },child: Container(
       width: double.infinity,
       padding: EdgeInsets.all(D.default_10),
-      child: Text(tr("forget_password"),style: S.h4(color: Colors.black),textAlign:TextAlign.end,),);
+      child: Text(tr("forget_password"),style: S.h4(color: Colors.black),textAlign:TextAlign.end,),),);
   }
   void _onLoginClicked(){
     if (_loginFormGlobalKey.currentState!.validate()) {
