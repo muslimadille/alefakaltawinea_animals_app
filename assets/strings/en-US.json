@@ -68,7 +68,9 @@
   "enter_old_password": "Old Password",
   "enter__new_password": "New password",
   "forget_password_title": "Add a new password",
-  "submit":"Submit"
+  "submit":"Submit",
+  "register_new": "Create a new account"
+
 
 
 

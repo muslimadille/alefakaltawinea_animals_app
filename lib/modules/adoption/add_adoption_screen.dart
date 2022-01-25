@@ -8,6 +8,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/input%20_validation_mixing.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/action_bar_widget.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:dio/dio.dart';
@@ -61,9 +62,22 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
           ActionBarWidget(tr("adoption"), context),
           Expanded(
               child: Container(
+                color: C.BASE_BLUE_WHITE,
                   child: Stack(
                     alignment: AlignmentDirectional.bottomCenter,
-                    children: [_greenCOntainer(), _whiteContainer()],
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+
+                        children: [
+                          TransitionImage(
+                            Res.ANIMALS_BG,
+                            fit: BoxFit.fitWidth,
+                            width: MediaQuery.of(context).size.width-D.default_50,
+                            height: D.default_90,
+                          )              ],),
+                      _greenCOntainer(), _whiteContainer()],
                   )))
         ],
       ),
@@ -441,12 +455,14 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
             onTap: () {
               _imgFromGallery();
             },
-            child: TransitionImage("",
+            child: TransitionImage(Res.DEFAULT_ADD_IMAGE,
                 fit: BoxFit.cover,
                 file:_cLassImage,
                 radius: D.default_10,
                 width: D.default_100,
                 height: D.default_100,
+                padding: EdgeInsets.all(D.default_10),
+                placeHolderImage: Res.DEFAULT_ADD_IMAGE,
                 strokeColor: imageValid?C.BASE_BLUE:Colors.red,
                 strokeWidth: D.default_2))),);
   }
@@ -457,10 +473,11 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
       source: ImageSource.gallery,
       imageQuality: 50,
     );
-    _cLassImage = File(compressedImage!.path);
-    String fileName = _cLassImage!.path.split('/').last;
     setState(() {
+      _cLassImage = File(compressedImage!.path);
+
     });
+    String fileName = _cLassImage!.path.split('/').last;
     FormData formData = FormData.fromMap({
       "file":
       await MultipartFile.fromFile(_cLassImage!.path, filename:fileName),

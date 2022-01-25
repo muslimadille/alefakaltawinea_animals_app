@@ -104,6 +104,12 @@ flutter:
     - assets/images/offer_icon.png
     - assets/images/home_curve.png
     - assets/images/shop_ic.png
+    - assets/images/animals_bg.png
+    - assets/images/no_profile_bg.png
+    - assets/images/add_image.png
+    - assets/images/defult_img.png
+    - assets/images/logo_new_img.png
+
 
     - assets/strings/ar-EG.json
     - assets/strings/en-US.json

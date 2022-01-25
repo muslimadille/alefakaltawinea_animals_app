@@ -1,7 +1,9 @@
 import 'package:alefakaltawinea_animals_app/modules/adoption/provider/adoption_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
+import 'package:alefakaltawinea_animals_app/modules/profile/no_profile_screen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
@@ -44,9 +46,22 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
           ActionBarWidget(tr("adoption"), context),
           Expanded(
               child: Container(
+                color: C.BASE_BLUE_WHITE,
                   child: Stack(
             alignment: AlignmentDirectional.bottomCenter,
-            children: [_greenCOntainer(), _whiteContainer()],
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+
+                children: [
+                  TransitionImage(
+                    Res.ANIMALS_BG,
+                    fit: BoxFit.fitWidth,
+                    width: MediaQuery.of(context).size.width-D.default_50,
+                    height: D.default_90,
+                  )              ],),
+              _greenCOntainer(), _whiteContainer()],
           )))
         ],
       ),
@@ -56,7 +71,11 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
   Widget _addBtn() {
     return InkWell(
       onTap: () {
-        MyUtils.navigate(context, AddAdoptionScreen());
+        if(Constants.currentUser!=null){
+          MyUtils.navigate(context, AddAdoptionScreen());
+        }else{
+          MyUtils.navigate(context, NoProfileScreen());
+        }
       },
       child: Container(
           width: D.default_200,
@@ -169,7 +188,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
             crossAxisCount: 3,
             crossAxisSpacing: D.default_10,
             mainAxisSpacing: D.default_10,
-            childAspectRatio: 0.8,
+            childAspectRatio: 0.6,
           ),
           delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
@@ -222,7 +241,11 @@ Widget _noData(){
           ),
           InkWell(
               onTap: () {
-                MyUtils.navigate(context, AnimalDetailsScreen(index));
+                if(Constants.currentUser!=null){
+                  MyUtils.navigate(context, AnimalDetailsScreen(index));
+                }else{
+                  MyUtils.navigate(context, NoProfileScreen());
+                }
               },
               child: Container(
                   margin: EdgeInsets.all(D.default_5),

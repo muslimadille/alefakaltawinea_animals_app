@@ -4,6 +4,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/action_bar_widget.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -40,9 +41,23 @@ class _AnimalDetailsScreenState extends State<AnimalDetailsScreen> {
           ActionBarWidget(tr("adoption"), context),
           Expanded(
               child: Container(
+                color: C.BASE_BLUE_WHITE,
                   child: Stack(
+
                     alignment: AlignmentDirectional.bottomCenter,
-                    children: [_greenCOntainer(), _whiteContainer()],
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+
+                        children: [
+                          TransitionImage(
+                            Res.ANIMALS_BG,
+                            fit: BoxFit.fitWidth,
+                            width: MediaQuery.of(context).size.width-D.default_50,
+                            height: D.default_90,
+                          )              ],),
+                      _greenCOntainer(), _whiteContainer()],
                   )))
         ],
       ),
@@ -88,7 +103,7 @@ class _AnimalDetailsScreenState extends State<AnimalDetailsScreen> {
   Widget detailsCrd(){
     AnimalData data=adoptionProviderModel!.animalPagerListModel!.data![widget.index];
     return SingleChildScrollView(child: Container(
-      margin: EdgeInsets.only(top:D.default_50,bottom: D.default_50,left: D.default_120,right: D.default_120),
+      margin: EdgeInsets.only(top:D.default_50,bottom: D.default_50,left: D.default_80,right: D.default_80),
       padding: EdgeInsets.all(D.default_2),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(D.default_10),

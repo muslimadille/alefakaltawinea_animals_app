@@ -128,7 +128,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       transitionBuilder: (Widget child, Animation<double> animation) {
         return  FadeTransition(child: child, opacity: animation);
       },
-        child:adsSliderProviderModel!.isLoading&&_isLoading?Center(key: Key("1"),child: Image.asset(Res.APP_LOGO_NAME,width: D.default_200,height: D.default_200),):Center(key:Key("2"),child: Image.asset(Res.APP_LOGO_DARK,width: D.default_150,height: D.default_150)));
+        child:adsSliderProviderModel!.isLoading&&_isLoading?Center(key: Key("1"),child: Image.asset(Res.APP_LOGO_NAME,width: D.default_200,height: D.default_200),):Center(key:Key("2"),child: Image.asset(Res.LOGO_WITHOUT_NAME,width: D.default_150,height: D.default_150)));
   }
   Widget _buttonsPart(){
     return FadeTransition(

@@ -47,7 +47,8 @@ class _CategoryListState extends State<CategoryList> {
   void _onItemClick(int index){
     if(widget.categoriesProviderModel!.categoriesList[index].id==-1){
       /// navigate to adoption
-      MyUtils.navigate(context, AdoptionScreen());
+
+    MyUtils.navigate(context, AdoptionScreen());
     }else{
       MyUtils.navigate(widget.ctx, ServiceProviderListScreen(widget.categoriesProviderModel!.categoriesList[index],widget.categoriesProviderModel!.categoriesList[index].name!));
     }

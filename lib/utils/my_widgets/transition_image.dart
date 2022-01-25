@@ -5,11 +5,14 @@ import 'dart:io';
 
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:multi_image_picker2/multi_image_picker2.dart';
 import 'package:shimmer/shimmer.dart';
+
 
 class TransitionImage extends StatefulWidget {
   TransitionImage(this.url,
@@ -102,7 +105,17 @@ class _TransitionImageState extends State<TransitionImage> {
   }
 
   Widget child() {
-    return  widget.asset != null
+    return widget.file != null
+        ? Container(
+      padding: widget.padding,
+      child: Image.file(
+        widget.file!,
+        fit: widget.fit ?? BoxFit.contain,
+      ),
+      height: widget.height,
+      width: widget.width,
+    )
+        : widget.asset != null
         ? Container(
       padding: widget.padding,
       height: widget.height,
@@ -111,17 +124,10 @@ class _TransitionImageState extends State<TransitionImage> {
       AssetThumb(asset: widget.asset!, height: 1000, width: 1000),
     )
         : widget.url.isEmpty
-        ? Container(
-      padding: widget.padding,
-      child: Icon(
-        widget.placeHolder == null
-            ? Icons.image
-            : widget.placeHolder,
-        color: widget.placeHolderColor,
-        size:D.default_30,
-      ),
-      height: widget.height,
-      width: widget.width,
+        ? Image.asset(
+      Res.DEFAULT_IMAGE,
+      fit: widget.fit ?? BoxFit.contain,
+      color: widget.fillColor,
     )
         : widget.url.contains("assets")
         ? Container(
@@ -158,10 +164,7 @@ class _TransitionImageState extends State<TransitionImage> {
           fit: widget.fit ?? BoxFit.contain,
           progressIndicatorBuilder:
               (context, url, progress) {
-            return Shimmer.fromColors(
-                child: Container(width:widget.width, height: widget.height,),
-                baseColor: Colors.grey,
-                highlightColor: Colors.white);
+            return Container();
           },
           /*placeholder: (context, url) {
                                       return widget.placeHolderImage != null
@@ -191,3 +194,4 @@ class _TransitionImageState extends State<TransitionImage> {
     );
   }
 }
+

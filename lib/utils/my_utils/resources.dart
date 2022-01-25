@@ -20,6 +20,18 @@ class Res{
   static String OFFER_ICON="assets/images/offer_icon.png";
   static String HOME_CURVE="assets/images/home_curve.png";
   static String SHOP_IC="assets/images/shop_ic.png";
+  static String ANIMALS_BG="assets/images/animals_bg.png";
+  static String NO_PROFILE_BG="assets/images/no_profile_bg.png";
+  static String DEFAULT_ADD_IMAGE="assets/images/add_image.png";
+  static String DEFAULT_IMAGE="assets/images/defult_img.png";
+  static String LOGO_WITHOUT_NAME="assets/images/logo_new_img.png";
+
+
+
+
+
+
+
 
 
 

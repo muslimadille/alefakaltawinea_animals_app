@@ -427,6 +427,7 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
       Icon(Icons.person_pin,color: C.BASE_BLUE,size: D.default_80,),
        InkWell(onTap: (){
          Constants.prefs!.clear();
+         Constants.currentUser!=null;
          MyUtils.navigateAsFirstScreen(context, SplashScreen());
        },child:  Container(
          margin: EdgeInsets.all(D.default_10),

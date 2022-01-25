@@ -2,9 +2,11 @@
 import 'package:alefakaltawinea_animals_app/modules/categories_screen/mainCategoriesScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/provider/bottom_bar_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/neerToYou/NearToyouScreen.dart';
+import 'package:alefakaltawinea_animals_app/modules/profile/no_profile_screen.dart';
 import 'package:alefakaltawinea_animals_app/modules/profile/profileScreen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
@@ -163,7 +165,11 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         children:[
           InkWell(onTap: (){
             bottomBarProviderModel!.setSelectedScreen(4);
-            MyUtils.navigate(context, ProfileScreen());
+            if(Constants.currentUser!=null){
+              MyUtils.navigate(context, ProfileScreen());
+            }else{
+              MyUtils.navigate(context, NoProfileScreen());
+            }
             //bottomBarProviderModel!.setSelectedScreen(4);
 
           }
