@@ -151,7 +151,9 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
                         ),)
 
                       ],),
-                      Row(children: [
+                      InkWell(onTap: (){
+                        launch("tel://0${widget.serviceProviderData.phone!}");
+                      },child: Row(children: [
                         Container(
                           child: Icon(Icons.local_phone,color: Colors.grey,size: D.default_20,),),
                         Container(
@@ -166,7 +168,8 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
                             padding:EdgeInsets.only(left:D.default_10,right:D.default_10),
                             child: Text(widget.serviceProviderData.website!,style: S.h4(color: Colors.grey),),),):Container()
 
-                      ],)
+                      ],),),
+
 
                     ],)),
               
