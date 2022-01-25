@@ -69,7 +69,8 @@
   "enter__new_password": "New password",
   "forget_password_title": "Add a new password",
   "submit":"Submit",
-  "register_new": "Create a new account"
+  "register_new": "Create a new account",
+  "cant_opn_url": "This site cannot be opened"
 
 
 

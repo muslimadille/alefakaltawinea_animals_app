@@ -71,7 +71,9 @@
  "enter__new_password": "كلمة المرور الجديدة",
  "forget_password_title": "إضافة كلمة مرور جديدة",
  "submit": "تأكيد",
- "register_new": "إنشاء حساب جديد"
+ "register_new": "إنشاء حساب جديد",
+ "cant_opn_url": "لايمكن فتح هذا الموقع"
+
 
 
 

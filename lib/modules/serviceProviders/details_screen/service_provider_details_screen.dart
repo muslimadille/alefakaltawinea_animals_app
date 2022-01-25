@@ -9,8 +9,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import 'offers/offers_list/service_provider_offers_list_screen.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 
 class ServiceProviderDetailsScreen extends StatefulWidget {
@@ -125,17 +126,10 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
                           padding:EdgeInsets.only(left:D.default_10,right:D.default_10,bottom: D.default_5),
                           child: Text(widget.serviceProviderData.address!,style: S.h4(color: Colors.grey),),)),
                         InkWell(onTap: (){
-                          Fluttertoast.showToast(
-                              msg: "قريبا",
-                              toastLength: Toast.LENGTH_LONG,
-                              gravity: ToastGravity.CENTER,
-                              timeInSecForIosWeb: 1,
-                              backgroundColor: Colors.red,
-                              textColor: Colors.white,
-                              fontSize: 16.0
-                          );
-                        },
-                        child: Container(
+                          _launchMapsUrl(
+                              widget.serviceProviderData.latitude!.isNotEmpty?double.parse(widget.serviceProviderData!.latitude!):0.0,
+                              widget.serviceProviderData.longitude!.isNotEmpty?double.parse(widget.serviceProviderData.longitude!):0.0);
+                        },child:  Container(
                           padding: EdgeInsets.only(left: D.default_10,right: D.default_10,top: D.default_5,bottom: D.default_5),
                           decoration: BoxDecoration(
                               color: Colors.black45,
@@ -165,8 +159,8 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
                           child: Text(widget.serviceProviderData.phone!,style: S.h4(color: Colors.grey),),),
                         widget.serviceProviderData.website!.isNotEmpty?Container(
                           child: Icon(Icons.web_rounded,color: Colors.grey,size: D.default_20,),):Container(),
-                        widget.serviceProviderData.website!.isNotEmpty?InkWell(onTap: (){
-                          _launchURL("www.google.com");
+                        widget.serviceProviderData.website!.isNotEmpty?InkWell(onTap: ()async{
+                          await _launchURLBrowser();
                         },
                           child: Container(
                             padding:EdgeInsets.only(left:D.default_10,right:D.default_10),
@@ -181,11 +175,22 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
       )
     ],);
   }
-  _launchURL(String url) async {
+  _launchURLBrowser() async {
+    final String ure=widget.serviceProviderData.website!??"";
+    String  url = ure;
     if (await canLaunch(url)) {
       await launch(url);
     } else {
-      throw 'Could not launch $url';
+      Fluttertoast.showToast(msg: tr("cant_opn_url"),backgroundColor: Colors.red,textColor: Colors.white,);
+    }
+  }
+  void _launchMapsUrl(double lat, double lon) async {
+    final url = 'https://www.google.com/maps/search/?api=1&query=$lat,$lon';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      Fluttertoast.showToast(msg: tr("cant_opn_url"),backgroundColor: Colors.red,textColor: Colors.white,);
+
     }
   }
 }

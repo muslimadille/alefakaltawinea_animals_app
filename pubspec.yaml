@@ -44,11 +44,11 @@ dependencies:
   cached_network_image: ^3.2.0
   shimmer: ^2.0.0
   fluttertoast: ^8.0.8
-  url_launcher: ^6.0.18
   pull_to_refresh: ^2.0.0
   otp_text_field: ^1.1.1
   image_picker: ^0.8.2
   http_parser: ^4.0.0
+  url_launcher: ^6.0.9
 
 
 
