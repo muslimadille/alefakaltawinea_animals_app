@@ -64,7 +64,11 @@
   "reason": "Reason to give up",
   "status": "Health status",
   "condition": "Conditions",
-  "edit": "Save Edits"
+  "edit": "Save Edits",
+  "enter_old_password": "Old Password",
+  "enter__new_password": "New password"
+
+
 
 
 

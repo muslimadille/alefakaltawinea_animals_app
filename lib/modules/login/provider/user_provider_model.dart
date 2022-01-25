@@ -7,6 +7,7 @@ import 'package:alefakaltawinea_animals_app/modules/otp/otp_screem.dart';
 import 'package:alefakaltawinea_animals_app/modules/otp/phone_screen.dart';
 import 'package:alefakaltawinea_animals_app/modules/profile/data/update_profile_api.dart';
 import 'package:alefakaltawinea_animals_app/modules/registeration/data/registeration_api.dart';
+import 'package:alefakaltawinea_animals_app/modules/spalshScreen/spalshScreen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/apis.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
@@ -115,5 +116,23 @@ setCurrentUserData(UserData user){
 
   }
 
+  changePassword(BuildContext ctx,String oldPassword,String newPassword,String confPassword) async {
+    setIsLoading(true);
+    MyResponse<dynamic> response =
+    await updateProfileApi.changePassword( oldPassword, newPassword, confPassword);
+
+    if (response.status == Apis.CODE_SUCCESS){
+      setIsLoading(false);
+      Constants.prefs!.clear();
+      MyUtils.navigateAsFirstScreen(ctx, SplashScreen());
+
+    }else if(response.status == Apis.CODE_SHOW_MESSAGE ){
+      print("login error: ${response.msg}");
+      setIsLoading(false);
+      await Fluttertoast.showToast(msg: "${response.msg}");
+    }
+    notifyListeners();
+
+  }
 
 }

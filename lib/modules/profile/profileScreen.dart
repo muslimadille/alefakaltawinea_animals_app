@@ -27,6 +27,8 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin {
   TextEditingController _phoneController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
+  TextEditingController _oldPasswordController = TextEditingController();
+
   TextEditingController _confirmPasswordController = TextEditingController();
   TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
@@ -99,8 +101,12 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
                       _region(),
                       Container(height: D.default_1,color: Colors.grey,),
                       _email(),
-                      _updateBtn()
-
+                      _updateBtn(),
+                      Container(height: D.default_1,color: Colors.grey,),
+                      _oldPassword(),
+                      _password(),
+                      _confirmPassword(),
+                      _updatePasswordBtn()
 
                     ],
                   ),
@@ -232,12 +238,63 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
                 return tr("password_length");
               }
             } else {
-              return tr("enter_password");
+              return tr("");
             }
           },
           style: S.h4(color: Colors.black),
           decoration: InputDecoration(
-              labelText: tr("enter_password"),
+              labelText: tr("enter__new_password"),
+              labelStyle: S.h2(color: Colors.grey),
+              enabledBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey),
+              ),
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: C.BASE_BLUE),
+              ),
+              border: UnderlineInputBorder(
+                  borderSide: BorderSide(color: C.BASE_BLUE)),
+              errorStyle: S.h4(color: Colors.red),
+              contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+              suffixIcon: IconButton(
+                onPressed: () {
+                  setState(() {
+                    passwordobsecure
+                        ? passwordobsecure = false
+                        : passwordobsecure = true;
+                  });
+                },
+                icon: Icon(
+                  (passwordobsecure ?? false)
+                      ? Icons.visibility_off
+                      : Icons.visibility,
+                  color: Colors.grey,
+                ),
+              )),
+          keyboardType: TextInputType.text,
+          obscureText: passwordobsecure,
+          cursorColor: C.BASE_BLUE,
+          autofocus: false,
+        ));
+  }
+  Widget _oldPassword() {
+    return Container(
+        width: double.infinity,
+        child: TextFormField(
+          controller: _oldPasswordController,
+          validator: (password) {
+            if (isFieldNotEmpty(password!)) {
+              if (isPasswordValide(password)) {
+                return null;
+              } else {
+                return tr("password_length");
+              }
+            } else {
+              return tr("");
+            }
+          },
+          style: S.h4(color: Colors.black),
+          decoration: InputDecoration(
+              labelText: tr("enter_old_password"),
               labelStyle: S.h2(color: Colors.grey),
               enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.grey),
@@ -360,39 +417,6 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
         ));
   }
 
-  Widget _editBtn() {
-    return Center(
-      child: InkWell(
-        onTap: () {
-          //_onRegisterClicked();
-        },
-        child: Container(
-          width: D.default_300,
-          margin: EdgeInsets.all(D.default_30),
-          padding: EdgeInsets.only(
-              left: D.default_20,
-              right: D.default_20,
-              top: D.default_10,
-              bottom: D.default_10),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(D.default_10),
-              color: C.BASE_BLUE,
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    offset: Offset(2, 2),
-                    blurRadius: 4,
-                    spreadRadius: 2)
-              ]),
-          child: Text(
-            tr("create_new_account"),
-            style: S.h2(color: Colors.white),
-            textAlign: TextAlign.center,
-          ),
-        ),
-      ),
-    );
-  }
   Widget _Logout(){
     return Container(
       margin: EdgeInsets.all(D.default_15),
@@ -435,6 +459,44 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
               regionId:Constants.REGIONS.firstWhere((element) => element.id.toString()==userProviderModel!.currentUser!.regionId!).id!,
               stateId:Constants.REGIONS.firstWhere((element) => element.id.toString()==userProviderModel!.currentUser!.regionId!).getStates![0].id!
               );
+        },
+        child: Container(
+          width: D.default_200,
+          margin: EdgeInsets.all(D.default_30),
+          padding: EdgeInsets.only(
+              left: D.default_20,
+              right: D.default_20,
+              top: D.default_10,
+              bottom: D.default_10),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(D.default_10),
+              color: C.BASE_BLUE,
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    offset: Offset(2, 2),
+                    blurRadius: 4,
+                    spreadRadius: 2)
+              ]),
+          child: Text(
+            tr("edit"),
+            style: S.h2(color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+    );
+  }
+  Widget _updatePasswordBtn() {
+    return Center(
+      child: InkWell(
+        onTap: () {
+          userProviderModel!.changePassword(
+              context,
+              _oldPasswordController.text,
+              _passwordController.text,
+              _confirmPasswordController.text,
+          );
         },
         child: Container(
           width: D.default_200,
