@@ -99,6 +99,8 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
                       _region(),
                       Container(height: D.default_1,color: Colors.grey,),
                       _email(),
+                      _updateBtn()
+
 
                     ],
                   ),
@@ -141,7 +143,7 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
                 MyUtils.regionsDialog(context,utilsProviderModel,userProviderModel,isDismissible:true);
               },
               child: Center(child: Text(
-                userProviderModel!.currentUser!.regionId!.isNotEmpty?Constants.REGIONS.firstWhere((element) => element.id.toString()==userProviderModel!.currentUser!.regionId!).name!
+                userProviderModel!.currentUser!.regionId!=null?Constants.REGIONS.firstWhere((element) => element.id.toString()==userProviderModel!.currentUser!.regionId!).name!
                     :RegionsModel(id: -1,name: tr("select_city")).name!
     ,style: S.h3(color: Colors.white),),),)
 
@@ -421,4 +423,45 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
          ],),),)
     ],),);
   }
+  Widget _updateBtn() {
+    return Center(
+      child: InkWell(
+        onTap: () {
+          userProviderModel!.updateProfile(
+              context,
+              _nameController.text,
+              _emailController.text,
+              _phoneController.text,
+              regionId:Constants.REGIONS.firstWhere((element) => element.id.toString()==userProviderModel!.currentUser!.regionId!).id!,
+              stateId:Constants.REGIONS.firstWhere((element) => element.id.toString()==userProviderModel!.currentUser!.regionId!).getStates![0].id!
+              );
+        },
+        child: Container(
+          width: D.default_200,
+          margin: EdgeInsets.all(D.default_30),
+          padding: EdgeInsets.only(
+              left: D.default_20,
+              right: D.default_20,
+              top: D.default_10,
+              bottom: D.default_10),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(D.default_10),
+              color: C.BASE_BLUE,
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    offset: Offset(2, 2),
+                    blurRadius: 4,
+                    spreadRadius: 2)
+              ]),
+          child: Text(
+            tr("edit"),
+            style: S.h2(color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+    );
+  }
+
 }

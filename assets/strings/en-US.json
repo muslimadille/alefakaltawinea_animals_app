@@ -63,7 +63,8 @@
   "vaccation": "Vaccination",
   "reason": "Reason to give up",
   "status": "Health status",
-  "condition": "Conditions"
+  "condition": "Conditions",
+  "edit": "Save Edits"
 
 
 

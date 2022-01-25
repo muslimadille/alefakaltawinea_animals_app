@@ -7,14 +7,14 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/apis.dart';
 
 class UpdateProfileApi{
 
-  Future<MyResponse<UserData>> updateProfile(String name,String email,String phone,int regionId,stateId) async {
-    final url = "${Apis.REGISTER}";
+  Future<MyResponse<UserData>> updateProfile(String name,String email,String phone,int regionId,int stateId) async {
+    final url = "${Apis.UPDATE_PROFILE}";
     Map<String,dynamic>body={
       "username":name,
       "email":email,
       "phone":phone,
-      "region_id":regionId,
-      "state_id":stateId,
+      "region_id":regionId.toString(),
+      "state_id":stateId.toString(),
     };
     final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_POST, url,body: body);
     if (response != null && response.statusCode == 200) {

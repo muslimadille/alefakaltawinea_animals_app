@@ -68,9 +68,9 @@ class UserData {
   String? bannerPhoto;
   String? longitude;
   String? latitude;
-  String? regionId;
+  dynamic regionId;
   String? regionName;
-  String? stateId;
+  dynamic stateId;
   String? stateName;
   String? isOnline;
   String? categoryId;

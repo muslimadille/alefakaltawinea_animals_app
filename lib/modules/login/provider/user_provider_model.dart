@@ -5,6 +5,7 @@ import 'package:alefakaltawinea_animals_app/modules/login/data/user_data.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/login_screen.dart';
 import 'package:alefakaltawinea_animals_app/modules/otp/otp_screem.dart';
 import 'package:alefakaltawinea_animals_app/modules/otp/phone_screen.dart';
+import 'package:alefakaltawinea_animals_app/modules/profile/data/update_profile_api.dart';
 import 'package:alefakaltawinea_animals_app/modules/registeration/data/registeration_api.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/apis.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
@@ -25,6 +26,7 @@ class UserProviderModel with ChangeNotifier{
   /// ...........login............
   UserData? currentUser;
   LoginApi loginApi=LoginApi();
+  UpdateProfileApi updateProfileApi=UpdateProfileApi();
   login(String phone,String password,BuildContext ctx) async {
     setIsLoading(true);
     MyResponse<UserData> response =
@@ -87,17 +89,17 @@ setCurrentUserData(UserData user){
 
   }
 /// ...........update profile............
-  updateProfile(BuildContext ctx,String name,String email,String phone,String password,String confirmPass,{int regionId=1,int stateId=1}) async {
+  updateProfile(BuildContext ctx,String name,String email,String phone,{int regionId=1,int stateId=1}) async {
     setIsLoading(true);
     MyResponse<UserData> response =
-    await registerationApi.register( name, email, phone, password, confirmPass, regionId:1, stateId:1);
+    await updateProfileApi.updateProfile( name, email, phone,regionId,stateId);
 
     if (response.status == Apis.CODE_SUCCESS &&response.data!=null){
       UserData user=response.data;
       setCurrentUserData(user);
       setIsLoading(false);
       if(user.activate=="0"){
-        MyUtils.navigateAsFirstScreen(ctx, OtpScreen("register",tr('register_otp'),code:response.code.toString(),));
+        MyUtils.navigateAsFirstScreen(ctx, OtpScreen("update",tr('register_otp'),code:response.code.toString(),));
       }
     }else if(response.status == Apis.CODE_ACTIVE_USER &&response.data!=null){
       UserData user=response.data;
