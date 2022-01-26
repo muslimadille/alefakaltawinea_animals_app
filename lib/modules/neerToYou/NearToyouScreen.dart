@@ -88,7 +88,7 @@ class _NearToYouScreenState extends State<NearToYouScreen> {
   Future <void>_getMyCurrentLocation()async{
     final GoogleMapController controller=await serviceProvidersProviderModel!.mapController.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(_myCameraPosition));
-    serviceProvidersProviderModel!.getClosestList(1,_position!.latitude.toString(),_position!.longitude.toString());
+    serviceProvidersProviderModel!.getClosestList(context,1,_position!.latitude.toString(),_position!.longitude.toString());
   }
   Widget _categories(){
     return Container(
@@ -128,61 +128,62 @@ class _NearToYouScreenState extends State<NearToYouScreen> {
     return InkWell(onTap: (){
       setState(() {
         selectedCategory=categoriesProviderModel!.categoriesList[index];
-        serviceProvidersProviderModel!.getClosestList(categoriesProviderModel!.categoriesList[index].id!,_position!.latitude.toString(),_position!.longitude.toString());
+        serviceProvidersProviderModel!.getClosestList(context,categoriesProviderModel!.categoriesList[index].id!,_position!.latitude.toString(),_position!.longitude.toString());
 
       });
     },
-      child:Stack(
+      child:Directionality(textDirection: TextDirection.rtl,
+      child: Stack(
           alignment:AlignmentDirectional.centerStart,
-        clipBehavior: Clip.none,
-        children: [
-          Container(
-            padding: EdgeInsets.all(D.default_10),
-            child:  Container(
-        height: D.default_100,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(D.default_100),
-            color: selectedCategory!.id==categoriesProviderModel!.categoriesList[index].id?C.BASE_BLUE:Colors.white,
-            boxShadow:[BoxShadow(
-                color: Colors.black.withOpacity(0.3),
-                offset:Offset(2,2),
-                blurRadius:4,
-                spreadRadius: 1
-            )]
-        ),child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+          clipBehavior: Clip.none,
           children: [
-            SizedBox(width: D.default_35,),
-            Text(categoriesProviderModel!.categoriesList[index].name!,style:S.h4(color:
-            selectedCategory!.id==categoriesProviderModel!.categoriesList[index].id?Colors.white:C.BASE_BLUE)),
-          ],
-        )
-        ) ,),
-          Positioned(child: Container(
-            width:D.default_70,
-            height:D.default_70,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(D.default_200),
-                color: selectedCategory!.id==categoriesProviderModel!.categoriesList[index].id?C.BASE_BLUE:Colors.white,
-                boxShadow:[BoxShadow(
-                    color: Colors.black.withOpacity(0.3),
-                    offset:Offset(2,2),
-                    blurRadius:4,
-                    spreadRadius: 1
-                )]
-            ),
-            child: TransitionImage(
-            categoriesProviderModel!.categoriesList[index].photo!.isNotEmpty?categoriesProviderModel!.categoriesList[index].photo!:Res.SHOP_IC,
-            fit: BoxFit.cover,
-            backgroundColor: Colors.white,
-            padding: EdgeInsets.all(D.default_10),
-            width:D.default_70,
-            height:D.default_70,
-            radius: D.default_200,
-            strokeColor: selectedCategory!.id==categoriesProviderModel!.categoriesList[index].id?C.BASE_BLUE:Colors.white,
+            Container(
+              padding: EdgeInsets.all(D.default_10),
+              child:  Container(
+                  height: D.default_100,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(D.default_100),
+                      color: selectedCategory!.id==categoriesProviderModel!.categoriesList[index].id?C.BASE_BLUE:Colors.white,
+                      boxShadow:[BoxShadow(
+                          color: Colors.black.withOpacity(0.3),
+                          offset:Offset(2,2),
+                          blurRadius:4,
+                          spreadRadius: 1
+                      )]
+                  ),child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(width: D.default_35,),
+                  Text(categoriesProviderModel!.categoriesList[index].name!,style:S.h4(color:
+                  selectedCategory!.id==categoriesProviderModel!.categoriesList[index].id?Colors.white:C.BASE_BLUE)),
+                ],
+              )
+              ) ,),
+            Positioned(child: Container(
+              width:D.default_70,
+              height:D.default_70,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(D.default_200),
+                  color: selectedCategory!.id==categoriesProviderModel!.categoriesList[index].id?C.BASE_BLUE:Colors.white,
+                  boxShadow:[BoxShadow(
+                      color: Colors.black.withOpacity(0.3),
+                      offset:Offset(2,2),
+                      blurRadius:4,
+                      spreadRadius: 1
+                  )]
+              ),
+              child: TransitionImage(
+                categoriesProviderModel!.categoriesList[index].photo!.isNotEmpty?categoriesProviderModel!.categoriesList[index].photo!:Res.SHOP_IC,
+                fit: BoxFit.cover,
+                backgroundColor: Colors.white,
+                padding: EdgeInsets.all(D.default_10),
+                width:D.default_70,
+                height:D.default_70,
+                radius: D.default_200,
+                strokeColor: selectedCategory!.id==categoriesProviderModel!.categoriesList[index].id?C.BASE_BLUE:Colors.white,
 
-          ),),right: D.default_10,),
-        ]));
+              ),),right: D.default_10,),
+          ]),));
   }
 
 

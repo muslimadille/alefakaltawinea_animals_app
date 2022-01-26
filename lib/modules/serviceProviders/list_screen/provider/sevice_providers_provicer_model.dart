@@ -2,9 +2,11 @@
 import 'dart:async';
 
 import 'package:alefakaltawinea_animals_app/data/dio/my_rasponce.dart';
+import 'package:alefakaltawinea_animals_app/modules/serviceProviders/details_screen/service_provider_details_screen.dart';
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/data/getServiceProvidersApi.dart';
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/data/serviceProvidersModel.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/apis.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -42,13 +44,13 @@ class ServiceProvidersProviderModel with ChangeNotifier {
     notifyListeners();
 
   }
-  getClosestList(int categoryId,String lat,String long) async {
+  getClosestList(BuildContext ctx,int categoryId,String lat,String long) async {
     setIsLoading(true);
     MyResponse<List<Data>> response =
     await getServiceProvidersApi.getClosest(categoryId,lat,long);
 
     if (response.status == Apis.CODE_SUCCESS &&response.data!=null){
-        setMarkers(response.data);
+        setMarkers(response.data,ctx);
       setIsLoading(false);
     }else if(response.status == Apis.CODE_SUCCESS &&response.data==null){
       setIsLoading(false);
@@ -77,7 +79,7 @@ class ServiceProvidersProviderModel with ChangeNotifier {
     }
     notifyListeners();
   }
-  void setMarkers(List<Data> value)async{
+  void setMarkers(List<Data> value ,BuildContext ctx)async{
     setIsLoading(true);
     markers.clear();
 
@@ -89,8 +91,12 @@ class ServiceProvidersProviderModel with ChangeNotifier {
             position: latlng,
             infoWindow: InfoWindow(
               title: "${value[i].name}",
+                onTap:(){
+                  MyUtils.navigate(ctx, ServiceProviderDetailsScreen(value[i]));
+                }
             ),
             icon: BitmapDescriptor.defaultMarker,
+
           ));
         }
         currentCameraPosition=CameraPosition(
