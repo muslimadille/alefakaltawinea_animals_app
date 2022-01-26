@@ -90,7 +90,7 @@ setCurrentUserData(UserData user){
 
   }
 /// ...........update profile............
-  updateProfile(BuildContext ctx,String name,String email,String phone,{int regionId=1,int stateId=1}) async {
+  updateProfile(BuildContext ctx,String name,String email,String phone,{ regionId=1,int stateId=1}) async {
     setIsLoading(true);
     MyResponse<UserData> response =
     await updateProfileApi.updateProfile( name, email, phone,regionId,stateId);

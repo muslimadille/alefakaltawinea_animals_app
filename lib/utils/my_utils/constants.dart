@@ -11,6 +11,7 @@ class Constants extends Object{
   static String? SAVED_PHONE_KEY="SAVED_PHONE";
   static String? SAVED_PASSWORD_KEY="SAVED_PASSWORD";
   static List<RegionsModel> REGIONS=[];
+  static String MAPS_API_KEY="AIzaSyDuvS1cZBr4opbX8FmSRyuuKixykzVY3So";
 
 
 

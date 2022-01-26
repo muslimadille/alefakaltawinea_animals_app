@@ -85,7 +85,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     });
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
 
-      await Future.delayed(Duration(milliseconds: 6000)).then((value) {
+      await Future.delayed(Duration(milliseconds: 3000)).then((value) {
         setState(() {
           _isLoading=false;
         });
@@ -104,7 +104,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
         tag: "SplashScreen",
       showSettings: false,
         showBottomBar: false,
-        body: AnimatedContainer(duration: Duration(milliseconds: 1000),
+        body: AnimatedContainer(duration: Duration(milliseconds: 500),
       height: double.infinity,
       color:_isLoading?Colors.white: C.BASE_BLUE,
       child: Column(
@@ -124,7 +124,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   }
   Widget _logoTitleItem(){
     return AnimatedSwitcher(
-        duration: Duration(milliseconds: 3000),
+        duration: Duration(milliseconds: 1000),
       transitionBuilder: (Widget child, Animation<double> animation) {
         return  FadeTransition(child: child, opacity: animation);
       },

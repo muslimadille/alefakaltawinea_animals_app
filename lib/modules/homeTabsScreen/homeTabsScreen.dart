@@ -185,17 +185,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
           mainAxisAlignment: MainAxisAlignment.center,
           children:[
             InkWell(onTap: (){
-              //bottomBarProviderModel!.setSelectedScreen(2);
-              //Fluttertoast.showToast(msg:"قريبا");
-              Fluttertoast.showToast(
-                  msg: "قريبا",
-                  toastLength: Toast.LENGTH_LONG,
-                  gravity: ToastGravity.CENTER,
-                  timeInSecForIosWeb: 1,
-                  backgroundColor: Colors.red,
-                  textColor: Colors.white,
-                  fontSize: 16.0
-              );
+             MyUtils.navigate(context, NearToYouScreen());
             }
               ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==2?Res.IC_NEAR_BLUE:Res.IC_NEAR_GREY,width: D.default_30,height: D.default_30,),),
             Center(child:Text(tr("closest"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==2?C.BASE_BLUE:Colors.grey),),)

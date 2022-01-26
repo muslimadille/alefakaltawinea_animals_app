@@ -75,7 +75,7 @@ class _OtpScreenState extends State<OtpScreen> {
   }
   Widget _useCodeBtn(){
     return InkWell(onTap: (){
-      if(otpProviderModel!.activation_code.toString()==_userCode){
+      if(otpProviderModel!.activation_code.toString()==_userCode||widget.code==_userCode){
         if(widget.otpFalge=="ForgetPasswordScreen"){
           MyUtils.navigate(context, ForgetPasswordScreen(widget.phone!, _userCode));
         }else{

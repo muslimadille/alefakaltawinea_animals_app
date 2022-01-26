@@ -115,7 +115,7 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
                   "conditions":_conditionsController.text,
                   "photo": mFile,
                 });
-                adoptionProviderModel!.setAnimal(formData,adoptionProviderModel!.categoriesList[adoptionProviderModel!.selectedCategoryIndex].id!);
+                adoptionProviderModel!.setAnimal(context,formData,adoptionProviderModel!.categoriesList[adoptionProviderModel!.selectedCategoryIndex].id!);
               }
             }else{
               setState(() {

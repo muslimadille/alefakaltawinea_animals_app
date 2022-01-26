@@ -149,7 +149,7 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
                 MyUtils.regionsDialog(context,utilsProviderModel,userProviderModel,isDismissible:true);
               },
               child: Center(child: Text(
-                userProviderModel!.currentUser!.regionId!=null?Constants.REGIONS.firstWhere((element) => element.id.toString()==userProviderModel!.currentUser!.regionId!).name!
+                userProviderModel!.currentUser!.regionId!=null&&userProviderModel!.currentUser!.regionId!.isNotEmpty?Constants.REGIONS.firstWhere((element) => element.id.toString()==userProviderModel!.currentUser!.regionId!).name!
                     :RegionsModel(id: -1,name: tr("select_city")).name!
     ,style: S.h3(color: Colors.white),),),)
 
