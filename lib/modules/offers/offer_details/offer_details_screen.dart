@@ -3,10 +3,13 @@ import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
+import 'offer_code_screen.dart';
 
 class OfferDetailsScreen extends StatefulWidget {
   Data serviceProviderData;
@@ -56,15 +59,7 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
   }
   Widget _cobonBtn(){
     return Container(child: Center(child: MaterialButton(onPressed: (){
-      Fluttertoast.showToast(
-          msg: "قريبا",
-          toastLength: Toast.LENGTH_LONG,
-          gravity: ToastGravity.CENTER,
-          timeInSecForIosWeb: 1,
-          backgroundColor: Colors.red,
-          textColor: Colors.white,
-          fontSize: 16.0
-      );
+      MyUtils.navigate(context, OfferCodeScreen(widget.serviceProviderData.offers![widget.index]));
     },
     child: Container(
       width: D.default_200,

@@ -59,7 +59,6 @@ class OtpProviderModel with ChangeNotifier{
     notifyListeners();
 
   }
-///........forget password...................
 ///.......update profile phone.....................
 
 void setActivationCode(int value){
