@@ -102,27 +102,27 @@ class _NearToYouScreenState extends State<NearToYouScreen> {
                 spreadRadius: 1
             )]
         ),
-      padding: EdgeInsets.only(top: D.default_5,bottom: D.default_5),
+      padding: EdgeInsets.only(top: D.default_10,bottom: D.default_10),
         margin: EdgeInsets.all(D.default_5),
-
         height: D.default_260,
-        child:CustomScrollView(slivers: [
-      SliverGrid(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: D.default_5,
-            mainAxisSpacing: D.default_5,
-            childAspectRatio: 2.8,
-          ),
-          delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-              return _categoriesIem(index);
-            },
-            childCount:categoriesProviderModel!.categoriesList.length,
-            semanticIndexOffset: 1,
-          )),
+        child:Container(
+          child: Center(child: CustomScrollView(slivers: [
+          SliverGrid(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: D.default_10,
+                mainAxisSpacing: D.default_10,
+                childAspectRatio: D.default_5*0.8,
+              ),
+              delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                  return _categoriesIem(index);
+                },
+                childCount:categoriesProviderModel!.categoriesList.length,
+                semanticIndexOffset: 1,
+              )),
 
-    ]));
+        ]),),));
   }
   Widget _categoriesIem(int index){
     return InkWell(onTap: (){
@@ -133,7 +133,8 @@ class _NearToYouScreenState extends State<NearToYouScreen> {
       });
     },
       child:Directionality(textDirection: TextDirection.rtl,
-      child: Stack(
+      child: Container(
+        child: Stack(
           alignment:AlignmentDirectional.centerStart,
           clipBehavior: Clip.none,
           children: [
@@ -160,8 +161,8 @@ class _NearToYouScreenState extends State<NearToYouScreen> {
               )
               ) ,),
             Positioned(child: Container(
-              width:D.default_70,
-              height:D.default_70,
+              width:D.default_65,
+              height:D.default_65,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(D.default_200),
                   color: selectedCategory!.id==categoriesProviderModel!.categoriesList[index].id?C.BASE_BLUE:Colors.white,
@@ -177,13 +178,13 @@ class _NearToYouScreenState extends State<NearToYouScreen> {
                 fit: BoxFit.cover,
                 backgroundColor: Colors.white,
                 padding: EdgeInsets.all(D.default_10),
-                width:D.default_70,
-                height:D.default_70,
+                width:D.default_65,
+                height:D.default_65,
                 radius: D.default_200,
                 strokeColor: selectedCategory!.id==categoriesProviderModel!.categoriesList[index].id?C.BASE_BLUE:Colors.white,
 
               ),),right: D.default_10,),
-          ]),));
+          ]),),));
   }
 
 

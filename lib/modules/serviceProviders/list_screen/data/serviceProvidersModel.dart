@@ -96,6 +96,7 @@ class Data {
   String? isOnline;
   String? categoryId;
   String? website;
+  int? is_fav;
   List<OfferModel>? offers;
 
 
@@ -116,6 +117,7 @@ class Data {
         this.isOnline,
         this.categoryId,
         this.website,
+        this.is_fav,
       this.offers});
 
   Data.fromJson(Map<String, dynamic> json) {
@@ -135,6 +137,7 @@ class Data {
     isOnline = json['is_online'];
     categoryId = json['category_id'];
     website = json['website'];
+    is_fav=json['is_fav'];
     if (json['offers'] != null) {
       offers = <OfferModel>[];
       json['offers'].forEach((v) {
@@ -161,6 +164,7 @@ class Data {
     data['is_online'] = this.isOnline;
     data['category_id'] = this.categoryId;
     data['website'] = this.website;
+    data['is_fav'] = this.is_fav;
     if (this.offers != null) {
       data['offers'] = this.offers!.map((v) => v.toJson()).toList();
     }

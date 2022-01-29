@@ -40,7 +40,6 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   AnimationController? _controller;
   Animation<double>? _animation;
   Intro? intro;
-  IntroProviderModel?introProviderModel;
   AdsSliderProviderModel?adsSliderProviderModel;
   SharedPreferences? prefs;
   UtilsProviderModel? utilsProviderModel;
@@ -70,7 +69,6 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
     intro=_myIntro();
     _initPref(context);
-    introProviderModel =Provider.of<IntroProviderModel>(context, listen: false);
     adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: false);
     adsSliderProviderModel!.getAdsSlider();
     _controller=AnimationController(vsync: this,duration:Duration(milliseconds: 2000));
@@ -97,7 +95,6 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   @override
   Widget build(BuildContext context) {
     adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: true);
-    introProviderModel =Provider.of<IntroProviderModel>(context, listen: true);
     userProviderModel=Provider.of<UserProviderModel>(context,listen: true);
 
     return BaseScreen(
@@ -130,6 +127,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       },
         child:adsSliderProviderModel!.isLoading&&_isLoading?Center(key: Key("1"),child: Image.asset(Res.APP_LOGO_NAME,width: D.default_200,height: D.default_200),):Center(key:Key("2"),child: Image.asset(Res.LOGO_WITHOUT_NAME,width: D.default_150,height: D.default_150)));
   }
+
   Widget _buttonsPart(){
     return FadeTransition(
         child:Container(

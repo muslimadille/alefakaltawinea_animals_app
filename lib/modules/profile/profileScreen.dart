@@ -1,8 +1,10 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/provider/bottom_bar_provider_model.dart';
+import 'package:alefakaltawinea_animals_app/modules/login/data/user_data.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/provider/user_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/spalshScreen/data/regions_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/spalshScreen/spalshScreen.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/apis.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
@@ -425,9 +427,12 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
       Icon(Icons.person_pin,color: C.BASE_BLUE,size: D.default_80,),
-       InkWell(onTap: (){
-         Constants.prefs!.clear();
-         Constants.currentUser!=null;
+       InkWell(onTap: ()async{
+         await Constants.prefs!.setString(Constants.SAVED_PHONE_KEY!,"");
+         await Constants.prefs!.setString(Constants.SAVED_PASSWORD_KEY!,"");
+         Apis.TOKEN_VALUE="";
+         Constants.currentUser=null;
+         userProviderModel!.currentUser=null;
          MyUtils.navigateAsFirstScreen(context, SplashScreen());
        },child:  Container(
          margin: EdgeInsets.all(D.default_10),

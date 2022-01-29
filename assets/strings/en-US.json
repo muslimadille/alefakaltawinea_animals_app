@@ -70,34 +70,10 @@
   "forget_password_title": "Add a new password",
   "submit":"Submit",
   "register_new": "Create a new account",
-  "cant_opn_url": "This site cannot be opened"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  "cant_opn_url": "This site cannot be opened",
+  "fav_screen_title": "Favorite",
+  "FAV_EMPTY": "Your favorites list is empty",
+  "there_is_no_fav": "Looks like you haven't added anything to your favorites yet"
 
 
 }

@@ -1,4 +1,4 @@
-import 'package:alefakaltawinea_animals_app/modules/serviceProviders/details_screen/offers/offer_details/offer_details_screen.dart';
+import 'package:alefakaltawinea_animals_app/modules/offers/offer_details/offer_details_screen.dart';
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/data/serviceProvidersModel.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';

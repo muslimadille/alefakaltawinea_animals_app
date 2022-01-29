@@ -74,6 +74,8 @@ setCurrentUserData(UserData user){
     if (response.status == Apis.CODE_SUCCESS &&response.data!=null){
       UserData user=response.data;
       setCurrentUserData(user);
+      await Constants.prefs!.setString(Constants.SAVED_PHONE_KEY!,phone);
+      await Constants.prefs!.setString(Constants.SAVED_PASSWORD_KEY!,password);
       setIsLoading(false);
       MyUtils.navigateReplaceCurrent(ctx, OtpScreen("register",tr('register_otp'),code:response.code.toString(),));
     }else if(response.status == Apis.CODE_ACTIVE_USER &&response.data!=null){

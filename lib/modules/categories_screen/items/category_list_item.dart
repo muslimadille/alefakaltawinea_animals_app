@@ -28,13 +28,6 @@ class _CategoryListItemState extends State<CategoryListItem> {
   GlobalKey _keyRed = GlobalKey();
   double height=0;
 
-  _getSizes() {
-    final RenderBox? renderBoxRed = _keyRed.currentContext?.findRenderObject() as RenderBox?;
-    final sizeRed = renderBoxRed!.size.height;
-    setState(() {
-      height=sizeRed;
-    });
-  }
 
   @override
   void initState() {
@@ -92,8 +85,8 @@ class _CategoryListItemState extends State<CategoryListItem> {
           children: [
             Container(
               margin: EdgeInsets.only(left: D.default_10,right: D.default_10),
-              height:D.default_110,
-              width:D.default_110,
+              height:D.default_100,
+              width:D.default_100,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(D.default_300),
                   color: C.BASE_BLUE,
@@ -110,8 +103,8 @@ class _CategoryListItemState extends State<CategoryListItem> {
               fit: BoxFit.cover,
               backgroundColor: Colors.white,
               padding: EdgeInsets.all(D.default_15),
-              height:D.default_100,
-              width:D.default_100,
+              height:D.default_90,
+              width:D.default_90,
               radius: D.default_300,
 
             )
@@ -119,7 +112,7 @@ class _CategoryListItemState extends State<CategoryListItem> {
       ),
       Container(
         height: D.default_30,
-          width: D.default_200,
+          width: D.default_170,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(D.default_10),
               color: C.BASE_BLUE,

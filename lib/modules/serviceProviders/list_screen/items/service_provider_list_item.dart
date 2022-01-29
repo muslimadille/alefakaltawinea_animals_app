@@ -65,11 +65,19 @@ class _ServiceProviderListItemState extends State<ServiceProviderListItem> {
                 Expanded(child: Text(
                   widget.serviceProvidersProviderModel!.serviceProviderModel!.data![widget.index].name!
                   ,style: S.h3(color:C.BASE_BLUE),),),
-                TransitionImage(
-                  Res.IC_FAV_GREY,
+                InkWell(
+                  onTap: (){
+                    widget.serviceProvidersProviderModel!.setFav(widget.serviceProvidersProviderModel!.serviceProviderModel!.data![widget.index].id!);
+                     setState(() {
+                       fav_icon=Res.IC_FAV_BLUE;
+                     });
+                    },
+                  child: TransitionImage(
+                    widget.serviceProvidersProviderModel!.serviceProviderModel!.data![widget.index].is_fav==0?
+                  fav_icon:Res.IC_FAV_BLUE,
                   height: D.default_25,
                   width: D.default_25,
-                )
+                ),)
 
               ],),
           )
@@ -99,4 +107,6 @@ class _ServiceProviderListItemState extends State<ServiceProviderListItem> {
       ],),
     ),);
   }
+  String fav_icon= Res.IC_FAV_GREY;
+
 }

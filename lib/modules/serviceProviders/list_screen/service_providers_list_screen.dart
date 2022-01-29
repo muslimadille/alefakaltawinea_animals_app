@@ -53,7 +53,7 @@ class _ServiceProviderListScreenState extends State<ServiceProviderListScreen>  
       showBottomBar: true,
       showSettings: false,
         body: Column(children: [
-          ActionBarWidget(widget.title, context),
+          ActionBarWidget(widget.title, context,showSearch: serviceProvidersProviderModel!.serviceProviderModel!=null?serviceProvidersProviderModel!.serviceProviderModel!.data!.isNotEmpty:false,),
       Expanded(child:serviceProvidersProviderModel!.isLoading?LoadingProgress():SmartRefresher(
         key: _refresherKey,
         controller: _refreshController,

@@ -51,6 +51,7 @@ dependencies:
   url_launcher: ^6.0.9
   google_maps_flutter: ^2.0.10
   geolocator: ^8.0.5
+  material_floating_search_bar: ^0.3.6
 
 
 

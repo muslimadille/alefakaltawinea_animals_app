@@ -2,6 +2,7 @@
 import 'dart:async';
 
 import 'package:alefakaltawinea_animals_app/data/dio/my_rasponce.dart';
+import 'package:alefakaltawinea_animals_app/modules/fav/data/fav_api.dart';
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/details_screen/service_provider_details_screen.dart';
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/data/getServiceProvidersApi.dart';
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/data/serviceProvidersModel.dart';
@@ -25,14 +26,15 @@ class ServiceProvidersProviderModel with ChangeNotifier {
 
   /// ..........categories...........
   ServiceProviderModel? serviceProviderModel;
+  ServiceProviderModel? searchServiceProviderModel;
   GetServiceProvidersApi getServiceProvidersApi=GetServiceProvidersApi();
-  getServiceProvidersList(int categoryId,int page) async {
+  getServiceProvidersList(int categoryId,int page,{String lat="",String long="",String keyword="",String state_id=""}) async {
     if(page==1) {
       serviceProviderModel = null;
     }
     setIsLoading(true);
     MyResponse<ServiceProviderModel> response =
-    await getServiceProvidersApi.getServiceProviders(categoryId, page);
+    await getServiceProvidersApi.getServiceProviders(categoryId, page,keyword: keyword);
     if (response.status == Apis.CODE_SUCCESS &&response.data!=null){
         setServiceProviderModel(response.data);
       setIsLoading(false);
@@ -44,6 +46,26 @@ class ServiceProvidersProviderModel with ChangeNotifier {
     notifyListeners();
 
   }
+  getSearchList(int categoryId,int page,{String lat="",String long="",String keyword="",String state_id=""}) async {
+    searchServiceProviderModel==null;
+    if(page==1) {
+      searchServiceProviderModel = null;
+    }
+    setIsLoading(true);
+    MyResponse<ServiceProviderModel> response =
+    await getServiceProvidersApi.getSearch(categoryId, page,keyword: keyword);
+    if (response.status == Apis.CODE_SUCCESS &&response.data!=null){
+      setSearchModel(response.data);
+      setIsLoading(false);
+    }else if(response.status == Apis.CODE_SUCCESS &&response.data==null){
+      setIsLoading(false);
+    }else{
+      setIsLoading(false);
+    }
+    notifyListeners();
+
+  }
+
   getClosestList(BuildContext ctx,int categoryId,String lat,String long) async {
     setIsLoading(true);
     MyResponse<List<Data>> response =
@@ -79,6 +101,11 @@ class ServiceProvidersProviderModel with ChangeNotifier {
     }
     notifyListeners();
   }
+  void setSearchModel(ServiceProviderModel value){
+      searchServiceProviderModel=value;
+    notifyListeners();
+  }
+
   void setMarkers(List<Data> value ,BuildContext ctx)async{
     setIsLoading(true);
     markers.clear();
@@ -112,5 +139,42 @@ class ServiceProvidersProviderModel with ChangeNotifier {
 setIsLoading(false);
     notifyListeners();
   }
+  ///...................fav.......................................
+  FavApi favApi=FavApi();
+  List<Data> favList=[];
+  setFavList(List<Data> value){
+    favList=value;
+    notifyListeners();
+  }
+  getFavsList() async {
+    setIsLoading(true);
+    MyResponse<List<Data>> response =
+    await favApi.getFavs();
+    if (response.status == Apis.CODE_SUCCESS &&response.data!=null){
+      setFavList(response.data);
+      setIsLoading(false);
+    }else if(response.status == Apis.CODE_SUCCESS &&response.data==null){
+      setIsLoading(false);
+    }else{
+      setIsLoading(false);
+    }
+    notifyListeners();
+
+  }
+  setFav(int shopId) async {
+    //setIsLoading(true);
+    MyResponse<dynamic> response =
+    await favApi.setFav(shopId);
+    if (response.status == Apis.CODE_SUCCESS ){
+      setIsLoading(false);
+    }else if(response.status == Apis.CODE_SUCCESS &&response.data==null){
+      setIsLoading(false);
+    }else{
+      setIsLoading(false);
+    }
+    notifyListeners();
+
+  }
+
 
 }

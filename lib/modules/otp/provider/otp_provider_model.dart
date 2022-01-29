@@ -5,6 +5,7 @@ import 'package:alefakaltawinea_animals_app/modules/login/provider/user_provider
 import 'package:alefakaltawinea_animals_app/modules/otp/data/otp_api.dart';
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/provider/sevice_providers_provicer_model.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/apis.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -23,10 +24,11 @@ class OtpProviderModel with ChangeNotifier{
   ///......active account....................
   activeAccount(String phone,String code,BuildContext ctx,UserData user) async {
     setIsLoading(true);
-    MyResponse<dynamic> response =
+    MyResponse<UserData> response =
     await otpApi.activeAccount(phone,code);
-    if (response.status == Apis.CODE_SUCCESS){
-      user.activate="1";
+    if (response.status == Apis.CODE_SUCCESS&&response.data!=null){
+      Constants.currentUser=response.data;
+      Apis.TOKEN_VALUE=user.token!;
       setIsLoading(false);
       MyUtils.navigateAsFirstScreen(ctx, MainCategoriesScreen());
     }else if(response.status == Apis.CODE_SHOW_MESSAGE){
