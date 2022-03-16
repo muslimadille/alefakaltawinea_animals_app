@@ -16,15 +16,21 @@ class MyUtils{
 
   /// ........... navigation utils................................
   static void navigate(BuildContext context,Widget screen){
-    Navigator.of(context).push(MaterialPageRoute(builder: (context) => screen));
+    Navigator.of(context).push(MaterialPageRoute(builder: (context) => screen)).then((value) {
+      Constants.utilsProviderModel!.setCurrentLocal(context, Constants.utilsProviderModel!.currentLocal);
+    });
   }
   static void navigateAsFirstScreen(BuildContext context,Widget screen){
     Navigator.of(context).popUntil((route) => route.isFirst);
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => screen));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => screen)).then((value) {
+      Constants.utilsProviderModel!.setCurrentLocal(context, Constants.utilsProviderModel!.currentLocal);
+    });
   }
 
   static void navigateReplaceCurrent(BuildContext context,Widget screen){
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => screen));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => screen)).then((value) {
+      Constants.utilsProviderModel!.setCurrentLocal(context, Constants.utilsProviderModel!.currentLocal);
+    });
   }
   ///========================intor utils===================================================
   static  Intro myIntro(List<String> descriptionsList){

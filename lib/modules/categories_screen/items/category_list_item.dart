@@ -27,8 +27,6 @@ class _CategoryListItemState extends State<CategoryListItem> {
   int index;
   GlobalKey _keyRed = GlobalKey();
   double height=0;
-
-
   @override
   void initState() {
     super.initState();

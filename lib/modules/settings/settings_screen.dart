@@ -1,6 +1,7 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
@@ -61,9 +62,9 @@ class _SettingScreenState extends State<SettingScreen> {
                                 ),
                                 child: InkWell(
                                   onTap: (){
-                                    MyUtils.languageDialog(context, _changeLnguagesAlertBody(),utilsProviderModel,isDismissible:true);
+                                    MyUtils.languageDialog(context, _changeLnguagesAlertBody(),Constants.utilsProviderModel!,isDismissible:true);
                                   },
-                                  child: Center(child: Text(utilsProviderModel!.currentLocalName,style: S.h3(color: Colors.white),),),)
+                                  child: Center(child: Text(Constants.utilsProviderModel!.currentLocalName,style: S.h3(color: Colors.white),),),)
 
                             )
                           ],),
@@ -115,8 +116,8 @@ class _SettingScreenState extends State<SettingScreen> {
     );
   }
   Widget _changeLnguagesAlertBody(){
-    bool arStat=utilsProviderModel!.isArabic;
-    bool enStat=utilsProviderModel!.isEnglish;
+    bool arStat=Constants.utilsProviderModel!.isArabic;
+    bool enStat=Constants.utilsProviderModel!.isEnglish;
     return Container(
       width: double.infinity,
       height: double.infinity,
@@ -139,7 +140,7 @@ class _SettingScreenState extends State<SettingScreen> {
 
                     bool currentValue=val as bool ;
                     arStat=currentValue;
-                    currentValue?utilsProviderModel!.setLanguageState("ar"):utilsProviderModel!.setLanguageState("en");
+                    currentValue?Constants.utilsProviderModel!.setLanguageState("ar"):Constants.utilsProviderModel!.setLanguageState("en");
                     setState(() {
 
                     });
@@ -153,7 +154,7 @@ class _SettingScreenState extends State<SettingScreen> {
                   Radio(value: true, groupValue:enStat, toggleable: true,onChanged: ( val ){
                     bool currentValue=val as bool ;
                     enStat=currentValue;
-                    currentValue?utilsProviderModel!.setLanguageState("en"):utilsProviderModel!.setLanguageState("ar");
+                    currentValue?Constants.utilsProviderModel!.setLanguageState("en"):Constants.utilsProviderModel!.setLanguageState("ar");
                     setState(() {
 
                     });

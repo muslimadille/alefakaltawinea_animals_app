@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 
-class UtilsProviderModel with ChangeNotifier{
+class UtilsProviderModel with ChangeNotifier {
   bool isArabic=true;
   bool isEnglish=false;
   Locale currentLocal =Locale('ar', 'EG');

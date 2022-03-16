@@ -11,7 +11,7 @@ class RegisterationApi{
     final url = "${Apis.REGISTER}";
     Map<String,dynamic>body={
       "username":name,
-      "email":email,
+      "username":email,
       "phone":phone,
       "region_id":regionId,
       "state_id":stateId,

@@ -2,6 +2,7 @@
 import 'dart:io';
 
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
@@ -54,11 +55,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     UtilsProviderModel utilsProviderModel;
     utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: true);
+    Constants.utilsProviderModel=utilsProviderModel;
     _initProviders(context);
 
 
 
-    return  utilsProviderModel.currentLocalName.isNotEmpty? MaterialApp(
+    return  Constants.utilsProviderModel!.currentLocalName.isNotEmpty? MaterialApp(
       theme: ThemeData(
           primaryColor:C.BASE_BLUE,
           focusColor:C.BASE_BLUE
@@ -66,7 +68,7 @@ class MyApp extends StatelessWidget {
       ),
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
-        locale: utilsProviderModel.currentLocal,
+        locale: Constants.utilsProviderModel!.currentLocal,
         debugShowCheckedModeBanner: false,
         home: BaseScreen(
           tag: "SplashScreen",
