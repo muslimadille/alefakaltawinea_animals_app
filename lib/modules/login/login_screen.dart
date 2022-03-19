@@ -1,5 +1,4 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
-import 'package:alefakaltawinea_animals_app/modules/login/forget_password/forget_password_screen.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/provider/user_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/otp/phone_screen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
@@ -42,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-              height: D.default_250,
+            margin: EdgeInsets.only(top:D.default_150,bottom: D.default_30),
               child: Center(child: Text(tr("welcome_back"),style: S.h1(color: C.BASE_BLUE),textAlign: TextAlign.center,),)),
           _header(),
           Container(
@@ -86,8 +85,7 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
   Widget _header(){
     return Container(
       padding: EdgeInsets.all(D.default_10),
-      color: C.BASE_BLUE,
-      child: Center(child: Text(tr("login_header"),style: S.h1(color: Colors.white),textAlign: TextAlign.center,),),);
+      child: Center(child: Text(tr("login_header"),style: S.h1(color: C.BASE_BLUE),textAlign: TextAlign.center,),),);
   }
   Widget _password(){
     return Container(
