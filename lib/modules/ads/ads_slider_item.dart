@@ -72,11 +72,11 @@ class _AdsSliderItemState extends State<AdsSliderItem> {
           ),):Container(),
         ],),
       ),
-        TransitionImage(Res.HOME_CURVE,fit: BoxFit.cover,width: double.infinity,height: D.default_80,),
         Container(
-          height: D.default_50,
+          height: D.default_40,
+          color: Colors.white,
           width: double.infinity,
-          padding: EdgeInsets.all(D.default_10),
+          padding: EdgeInsets.only(top:D.default_10),
 
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,

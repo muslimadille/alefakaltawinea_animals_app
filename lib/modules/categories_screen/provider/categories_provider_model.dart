@@ -34,8 +34,6 @@ class CategoriesProviderModel with ChangeNotifier {
   }
   void setCategoriesList(List<CategoriesDataModel> value){
     categoriesList.addAll(value);
-    CategoriesDataModel adaption=CategoriesDataModel(id:-1,name:tr("adoption"),photo: Res.ADOPTION_IMG);
-    categoriesList.add(adaption);
     notifyListeners();
   }
 

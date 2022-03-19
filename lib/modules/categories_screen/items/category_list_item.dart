@@ -13,10 +13,10 @@ import '../../../main.dart';
 class CategoryListItem extends StatefulWidget {
   int index;
   OnItemClickListener? onItemClickListener;
-  CategoriesProviderModel?categoriesProviderModel;
+  CategoriesProviderModel? categoriesProviderModel;
 
-
-  CategoryListItem(this.index,this.categoriesProviderModel,this.onItemClickListener) ;
+  CategoryListItem(
+      this.index, this.categoriesProviderModel, this.onItemClickListener);
 
   @override
   _CategoryListItemState createState() => _CategoryListItemState(index);
@@ -24,107 +24,111 @@ class CategoryListItem extends StatefulWidget {
 
 class _CategoryListItemState extends State<CategoryListItem> {
   _CategoryListItemState(this.index);
+
   int index;
   GlobalKey _keyRed = GlobalKey();
-  double height=0;
+  double height = 0;
+
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
-    });
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {});
   }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap:widget.onItemClickListener,
-        child:_newIem() ,
-        );
+      onTap: widget.onItemClickListener,
+      child: _newIem(),
+    );
   }
-  Widget _old(){
-    return Directionality(textDirection: TextDirection.ltr,
-      child:Container(
+
+  Widget _old() {
+    return Directionality(
+      textDirection: TextDirection.ltr,
+      child: Container(
           key: _keyRed,
-          margin:EdgeInsets.only(left:D.default_5,right:D.default_5,top: D.default_10),
+          margin: EdgeInsets.only(
+              left: D.default_5, right: D.default_5, top: D.default_10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(D.default_10),
-              color: Color(int.parse(widget.categoriesProviderModel!.categoriesList[widget.index].color!.replaceAll("#", "0xFF"))),
-              boxShadow:[BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  offset:Offset(1,1),
-                  blurRadius:1,
-                  spreadRadius: 1
-              )]
-          ),
+              color: Color(int.parse(widget
+                  .categoriesProviderModel!.categoriesList[widget.index].color!
+                  .replaceAll("#", "0xFF"))),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    offset: Offset(1, 1),
+                    blurRadius: 1,
+                    spreadRadius: 1)
+              ]),
           child: Stack(
-              alignment:AlignmentDirectional.bottomCenter,
+              alignment: AlignmentDirectional.bottomCenter,
               clipBehavior: Clip.none,
               children: [
-                Positioned(child:widget.categoriesProviderModel!.categoriesList[widget.index].photo!.isNotEmpty? TransitionImage(
-                  widget.categoriesProviderModel!.categoriesList[widget.index].photo!,
-                  fit: BoxFit.cover,
-                  height:height+D.default_10,
-                ):Container(),bottom: 0,right:-D.default_16,)
-                ,Container(
-                  child:Row(
-                    mainAxisAlignment:widget.categoriesProviderModel!.categoriesList[widget.index].photo!.isNotEmpty? MainAxisAlignment.start:MainAxisAlignment.center,
-                    children: [
-                      Center(child: Container(
-                        padding:EdgeInsets.all(D.default_20)
-                        ,child: Text(widget.categoriesProviderModel!.categoriesList[widget.index].name!,style:S.h3(color: Colors.black)),),)
-                    ],) ,
+                Positioned(
+                  child: widget.categoriesProviderModel!
+                          .categoriesList[widget.index].photo!.isNotEmpty
+                      ? TransitionImage(
+                          widget.categoriesProviderModel!
+                              .categoriesList[widget.index].photo!,
+                          fit: BoxFit.cover,
+                          height: height + D.default_10,
+                        )
+                      : Container(),
+                  bottom: 0,
+                  right: -D.default_16,
                 ),
-              ])) ,) ;
-  }
-  Widget _newIem(){
-    return Container(child: Column(children: [
-      Container(
-        child: Stack(
-          alignment: AlignmentDirectional.bottomCenter,
-          children: [
-            Container(
-              margin: EdgeInsets.only(left: D.default_10,right: D.default_10),
-              height:D.default_100,
-              width:D.default_100,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(D.default_300),
-                  color: C.BASE_BLUE,
-                  boxShadow:[BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      offset:Offset(1,1),
-                      blurRadius:1,
-                      spreadRadius: 1
-                  )]
-              ),
-            ),
-            TransitionImage(
-              widget.categoriesProviderModel!.categoriesList[widget.index].photo!.isNotEmpty?widget.categoriesProviderModel!.categoriesList[widget.index].photo!:Res.SHOP_IC,
-              fit: BoxFit.cover,
-              backgroundColor: Colors.white,
-              padding: EdgeInsets.all(D.default_15),
-              height:D.default_90,
-              width:D.default_90,
-              radius: D.default_300,
-
-            )
-        ],),
-      ),
-      Container(
-        height: D.default_30,
-          width: D.default_170,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(D.default_10),
-              color: C.BASE_BLUE,
-              boxShadow:[BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  offset:Offset(1,1),
-                  blurRadius:1,
-                  spreadRadius: 1
-              )]
-          ),
-        child:Center(child: Text(widget.categoriesProviderModel!.categoriesList[widget.index].name!,style:S.h3(color: Colors.white)),) ,
-      ),
-
-    ],),);
+                Container(
+                  child: Row(
+                    mainAxisAlignment: widget.categoriesProviderModel!
+                            .categoriesList[widget.index].photo!.isNotEmpty
+                        ? MainAxisAlignment.start
+                        : MainAxisAlignment.center,
+                    children: [
+                      Center(
+                        child: Container(
+                          padding: EdgeInsets.all(D.default_20),
+                          child: Text(
+                              widget.categoriesProviderModel!
+                                  .categoriesList[widget.index].name!,
+                              style: S.h3(color: Colors.black)),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+              ])),
+    );
   }
 
+  Widget _newIem() {
+    return Stack(
+      alignment: AlignmentDirectional.bottomCenter,
+      children: [
+        Container(
+          color: widget.categoriesProviderModel!.categoriesList[widget.index].color!=null?Color(int.parse("${widget.categoriesProviderModel!.categoriesList[widget.index].color!.replaceAll("#", "0xff")}")) : Color(0xffF38183),),
+        Positioned(
+            child: TransitionImage(
+              widget.categoriesProviderModel!.categoriesList[widget.index]
+                  .photo!.isNotEmpty
+                  ? widget.categoriesProviderModel!
+                  .categoriesList[widget.index].photo!
+                  : Res.SHOP_IC,
+              fit: BoxFit.fitHeight,
+              padding: EdgeInsets.only(top:D.default_30,bottom:D.default_30),
+              width: MediaQuery.of(context).size.width / 2,
+              height: MediaQuery.of(context).size.width / 2,
+            )),
+        Container(
+          height: D.default_40,
+          child: Center(
+          child: Text(
+              widget.categoriesProviderModel!
+                  .categoriesList[widget.index].name!,
+              style: S.h3(color: Colors.white)),
+        ),)
+      ],
+    );
+  }
 }

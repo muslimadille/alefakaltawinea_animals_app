@@ -110,6 +110,7 @@ flutter:
     - assets/images/logo_new_img.png
     - assets/images/spalsh_bg.png
     - assets/images/onboarding_bg.png
+    - assets/images/adoption_new_img.png
 
     - assets/strings/ar-EG.json
     - assets/strings/en-US.json

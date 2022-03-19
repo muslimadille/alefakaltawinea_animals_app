@@ -78,7 +78,7 @@ class UserData {
   String? color;
   String? userTypeId;
   String? token;
-  String? activate;
+  dynamic? activate;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

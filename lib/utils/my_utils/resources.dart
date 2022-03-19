@@ -26,6 +26,9 @@ class Res{
   static String LOGO_WITHOUT_NAME="assets/images/logo_new_img.png";
   static String SPLASH_BG="assets/images/spalsh_bg.png";
   static String ONBOARDING_BG="assets/images/onboarding_bg.png";
+  static String ADOPTION_NEW_IMAG="assets/images/adoption_new_img.png";
+
+
 
 
 }

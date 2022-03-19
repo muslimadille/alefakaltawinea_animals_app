@@ -76,7 +76,9 @@
   "there_is_no_fav": "Looks like you haven't added anything to your favorites yet",
   "terms_text": "I agree to the terms and conditions and privacy policy",
   "accept_terms_toast":"Please agree to the terms and conditions",
-  "password": "Password"
+  "password": "Password",
+  "new_regist": "New? Register now"
+
 
 
 }

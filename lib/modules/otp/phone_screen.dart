@@ -1,5 +1,7 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
+import 'package:alefakaltawinea_animals_app/modules/login/login_screen.dart';
 import 'package:alefakaltawinea_animals_app/modules/otp/otp_screem.dart';
+import 'package:alefakaltawinea_animals_app/modules/registeration/registration_screen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/input%20_validation_mixing.dart';
@@ -38,14 +40,15 @@ class _PhoneScreenState extends State<PhoneScreen> with InputValidationMixin{
               SizedBox(height: D.default_100,),
               _phone(),
               SizedBox(height: D.default_30,),
-
               _nextBtn(),
+              _loginPart()
 
             ],)
       ),);
   }
   Widget _phone() {
     return Container(
+      margin: EdgeInsets.only(left:D.default_50,right: D.default_50),
         width: double.infinity,
         child: Form(
           key: _registerFormGlobalKey,
@@ -62,18 +65,23 @@ class _PhoneScreenState extends State<PhoneScreen> with InputValidationMixin{
             }
           },
           decoration: InputDecoration(
-            hintText: tr("enter_phone"),
-            hintStyle: S.h2(color: Colors.grey),
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey),
-            ),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: C.BASE_BLUE),
-            ),
-            border: UnderlineInputBorder(
-                borderSide: BorderSide(color: C.BASE_BLUE)),
-            errorStyle: S.h4(color: Colors.red),
-            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+              hintText: tr("enter_phone"),
+              hintStyle: S.h4(color: Colors.grey),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: C.BASE_BLUE),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: C.BASE_BLUE),
+                borderRadius: BorderRadius.circular(10.0),
+              ),
+              errorStyle: S.h4(color: Colors.red),
+              contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+
           ),
           keyboardType: TextInputType.phone,
           obscureText: false,
@@ -111,6 +119,27 @@ class _PhoneScreenState extends State<PhoneScreen> with InputValidationMixin{
               )]
           ),
           child: Center(child: Text(tr('send'),style: S.h1(color: Colors.white),textAlign: TextAlign.center,),)),);
+  }
+  Widget _loginPart(){
+    return Container(
+      height: D.default_50,
+      padding: EdgeInsets.all(D.default_5),
+      margin: EdgeInsets.all(D.default_10),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+      InkWell(onTap: (){
+        MyUtils.navigate(context, RegistrationScreen());
+      },child:Text(tr("new_regist"),style: S.h2(color: C.BASE_BLUE),),
+      ),
+      Container(
+        margin: EdgeInsets.all(D.default_10),
+        color: Colors.grey,width: D.default_1,height: double.infinity,),
+      InkWell(onTap: (){
+        MyUtils.navigate(context, LoginScreen());
+      },child:Text(tr("login_header"),style: S.h2(color: C.BASE_BLUE),),
+      ),
+    ],),);
   }
 
 }

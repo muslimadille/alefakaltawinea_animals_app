@@ -2,7 +2,6 @@ import 'package:alefakaltawinea_animals_app/modules/ads/ads_slider.dart';
 import 'package:alefakaltawinea_animals_app/modules/ads/provider/ads_slider_provider.dart';
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/categories_screen/provider/categories_provider_model.dart';
-import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/provider/intro_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
 import 'package:flutter/material.dart';
@@ -43,7 +42,6 @@ class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
       Container(height: MediaQuery.of(context).size.height*0.30,child: AdsSlider(),),
          Expanded(child:  Container(
            color: Colors.white,
-           padding: EdgeInsets.all(D.default_10),
            child: CategoryList(context,categoriesProviderModel),))
     ],));
   }
