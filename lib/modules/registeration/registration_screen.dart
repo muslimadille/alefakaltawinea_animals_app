@@ -49,10 +49,11 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
             ? LoadingProgress()
             : SingleChildScrollView(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                        height: D.default_200,
+                      margin: EdgeInsets.only(top: D.default_100,bottom: D.default_30),
                         child: Center(
                           child: Text(
                             tr("register_header"),
@@ -60,7 +61,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
                             textAlign: TextAlign.center,
                           ),
                         )),
-                    _header(),
                     Container(
                       padding: EdgeInsets.all(D.default_20),
                       child: Form(
@@ -74,7 +74,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
                             _phone(),
                             _password(),
                             _confirmPassword(),
-                            _coditions(),
+                            SizedBox(height: D.default_20,),
                             _registerBtn(),
                           ],
                         ),
@@ -166,7 +166,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
             }
           },
           decoration: InputDecoration(
-            hintText: tr("enter_email"),
+            hintText: tr("email"),
             hintStyle: S.h2(color: Colors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
@@ -204,7 +204,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
           },
           style: S.h4(color: Colors.black),
           decoration: InputDecoration(
-              hintText: tr("enter_password"),
+              hintText: tr("password"),
               hintStyle: S.h2(color: Colors.grey),
               enabledBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.grey),
@@ -306,7 +306,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
             }
           },
           decoration: InputDecoration(
-            hintText: tr("enter_phone"),
+            hintText: tr("phone"),
             hintStyle: S.h2(color: Colors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),

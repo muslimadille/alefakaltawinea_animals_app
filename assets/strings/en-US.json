@@ -34,7 +34,7 @@
   "enter_phone": "Enter a phone number",
   "welcome_back": "Welcome back",
   "forget_password": "Did you forget your password?",
-  "register_header":"Welcome \n Fill in your information below \n and create your own account",
+  "register_header":"Welcome\nWe need a minute from you\n Fill in the information to create your own account",
   "profile_info": "Your account information",
   "confirm_password": "Confirm password",
   "not_confirm":"Password does not match",
@@ -75,7 +75,8 @@
   "FAV_EMPTY": "Your favorites list is empty",
   "there_is_no_fav": "Looks like you haven't added anything to your favorites yet",
   "terms_text": "I agree to the terms and conditions and privacy policy",
-  "accept_terms_toast":"Please agree to the terms and conditions"
+  "accept_terms_toast":"Please agree to the terms and conditions",
+  "password": "Password"
 
 
 }
