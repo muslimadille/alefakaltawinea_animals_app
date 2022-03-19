@@ -48,13 +48,13 @@ class _AdsSliderItemState extends State<AdsSliderItem> {
             )),
 
           ],),
-          widget.AdsItem.photo!.isNotEmpty? Positioned(child: Container(
+          /*widget.AdsItem.photo!.isNotEmpty? Positioned(child: Container(
             padding: EdgeInsets.all(D.default_5),
-            margin: EdgeInsets.only(left:D.default_10,right:D.default_10),
+            margin: EdgeInsets.only(left:D.default_10,right:D.default_10,top: D.default_10),
             width: D.default_60,
             height: D.default_60,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.only(bottomRight: Radius.circular(D.default_5),bottomLeft:Radius.circular(D.default_5) ),
+                borderRadius: BorderRadius.all(Radius.circular(D.default_5) ),
                 color: Colors.white,
                 boxShadow:[BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
@@ -69,7 +69,7 @@ class _AdsSliderItemState extends State<AdsSliderItem> {
               fit: BoxFit.cover,
               width: double.infinity,
             ) ,
-          ),):Container(),
+          ),):Container(),*/
         ],),
       ),
         Container(

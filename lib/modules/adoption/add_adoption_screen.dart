@@ -59,91 +59,46 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
       tag: "AdoptionScreen",
       body: Column(
         children: [
-          ActionBarWidget(tr("adoption"), context),
+          ActionBarWidget("", context,backgroundColor: C.ADAPTION_COLOR,),
           Expanded(
               child: Container(
-                color: C.BASE_BLUE_WHITE,
+                  color: C.ADAPTION_COLOR,
                   child: Stack(
-                    alignment: AlignmentDirectional.bottomCenter,
+
+                    alignment: AlignmentDirectional.topCenter,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
-
-                        children: [
-                          TransitionImage(
-                            Res.ANIMALS_BG,
-                            fit: BoxFit.fitWidth,
-                            width: MediaQuery.of(context).size.width-D.default_50,
-                            height: D.default_90,
-                          )              ],),
-                      _greenCOntainer(), _whiteContainer()],
+                      _whiteContainer(),
+                      Positioned(child:
+                      Container(
+                        width: D.default_130,
+                        height: D.default_130,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(D.default_200)),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  offset: Offset(1, 1),
+                                  blurRadius: 1,
+                                  spreadRadius: 0.5)
+                            ]),
+                        child: InkWell(
+                            onTap: () {
+                              _imgFromGallery();
+                            },
+                            child: _cLassImage!=null?TransitionImage(Res.DEFAULT_ADD_IMAGE,
+                                fit: BoxFit.cover,
+                                file:_cLassImage,
+                                radius: D.default_200,
+                                width: D.default_130,
+                                height: D.default_130,
+                                padding: EdgeInsets.all(D.default_10),
+                                placeHolderImage: Res.DEFAULT_IMAGE,
+                                strokeColor: imageValid?Colors.white:Colors.red,
+                                strokeWidth: D.default_2):Center(child: Icon(Icons.camera_alt_outlined,size: D.default_50,color: C.ADAPTION_COLOR,),)),),top:D.default_100),
+                      Positioned(child: Text(tr("add_adoption_title"),style: S.h2(color: Colors.white),),top: D.default_30,)
+                    ],
                   )))
-        ],
-      ),
-    );
-  }
-  Widget _greenCOntainer() {
-    return Container(
-      margin: EdgeInsets.only(top: D.default_90),
-      height: double.infinity,
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(D.default_80),
-            topRight: Radius.circular(D.default_80)),
-        color: C.BASE_BLUE,
-      ),
-      child: Column(
-        children: [
-          InkWell(onTap: () async {
-            if(_cLassImage!=null){
-              if (_registerFormGlobalKey.currentState!.validate()) {
-                _registerFormGlobalKey.currentState!.save();
-                MultipartFile mFile = await MultipartFile.fromFile(
-                  _cLassImage!.path, filename:  _cLassImage!.path.split('/').last,
-                  contentType: MediaType("image",  _cLassImage!.path.split('/').last.split(".").last),);
-                FormData formData =  FormData.fromMap({
-                  "category_id":adoptionProviderModel!.categoriesList[adoptionProviderModel!.selectedCategoryIndex].id,
-                  "age":_ageController.text,
-                  "type":_typeController.text,
-                  "gender":_genderController.text,
-                  "vaccination":_vaccitionController.text,
-                  "city":_cityController.text,
-                  "reason_to_give_up":_reasonController.text,
-                  "health_status":_statusController.text,
-                  "conditions":_conditionsController.text,
-                  "photo": mFile,
-                });
-                adoptionProviderModel!.setAnimal(context,formData,adoptionProviderModel!.categoriesList[adoptionProviderModel!.selectedCategoryIndex].id!);
-              }
-            }else{
-              setState(() {
-                imageValid=false;
-              });
-            }
-
-          },child: Container(
-              width: D.default_200,
-              margin: EdgeInsets.all(D.default_20),
-              padding: EdgeInsets.all(D.default_10),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(D.default_15),
-                  color: Colors.white,
-                  boxShadow: [
-                    BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        offset: Offset(2, 2),
-                        blurRadius: 4,
-                        spreadRadius: 2)
-                  ]),
-              child: Center(
-                child: Text(
-                  tr("add_adoption"),
-                  style: S.h3(color: C.BASE_BLUE),
-                  textAlign: TextAlign.center,
-                ),
-              )),),
         ],
       ),
     );
@@ -168,17 +123,21 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
                 blurRadius: 1,
                 spreadRadius: 0.5)
           ]),
-      child: _dataForm(),
+      child: Column(children: [
+        Expanded(child: _dataForm()),
+        _addBtn()
+      ],),
     );
   }
   Widget _dataForm(){
     return SingleChildScrollView(child: Form(
       key: _registerFormGlobalKey,
-      child: Column(
+      child: Container(
+        margin: EdgeInsets.only(left: D.default_20,right: D.default_20,top: D.default_50,bottom: D.default_10),
+        child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          _image(),
           _age(),
           _gender(),
           _type(),
@@ -186,9 +145,10 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
           _city(),
           _reason(),
           _status(),
-          _conditions()
+          _conditions(),
+
         ],
-      ),
+      ),),
     ),);
   }
   Widget _age() {
@@ -205,21 +165,21 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
           },
           decoration: InputDecoration(
             hintText: tr("age"),
-            hintStyle: S.h2(color: Colors.grey),
+            hintStyle: S.h4(color: Colors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: C.BASE_BLUE),
+              borderSide: BorderSide(color: C.ADAPTION_COLOR),
             ),
             border: UnderlineInputBorder(
-                borderSide: BorderSide(color: C.BASE_BLUE)),
+                borderSide: BorderSide(color: C.ADAPTION_COLOR)),
             errorStyle: S.h4(color: Colors.red),
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           ),
           keyboardType: TextInputType.text,
           obscureText: false,
-          cursorColor: C.BASE_BLUE,
+          cursorColor: C.ADAPTION_COLOR,
           autofocus: false,
         ));
   }
@@ -237,21 +197,21 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
           },
           decoration: InputDecoration(
             hintText: tr("gendar"),
-            hintStyle: S.h2(color: Colors.grey),
+            hintStyle: S.h4(color: Colors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: C.BASE_BLUE),
+              borderSide: BorderSide(color: C.ADAPTION_COLOR),
             ),
             border: UnderlineInputBorder(
-                borderSide: BorderSide(color: C.BASE_BLUE)),
+                borderSide: BorderSide(color: C.ADAPTION_COLOR)),
             errorStyle: S.h4(color: Colors.red),
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           ),
           keyboardType: TextInputType.text,
           obscureText: false,
-          cursorColor: C.BASE_BLUE,
+          cursorColor: C.ADAPTION_COLOR,
           autofocus: false,
         ));
   }
@@ -269,21 +229,21 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
           },
           decoration: InputDecoration(
             hintText: tr("type"),
-            hintStyle: S.h2(color: Colors.grey),
+            hintStyle: S.h4(color: Colors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: C.BASE_BLUE),
+              borderSide: BorderSide(color: C.ADAPTION_COLOR),
             ),
             border: UnderlineInputBorder(
-                borderSide: BorderSide(color: C.BASE_BLUE)),
+                borderSide: BorderSide(color: C.ADAPTION_COLOR)),
             errorStyle: S.h4(color: Colors.red),
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           ),
           keyboardType: TextInputType.text,
           obscureText: false,
-          cursorColor: C.BASE_BLUE,
+          cursorColor: C.ADAPTION_COLOR,
           autofocus: false,
         ));
   }
@@ -301,21 +261,21 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
           },
           decoration: InputDecoration(
             hintText: tr("vaccation"),
-            hintStyle: S.h2(color: Colors.grey),
+            hintStyle: S.h4(color: Colors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: C.BASE_BLUE),
+              borderSide: BorderSide(color: C.ADAPTION_COLOR),
             ),
             border: UnderlineInputBorder(
-                borderSide: BorderSide(color: C.BASE_BLUE)),
+                borderSide: BorderSide(color: C.ADAPTION_COLOR)),
             errorStyle: S.h4(color: Colors.red),
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           ),
           keyboardType: TextInputType.text,
           obscureText: false,
-          cursorColor: C.BASE_BLUE,
+          cursorColor: C.ADAPTION_COLOR,
           autofocus: false,
         ));
   }
@@ -333,21 +293,21 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
           },
           decoration: InputDecoration(
             hintText: tr("city"),
-            hintStyle: S.h2(color: Colors.grey),
+            hintStyle: S.h4(color: Colors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: C.BASE_BLUE),
+              borderSide: BorderSide(color: C.ADAPTION_COLOR),
             ),
             border: UnderlineInputBorder(
-                borderSide: BorderSide(color: C.BASE_BLUE)),
+                borderSide: BorderSide(color: C.ADAPTION_COLOR)),
             errorStyle: S.h4(color: Colors.red),
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           ),
           keyboardType: TextInputType.text,
           obscureText: false,
-          cursorColor: C.BASE_BLUE,
+          cursorColor: C.ADAPTION_COLOR,
           autofocus: false,
         ));
   }
@@ -365,21 +325,21 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
           },
           decoration: InputDecoration(
             hintText: tr("reason"),
-            hintStyle: S.h2(color: Colors.grey),
+            hintStyle: S.h4(color: Colors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: C.BASE_BLUE),
+              borderSide: BorderSide(color: C.ADAPTION_COLOR),
             ),
             border: UnderlineInputBorder(
-                borderSide: BorderSide(color: C.BASE_BLUE)),
+                borderSide: BorderSide(color: C.ADAPTION_COLOR)),
             errorStyle: S.h4(color: Colors.red),
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           ),
           keyboardType: TextInputType.text,
           obscureText: false,
-          cursorColor: C.BASE_BLUE,
+          cursorColor: C.ADAPTION_COLOR,
           autofocus: false,
         ));
   }
@@ -397,21 +357,21 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
           },
           decoration: InputDecoration(
             hintText: tr("status"),
-            hintStyle: S.h2(color: Colors.grey),
+            hintStyle: S.h4(color: Colors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: C.BASE_BLUE),
+              borderSide: BorderSide(color: C.ADAPTION_COLOR),
             ),
             border: UnderlineInputBorder(
-                borderSide: BorderSide(color: C.BASE_BLUE)),
+                borderSide: BorderSide(color: C.ADAPTION_COLOR)),
             errorStyle: S.h4(color: Colors.red),
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           ),
           keyboardType: TextInputType.text,
           obscureText: false,
-          cursorColor: C.BASE_BLUE,
+          cursorColor: C.ADAPTION_COLOR,
           autofocus: false,
         ));
   }
@@ -429,42 +389,23 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
           },
           decoration: InputDecoration(
             hintText: tr("condition"),
-            hintStyle: S.h2(color: Colors.grey),
+            hintStyle: S.h4(color: Colors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: C.BASE_BLUE),
+              borderSide: BorderSide(color: C.ADAPTION_COLOR),
             ),
             border: UnderlineInputBorder(
-                borderSide: BorderSide(color: C.BASE_BLUE)),
+                borderSide: BorderSide(color: C.ADAPTION_COLOR)),
             errorStyle: S.h4(color: Colors.red),
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           ),
           keyboardType: TextInputType.text,
           obscureText: false,
-          cursorColor: C.BASE_BLUE,
+          cursorColor: C.ADAPTION_COLOR,
           autofocus: false,
         ));
-  }
-  Widget _image(){
-    return Center(child: Container(
-        padding: EdgeInsets.only(
-            left: D.default_10, right: D.default_10,top:D.default_5,bottom:D.default_10),
-        child: InkWell(
-            onTap: () {
-              _imgFromGallery();
-            },
-            child: TransitionImage(Res.DEFAULT_ADD_IMAGE,
-                fit: BoxFit.cover,
-                file:_cLassImage,
-                radius: D.default_10,
-                width: D.default_100,
-                height: D.default_100,
-                padding: EdgeInsets.all(D.default_10),
-                placeHolderImage: Res.DEFAULT_ADD_IMAGE,
-                strokeColor: imageValid?C.BASE_BLUE:Colors.red,
-                strokeWidth: D.default_2))),);
   }
 
   _imgFromGallery() async {
@@ -486,6 +427,55 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
     _cLassImage!.length().then((value) => print("image size ${value}"));
   }
 
+Widget _addBtn(){
+    return InkWell(onTap: () async {
+      if(_cLassImage!=null){
+        if (_registerFormGlobalKey.currentState!.validate()) {
+          _registerFormGlobalKey.currentState!.save();
+          MultipartFile mFile = await MultipartFile.fromFile(
+            _cLassImage!.path, filename:  _cLassImage!.path.split('/').last,
+            contentType: MediaType("image",  _cLassImage!.path.split('/').last.split(".").last),);
+          FormData formData =  FormData.fromMap({
+            "category_id":adoptionProviderModel!.categoriesList[adoptionProviderModel!.selectedCategoryIndex].id,
+            "age":_ageController.text,
+            "type":_typeController.text,
+            "gender":_genderController.text,
+            "vaccination":_vaccitionController.text,
+            "city":_cityController.text,
+            "reason_to_give_up":_reasonController.text,
+            "health_status":_statusController.text,
+            "conditions":_conditionsController.text,
+            "photo": mFile,
+          });
+          adoptionProviderModel!.setAnimal(context,formData,adoptionProviderModel!.categoriesList[adoptionProviderModel!.selectedCategoryIndex].id!);
+        }
+      }else{
+        setState(() {
+          imageValid=false;
+        });
+      }
 
+    },child: Container(
+        width: D.default_200,
+        margin: EdgeInsets.all(D.default_20),
+        padding: EdgeInsets.all(D.default_10),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(D.default_15),
+            color: C.ADAPTION_COLOR,
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  offset: Offset(1, 1),
+                  blurRadius: 1,
+                  spreadRadius: 1)
+            ]),
+        child: Center(
+          child: Text(
+            tr("add_adoption"),
+            style: S.h3(color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+        )),);
+}
 
 }

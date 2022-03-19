@@ -16,6 +16,7 @@ class ServiceProvidersProviderModel with ChangeNotifier {
   ///.....ui controllers.........
   bool isLoading=false;
 
+
   void setIsLoading(bool value){
     isLoading=value;
     notifyListeners();
@@ -23,6 +24,8 @@ class ServiceProvidersProviderModel with ChangeNotifier {
   Set<Marker> markers = {};
   CameraPosition? currentCameraPosition;
   Completer<GoogleMapController> mapController=Completer();
+  List<Data> currentLocationsList=[];
+  Data? currentSelectedShop;
 
   /// ..........categories...........
   ServiceProviderModel? serviceProviderModel;
@@ -72,6 +75,13 @@ class ServiceProvidersProviderModel with ChangeNotifier {
     await getServiceProvidersApi.getClosest(categoryId,lat,long);
 
     if (response.status == Apis.CODE_SUCCESS &&response.data!=null){
+      currentLocationsList.clear();
+      currentLocationsList.addAll(response.data);
+      if(currentLocationsList.isNotEmpty){
+        currentSelectedShop=currentLocationsList[0];
+      }else{
+        currentSelectedShop=null;
+      }
         setMarkers(response.data,ctx);
       setIsLoading(false);
     }else if(response.status == Apis.CODE_SUCCESS &&response.data==null){
@@ -114,12 +124,16 @@ class ServiceProvidersProviderModel with ChangeNotifier {
         for(int i=0;i<value.length;i++){
           LatLng latlng=LatLng(double.parse(value[i].latitude!), double.parse(value[i].longitude!));
           markers.add(Marker(
+            onTap: (){
+              currentSelectedShop=currentLocationsList[i];
+              notifyListeners();
+            },
             markerId: MarkerId("${value[i].id}"),
             position: latlng,
             infoWindow: InfoWindow(
               title: "${value[i].name}",
                 onTap:(){
-                  MyUtils.navigate(ctx, ServiceProviderDetailsScreen(value[i]));
+                  //MyUtils.navigate(ctx, ServiceProviderDetailsScreen(value[i]));
                 }
             ),
             icon: BitmapDescriptor.defaultMarker,

@@ -11,13 +11,15 @@ class ActionBarWidget extends StatelessWidget {
   Color textColor;
   Color backgroundColor;
   bool showSearch;
+  bool enableShadow;
   BuildContext cxt;
    ActionBarWidget(
        this.title,
        this.cxt,
        {this.textColor=Colors.white,
          this.backgroundColor=C.BASE_BLUE,
-         this.showSearch=false
+         this.showSearch=false,
+         this.enableShadow=true
        });
 
   @override
@@ -28,7 +30,7 @@ class ActionBarWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(0),
           color: backgroundColor,
           boxShadow:[BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
+              color: enableShadow?Colors.grey.withOpacity(0.5):Colors.white,
               offset:Offset(2,2),
               blurRadius:2,
               spreadRadius: 2
@@ -53,7 +55,7 @@ class ActionBarWidget extends StatelessWidget {
       padding:EdgeInsets.only(left:D.default_10,right:D.default_10),
       child:IconButton(onPressed: () {
         Navigator.of(cxt).pop();
-      }, icon: Icon(Icons.arrow_back_ios,color: Colors.white,size: D.default_25,),) ,
+      }, icon: Icon(Icons.arrow_back_ios,color: textColor,size: D.default_25,),) ,
     );
   }
   Widget _searchBtn(BuildContext context){
@@ -61,7 +63,7 @@ class ActionBarWidget extends StatelessWidget {
       padding:EdgeInsets.only(left:D.default_10,right:D.default_10),
       child:IconButton(onPressed: () {
         MyUtils.navigate(context, SearchScreen(title));
-      }, icon: Icon(Icons.search,color: Colors.white,size: D.default_25,),) ,
+      }, icon: Icon(Icons.search,color: textColor,size: D.default_25,),) ,
     );
   }
 

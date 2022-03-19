@@ -38,26 +38,37 @@ class _AnimalDetailsScreenState extends State<AnimalDetailsScreen> {
       tag: "AdoptionScreen",
       body: Column(
         children: [
-          ActionBarWidget(tr("adoption"), context),
+          ActionBarWidget("", context,backgroundColor: C.ADAPTION_COLOR,),
           Expanded(
               child: Container(
-                color: C.BASE_BLUE_WHITE,
+                color: C.ADAPTION_COLOR,
                   child: Stack(
 
-                    alignment: AlignmentDirectional.bottomCenter,
+                    alignment: AlignmentDirectional.topCenter,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.start,
+                     _whiteContainer(),
+                      Positioned(child:
+                      Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(D.default_200)),
+                            color: Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  offset: Offset(1, 1),
+                                  blurRadius: 1,
+                                  spreadRadius: 0.5)
+                            ]),
+                        child: TransitionImage(
+                        adoptionProviderModel!.animalPagerListModel!.data![widget.index].photo!,
+                        radius: D.default_200,
+                        fit: BoxFit.cover,
+                        width: D.default_120,
+                        height: D.default_120,
+                        strokeColor: Colors.white,
 
-                        children: [
-                          TransitionImage(
-                            Res.ANIMALS_BG,
-                            fit: BoxFit.fitWidth,
-                            width: MediaQuery.of(context).size.width-D.default_50,
-                            height: D.default_90,
-                          )              ],),
-                      _greenCOntainer(), _whiteContainer()],
+                      ),),top:D.default_120)
+                    ],
                   )))
         ],
       ),
@@ -87,8 +98,8 @@ class _AnimalDetailsScreenState extends State<AnimalDetailsScreen> {
       width: double.infinity,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(D.default_80),
-              topRight: Radius.circular(D.default_80)),
+              topLeft: Radius.circular(D.default_30),
+              topRight: Radius.circular(D.default_30)),
           color: Colors.white,
           boxShadow: [
             BoxShadow(
@@ -103,30 +114,25 @@ class _AnimalDetailsScreenState extends State<AnimalDetailsScreen> {
   Widget detailsCrd(){
     AnimalData data=adoptionProviderModel!.animalPagerListModel!.data![widget.index];
     return SingleChildScrollView(child: Container(
-      margin: EdgeInsets.only(top:D.default_50,bottom: D.default_50,left: D.default_80,right: D.default_80),
+      margin: EdgeInsets.only(top:D.default_80,bottom: D.default_20,left: D.default_20,right: D.default_20),
       padding: EdgeInsets.all(D.default_2),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(D.default_10),
-        border: Border.all(color: Colors.grey, width: D.default_1),
-        color: Colors.white,
-      ),
+
       child: Column(
         children: [
-          TransitionImage(
-            adoptionProviderModel!.animalPagerListModel!.data![widget.index].photo!,
-            radius: D.default_10,
-            fit: BoxFit.cover,
-            width: double.infinity,
-            height: D.default_180,
-
-          ),
           _infoItem(tr("age"),data.age!),
+          Container(color: Colors.grey[400],height: D.default_1,width: double.infinity,),
           _infoItem(tr("gendar"),data.gender!),
+          Container(color: Colors.grey[400],height: D.default_1,width: double.infinity,),
           _infoItem(tr("type"),data.type!),
+          Container(color: Colors.grey[400],height: D.default_1,width: double.infinity,),
           _infoItem(tr("vaccation"),data.vaccination!),
+          Container(color: Colors.grey[400],height: D.default_1,width: double.infinity,),
           _infoItem(tr("city"),data.city!),
+          Container(color: Colors.grey[400],height: D.default_1,width: double.infinity,),
           _infoItem(tr("reason"),data.reasonToGiveUp!),
+          Container(color: Colors.grey[400],height: D.default_1,width: double.infinity,),
           _infoItem(tr("status"),data.healthStatus!),
+          Container(color: Colors.grey[400],height: D.default_1,width: double.infinity,),
           _infoItem(tr("condition"),data.conditions!),
         ],
       ),
@@ -138,8 +144,9 @@ class _AnimalDetailsScreenState extends State<AnimalDetailsScreen> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text("${title}:  ",style: S.h3(color: C.BASE_BLUE),),
-          Text("${content}",style: S.h4(color: Colors.black54),),
+          Text("${title}:  ",style: S.h2(color: Colors.black54),),
+          Text("${content}",style: S.h2(color: Colors.black54),),
         ],),);
   }
+
 }
