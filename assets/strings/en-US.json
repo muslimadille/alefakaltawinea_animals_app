@@ -73,7 +73,9 @@
   "cant_opn_url": "This site cannot be opened",
   "fav_screen_title": "Favorite",
   "FAV_EMPTY": "Your favorites list is empty",
-  "there_is_no_fav": "Looks like you haven't added anything to your favorites yet"
+  "there_is_no_fav": "Looks like you haven't added anything to your favorites yet",
+  "terms_text": "I agree to the terms and conditions and privacy policy",
+  "accept_terms_toast":"Please agree to the terms and conditions"
 
 
 }

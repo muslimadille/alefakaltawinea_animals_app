@@ -108,7 +108,8 @@ flutter:
     - assets/images/add_image.png
     - assets/images/defult_img.png
     - assets/images/logo_new_img.png
-
+    - assets/images/spalsh_bg.png
+    - assets/images/onboarding_bg.png
 
     - assets/strings/ar-EG.json
     - assets/strings/en-US.json

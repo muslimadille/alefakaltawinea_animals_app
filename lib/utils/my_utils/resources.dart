@@ -11,7 +11,6 @@ class Res{
   static String IC_NOTIFICATIONS_BLUE="assets/images/ic_notifications_blue.png";
   static String IC_NEAR_GREY="assets/images/ic_near_grey.png";
   static String IC_NEAR_BLUE="assets/images/ic_near_blue.png";
-
   static String MARKET_IMG="assets/images/market_img.png";
   static String CLINIC_IMG="assets/images/clinic_img.png";
   static String CAR_IMG="assets/images/car_img.png";
@@ -25,18 +24,8 @@ class Res{
   static String DEFAULT_ADD_IMAGE="assets/images/add_image.png";
   static String DEFAULT_IMAGE="assets/images/defult_img.png";
   static String LOGO_WITHOUT_NAME="assets/images/logo_new_img.png";
-
-
-
-
-
-
-
-
-
-
-
-
+  static String SPLASH_BG="assets/images/spalsh_bg.png";
+  static String ONBOARDING_BG="assets/images/onboarding_bg.png";
 
 
 }
