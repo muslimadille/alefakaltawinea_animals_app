@@ -9,6 +9,8 @@ import 'package:flutter/cupertino.dart';
 class CategoriesProviderModel with ChangeNotifier {
   ///.....ui controllers.........
   bool isLoading=false;
+  bool showHadeth=false;
+
   void setIsLoading(bool value){
     isLoading=value;
     notifyListeners();

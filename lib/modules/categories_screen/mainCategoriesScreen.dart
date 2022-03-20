@@ -3,9 +3,14 @@ import 'package:alefakaltawinea_animals_app/modules/ads/provider/ads_slider_prov
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/categories_screen/provider/categories_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../utils/my_utils/myColors.dart';
+import '../../utils/my_utils/myUtils.dart';
+import '../adoption/adpotion_screen.dart';
 import 'items/category_list.dart';
 
 class MainCategoriesScreen extends StatefulWidget {
@@ -38,11 +43,52 @@ class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
         showSettings: true,
         showIntro: true,
         body: categoriesProviderModel!.isLoading?LoadingProgress():
-        Column(children: [
-      Container(height: MediaQuery.of(context).size.height*0.30,child: AdsSlider(),),
-         Expanded(child:  Container(
-           color: Colors.white,
-           child: CategoryList(context,categoriesProviderModel),))
-    ],));
+        Stack(
+          fit:StackFit.expand,
+          children: [
+          Column(children: [
+            Container(height: MediaQuery.of(context).size.height*0.30,child: AdsSlider(),),
+            Expanded(child:  Container(
+              color: Colors.white,
+              child: CategoryList(context,categoriesProviderModel),))
+          ],),
+            categoriesProviderModel!.showHadeth?_adotionAlert():Container()
+        ],));
+  }
+  Widget _adotionAlert(){
+    return Container(
+      color: Colors.white.withOpacity(0.8),
+      child: Column(children: [
+        Expanded(child: Container()),
+        Container(
+          padding: EdgeInsets.all(D.default_10),
+          color: C.ADAPTION_COLOR.withOpacity(0.8),
+          height: D.default_200,
+          width: double.infinity,
+          child: Column(children: [
+            Expanded(child: Container(
+              margin: EdgeInsets.only(right: D.default_10,top:D.default_10),
+              child: Text(tr("hadeth"),style: S.h2(color: Colors.white),),),),
+            InkWell(
+              onTap: (){
+                categoriesProviderModel!.showHadeth=false;
+                categoriesProviderModel!.notifyListeners();
+                MyUtils.navigate(context, AdoptionScreen());
+              },
+              child: Container(child:
+            Row(children: [
+              Checkbox(
+                  side: BorderSide(color: Colors.white),
+                  value: false, onChanged: (value){
+                categoriesProviderModel!.showHadeth=false;
+                categoriesProviderModel!.notifyListeners();
+                MyUtils.navigate(context, AdoptionScreen());
+              }),
+              Text(tr("hadeth_check"),style: S.h3(color: Colors.white),)
+            ],),),)
+          ],),
+        )
+      ],),
+    );
   }
 }

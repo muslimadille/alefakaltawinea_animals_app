@@ -48,7 +48,8 @@ class _CategoryListState extends State<CategoryList> {
             semanticIndexOffset: 1,
           )),
       SliverToBoxAdapter(child:  InkWell(onTap: (){
-        MyUtils.navigate(context, AdoptionScreen());
+        widget.categoriesProviderModel!.showHadeth=true;
+        widget.categoriesProviderModel!.notifyListeners();
       },
       child: Container(color: Color(int.parse(adaption.color!.replaceAll("#", "0xff"))),width: MediaQuery.of(context).size.width,height: D.default_150,
         child: Row(

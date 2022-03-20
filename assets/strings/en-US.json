@@ -84,7 +84,11 @@
   "animal_name": "Alifak Name",
   "edit_adoption_title": "Adoption form (my page)",
   "delete_adoption": "Delete",
-  "edit_adoption": "Edit"
+  "edit_adoption": "Edit",
+  "hadeth": "قال رسول الله صلى الله عليه وسلم لعائشة رضي الله عنها\nيا عائشة إن الله رفيق يحب الرفق.ويعطي على الرفق مالا يعطي على العنف.ومالا يعطي على ما سواه.رواه مسلم",
+  "hadeth_check": "أتعهد مخافة الله في أي حيوان أتبناه وعدم المتاجرة به."
+
+
 
 
 

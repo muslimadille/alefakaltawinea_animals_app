@@ -13,6 +13,8 @@ class Constants extends Object{
   static String? SAVED_PASSWORD_KEY="SAVED_PASSWORD";
   static List<RegionsModel> REGIONS=[];
   static String MAPS_API_KEY="AIzaSyDuvS1cZBr4opbX8FmSRyuuKixykzVY3So";
+  static bool show_adoption_alert=false;
+
 
   ///888888888888888888888888888888888888888888888888888888
   static UtilsProviderModel? utilsProviderModel;
