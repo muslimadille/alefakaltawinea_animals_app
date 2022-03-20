@@ -17,6 +17,7 @@ import 'package:provider/provider.dart';
 
 import 'add_adoption_screen.dart';
 import 'animal_details_screen.dart';
+import 'my_adoption_screen.dart';
 
 class AdoptionScreen extends StatefulWidget {
   const AdoptionScreen({Key? key}) : super(key: key);
@@ -92,7 +93,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
     return InkWell(
       onTap: () {
         if(Constants.currentUser!=null){
-          //MyUtils.navigate(context, AddAdoptionScreen());
+          MyUtils.navigate(context, MyAdoptionScreen());
         }else{
           MyUtils.navigate(context, NoProfileScreen());
         }

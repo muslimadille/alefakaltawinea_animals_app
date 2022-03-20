@@ -83,6 +83,9 @@
  "my_adoption": "صفحتي للتبني",
  "add_adoption_title": "إضافة إستمارة تبني",
  "noti_EMPTY": "لا يوجد إشعارات متاحة",
- "animal_name": "اسم أليفك"
+ "animal_name": "اسم أليفك",
+ "edit_adoption_title": "استمارة تبني(صفحتي)",
+ "delete_adoption": "حذف",
+ "edit_adoption": "تعديل"
 
 }

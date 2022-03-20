@@ -21,6 +21,16 @@ class AdaptionApi{
       return MyResponse<AnimalPagerListModel>.init(Apis.CODE_ERROR, "", null);
     }
   }
+  Future<MyResponse<AnimalPagerListModel>> getMyAnimals() async {
+    final url = "${Apis.GET_MY_ANIMALS}";
+    final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_GET, url);
+    if (response != null && response.statusCode == 200) {
+      return MyResponse<AnimalPagerListModel>.fromJson(
+          json.decode(jsonEncode(response.data)));
+    } else {
+      return MyResponse<AnimalPagerListModel>.init(Apis.CODE_ERROR, "", null);
+    }
+  }
   Future<MyResponse<List<AdoptionCategoriesModel>>> getAdoptionCategories() async {
     final url = "${Apis.GET_ADOPTION_CATEGORIES}";
     final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_GET, url);
@@ -34,6 +44,26 @@ class AdaptionApi{
   Future<MyResponse<dynamic>> setAdoptionAnimal(FormData body) async {
     final url = "${Apis.ADD_ADOPTION_ANIMALS}";
     final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_POST, url,body: body);
+    if (response != null && response.statusCode == 200) {
+      return MyResponse<dynamic>.fromJson(
+          json.decode(jsonEncode(response.data)));
+    } else {
+      return MyResponse<dynamic>.init(Apis.CODE_ERROR, "", null);
+    }
+  }
+  Future<MyResponse<dynamic>> editAdoptionAnimal(FormData body,int id) async {
+    final url = "${Apis.EDIT_ANIMAL}$id";
+    final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_POST, url,body: body);
+    if (response != null && response.statusCode == 200) {
+      return MyResponse<dynamic>.fromJson(
+          json.decode(jsonEncode(response.data)));
+    } else {
+      return MyResponse<dynamic>.init(Apis.CODE_ERROR, "", null);
+    }
+  }
+  Future<MyResponse<dynamic>> deleteAdoptionAnimal(int id) async {
+    final url = "${Apis.DELETE_ANIMAL}$id";
+    final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_POST, url);
     if (response != null && response.statusCode == 200) {
       return MyResponse<dynamic>.fromJson(
           json.decode(jsonEncode(response.data)));

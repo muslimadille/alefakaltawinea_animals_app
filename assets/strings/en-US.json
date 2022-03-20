@@ -81,7 +81,13 @@
   "my_adoption": "My adoptions",
   "add_adoption_title": "Add adoption form",
   "noti_EMPTY": "There are notifications available",
-  "animal_name": "Alifak Name"
+  "animal_name": "Alifak Name",
+  "edit_adoption_title": "Adoption form (my page)",
+  "delete_adoption": "Delete",
+  "edit_adoption": "Edit"
+
+
+
 
 
 

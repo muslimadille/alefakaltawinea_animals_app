@@ -148,6 +148,7 @@ class AnimalData {
     thumb = json['thumb'];
     categoryId = json['category_id'];
     stop = json['stop'];
+    name=json['name'];
     user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
   int? id;
@@ -168,6 +169,7 @@ class AnimalData {
   String? categoryId;
   String? stop;
   User? user;
+  String?name;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -188,6 +190,7 @@ class AnimalData {
     map['thumb'] = thumb;
     map['category_id'] = categoryId;
     map['stop'] = stop;
+    map['name']=name;
     if (user != null) {
       map['user'] = user?.toJson();
     }

@@ -30,6 +30,13 @@ class Apis{
   static String GET_ADOPTION_CATEGORIES="${BASE_URL}/sub-categories";
   static String GET_ADOPTION_ANIMALS="${BASE_URL}/animals";//?category_id=1
   static String ADD_ADOPTION_ANIMALS="${BASE_URL}/add-animal";
+  static String GET_MY_ANIMALS="${BASE_URL}/my-animals";
+  static String EDIT_ANIMAL="${BASE_URL}/update-animal/";
+  static String DELETE_ANIMAL="${BASE_URL}/delete-animal/";
+
+
+
+
   ///....................fav.....................
   static String ADD_FAV="${BASE_URL}/add-fav";
   static String GET_FAV="${BASE_URL}/favs";

@@ -1,11 +1,13 @@
 
 import 'dart:convert';
 
+import 'package:alefakaltawinea_animals_app/modules/adoption/data/animal_pager_list_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/adoption/provider/adoption_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/apis.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/input%20_validation_mixing.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
@@ -22,7 +24,8 @@ import 'package:provider/provider.dart';
 
 
 class AddAdoptionScreen extends StatefulWidget {
-   AddAdoptionScreen();
+  AnimalData?data;
+   AddAdoptionScreen({this.data});
 
   @override
   _AddAdoptionScreenState createState() => _AddAdoptionScreenState();
@@ -48,6 +51,18 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
   void initState() {
     super.initState();
     adoptionProviderModel=Provider.of<AdoptionProviderModel>(context,listen: false);
+    if(widget.data!=null){
+       _nameController.text = widget.data!.name??"";
+       _phoneController.text = Constants.currentUser!.phone??"";
+       _ageController.text = widget.data!.age??"";
+       _genderController.text =widget.data!.gender??"" ;
+       _typeController.text =widget.data!.type??"" ;
+       _vaccitionController.text =widget.data!.vaccination??"";
+       _cityController.text =widget.data!.city??"" ;
+       _reasonController.text = widget.data!.reasonToGiveUp??"";
+       _statusController.text = widget.data!.healthStatus??"";
+       _conditionsController.text = widget.data!.conditions??"";
+    }
 
   }
 
@@ -87,7 +102,8 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
                             onTap: () {
                               _imgFromGallery();
                             },
-                            child: _cLassImage!=null?TransitionImage(Res.DEFAULT_ADD_IMAGE,
+                            child: _cLassImage!=null?TransitionImage(
+                                widget.data!=null?widget.data!.photo!:Res.DEFAULT_ADD_IMAGE,
                                 fit: BoxFit.cover,
                                 file:_cLassImage,
                                 radius: D.default_200,
@@ -96,8 +112,17 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
                                 padding: EdgeInsets.all(D.default_10),
                                 placeHolderImage: Res.DEFAULT_IMAGE,
                                 strokeColor: imageValid?Colors.white:Colors.red,
+                                strokeWidth: D.default_2):widget.data!=null?TransitionImage(
+                                widget.data!.photo!,
+                                fit: BoxFit.cover,
+                                radius: D.default_200,
+                                width: D.default_130,
+                                height: D.default_130,
+                                padding: EdgeInsets.all(D.default_10),
+                                placeHolderImage: Res.DEFAULT_IMAGE,
+                                strokeColor: imageValid?Colors.white:Colors.red,
                                 strokeWidth: D.default_2):Center(child: Icon(Icons.camera_alt_outlined,size: D.default_50,color: C.ADAPTION_COLOR,),)),),top:D.default_100),
-                      Positioned(child: Text(tr("add_adoption_title"),style: S.h2(color: Colors.white),),top: D.default_30,)
+                      Positioned(child: Text(widget.data!=null?tr("edit_adoption_title"):tr("add_adoption_title"),style: S.h2(color: Colors.white),),top: D.default_30,)
                     ],
                   )))
         ],
@@ -126,7 +151,13 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
           ]),
       child: Column(children: [
         Expanded(child: _dataForm()),
-        _addBtn()
+        widget.data!=null?
+            Container(child:Row(children: [
+              Expanded(child: _editBtn()),
+              SizedBox(width:D.default_20),
+              Expanded(child: _deleteBtn()),
+            ],))
+            :_addBtn()
       ],),
     );
   }
@@ -167,8 +198,8 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
             }
           },
           decoration: InputDecoration(
-            hintText: tr("animal_name"),
-            hintStyle: S.h4(color: Colors.grey),
+            labelText: tr("animal_name"),
+            labelStyle: S.h4(color: Colors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
@@ -199,8 +230,8 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
             }
           },
           decoration: InputDecoration(
-            hintText: tr("phone"),
-            hintStyle: S.h4(color: Colors.grey),
+            labelText: tr("phone"),
+            labelStyle: S.h4(color: Colors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
@@ -232,8 +263,8 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
             }
           },
           decoration: InputDecoration(
-            hintText: tr("age"),
-            hintStyle: S.h4(color: Colors.grey),
+            labelText: tr("age"),
+            labelStyle: S.h4(color: Colors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
@@ -264,8 +295,8 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
             }
           },
           decoration: InputDecoration(
-            hintText: tr("gendar"),
-            hintStyle: S.h4(color: Colors.grey),
+            labelText: tr("gendar"),
+            labelStyle: S.h4(color: Colors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
@@ -296,8 +327,8 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
             }
           },
           decoration: InputDecoration(
-            hintText: tr("type"),
-            hintStyle: S.h4(color: Colors.grey),
+            labelText: tr("type"),
+            labelStyle: S.h4(color: Colors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
@@ -328,8 +359,8 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
             }
           },
           decoration: InputDecoration(
-            hintText: tr("vaccation"),
-            hintStyle: S.h4(color: Colors.grey),
+            labelText: tr("vaccation"),
+            labelStyle: S.h4(color: Colors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
@@ -360,8 +391,8 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
             }
           },
           decoration: InputDecoration(
-            hintText: tr("city"),
-            hintStyle: S.h4(color: Colors.grey),
+            labelText: tr("city"),
+            labelStyle: S.h4(color: Colors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
@@ -392,8 +423,8 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
             }
           },
           decoration: InputDecoration(
-            hintText: tr("reason"),
-            hintStyle: S.h4(color: Colors.grey),
+            labelText: tr("reason"),
+            labelStyle: S.h4(color: Colors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
@@ -424,8 +455,8 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
             }
           },
           decoration: InputDecoration(
-            hintText: tr("status"),
-            hintStyle: S.h4(color: Colors.grey),
+            labelText: tr("status"),
+            labelStyle: S.h4(color: Colors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
@@ -456,8 +487,8 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
             }
           },
           decoration: InputDecoration(
-            hintText: tr("condition"),
-            hintStyle: S.h4(color: Colors.grey),
+            labelText: tr("condition"),
+            labelStyle: S.h4(color: Colors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ),
@@ -547,5 +578,82 @@ Widget _addBtn(){
           ),
         )),);
 }
+  Widget _editBtn(){
+    return InkWell(onTap: () async {
+      if(_cLassImage!=null){
+        if (_registerFormGlobalKey.currentState!.validate()) {
+          _registerFormGlobalKey.currentState!.save();
+          MultipartFile mFile = await MultipartFile.fromFile(
+            _cLassImage!.path, filename:  _cLassImage!.path.split('/').last,
+            contentType: MediaType("image",  _cLassImage!.path.split('/').last.split(".").last),);
+          FormData formData =  FormData.fromMap({
+            "name":_nameController.text,
+            "phone":_phoneController.text,
+            "category_id":adoptionProviderModel!.categoriesList[adoptionProviderModel!.selectedCategoryIndex].id,
+            "age":_ageController.text,
+            "type":_typeController.text,
+            "gender":_genderController.text,
+            "vaccination":_vaccitionController.text,
+            "city":_cityController.text,
+            "reason_to_give_up":_reasonController.text,
+            "health_status":_statusController.text,
+            "conditions":_conditionsController.text,
+            "photo": mFile,
+          });
+          adoptionProviderModel!.editAnimal(context,formData,widget.data!.id!);
+        }
+      }else{
+        setState(() {
+          imageValid=false;
+        });
+      }
+
+    },child: Container(
+        width: D.default_200,
+        margin: EdgeInsets.all(D.default_20),
+        padding: EdgeInsets.all(D.default_10),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(D.default_15),
+            color: C.ADAPTION_COLOR,
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  offset: Offset(1, 1),
+                  blurRadius: 1,
+                  spreadRadius: 1)
+            ]),
+        child: Center(
+          child: Text(
+            tr("edit_adoption"),
+            style: S.h3(color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+        )),);
+  }
+  Widget _deleteBtn(){
+    return InkWell(onTap: () async {
+      adoptionProviderModel!.deleteAnimal(context,widget.data!.id!);
+    },child: Container(
+        width: D.default_200,
+        margin: EdgeInsets.all(D.default_20),
+        padding: EdgeInsets.all(D.default_10),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(D.default_15),
+            color: C.ADAPTION_COLOR,
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  offset: Offset(1, 1),
+                  blurRadius: 1,
+                  spreadRadius: 1)
+            ]),
+        child: Center(
+          child: Text(
+            tr("delete_adoption"),
+            style: S.h3(color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+        )),);
+  }
 
 }

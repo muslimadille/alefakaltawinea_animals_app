@@ -1,3 +1,4 @@
+import 'package:alefakaltawinea_animals_app/modules/adoption/data/animal_pager_list_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/adoption/provider/adoption_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/profile/no_profile_screen.dart';
@@ -51,9 +52,10 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
                 child: Column(
                   children: [
                     _categoryList(),
-                    Row(children: [
-                      Expanded(child: _addBtn(),),
-                      Expanded(child: _myOffersBtn(),),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                      _myOffersBtn()
                     ],),
                     adoptionProviderModel!.isLoading?Expanded(child: LoadingProgress()): Expanded(flex: 1,child: _animalsList())
                   ],
@@ -89,29 +91,20 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
     );
   }
   Widget _myOffersBtn() {
-    return InkWell(
-      onTap: () {
-        if(Constants.currentUser!=null){
-          //MyUtils.navigate(context, AddMyAdoptionScreen());
-        }else{
-          MyUtils.navigate(context, NoProfileScreen());
-        }
-      },
-      child: Container(
-          margin: EdgeInsets.only(left:D.default_10,right:D.default_10),
-          padding: EdgeInsets.only(top:D.default_10,bottom:D.default_10,left:D.default_20,right:D.default_20),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(D.default_15),
-            color: C.ADAPTION_COLOR,
+    return Container(
+        margin: EdgeInsets.only(left:D.default_10,right:D.default_10),
+        padding: EdgeInsets.only(top:D.default_10,bottom:D.default_10,left:D.default_20,right:D.default_20),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(D.default_15),
+          color: C.ADAPTION_COLOR,
+        ),
+        child: Center(
+          child: Text(
+            tr("my_adoption"),
+            style: S.h4(color: Colors.white),
+            textAlign: TextAlign.center,
           ),
-          child: Center(
-            child: Text(
-              tr("my_adoption"),
-              style: S.h4(color: Colors.white),
-              textAlign: TextAlign.center,
-            ),
-          )),
-    );
+        ));
   }
 
 
@@ -131,7 +124,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
                 child: InkWell(
                   onTap: (){
                     adoptionProviderModel!.setSelectedCategoryIndex(index);
-                    adoptionProviderModel!.getAnimals(adoptionProviderModel!.categoriesList[index].id!);
+                    adoptionProviderModel!.getMyAnimals()();
                   },
                   child: TransitionImage(
                     adoptionProviderModel!.categoriesList[index].photo!,
@@ -148,7 +141,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
   }
 
   Widget _animalsList() {
-    return adoptionProviderModel!.animalPagerListModel!=null&&adoptionProviderModel!.animalPagerListModel!.data!.isNotEmpty?Container(
+    return adoptionProviderModel!.myAnimalsPagerListModel!=null&&adoptionProviderModel!.myAnimalsPagerListModel!.data!.isNotEmpty?Container(
       padding: EdgeInsets.all(D.default_10),
       child: CustomScrollView(slivers: [
         SliverGrid(
@@ -162,7 +155,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
                   (BuildContext context, int index) {
                 return _animalsListItem(index);
               },
-              childCount: adoptionProviderModel!.animalPagerListModel!.data!.length,
+              childCount: adoptionProviderModel!.myAnimalsPagerListModel!.data!.length,
               semanticIndexOffset: 1,
             )),
       ]),):_noData();
@@ -171,19 +164,19 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
     return Center(child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        TransitionImage(Res.OFFER_ICON,
-          width: D.default_80,
-          height: D.default_80,
-        ),
+        Text("صفحتك للتبني فارغة",style: S.h1(color: C.ADAPTION_COLOR),),
+        Text("يبدو أنك لم تقم بإضافة أي اليف في صفحتك حتي الأن",style: S.h3(color: Colors.grey),),
         SizedBox(height: D.default_20,),
-        Text("لا توجد حيوانات متاحة حاليا في هذا القسم",style: S.h3(color: C.BASE_BLUE),)
+        Container(
+          margin: EdgeInsets.all(D.default_30),
+          child: _addBtn(),)
       ],),);
   }
   Widget _animalsListItem(int index) {
     return InkWell(
         onTap: () {
           if(Constants.currentUser!=null){
-            MyUtils.navigate(context, AnimalDetailsScreen(index));
+            MyUtils.navigate(context, AddAdoptionScreen(data:adoptionProviderModel!.myAnimalsPagerListModel!.data![index]));
           }else{
             MyUtils.navigate(context, NoProfileScreen());
           }
@@ -198,7 +191,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
             children: [
               Expanded(
                   child: Center(child: TransitionImage(
-                    adoptionProviderModel!.animalPagerListModel!.data![index].photo!,
+                    adoptionProviderModel!.myAnimalsPagerListModel!.data![index].photo!,
                     radius: D.default_300,
                     fit: BoxFit.cover,
                     width: D.default_90,
@@ -207,7 +200,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
               Container(
                 child: Center(
                   child: Text(
-                    adoptionProviderModel!.animalPagerListModel!.data![index].type!,
+                    adoptionProviderModel!.myAnimalsPagerListModel!.data![index].type!,
                     style: S.h3(color: C.BASE_BLUE),
                   ),
                 ),

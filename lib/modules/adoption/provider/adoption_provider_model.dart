@@ -23,6 +23,8 @@ class AdoptionProviderModel with ChangeNotifier{
   /// ..........categories...........
   List<AdoptionCategoriesModel> categoriesList=[];
   AnimalPagerListModel? animalPagerListModel;
+  AnimalPagerListModel? myAnimalsPagerListModel;
+
   AdaptionApi adoptionApi=AdaptionApi();
   getCategoriesList() async {
     setIsLoading(true);
@@ -55,6 +57,21 @@ class AdoptionProviderModel with ChangeNotifier{
     notifyListeners();
 
   }
+  getMyAnimals() async {
+    setIsLoading(true);
+    MyResponse<AnimalPagerListModel> response =
+    await adoptionApi.getMyAnimals();
+    if (response.status == Apis.CODE_SUCCESS &&response.data!=null){
+      myAnimalsPagerListModel=response.data;
+      setIsLoading(false);
+    }else if(response.status == Apis.CODE_SUCCESS &&response.data==null){
+      setIsLoading(false);
+    }else{
+      setIsLoading(false);
+    }
+    notifyListeners();
+
+  }
   setAnimal(BuildContext ctx,FormData body,int categoryId) async {
     setIsLoading(true);
     MyResponse<dynamic> response =
@@ -62,6 +79,41 @@ class AdoptionProviderModel with ChangeNotifier{
     if (response.status == Apis.CODE_SUCCESS){
       setIsLoading(false);
       getAnimals(categoryId);
+      Navigator.of(ctx).pop();
+      await Fluttertoast.showToast(msg: "${response.msg}");
+    }else if(response.status == Apis.CODE_SUCCESS &&response.data==null){
+      setIsLoading(false);
+    }else{
+      setIsLoading(false);
+    }
+    notifyListeners();
+
+  }
+  editAnimal(BuildContext ctx,FormData body,int animalId) async {
+    setIsLoading(true);
+    MyResponse<dynamic> response =
+    await adoptionApi.editAdoptionAnimal(body,animalId);
+    if (response.status == Apis.CODE_SUCCESS){
+      getMyAnimals();
+      setIsLoading(false);
+      Navigator.of(ctx).pop();
+      await Fluttertoast.showToast(msg: "${response.msg}");
+    }else if(response.status == Apis.CODE_SUCCESS &&response.data==null){
+      setIsLoading(false);
+    }else{
+      setIsLoading(false);
+    }
+    notifyListeners();
+
+  }
+
+  deleteAnimal(BuildContext ctx,int animalId) async {
+    setIsLoading(true);
+    MyResponse<dynamic> response =
+    await adoptionApi.deleteAdoptionAnimal(animalId);
+    if (response.status == Apis.CODE_SUCCESS){
+      getMyAnimals();
+      setIsLoading(false);
       Navigator.of(ctx).pop();
       await Fluttertoast.showToast(msg: "${response.msg}");
     }else if(response.status == Apis.CODE_SUCCESS &&response.data==null){
