@@ -19,6 +19,7 @@ import 'package:flutter_intro/flutter_intro.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
+import '../notifications/notifications_screen.dart';
 import 'provider/intro_provider_model.dart';
 
 
@@ -141,16 +142,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         children:[
           InkWell(onTap: (){
             bottomBarProviderModel!.setSelectedScreen(3);
-            Fluttertoast.showToast(
-                msg: "قريبا",
-                toastLength: Toast.LENGTH_LONG,
-                gravity: ToastGravity.CENTER,
-                timeInSecForIosWeb: 1,
-                backgroundColor: Colors.red,
-                textColor: Colors.white,
-                fontSize: 16.0
-            );            // bottomBarProviderModel!.setSelectedScreen(3);
-
+            MyUtils.navigate(context, NotificationsScreen());
           }
             ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==3?Res.IC_NOTIFICATIONS_BLUE:Res.IC_NOTIFICATIONS_GREY,width: D.default_30,height: D.default_30,),),
           Center(child:Text(tr("notifications"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==3?C.BASE_BLUE:Colors.grey),),)

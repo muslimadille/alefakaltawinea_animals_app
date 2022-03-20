@@ -81,6 +81,8 @@
  "password": "كلمة المرور",
  "new_regist": "جديد؟ سجل الآن",
  "my_adoption": "صفحتي للتبني",
- "add_adoption_title": "إضافة إستمارة تبني"
+ "add_adoption_title": "إضافة إستمارة تبني",
+ "noti_EMPTY": "لا يوجد إشعارات متاحة",
+ "animal_name": "اسم أليفك"
 
 }

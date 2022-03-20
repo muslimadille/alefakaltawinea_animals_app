@@ -30,7 +30,8 @@ class AddAdoptionScreen extends StatefulWidget {
 
 class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidationMixin{
   AdoptionProviderModel? adoptionProviderModel;
-
+  TextEditingController _nameController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController();
   TextEditingController _ageController = TextEditingController();
   TextEditingController _genderController = TextEditingController();
   TextEditingController _typeController = TextEditingController();
@@ -138,6 +139,8 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          _name(),
+          _phone(),
           _age(),
           _gender(),
           _type(),
@@ -151,6 +154,71 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
       ),),
     ),);
   }
+  Widget _name() {
+    return Container(
+        width: double.infinity,
+        child: TextFormField(
+          controller: _nameController,
+          validator: (name) {
+            if (isFieldNotEmpty(name!)) {
+              return null;
+            } else {
+              return tr("");
+            }
+          },
+          decoration: InputDecoration(
+            hintText: tr("animal_name"),
+            hintStyle: S.h4(color: Colors.grey),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: C.ADAPTION_COLOR),
+            ),
+            border: UnderlineInputBorder(
+                borderSide: BorderSide(color: C.ADAPTION_COLOR)),
+            errorStyle: S.h4(color: Colors.red),
+            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          ),
+          keyboardType: TextInputType.text,
+          obscureText: false,
+          cursorColor: C.ADAPTION_COLOR,
+          autofocus: false,
+        ));
+  }
+  Widget _phone() {
+    return Container(
+        width: double.infinity,
+        child: TextFormField(
+          controller: _phoneController,
+          validator: (name) {
+            if (isFieldNotEmpty(name!)) {
+              return null;
+            } else {
+              return tr("");
+            }
+          },
+          decoration: InputDecoration(
+            hintText: tr("phone"),
+            hintStyle: S.h4(color: Colors.grey),
+            enabledBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey),
+            ),
+            focusedBorder: UnderlineInputBorder(
+              borderSide: BorderSide(color: C.ADAPTION_COLOR),
+            ),
+            border: UnderlineInputBorder(
+                borderSide: BorderSide(color: C.ADAPTION_COLOR)),
+            errorStyle: S.h4(color: Colors.red),
+            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+          ),
+          keyboardType: TextInputType.phone,
+          obscureText: false,
+          cursorColor: C.ADAPTION_COLOR,
+          autofocus: false,
+        ));
+  }
+
   Widget _age() {
     return Container(
         width: double.infinity,
@@ -436,6 +504,8 @@ Widget _addBtn(){
             _cLassImage!.path, filename:  _cLassImage!.path.split('/').last,
             contentType: MediaType("image",  _cLassImage!.path.split('/').last.split(".").last),);
           FormData formData =  FormData.fromMap({
+            "name":_nameController.text,
+            "phone":_phoneController.text,
             "category_id":adoptionProviderModel!.categoriesList[adoptionProviderModel!.selectedCategoryIndex].id,
             "age":_ageController.text,
             "type":_typeController.text,

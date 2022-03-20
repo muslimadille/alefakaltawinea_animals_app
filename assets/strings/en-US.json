@@ -79,7 +79,11 @@
   "password": "Password",
   "new_regist": "New? Register now",
   "my_adoption": "My adoptions",
-  "add_adoption_title": "Add adoption form"
+  "add_adoption_title": "Add adoption form",
+  "noti_EMPTY": "There are notifications available",
+  "animal_name": "Alifak Name"
+
+
 
 
 
