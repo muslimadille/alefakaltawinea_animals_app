@@ -53,7 +53,8 @@ class _ServiceProviderListScreenState extends State<ServiceProviderListScreen>  
       showBottomBar: true,
       showSettings: false,
         body: Column(children: [
-          ActionBarWidget(widget.title, context,showSearch: serviceProvidersProviderModel!.serviceProviderModel!=null?serviceProvidersProviderModel!.serviceProviderModel!.data!.isNotEmpty:false,),
+          ActionBarWidget(widget.title, context,showSearch: serviceProvidersProviderModel!.serviceProviderModel!=null?serviceProvidersProviderModel!.serviceProviderModel!.data!.isNotEmpty:false,
+          backgroundColor: Color(int.parse(widget.selectedCategory!.color!.replaceAll("#", "0xff"))),),
       Expanded(child:serviceProvidersProviderModel!.isLoading?LoadingProgress():SmartRefresher(
         key: _refresherKey,
         controller: _refreshController,
@@ -83,16 +84,11 @@ class _ServiceProviderListScreenState extends State<ServiceProviderListScreen>  
         itemCount: serviceProvidersProviderModel!.serviceProviderModel!.data!.length,
         padding: EdgeInsets.all(D.default_10),
         itemBuilder: (context,index){
-          return  ServiceProviderListItem(index,serviceProvidersProviderModel);
+          return  ServiceProviderListItem(index,serviceProvidersProviderModel,color:Color(int.parse(widget.selectedCategory!.color!.replaceAll("#", "0xff"))) ,);
         }):Center(child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        TransitionImage(Res.OFFER_ICON,
-          width: D.default_80,
-          height: D.default_80,
-        ),
-        SizedBox(height: D.default_20,),
-        Text("لا توجد عروض متاحة حاليا في هذا القسم",style: S.h3(color: C.BASE_BLUE),)
+        Text("لا توجد عروض متاحة حاليا في هذا القسم",style: S.h3(color:Color(int.parse(widget.selectedCategory!.color!.replaceAll("#", "0xff"))) ),)
       ],),);
   }
   Widget _actionBar(){

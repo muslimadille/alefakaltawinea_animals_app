@@ -10,9 +10,10 @@ import 'package:flutter/material.dart';
 
 class ServiceProviderListItem extends StatefulWidget {
   int index;
+  Color? color;
   ServiceProvidersProviderModel? serviceProvidersProviderModel;
 
-   ServiceProviderListItem(this.index,this.serviceProvidersProviderModel);
+   ServiceProviderListItem(this.index,this.serviceProvidersProviderModel,{this.color=C.BASE_BLUE});
 
   @override
   _ServiceProviderListItemState createState() => _ServiceProviderListItemState();
@@ -64,7 +65,7 @@ class _ServiceProviderListItemState extends State<ServiceProviderListItem> {
               children: [
                 Expanded(child: Text(
                   widget.serviceProvidersProviderModel!.serviceProviderModel!.data![widget.index].name!
-                  ,style: S.h3(color:C.BASE_BLUE),),),
+                  ,style: S.h3(color:widget.color),),),
                 InkWell(
                   onTap: (){
                     widget.serviceProvidersProviderModel!.setFav(widget.serviceProvidersProviderModel!.serviceProviderModel!.data![widget.index].id!);
