@@ -116,7 +116,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
   }
   Widget _favBtn(){
     return Expanded(
-      key:widget.showIntro? widget.introProviderModel!.intro!.keys[1]:Key("_favBtn"),
+      //key:widget.showIntro? widget.introProviderModel!.intro!.keys[1]:Key("_favBtn"),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
@@ -136,7 +136,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
   }
   Widget _notificationsBtn(){
     return Expanded(
-      key: widget.showIntro?widget.introProviderModel!.intro!.keys[3]:Key("_notificationsBtn"),
+      //key: widget.showIntro?widget.introProviderModel!.intro!.keys[3]:Key("_notificationsBtn"),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
@@ -151,7 +151,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
   }
   Widget _profileBtn(){
     return Expanded(
-      key: widget.showIntro?widget.introProviderModel!.intro!.keys[4]:Key("_profileBtn"),
+     // key: widget.showIntro?widget.introProviderModel!.intro!.keys[4]:Key("_profileBtn"),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
@@ -172,7 +172,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
   }
   Widget _closestBtn(){
     return Expanded(
-      key: widget.showIntro?widget.introProviderModel!.intro!.keys[2]:Key("_closestBtn"),
+      //key: widget.showIntro?widget.introProviderModel!.intro!.keys[2]:Key("_closestBtn"),
       child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children:[

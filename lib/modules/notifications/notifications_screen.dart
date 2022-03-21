@@ -37,7 +37,7 @@ class _NotificationsScreenState extends State<NotificationsScreen>  {
     super.initState();
     ///bottom bar selection
     bottomBarProviderModel=Provider.of<BottomBarProviderModel>(context,listen: false);
-    bottomBarProviderModel!.setSelectedScreen(1);
+    //bottomBarProviderModel!.setSelectedScreen(1);
 
     ///service providers data
     serviceProvidersProviderModel=Provider.of<ServiceProvidersProviderModel>(context,listen: false);

@@ -87,13 +87,9 @@ Widget _noData(){
     return Center(child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        TransitionImage(Res.IC_FAV_BLUE,
-          width: D.default_80,
-          height: D.default_80,
-        ),
-        SizedBox(height: D.default_20,),
+
         Text(tr('FAV_EMPTY'),style: S.h2(color: C.BASE_BLUE),),
-        Text(tr('there_is_no_fav'),style: S.h4(color: C.BASE_BLUE),)
+        Text(tr('there_is_no_fav'),style: S.h4(color: Colors.grey),)
 
       ],),);
 }

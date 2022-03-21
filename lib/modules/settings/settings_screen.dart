@@ -1,4 +1,5 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
+import 'package:alefakaltawinea_animals_app/modules/settings/terms_screen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
@@ -10,6 +11,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'about_screen.dart';
+import 'add_store_screen.dart';
+import 'contact_us_screen.dart';
 
 
 class SettingScreen extends StatefulWidget {
@@ -43,6 +48,9 @@ class _SettingScreenState extends State<SettingScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: D.default_10,),
+                        _itemText(tr("about_app"), () {
+                          MyUtils.navigate(context, AboutAppScreen());
+                        }),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -68,30 +76,16 @@ class _SettingScreenState extends State<SettingScreen> {
 
                             )
                           ],),
-                        /*Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            _itemText(tr("select_city"), (){}),
-                            Container(
-                                width: D.default_150,
-                                padding: EdgeInsets.only(left:D.default_10,right: D.default_10,top: D.default_5,bottom: D.default_5),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(D.default_100),
-                                    color: C.BASE_BLUE,
-                                    boxShadow:[BoxShadow(
-                                        color: Colors.grey.withOpacity(0.5),
-                                        offset:Offset(1,1),
-                                        blurRadius:1,
-                                        spreadRadius: 0.5
-                                    )]
-                                ),
-                                child: Center(child: Text(utilsProviderModel!.currentLocalName,style: S.h3(color: Colors.white),),)
-
-                            )
-                          ],),
-                        _itemText(tr("about_app"), () {}),
-                        _itemText(tr("contact_us"), () {}),
-                        _itemText(tr("Terms_and_Conditions"), (){}),*/
+                        _itemText(tr("subscrib"), () {}),
+                        _itemText(tr("add_your_shop"), (){
+                          MyUtils.navigate(context, AddStoreScreen());
+                        }),
+                        _itemText(tr("contact_us"), () {
+                          MyUtils.navigate(context, ContactUsScreen());
+                        }),
+                        _itemText(tr("Terms_and_Conditions"), (){
+                          MyUtils.navigate(context, TermsScreen());
+                        }),
                       ],
                     ),
                   ),
@@ -106,14 +100,16 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 
   Widget _itemText(String title, Function onClick) {
-    return Row(
+    return InkWell(onTap: (){
+      onClick();
+    },child: Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Container(
             padding: EdgeInsets.all(D.default_15),
             child: Text(title, style: S.h2(color: Colors.black)))
       ],
-    );
+    ),);
   }
   Widget _changeLnguagesAlertBody(){
     bool arStat=Constants.utilsProviderModel!.isArabic;
