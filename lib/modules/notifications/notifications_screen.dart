@@ -51,7 +51,7 @@ class _NotificationsScreenState extends State<NotificationsScreen>  {
         showBottomBar: true,
         showSettings: false,
         body: Column(children: [
-          ActionBarWidget(tr('fav_screen_title'), context),
+          ActionBarWidget(tr('noti_screen_title'), context),
           Expanded(child:serviceProvidersProviderModel!.isLoading?LoadingProgress():SmartRefresher(
             key: _refresherKey,
             controller: _refreshController,
