@@ -26,6 +26,7 @@ class ServiceProvidersProviderModel with ChangeNotifier {
   Completer<GoogleMapController> mapController=Completer();
   List<Data> currentLocationsList=[];
   Data? currentSelectedShop;
+  int?selectedMarkerColor;
 
   /// ..........categories...........
   ServiceProviderModel? serviceProviderModel;
@@ -69,7 +70,7 @@ class ServiceProvidersProviderModel with ChangeNotifier {
 
   }
 
-  getClosestList(BuildContext ctx,int categoryId,String lat,String long) async {
+  getClosestList(BuildContext ctx,int categoryId,String lat,String long,int color,bool all) async {
     setIsLoading(true);
     MyResponse<List<Data>> response =
     await getServiceProvidersApi.getClosest(categoryId,lat,long);
@@ -78,11 +79,11 @@ class ServiceProvidersProviderModel with ChangeNotifier {
       currentLocationsList.clear();
       currentLocationsList.addAll(response.data);
       if(currentLocationsList.isNotEmpty){
-        currentSelectedShop=currentLocationsList[0];
+        //currentSelectedShop=currentLocationsList[0];
       }else{
         currentSelectedShop=null;
       }
-        setMarkers(response.data,ctx);
+        setMarkers(response.data,ctx,color,all);
       setIsLoading(false);
     }else if(response.status == Apis.CODE_SUCCESS &&response.data==null){
       setIsLoading(false);
@@ -116,16 +117,18 @@ class ServiceProvidersProviderModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void setMarkers(List<Data> value ,BuildContext ctx)async{
+  void setMarkers(List<Data> value ,BuildContext ctx,int color,bool all)async{
     setIsLoading(true);
-    markers.clear();
-
+    if(!all){
+      markers.clear();
+    }
       if(value.isNotEmpty){
         for(int i=0;i<value.length;i++){
           LatLng latlng=LatLng(double.parse(value[i].latitude!), double.parse(value[i].longitude!));
           markers.add(Marker(
             onTap: (){
               currentSelectedShop=currentLocationsList[i];
+              selectedMarkerColor=color;
               notifyListeners();
             },
             markerId: MarkerId("${value[i].id}"),
@@ -136,7 +139,7 @@ class ServiceProvidersProviderModel with ChangeNotifier {
                   //MyUtils.navigate(ctx, ServiceProviderDetailsScreen(value[i]));
                 }
             ),
-            icon: BitmapDescriptor.defaultMarker,
+            icon: BitmapDescriptor.defaultMarkerWithHue(HSLColor.fromColor(Color(color)).hue),
 
           ));
         }

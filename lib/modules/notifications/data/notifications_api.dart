@@ -4,11 +4,12 @@ import '../../../data/dio/dio_utils.dart';
 import '../../../data/dio/my_rasponce.dart';
 import '../../../utils/my_utils/apis.dart';
 import '../../serviceProviders/list_screen/data/serviceProvidersModel.dart';
+import 'notification_model.dart';
 
-class GetAds_sliderApi{
+class NotificationApi{
 
   Future<MyResponse<List<Data>>> getNotification() async {
-    final url = "${Apis.GET_ADS_SLIDER}";
+    final url = "${Apis.GET_NOTIFICATIONS}";
     final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_GET, url);
     if (response != null && response.statusCode == 200) {
       return MyResponse<List<Data>>.fromJson(

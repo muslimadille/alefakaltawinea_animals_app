@@ -111,14 +111,21 @@ flutter:
     - assets/images/spalsh_bg.png
     - assets/images/onboarding_bg.png
     - assets/images/adoption_new_img.png
+    - assets/images/cart_img.png
+    - assets/images/logo_name_blue.png
+    - assets/images/logo_name_white.png
+
 
     - assets/strings/ar-EG.json
     - assets/strings/en-US.json
     - assets/fonts/cairo_font.ttf
+    - assets/fonts/ArabicUiTextLight.otf
+
   fonts:
     - family: Cairo
       fonts:
         - asset: assets/fonts/cairo_font.ttf
+        - asset: assets/fonts/ArabicUiTextLight.otf
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

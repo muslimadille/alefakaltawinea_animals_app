@@ -108,26 +108,26 @@ class _CategoryListItemState extends State<CategoryListItem> {
       children: [
         Container(
           color: widget.categoriesProviderModel!.categoriesList[widget.index].color!=null?Color(int.parse("${widget.categoriesProviderModel!.categoriesList[widget.index].color!.replaceAll("#", "0xff")}")) : Color(0xffF38183),),
-        Positioned(
-            child: TransitionImage(
-              widget.categoriesProviderModel!.categoriesList[widget.index]
-                  .photo!.isNotEmpty
-                  ? widget.categoriesProviderModel!
-                  .categoriesList[widget.index].photo!
-                  : Res.SHOP_IC,
-              fit: BoxFit.fitHeight,
-              padding: EdgeInsets.only(top:D.default_30,bottom:D.default_30),
-              width: MediaQuery.of(context).size.width / 2,
-              height: MediaQuery.of(context).size.width / 2,
-            )),
-        Container(
-          height: D.default_40,
-          child: Center(
-          child: Text(
-              widget.categoriesProviderModel!
-                  .categoriesList[widget.index].name!,
-              style: S.h3(color: Colors.white)),
-        ),)
+        Column(children: [
+          Expanded(child: TransitionImage(
+            widget.categoriesProviderModel!.categoriesList[widget.index]
+                .photo!.isNotEmpty
+                ? widget.categoriesProviderModel!
+                .categoriesList[widget.index].photo!
+                : Res.SHOP_IC,
+            fit: BoxFit.fitWidth,
+            padding: EdgeInsets.only(top: D.default_10),
+          )),
+          Container(
+            height: D.default_40,
+            margin: EdgeInsets.only(bottom: D.default_5),
+            child: Center(
+              child: Text(
+                  widget.categoriesProviderModel!
+                      .categoriesList[widget.index].name!,
+                  style: S.h1Bold(color: Colors.white)),
+            ),)],)
+        
       ],
     );
   }

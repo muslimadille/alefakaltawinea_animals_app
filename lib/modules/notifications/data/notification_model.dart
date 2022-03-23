@@ -1,3 +1,5 @@
+import '../../serviceProviders/list_screen/data/photo_model.dart';
+
 class NotificationModel {
   int? id;
   String? name;
@@ -7,7 +9,7 @@ class NotificationModel {
   String? email;
   String? website;
   String? photo;
-  List<Null>? photos;
+  List<PhotoModel>? photos;
   String? bannerPhoto;
   String? offerPhoto;
   String? longitude;
@@ -64,9 +66,9 @@ class NotificationModel {
     website = json['website'];
     photo = json['photo'];
     if (json['photos'] != null) {
-      photos = <Null>[];
+      photos = <PhotoModel>[];
       json['photos'].forEach((v) {
-        photos!.add(v);
+        photos!.add(PhotoModel.fromJson(v));
       });
     }
     bannerPhoto = json['banner_photo'];
@@ -91,6 +93,7 @@ class NotificationModel {
     token = json['token'];
     activate = json['activate'];
     distance = json['distance'];
+
   }
 
   Map<String, dynamic> toJson() {
@@ -104,7 +107,7 @@ class NotificationModel {
     data['website'] = this.website;
     data['photo'] = this.photo;
     if (this.photos != null) {
-      data['photos'] = this.photos!.map((v) => v).toList();
+      data['photos'] = this.photos!.map((v) => v.toJson()).toList();
     }
     data['banner_photo'] = this.bannerPhoto;
     data['offer_photo'] = this.offerPhoto;

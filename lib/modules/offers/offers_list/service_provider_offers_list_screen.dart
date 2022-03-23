@@ -6,6 +6,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class ServiceProviderOffersScreen extends StatefulWidget {
@@ -23,7 +24,7 @@ class _ServiceProviderOffersScreenState extends State<ServiceProviderOffersScree
       margin: EdgeInsets.only(top: D.default_10),
       child: Column(children: [
       Expanded(child:
-      widget.serviceProviderData.offers!.isNotEmpty?ListView.builder(
+      widget.serviceProviderData.offers!.isNotEmpty?ListView.separated(
           itemCount: widget.serviceProviderData.offers!.length,
           padding: EdgeInsets.only(top:D.default_10,bottom:D.default_10),
           itemBuilder: (context,index){
@@ -33,41 +34,34 @@ class _ServiceProviderOffersScreenState extends State<ServiceProviderOffersScree
               padding: EdgeInsets.zero,
             child: Container(
               width: double.infinity,
-              margin: EdgeInsets.only(left:D.default_15,right:D.default_15,top:D.default_5,bottom:D.default_5),
-              padding: EdgeInsets.only(left:D.default_10,right:D.default_10,top:D.default_20,bottom:D.default_20),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(D.default_10),
-                  border: Border.all(color: C.BASE_BLUE,width: D.default_1),
-                  color: Colors.white,
-                  boxShadow:[BoxShadow(
-                      color: Colors.grey.withOpacity(0.3),
-                      offset:Offset(2,2),
-                      blurRadius:2,
-                      spreadRadius: 2
-                  )]
-              ),
-              child: Wrap(alignment:WrapAlignment.center
-                  ,children: [
-                //Text("خصم ",style: S.h4(color: C.BASE_BLUE),),
-                //Text("${_getDescoundRaio(index)}%",style: S.h4(color: C.BASE_BLUE)),
-                //Text(" على ",style: S.h4(color: C.BASE_BLUE)),
-                Text("${widget.serviceProviderData.offers![index].title}",style: S.h4(color: C.BASE_BLUE),textAlign: TextAlign.center,),
-               // Text(" بـ ",style: S.h4(color: C.BASE_BLUE)),
-                //Text("${widget.serviceProviderData.offers![index]!.discountValue!}",style: S.h4(color: C.BASE_BLUE)),
-               // Text(" ريال ",style: S.h4(color: C.BASE_BLUE)),
-               // Text("بدلا من ",style: S.h4(color: C.BASE_BLUE)),
-               // Text("${widget.serviceProviderData.offers![index]!.price!}",style: S.h4(color: C.BASE_BLUE)),
-               // Text(" ريال ",style: S.h4(color: C.BASE_BLUE)),
-              ],),
+              margin: EdgeInsets.only(left:D.default_15,right:D.default_15,top:D.default_5),
+              padding: EdgeInsets.only(left:D.default_10,right:D.default_10,top:D.default_20,bottom:D.default_10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+
+                children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                  Expanded(child: Container(child: Text(widget.serviceProviderData.offers![index].title!,style: S.h2(color: C.BASE_BLUE),),),),
+                  Container(
+                    margin:EdgeInsets.only(left:D.default_10,right:D.default_10),
+                    child: Text("${widget.serviceProviderData.offers![index]!.discountValue!}${tr("curncy")}",style: S.h2(color: C.BASE_BLUE),),)
+                ],),
+                  Text("${tr("init_price")} ${widget.serviceProviderData.offers![index]!.price}${tr("curncy")}-${tr("wafer")}${_getDescoundRaio(index)}% ${tr("with_alifak_cart")}",style: S.h4(color: Colors.grey)),
+
+                ],),
             ),);
-          }):_noData())
+          }, separatorBuilder: (BuildContext context, int index) {
+            return Container(margin:EdgeInsets.only(left: D.default_20,right: D.default_20),color: Colors.grey,height: D.default_1,);
+      },):_noData())
     ],),);
   }
   double _getDescoundRaio(int index){
     double price=double.parse(widget.serviceProviderData.offers![index].price!);
     double discount=double.parse(widget.serviceProviderData.offers![index].discountValue!);
-    double raio=(discount/price)*100;
-    return raio;
+    double raio=((price-discount)/price)*100;
+    return raio.toInt().toDouble();
 
   }
   Widget _noData(){

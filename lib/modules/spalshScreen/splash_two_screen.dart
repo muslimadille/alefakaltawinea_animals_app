@@ -45,32 +45,34 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget _termsPart(){
     return Container(
       height: D.default_40,
-      margin: EdgeInsets.only(bottom: D.default_30),
+      margin: EdgeInsets.only(bottom: D.default_30,left: D.default_20,right: D.default_20),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
       Checkbox(
           value: rememberMe,
+          side: BorderSide(color: Colors.white),
           checkColor: C.BASE_BLUE,
           activeColor: Colors.white,
           onChanged: (value){
             _onRememberMeChanged(value!);
           }
       ),
-      Text(tr("terms_text"),style: S.h4(color: Colors.white),)
+      Text(tr("terms_text"),style: S.h3(color: Colors.white),)
 
     ],),);
   }
 Widget _buttonsPart(){
     return Container(
-        padding: EdgeInsets.only(bottom:D.default_10,top: D.default_10,left: D.default_5,right: D.default_5),
+        padding: EdgeInsets.only(bottom:D.default_10,top: D.default_10,left: D.default_30,right: D.default_30),
         child:Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            _registerBtn(),
             _browsApp(),
             _loginBtn(),
-            _registerBtn(),
+
           ],));
   }
   Widget _browsApp(){
@@ -83,11 +85,11 @@ Widget _buttonsPart(){
         }
 
       },child: Container(
-        padding: EdgeInsets.only(bottom:D.default_15,top: D.default_15,left: D.default_5,right: D.default_5),
+        padding: EdgeInsets.only(bottom:D.default_10,top: D.default_10,left: D.default_10,right: D.default_10),
         margin: EdgeInsets.all(D.default_5),
         decoration:  BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(D.default_5)),
+          borderRadius: BorderRadius.all(Radius.circular(D.default_10)),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
@@ -97,7 +99,7 @@ Widget _buttonsPart(){
             ),
           ],
         )
-        ,child: Center(child: Text(tr("brows_app_btn"),style:S.h4(color:C.BASE_BLUE)),)),));
+        ,child: Center(child: Text(tr("brows_app_btn"),style:S.h3(color:C.BASE_BLUE)),)),));
   }
   Widget _loginBtn(){
     return  Expanded(child: InkWell(
@@ -108,11 +110,11 @@ Widget _buttonsPart(){
           Fluttertoast.showToast(msg:tr("accept_terms_toast"));
         }
       },child: Container(
-        padding: EdgeInsets.only(bottom:D.default_15,top: D.default_15,left: D.default_5,right: D.default_5),
+        padding: EdgeInsets.only(bottom:D.default_10,top: D.default_10,left: D.default_10,right: D.default_10),
         margin: EdgeInsets.all(D.default_5),
         decoration:  BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(D.default_5)),
+          borderRadius: BorderRadius.all(Radius.circular(D.default_10)),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
@@ -122,7 +124,7 @@ Widget _buttonsPart(){
             ),
           ],
         )
-        ,child: Center(child: Text(tr("login"),style:S.h4(color:C.BASE_BLUE)),)),));
+        ,child: Center(child: Text(tr("login"),style:S.h3(color:C.BASE_BLUE)),)),));
   }
   Widget _registerBtn(){
     return  Expanded(child: InkWell(
@@ -133,11 +135,11 @@ Widget _buttonsPart(){
           Fluttertoast.showToast(msg:tr("accept_terms_toast"));
         }
       },child: Container(
-        padding: EdgeInsets.only(bottom:D.default_15,top: D.default_15,left: D.default_5,right: D.default_5),
+        padding: EdgeInsets.only(bottom:D.default_10,top: D.default_10,left: D.default_10,right: D.default_10),
         margin: EdgeInsets.all(D.default_5),
         decoration:  BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.all(Radius.circular(D.default_5)),
+          borderRadius: BorderRadius.all(Radius.circular(D.default_10)),
           boxShadow: [
             BoxShadow(
               color: Colors.grey.withOpacity(0.5),
@@ -147,7 +149,7 @@ Widget _buttonsPart(){
             ),
           ],
         )
-        ,child: Center(child: Text(tr("register"),style:S.h4(color:C.BASE_BLUE)),)),),);
+        ,child: Center(child: Text(tr("register"),style:S.h3(color:C.BASE_BLUE)),)),),);
   }
   void _onRememberMeChanged(bool newValue) => setState(() {
     rememberMe = newValue;

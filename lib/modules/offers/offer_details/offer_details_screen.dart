@@ -4,7 +4,9 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_widgets/action_bar_widget.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -24,16 +26,16 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseScreen(
-        showSettings: true,
+        showSettings: false,
         showBottomBar: true,
         tag: "OfferDetailsScreen",
         body: SingleChildScrollView(child: Container(
           child: Column(children: [
+            ActionBarWidget("", context,enableShadow: false,backgroundColor: Colors.white,textColor: C.BASE_BLUE,),
             _providerInfo(),
             _cobonInfo(),
             _cobonBtn(),
             _offerText(),
-            _devider(),
             Column(children: _benifitsList(),),
             SizedBox(height: D.default_20,)
           ],),
@@ -41,53 +43,42 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
   }
   Widget _offerText(){
     return Container(
-      margin: EdgeInsets.only(bottom:D.default_20,left:D.default_10,right:D.default_10),
-        child: Wrap(
-      alignment:WrapAlignment.center,
-      children: [
-        //Text("خصم ",style: S.h2(color: C.BASE_BLUE),),
-       // Text("${_getDescoundRaio(widget.index)}%",style: S.h2(color: C.BASE_BLUE)),
-       // Text(" على ",style: S.h2(color: C.BASE_BLUE)),
-        Text("${widget.serviceProviderData.offers![widget.index].title}",style: S.h2(color: C.BASE_BLUE),textAlign: TextAlign.center,),
-       // Text(" بـ ",style: S.h2(color: C.BASE_BLUE)),
-       // Text("${widget.serviceProviderData.offers![widget.index]!.discountValue!}",style: S.h2(color: C.BASE_BLUE)),
-       // Text(" ريال ",style: S.h2(color: C.BASE_BLUE)),
-       // Text("بدلا من ",style: S.h2(color: C.BASE_BLUE)),
-       // Text("${widget.serviceProviderData.offers![widget.index]!.price!}",style: S.h2(color: C.BASE_BLUE)),
-      //  Text(" ريال ",style: S.h2(color: C.BASE_BLUE)),
-      ],));
+      margin: EdgeInsets.only(bottom:D.default_20,left:D.default_20,right:D.default_20),
+        child: Text("${tr("descount")} ${_getDescoundRaio(widget.index)}%${tr("for")} ${widget.serviceProviderData.offers![widget.index].title}",style: S.h1(color: C.BASE_BLUE)),
+    );
   }
   Widget _cobonBtn(){
     return Container(child: Center(child: MaterialButton(onPressed: (){
       MyUtils.navigate(context, OfferCodeScreen(widget.serviceProviderData.offers![widget.index]));
     },
     child: Container(
-      width: D.default_200,
+      width: D.default_160,
       margin: EdgeInsets.all(D.default_20),
-      padding: EdgeInsets.all(D.default_15),
+      padding: EdgeInsets.all(D.default_5),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(D.default_50),
+          borderRadius: BorderRadius.circular(D.default_10),
           color: C.BASE_BLUE,
           boxShadow:[BoxShadow(
               color: Colors.grey.withOpacity(0.3),
-              offset:Offset(2,2),
-              blurRadius:2,
-              spreadRadius: 2
+              offset:Offset(1,1),
+              blurRadius:1,
+              spreadRadius: 1
           )]
       ),
-      child: Center(child: Text("استخدم الكوبون",style: S.h3(color: Colors.white),),),),),),);
+      child: Center(child: Text(tr("use_offer"),style: S.h2(color: Colors.white),),),),),),);
   }
   Widget _cobonInfo(){
     return Container(
+      margin: EdgeInsets.only(left: D.default_20,right: D.default_20),
       child: Column(
         children: [
-          _cobonInfoItem("قيمة التوفير:","${double.parse(widget.serviceProviderData.offers![widget.index].price!)-double.parse(widget.serviceProviderData.offers![widget.index].discountValue!)} ${"ريال"}"),
+          _cobonInfoItem(tr("save_amount"),"${double.parse(widget.serviceProviderData.offers![widget.index].price!)-double.parse(widget.serviceProviderData.offers![widget.index].discountValue!)} ${tr("curncy")}"),
           _devider(),
-          _cobonInfoItem("صالح لغاية:","${widget.serviceProviderData.offers![widget.index].expirationDate!}"),
+          _cobonInfoItem(tr("valed_to"),"${widget.serviceProviderData.offers![widget.index].expirationDate!}"),
           _devider(),
-          _cobonInfoItem("عدد مرات الإستخدام:","${widget.serviceProviderData.offers![widget.index].usageTimes!}"),
+          _cobonInfoItem(tr("num_of_use"),"${widget.serviceProviderData.offers![widget.index].usageTimes!}"),
           _devider(),
-          _cobonInfoItem("هذا الكوبون متاح فقط لمستخدمي البطاقة",""),
+          _cobonInfoItem(tr("cupon_holder_hint"),""),
           _devider()
 
     ],),) ;
@@ -97,35 +88,33 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
   }
   Widget _cobonInfoItem(String title,String content){
     return Container(
-      padding: EdgeInsets.only(left: D.default_10,right: D.default_10,top:D.default_20,bottom: D.default_20),
+      padding: EdgeInsets.only(left: D.default_10,right: D.default_10,top:D.default_10),
       child: Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         Text("${title} ",style: S.h2(color: Colors.black45),),
-        Text("${content} ",style: S.h3(color: Colors.black),),
+        Text("${content} ",style: S.h2(color: Colors.black45),),
       ],),);
   }
   Widget _providerInfo(){
     return Column(children: [
       Container(
-        height: D.default_150,
+        height: D.default_200,
         width: double.infinity,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(0),
-            color: Colors.white,
-            boxShadow:[BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                offset:Offset(3,3),
-                blurRadius:3,
-                spreadRadius: 0.5
-            )]
-        ),
+        margin: EdgeInsets.only(left: D.default_20,right: D.default_20),
         child: Stack(children: [
           Column(children: [
-            Expanded(child: TransitionImage(
-              widget.serviceProviderData.bannerPhoto!,
-              fit: BoxFit.cover,
-              width: double.infinity,
+            Expanded(child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(D.default_20),
+                color: Colors.white,
+              ),
+              child: TransitionImage(
+                widget.serviceProviderData.bannerPhoto!,
+                fit: BoxFit.cover,
+                radius: D.default_20,
+                width: double.infinity,
+              ),
             )),
 
           ],),
@@ -155,23 +144,16 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
       ),
       Container(
         width: double.infinity,
-        padding: EdgeInsets.all(D.default_10),
-        decoration: BoxDecoration(
-            color: C.BASE_BLUE,
-            boxShadow:[BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                offset:Offset(4,4),
-                blurRadius:4,
-                spreadRadius: 2
-            )]
-        ),
+        padding: EdgeInsets.only(top:D.default_10),
+
         child: Column(children: [
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(child: Text(
                 widget.serviceProviderData.name!
-                ,style: S.h1(color:Colors.white),),),
+                ,style: S.h1(color:C.BASE_BLUE),),),
 
 
             ],),
@@ -184,27 +166,27 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
   double _getDescoundRaio(int index){
     double price=double.parse(widget.serviceProviderData.offers![index].price!);
     double discount=double.parse(widget.serviceProviderData.offers![index].discountValue!);
-    double raio=(discount/price)*100;
-    return raio;
+    double raio=((price-discount)/price)*100;
+    return raio.toInt().toDouble();
 
   }
  List<Widget>  _benifitsList(){
    List<Widget> beni=[];
    beni.add(
      Container(
-       margin: EdgeInsets.only(left:D.default_10,right:D.default_10,top: D.default_5),
+       margin: EdgeInsets.only(left:D.default_20,right:D.default_20,top: D.default_5),
        child: Row(
        children: [
-         Expanded(child: Text("شروط الإستخدام:",style: S.h1(color: C.BASE_BLUE),textAlign:TextAlign.start ,))
+         Expanded(child: Text(tr("offer_terms"),style: S.h1(color: Colors.grey),textAlign:TextAlign.start ,))
        ],),)
    );
    for(int i=0;i<widget.serviceProviderData.offers![widget.index].features!.length;i++){
      beni.add(
          Container(
-           margin: EdgeInsets.only(left:D.default_10,right:D.default_10,top: D.default_5),
+           margin: EdgeInsets.only(left:D.default_20,right:D.default_20,top: D.default_5),
            child: Row(
              children: [
-               Expanded(child: Text("-${widget.serviceProviderData.offers![widget.index].features![i].ar}",style: S.h4(color:Colors.black87),textAlign:TextAlign.start ,))
+               Expanded(child: Text("-${widget.serviceProviderData.offers![widget.index].features![i].ar}",style: S.h3(color:Colors.grey),textAlign:TextAlign.start ,))
              ],),)
      );
    }

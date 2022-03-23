@@ -44,17 +44,9 @@ class _ChoceLanguageScreenState extends State<ChoceLanguageScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 TransitionImage(
-                  Res.LOGO_WITHOUT_NAME,
+                  "assets/images/logo_name_white.png",
                   width: D.default_150,
                   height: D.default_150,
-                ),
-                Text(
-                  "أليفك التعاونية",
-                  style: S.h1(color: Colors.white),
-                ),
-                Text(
-                  "ALIFAK ALTAWINEA",
-                  style: S.h1(color: Colors.white),
                 ),
                 SizedBox(
                   height: D.default_30,
@@ -63,7 +55,9 @@ class _ChoceLanguageScreenState extends State<ChoceLanguageScreen> {
                   Constants.utilsProviderModel!.setLanguageState("ar");
                   await utilsProviderModel!.setCurrentLocal(context, Locale("ar","EG"));
                   MyUtils.navigate(context, OnBoardingScreen());
-                }),
+                },
+
+                ),
                 SizedBox(
                   height: D.default_10,
                 ),
@@ -93,7 +87,7 @@ class _ChoceLanguageScreenState extends State<ChoceLanguageScreen> {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(D.default_100),),
           color: Colors.white,
-        ),child: Center(child: Text(title,style: S.h4(color: C.BASE_BLUE),),),
+        ),child: Center(child: Text(title,style: S.h1Bold(color: C.BASE_BLUE),textAlign:TextAlign.center ,),),
 
       ),),
     ));

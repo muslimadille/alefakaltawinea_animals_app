@@ -45,7 +45,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
       tag: "AdoptionScreen",
       body: Column(
         children: [
-          ActionBarWidget(tr("adoption"), context,backgroundColor: Colors.white,textColor: C.ADAPTION_COLOR,enableShadow: false,),
+          ActionBarWidget(tr(""), context,backgroundColor: Colors.white,textColor: C.BASE_BLUE,enableShadow: false,),
           Expanded(
               child:Container(
                 color: Colors.white,
@@ -134,7 +134,8 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                     adoptionProviderModel!.setSelectedCategoryIndex(index);
                     adoptionProviderModel!.getAnimals(adoptionProviderModel!.categoriesList[index].id!);
                   },
-                  child: TransitionImage(
+                  child:
+                  TransitionImage(
                   adoptionProviderModel!.categoriesList[index].photo!,
                   radius: D.default_200,
                   width: D.default_70,

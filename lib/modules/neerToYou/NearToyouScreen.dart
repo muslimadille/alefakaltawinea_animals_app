@@ -15,6 +15,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.da
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../serviceProviders/details_screen/service_provider_details_screen.dart';
@@ -45,7 +46,7 @@ class _NearToYouScreenState extends State<NearToYouScreen> {
         Provider.of<ServiceProvidersProviderModel>(context, listen: false);
     categoriesProviderModel =
         Provider.of<CategoriesProviderModel>(context, listen: false);
-    selectedCategory = categoriesProviderModel!.categoriesList[0];
+    //selectedCategory = categoriesProviderModel!.categoriesList[0];
     getCurrentLocation();
   }
 
@@ -113,13 +114,22 @@ class _NearToYouScreenState extends State<NearToYouScreen> {
     final GoogleMapController controller =
         await serviceProvidersProviderModel!.mapController.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(_myCameraPosition));
-    serviceProvidersProviderModel!.getClosestList(context, 1,
-        _position!.latitude.toString(), _position!.longitude.toString());
+    for(int index=0;index< categoriesProviderModel!.categoriesList.length;index++){
+      serviceProvidersProviderModel!.getClosestList(
+          context,
+          categoriesProviderModel!.categoriesList[index].id!,
+          _position!.latitude.toString(),
+          _position!.longitude.toString(),
+          int.parse(categoriesProviderModel!.categoriesList[index].color!.replaceAll("#", "0xff")),
+        true
+      );
+    }
+
   }
 
   Widget _categories() {
-    return Container(
-        height: D.default_260,
+    return AspectRatio(
+        aspectRatio: 1.73,
         child: CustomScrollView(slivers: [
           SliverGrid(
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -147,7 +157,10 @@ class _NearToYouScreenState extends State<NearToYouScreen> {
                 context,
                 categoriesProviderModel!.categoriesList[index].id!,
                 _position!.latitude.toString(),
-                _position!.longitude.toString());
+                _position!.longitude.toString(),
+              int.parse(categoriesProviderModel!.categoriesList[index].color!.replaceAll("#", "0xff")),
+              false
+            );
           });
         },
         child: Stack(
@@ -183,7 +196,7 @@ class _NearToYouScreenState extends State<NearToYouScreen> {
   }
 
   Widget _shopItem() {
-    return InkWell(
+    return  serviceProvidersProviderModel!.currentSelectedShop!=null?InkWell(
       onTap: (){
         MyUtils.navigate(context, ServiceProviderDetailsScreen(serviceProvidersProviderModel!.currentSelectedShop!));
       },
@@ -194,7 +207,7 @@ class _NearToYouScreenState extends State<NearToYouScreen> {
           width: double.infinity,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.all(Radius.circular(D.default_10)),
-              border: Border.all(color: Color(int.parse(selectedCategory!.color!.replaceAll("#", "0xff")))),
+              border: Border.all(color: Color(selectedCategory!=null?int.parse(selectedCategory!.color!.replaceAll("#", "0xff")):serviceProvidersProviderModel!.selectedMarkerColor!)),
               color: Colors.white,
               boxShadow:[BoxShadow(
                   color: Colors.grey.withOpacity(0.5),
@@ -209,7 +222,7 @@ class _NearToYouScreenState extends State<NearToYouScreen> {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(D.default_10)),
                   color: Colors.white,
-                  border: Border.all(color: Color(int.parse(selectedCategory!.color!.replaceAll("#", "0xff"))))
+                  border: Border.all(color: Color(selectedCategory!=null?int.parse(selectedCategory!.color!.replaceAll("#", "0xff")):serviceProvidersProviderModel!.selectedMarkerColor!))
                 ),
                 margin: EdgeInsets.all(D.default_10),
                 child: TransitionImage(
@@ -221,10 +234,10 @@ class _NearToYouScreenState extends State<NearToYouScreen> {
               Expanded(
                   child: Text(
                 "${serviceProvidersProviderModel!.currentSelectedShop!.name}",
-                style: S.h4(color: Color(int.parse(selectedCategory!.color!.replaceAll("#", "0xff"))))),
+                style: S.h4(color: Color(selectedCategory!=null?int.parse(selectedCategory!.color!.replaceAll("#", "0xff")):serviceProvidersProviderModel!.selectedMarkerColor!))),
               )
             ],
           )),
-    );
+    ):Container();
   }
 }

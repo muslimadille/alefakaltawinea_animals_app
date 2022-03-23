@@ -100,10 +100,12 @@ class _SearchScreenState extends State<SearchScreen>  {
   }
   Widget _searchBar(){
     return Container(
-      margin: EdgeInsets.all(D.default_10),
+      margin: EdgeInsets.only(top:D.default_10,bottom: D.default_10,left: D.default_20,right: D.default_20),
+      padding: EdgeInsets.only(left:D.default_10,right: D.default_10),
+
       height: D.default_70,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(D.default_100),
+          borderRadius: BorderRadius.circular(D.default_10),
           color: Colors.white,
           boxShadow:[BoxShadow(
               color: Colors.grey.withOpacity(0.5),

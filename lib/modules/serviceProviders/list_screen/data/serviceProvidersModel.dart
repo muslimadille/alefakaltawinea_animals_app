@@ -1,4 +1,5 @@
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/data/offer_model.dart';
+import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/data/photo_model.dart';
 
 class ServiceProviderModel {
   int? currentPage;
@@ -98,6 +99,9 @@ class Data {
   String? website;
   int? is_fav;
   List<OfferModel>? offers;
+  List<PhotoModel>? photos;
+
+
 
 
   Data(
@@ -118,7 +122,9 @@ class Data {
         this.categoryId,
         this.website,
         this.is_fav,
-      this.offers});
+      this.offers,
+        this.photos
+      });
 
   Data.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -144,6 +150,12 @@ class Data {
         offers!.add(new OfferModel.fromJson(v));
       });
     }
+    if (json['photos'] != null) {
+      photos = <PhotoModel>[];
+      json['photos'].forEach((v) {
+        photos!.add(new PhotoModel.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -167,6 +179,9 @@ class Data {
     data['is_fav'] = this.is_fav;
     if (this.offers != null) {
       data['offers'] = this.offers!.map((v) => v.toJson()).toList();
+    }
+    if (this.photos != null) {
+      data['photos'] = this.photos!.map((v) => v.toJson()).toList();
     }
     return data;
   }

@@ -102,88 +102,88 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
   }
   Widget _homeBtn(){
     return Expanded(
-      child: Column(
+      child: InkWell(onTap: (){
+        bottomBarProviderModel!.setSelectedScreen(0);
+        MyUtils.navigateAsFirstScreen(context, MainCategoriesScreen());
+      }
+        ,child:Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
-          InkWell(onTap: (){
-            bottomBarProviderModel!.setSelectedScreen(0);
-            MyUtils.navigateAsFirstScreen(context, MainCategoriesScreen());
-          }
-            ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==0?Res.IC_HOME_BLUE:Res.IC_HOME_GREY,width: D.default_30,height: D.default_30,),),
+          TransitionImage(bottomBarProviderModel!.selectedScreen==0?Res.IC_HOME_BLUE:Res.IC_HOME_GREY,width: D.default_25,height: D.default_25,),
           Center(child:Text(tr("home"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==0?C.BASE_BLUE:Colors.grey),),)
         ]
-    ),);
+    ),));
   }
   Widget _favBtn(){
     return Expanded(
       //key:widget.showIntro? widget.introProviderModel!.intro!.keys[1]:Key("_favBtn"),
-      child: Column(
+      child: InkWell(onTap: (){
+        bottomBarProviderModel!.setSelectedScreen(1);
+        if(Constants.currentUser!=null){
+          MyUtils.navigate(context, FavScreen());
+        }else{
+          MyUtils.navigate(context, NoProfileScreen());
+        }
+
+      }
+        ,child:Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
-          InkWell(onTap: (){
-            bottomBarProviderModel!.setSelectedScreen(1);
-            if(Constants.currentUser!=null){
-              MyUtils.navigate(context, FavScreen());
-            }else{
-              MyUtils.navigate(context, NoProfileScreen());
-            }
-
-          }
-            ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==1?Res.IC_FAV_BLUE:Res.IC_FAV_GREY,width: D.default_30,height: D.default_30,),),
+          TransitionImage(bottomBarProviderModel!.selectedScreen==1?Res.IC_FAV_BLUE:Res.IC_FAV_GREY,width: D.default_25,height: D.default_25,),
           Center(child:Text(tr("fav"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==1?C.BASE_BLUE:Colors.grey),),)
         ]
-    ),);
+    ),));
   }
   Widget _notificationsBtn(){
     return Expanded(
       //key: widget.showIntro?widget.introProviderModel!.intro!.keys[3]:Key("_notificationsBtn"),
-      child: Column(
+      child: InkWell(onTap: (){
+        bottomBarProviderModel!.setSelectedScreen(3);
+        MyUtils.navigate(context, NotificationsScreen());
+      }
+        ,child:Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
-          InkWell(onTap: (){
-            bottomBarProviderModel!.setSelectedScreen(3);
-            MyUtils.navigate(context, NotificationsScreen());
-          }
-            ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==3?Res.IC_NOTIFICATIONS_BLUE:Res.IC_NOTIFICATIONS_GREY,width: D.default_30,height: D.default_30,),),
+          TransitionImage(bottomBarProviderModel!.selectedScreen==3?Res.IC_NOTIFICATIONS_BLUE:Res.IC_NOTIFICATIONS_GREY,width: D.default_25,height: D.default_25,),
           Center(child:Text(tr("notifications"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==3?C.BASE_BLUE:Colors.grey),),)
         ]
-    ),);
+    ),));
   }
   Widget _profileBtn(){
     return Expanded(
      // key: widget.showIntro?widget.introProviderModel!.intro!.keys[4]:Key("_profileBtn"),
-      child: Column(
+      child: InkWell(onTap: (){
+        bottomBarProviderModel!.setSelectedScreen(4);
+        if(Constants.currentUser!=null){
+          MyUtils.navigate(context, ProfileScreen());
+        }else{
+          MyUtils.navigate(context, NoProfileScreen());
+        }
+        //bottomBarProviderModel!.setSelectedScreen(4);
+
+      }
+        ,child:Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
-          InkWell(onTap: (){
-            bottomBarProviderModel!.setSelectedScreen(4);
-            if(Constants.currentUser!=null){
-              MyUtils.navigate(context, ProfileScreen());
-            }else{
-              MyUtils.navigate(context, NoProfileScreen());
-            }
-            //bottomBarProviderModel!.setSelectedScreen(4);
-
-          }
-            ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==4?Res.IC_PROFILE_BLUE:Res.IC_PROFILE_GREY,width: D.default_30,height: D.default_30,),),
+          TransitionImage(bottomBarProviderModel!.selectedScreen==4?Res.IC_PROFILE_BLUE:Res.IC_PROFILE_GREY,width: D.default_25,height: D.default_25,),
           Center(child:Text(tr("profile"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==4?C.BASE_BLUE:Colors.grey),),)
         ]
-    ),);
+    ),));
   }
   Widget _closestBtn(){
     return Expanded(
       //key: widget.showIntro?widget.introProviderModel!.intro!.keys[2]:Key("_closestBtn"),
-      child: Column(
+      child:InkWell(onTap: (){
+        bottomBarProviderModel!.setSelectedScreen(2);
+        MyUtils.navigate(context, NearToYouScreen());
+      }
+          ,child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children:[
-            InkWell(onTap: (){
-              bottomBarProviderModel!.setSelectedScreen(2);
-              MyUtils.navigate(context, NearToYouScreen());
-            }
-              ,child:TransitionImage(bottomBarProviderModel!.selectedScreen==2?Res.IC_NEAR_BLUE:Res.IC_NEAR_GREY,width: D.default_30,height: D.default_30,),),
+            TransitionImage(bottomBarProviderModel!.selectedScreen==2?Res.IC_NEAR_BLUE:Res.IC_NEAR_GREY,width: D.default_25,height: D.default_25,),
             Center(child:Text(tr("closest"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==2?C.BASE_BLUE:Colors.grey),),)
           ]
-      ),);
+      ),));
   }
 
 }

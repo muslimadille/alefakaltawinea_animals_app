@@ -38,7 +38,7 @@ class _SettingScreenState extends State<SettingScreen> {
         body: Container(
           child: Column(
             children: [
-              ActionBarWidget(tr("Settings_title"), context),
+              ActionBarWidget(tr("Settings_title"), context,showSetting: false,),
               Expanded(
                 child: SingleChildScrollView(
                   child: Container(

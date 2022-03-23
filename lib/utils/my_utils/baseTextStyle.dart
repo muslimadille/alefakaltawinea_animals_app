@@ -8,17 +8,29 @@ class S {
   
 
   static h1({Color? color, bool underline = false,TextDecoration? decoration,Color? decorationColor,double? decorationThickness, Color? shadowColor ,String? font}) =>
-      GoogleFonts.notoKufiArabic(
-  shadows: shadowColor == null ? null : shadow(color: shadowColor),
-  color: color == null ? Colors.black : color,
-  decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
-  decorationColor:decorationColor!=null?decorationColor:Colors.black ,
-  decorationThickness:decorationThickness,
-  fontSize: D.h1);
+      TextStyle(
+          fontFamily: "ArabicUiTextLight",
+          shadows: shadowColor == null ? null : shadow(color: shadowColor),
+          color: color == null ? Colors.black : color,
+          decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
+          decorationColor:decorationColor!=null?decorationColor:Colors.black ,
+          decorationThickness:decorationThickness,
+          fontSize: D.h1);
+  static h1Bold({Color? color, bool underline = false,TextDecoration? decoration,Color? decorationColor,double? decorationThickness, Color? shadowColor ,String? font}) =>
+      TextStyle(
+          fontFamily: "ArabicUiTextLight",
+          shadows: shadowColor == null ? null : shadow(color: shadowColor),
+          color: color == null ? Colors.black : color,
+          decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
+          decorationColor:decorationColor!=null?decorationColor:Colors.black ,
+          decorationThickness:decorationThickness,
+          fontWeight: FontWeight.bold,
+          fontSize: D.h1);
+
 
   static h2({Color? color, bool underline = false, TextDecoration? decoration,Color? decorationColor,double? decorationThickness,Color? shadowColor,String? font}) =>
       TextStyle(
-          fontFamily: "Cairo",
+          fontFamily: "ArabicUiTextLight",
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
@@ -28,7 +40,7 @@ class S {
 
   static h3({Color? color, bool underline = false,TextDecoration? decoration, Color? decorationColor,double? decorationThickness,Color? shadowColor,String? font}) =>
       TextStyle(
-          fontFamily: "Cairo",
+          fontFamily: "ArabicUiTextLight",
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
@@ -38,7 +50,7 @@ class S {
 
   static h4({Color? color, bool underline = false,TextDecoration? decoration,Color? decorationColor,double? decorationThickness, Color? shadowColor,String? font}) =>
       TextStyle(
-          fontFamily: "Cairo",
+          fontFamily: "ArabicUiTextLight",
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
@@ -48,7 +60,7 @@ class S {
 
   static h5({Color? color, bool underline = false,TextDecoration? decoration,Color? decorationColor,double? decorationThickness, Color? shadowColor,String? font}) =>
       TextStyle(
-          fontFamily: "Cairo",
+          fontFamily: "ArabicUiTextLight",
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
@@ -58,7 +70,7 @@ class S {
 
   static h6({Color? color, bool underline = false, TextDecoration? decoration,Color? decorationColor,double? decorationThickness,Color? shadowColor,String? font}) =>
       TextStyle(
-          fontFamily: "Cairo",
+          fontFamily: "ArabicUiTextLight",
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,

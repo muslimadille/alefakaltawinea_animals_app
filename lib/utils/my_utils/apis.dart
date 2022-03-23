@@ -40,6 +40,10 @@ class Apis{
   ///....................fav.....................
   static String ADD_FAV="${BASE_URL}/add-fav";
   static String GET_FAV="${BASE_URL}/favs";
+  ///................notification.............
+
+  static String GET_NOTIFICATIONS="${BASE_URL}/notifications";
+
 
 
 }

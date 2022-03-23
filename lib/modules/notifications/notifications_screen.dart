@@ -1,6 +1,7 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/categories_screen/data/categories_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/provider/bottom_bar_provider_model.dart';
+import 'package:alefakaltawinea_animals_app/modules/notifications/provider/notification_provider.dart';
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/items/service_provider_list_item.dart';
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/provider/sevice_providers_provicer_model.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
@@ -25,61 +26,56 @@ class NotificationsScreen extends StatefulWidget {
 
 class _NotificationsScreenState extends State<NotificationsScreen>  {
   BottomBarProviderModel?bottomBarProviderModel;
-  ServiceProvidersProviderModel? serviceProvidersProviderModel;
-  int _currentLoadedPage=1;
-  RefreshController _refreshController =
-  RefreshController(initialRefresh: false);
-  GlobalKey _contentKey = GlobalKey();
-  GlobalKey _refresherKey = GlobalKey();
+  NotificationProvider? notificationProvider;
+
 
   @override
   void initState() {
     super.initState();
     ///bottom bar selection
     bottomBarProviderModel=Provider.of<BottomBarProviderModel>(context,listen: false);
-    //bottomBarProviderModel!.setSelectedScreen(1);
 
-    ///service providers data
-    serviceProvidersProviderModel=Provider.of<ServiceProvidersProviderModel>(context,listen: false);
-    serviceProvidersProviderModel!.getFavsList();
+    ///notifications data
+    notificationProvider=Provider.of<NotificationProvider>(context,listen: false);
+    notificationProvider!.getNotificationsList();
   }
   @override
   Widget build(BuildContext context) {
-    serviceProvidersProviderModel=Provider.of<ServiceProvidersProviderModel>(context,listen: true);
+    notificationProvider=Provider.of<NotificationProvider>(context,listen: true);
     return BaseScreen(
         tag: "NotificationsScreen",
         showBottomBar: true,
         showSettings: false,
         body: Column(children: [
           ActionBarWidget(tr('noti_screen_title'), context),
-          Expanded(child:serviceProvidersProviderModel!.isLoading?LoadingProgress():SmartRefresher(
-            key: _refresherKey,
-            controller: _refreshController,
-            enablePullUp: true,
-            child: _listitem(),
-            physics: BouncingScrollPhysics(),
-            footer: ClassicFooter(
-              loadStyle: LoadStyle.ShowWhenLoading,
-              completeDuration: Duration(milliseconds: 500),
-            ),
-            onRefresh: () async {
-              serviceProvidersProviderModel!.getFavsList();
-            },
-            onLoading: () async {
-              serviceProvidersProviderModel!.getFavsList();
-
-              //_refreshController.loadFailed();
-            },
-          )
+          Expanded(child:notificationProvider!.isLoading?LoadingProgress():_listitem()
             ,)
         ],));
   }
   Widget _listitem(){
-    return false?ListView.builder(
-        itemCount: serviceProvidersProviderModel!.favList.length,
-        padding: EdgeInsets.all(D.default_10),
+    return notificationProvider!.notificationsList.isNotEmpty?ListView.builder(
+        itemCount: notificationProvider!.notificationsList.length,
+        padding: EdgeInsets.only(top:D.default_10,bottom:D.default_10),
         itemBuilder: (context,index){
-          return  Container();
+          return  Container(
+            margin: EdgeInsets.only(top:D.default_10,bottom:D.default_10),
+            height: D.default_80,width: double.infinity,color: C.BASE_BLUE,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              Container(
+                margin: EdgeInsets.only(left:D.default_10,right: D.default_10),
+                child: TransitionImage(
+                  notificationProvider!.notificationsList[index].photo??"",
+                  fit: BoxFit.cover,
+                  width: D.default_80,
+                  height: D.default_80,
+                  padding: EdgeInsets.all(D.default_10),
+                  backgroundColor: Colors.white,),),
+                Expanded(child: Text(notificationProvider!.notificationsList[index].offers![0].title!,style: S.h4(color: Colors.white),))
+            ],),
+          )
+          ;
         }):_noData();
   }
   Widget _noData(){

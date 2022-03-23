@@ -98,7 +98,30 @@
   "store_name": "Clinic or store name",
   "address": "Address",
   "resposepal": "the responsible person",
-  "noti_screen_title": "Notifications"
+  "noti_screen_title": "Notifications",
+  "search": "Search",
+  "curncy": "SAR",
+  "init_price": "Price before discount",
+  "wafer": "Save",
+  "with_alifak_cart": "With Alifak Cart",
+  "cupon_holder_hint": "This coupon is only available to card holders",
+  "save_amount": "Saving value:",
+  "valed_to": "valid up to:",
+  "num_of_use":"Number of use:",
+  "use_offer": "Use offer",
+  "descount": "Discount",
+  "for": "For",
+  "offer_terms": "Offer Terms",
+  "show_code_for": "Reveal the above code to your service provider to read and enjoy the show"
+
+
+
+
+
+
+
+
+
 
 
 

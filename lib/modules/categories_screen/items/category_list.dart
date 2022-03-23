@@ -28,48 +28,46 @@ class _CategoryListState extends State<CategoryList> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(slivers: [
+    return Column(children: [
 
-      SliverGrid(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 0,
-            mainAxisSpacing: 0,
-            childAspectRatio: 1.35,
-          ),
-          delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index) {
-              return CategoryListItem(
-                  index,
-                  widget.categoriesProviderModel,
-                  (){_onItemClick(index);});
-            },
-            childCount: widget.categoriesProviderModel!.categoriesList.length,
-            semanticIndexOffset: 1,
-          )),
-      SliverToBoxAdapter(child:  InkWell(onTap: (){
+      AspectRatio(
+          aspectRatio: 1.39,
+          child: GridView.builder(
+        itemCount: widget.categoriesProviderModel!.categoriesList.length,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 0,
+          mainAxisSpacing: 0,
+          childAspectRatio: 1.39,
+
+        ), itemBuilder: (BuildContext context, int index) {
+        return CategoryListItem(
+            index,
+            widget.categoriesProviderModel,
+                (){_onItemClick(index);});
+      },)),
+      Expanded(child: InkWell(onTap: (){
         widget.categoriesProviderModel!.showHadeth=true;
         widget.categoriesProviderModel!.notifyListeners();
       },
-      child: Container(color: Color(int.parse(adaption.color!.replaceAll("#", "0xff"))),width: MediaQuery.of(context).size.width,height: D.default_150,
-        child: Row(
-          children: [
-            Expanded(child: Container(
-              height: D.default_40,
-              child: Center(
-                child: Text(
-                    adaption.name!,
-                    style: S.h3(color: Colors.white)),
-              ),)),
-                Expanded(child: TransitionImage(
-                  adaption.photo!,
-                  fit: BoxFit.fitHeight,
-                  padding: EdgeInsets.only(top:D.default_10,bottom:D.default_10),
-                  width: double.infinity,
-                )),
+        child: Container(color: Color(int.parse(adaption.color!.replaceAll("#", "0xff"))),width: MediaQuery.of(context).size.width,
+          child: Row(
+            children: [
+              Expanded(child: Container(
+                child: Center(
+                  child: Text(
+                      adaption.name!,
+                      style: S.h1Bold(color: Colors.white)),
+                ),)),
+              Expanded(child: TransitionImage(
+                adaption.photo!,
+                fit: BoxFit.fitHeight,
+                padding: EdgeInsets.only(top:D.default_5,bottom:D.default_5),
+                width: double.infinity,
+              )),
 
-          ],
-        ),),),)
+            ],
+          ),),),)
 
     ]);
 

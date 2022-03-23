@@ -1,10 +1,12 @@
-import 'package:alefakaltawinea_animals_app/main.dart';
+
 import 'package:alefakaltawinea_animals_app/modules/search/search_screen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:flutter/material.dart';
+
+import '../../modules/settings/settings_screen.dart';
 
 class ActionBarWidget extends StatelessWidget {
   String title;
@@ -13,13 +15,15 @@ class ActionBarWidget extends StatelessWidget {
   bool showSearch;
   bool enableShadow;
   BuildContext cxt;
+  bool showSetting;
    ActionBarWidget(
        this.title,
        this.cxt,
        {this.textColor=Colors.white,
          this.backgroundColor=C.BASE_BLUE,
          this.showSearch=false,
-         this.enableShadow=true
+         this.enableShadow=true,
+         this.showSetting=true
        });
 
   @override
@@ -40,11 +44,11 @@ class ActionBarWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Expanded(flex:1,child: _backBtn(),),
-          Expanded(flex:1,child:showSearch?_searchBtn(context):Container(),),
-          Expanded(flex: 8,child: Center(child: Text(title,style: S.h1(color:textColor),),)),
-          Expanded(flex:1,child: Container(),),
-          Expanded(flex:1,child: Container(),),
+          _backBtn(),
+          showSearch?_searchBtn(context):Container(),
+          Expanded(child: Center(child: Text(title,style: S.h1(color:textColor),),)),
+          settingsBtn()
+
 
 
         ],),
@@ -52,7 +56,6 @@ class ActionBarWidget extends StatelessWidget {
   }
   Widget _backBtn(){
     return Container(
-      padding:EdgeInsets.only(left:D.default_10,right:D.default_10),
       child:IconButton(onPressed: () {
         Navigator.of(cxt).pop();
       }, icon: Icon(Icons.arrow_back_ios,color: textColor,size: D.default_25,),) ,
@@ -60,11 +63,17 @@ class ActionBarWidget extends StatelessWidget {
   }
   Widget _searchBtn(BuildContext context){
     return Container(
-      padding:EdgeInsets.only(left:D.default_10,right:D.default_10),
-      child:IconButton(onPressed: () {
+      child:InkWell(onTap: () {
         MyUtils.navigate(context, SearchScreen(title));
-      }, icon: Icon(Icons.search,color: textColor,size: D.default_25,),) ,
+      }, child: Icon(Icons.search,color: textColor,size: D.default_25,),) ,
     );
+  }
+  Widget settingsBtn(){
+    return showSetting?Container(
+      child:IconButton(onPressed: () {
+        MyUtils.navigate(cxt, SettingScreen());
+      }, icon: Icon(Icons.segment,color: textColor,size: D.default_30,),) ,
+    ):Container(width: D.default_30,);
   }
 
 

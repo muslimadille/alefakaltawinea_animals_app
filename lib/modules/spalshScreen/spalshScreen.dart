@@ -103,18 +103,17 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
           alignment:AlignmentDirectional.center,
           children: [
             TransitionImage(Res.SPLASH_BG,width: double.infinity,height:double.infinity,fit:BoxFit.cover),
-            Image.asset(Res.APP_LOGO_NAME,width: D.default_200,height: D.default_200)
+            _logoTitleItem()
 
     ],)
     );
   }
   Widget _logoTitleItem(){
-    return AnimatedSwitcher(
-        duration: Duration(milliseconds: 1000),
-      transitionBuilder: (Widget child, Animation<double> animation) {
-        return  FadeTransition(child: child, opacity: animation);
-      },
-        child:adsSliderProviderModel!.isLoading&&_isLoading?Center(key: Key("1"),child: Image.asset(Res.APP_LOGO_NAME,width: D.default_200,height: D.default_200),):Center(key:Key("2"),child: Image.asset(Res.LOGO_WITHOUT_NAME,width: D.default_150,height: D.default_150)));
+    return TransitionImage(
+      "assets/images/logo_name_blue.png",
+      width: D.default_300,
+      height: D.default_300,
+    );
   }
 
 

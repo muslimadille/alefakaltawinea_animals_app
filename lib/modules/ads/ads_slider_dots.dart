@@ -21,6 +21,7 @@ class AdsSliderDots extends StatelessWidget {
       color: Colors.white,
       width: double.infinity,
       height: D.default_27,
+      margin: EdgeInsets.only(bottom: D.default_5),
       child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
