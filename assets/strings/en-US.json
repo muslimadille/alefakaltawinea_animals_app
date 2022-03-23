@@ -112,7 +112,15 @@
   "descount": "Discount",
   "for": "For",
   "offer_terms": "Offer Terms",
-  "show_code_for": "Reveal the above code to your service provider to read and enjoy the show"
+  "show_code_for": "Reveal the above code to your service provider to read and enjoy the show",
+  "my_carts": "My Carts",
+  "my_info": "Profile",
+  "dont_have_cart_title": "Your carts list is empty",
+  "dont_have_cart_subtitle": "Looks like you haven't added any cards to your hand yet",
+  "add_cart": "Add cart"
+
+
+
 
 
 

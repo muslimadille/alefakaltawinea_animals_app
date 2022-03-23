@@ -1,6 +1,7 @@
 
 import 'package:alefakaltawinea_animals_app/modules/login/data/user_data.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/provider/user_provider_model.dart';
+import 'package:alefakaltawinea_animals_app/modules/spalshScreen/spalshScreen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -8,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_intro/flutter_intro.dart';
 import 'package:provider/provider.dart';
+import '../../modules/categories_screen/mainCategoriesScreen.dart';
 import 'baseDimentions.dart';
 import 'baseTextStyle.dart';
 import 'myColors.dart';
@@ -183,10 +185,13 @@ class MyUtils{
                         InkWell(onTap: ()async{
                           if(utilsProviderModel.isArabic){
                             await utilsProviderModel.setCurrentLocal(context, Locale("ar","EG"));
-                            Navigator.pop(context);
+                            //Navigator.pop(context);
+                            MyUtils.navigate(context, MainCategoriesScreen());
+
                           }else{
                             await utilsProviderModel.setCurrentLocal(context, Locale("en","US"));
-                            Navigator.pop(context);
+                            //Navigator.pop(context);
+                            MyUtils.navigate(context, MainCategoriesScreen());
                           }
                         },child: Container(
                             padding: EdgeInsets.all(D.default_15),

@@ -43,17 +43,17 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
   void initState() {
     super.initState();
     _controller = PersistentTabController(initialIndex: 0);
-    _handelIntro();
+   // _handelIntro();
 }
 
   @override
   Widget build(BuildContext context) {
     bottomBarProviderModel=Provider.of<BottomBarProviderModel>(context,listen: true);
-    return widget.introProviderModel!.intro!=null? _bottomBar():Container();
+    return  _bottomBar();
   }
  
   List<Widget>_screens=[MainCategoriesScreen(),NearToYouScreen(),ProfileScreen(),ProfileScreen(),ProfileScreen(),ProfileScreen()];
-  Intro _myIntro(){
+  /*Intro _myIntro(){
     List<String>descriptionsList=[
       tr("intro_settings"),
       tr("intro_fav"),
@@ -62,8 +62,8 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
       tr("intro_profile_btn"),
     ];
     return MyUtils.myIntro(descriptionsList);
-  }
-  void _handelIntro()async{
+  }*/
+  /*void _handelIntro()async{
 
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
       if(widget.showIntro) {
@@ -73,7 +73,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         if(widget.showIntro) widget.introProviderModel!.intro!.start(context);
       });
     });
-  }
+  }*/
   Widget _bottomBar(){
     return Container(
       padding: EdgeInsets.all(D.default_10),

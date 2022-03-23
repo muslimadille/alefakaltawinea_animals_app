@@ -1,4 +1,6 @@
+import 'package:alefakaltawinea_animals_app/modules/categories_screen/mainCategoriesScreen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
@@ -39,7 +41,8 @@ setCurrentRegionIndex(int value){
       setLanguageState("ar");
       await Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "ar");
     }
-    notifyListeners();
+    //notifyListeners();
+
   }
   setLanguageState(String type){
     if(type=="ar"){

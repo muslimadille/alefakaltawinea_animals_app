@@ -2,11 +2,13 @@ import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/categories_screen/data/categories_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/provider/bottom_bar_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/notifications/provider/notification_provider.dart';
+import 'package:alefakaltawinea_animals_app/modules/serviceProviders/details_screen/service_provider_details_screen.dart';
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/items/service_provider_list_item.dart';
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/provider/sevice_providers_provicer_model.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/action_bar_widget.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
@@ -57,24 +59,28 @@ class _NotificationsScreenState extends State<NotificationsScreen>  {
         itemCount: notificationProvider!.notificationsList.length,
         padding: EdgeInsets.only(top:D.default_10,bottom:D.default_10),
         itemBuilder: (context,index){
-          return  Container(
+          return InkWell(
+            onTap: (){
+              MyUtils.navigate(context, ServiceProviderDetailsScreen(notificationProvider!.notificationsList[index]));
+            },
+            child:  Container(
             margin: EdgeInsets.only(top:D.default_10,bottom:D.default_10),
             height: D.default_80,width: double.infinity,color: C.BASE_BLUE,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-              Container(
-                margin: EdgeInsets.only(left:D.default_10,right: D.default_10),
-                child: TransitionImage(
-                  notificationProvider!.notificationsList[index].photo??"",
-                  fit: BoxFit.cover,
-                  width: D.default_80,
-                  height: D.default_80,
-                  padding: EdgeInsets.all(D.default_10),
-                  backgroundColor: Colors.white,),),
+                Container(
+                  margin: EdgeInsets.only(left:D.default_10,right: D.default_10),
+                  child: TransitionImage(
+                    notificationProvider!.notificationsList[index].photo??"",
+                    fit: BoxFit.cover,
+                    width: D.default_80,
+                    height: D.default_80,
+                    padding: EdgeInsets.all(D.default_10),
+                    backgroundColor: Colors.white,),),
                 Expanded(child: Text(notificationProvider!.notificationsList[index].offers![0].title!,style: S.h4(color: Colors.white),))
-            ],),
-          )
+              ],),
+          ),)
           ;
         }):_noData();
   }

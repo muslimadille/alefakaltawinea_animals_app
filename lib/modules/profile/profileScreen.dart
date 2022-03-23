@@ -45,6 +45,7 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
   final _profileFormGlobalKey = GlobalKey<FormState>();
   BottomBarProviderModel?bottomBarProviderModel;
   UtilsProviderModel?utilsProviderModel;
+  int selectedTap=0;
 
 
   @override
@@ -83,41 +84,61 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
   Widget _ProfileScreen(){
     return Column(
       children:[
-        ActionBarWidget(tr("profile"),context),
+        ActionBarWidget("",context,backgroundColor: Colors.white,textColor: C.BASE_BLUE,enableShadow: false,),
         Expanded(child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               _Logout(),
-              Container(height: D.default_1,color: Colors.grey[200],),
-              Container(
-                padding: EdgeInsets.all(D.default_20),
-                child: Form(
-                  key: _profileFormGlobalKey,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      _name(),
-                      _phone(),
-                      _region(),
-                      Container(height: D.default_1,color: Colors.grey,),
-                      _email(),
-                      _updateBtn(),
-                      Container(height: D.default_1,color: Colors.grey,),
-                      _oldPassword(),
-                      _password(),
-                      _confirmPassword(),
-                      _updatePasswordBtn()
+              _tapsPart(),
+              selectedTap==0?_profileDataScreen():_noCarts()
 
-                    ],
-                  ),
-                ),
-              )
             ],
           ),
         ))]
       ,);
+  }
+  Widget _tapsPart(){
+    return Container(
+      margin: EdgeInsets.only(left: D.default_30,right: D.default_30),
+      child: Row(children: [
+        _myInfoBtn((){
+        setState(() {
+          selectedTap=0;
+        });
+      },tr("my_info")),
+        _myCartsBtn((){
+        setState(() {
+          selectedTap=1;
+        });
+      },tr("my_carts"))
+    ],),);
+  }
+  Widget _profileDataScreen(){
+    return Container(
+      padding: EdgeInsets.all(D.default_20),
+      child: Form(
+        key: _profileFormGlobalKey,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            _name(),
+            _phone(),
+            _region(),
+            Container(height: D.default_1,color: Colors.grey,),
+            _email(),
+            _updateBtn(),
+            Container(height: D.default_1,color: Colors.grey,),
+            _oldPassword(),
+            _password(),
+            _confirmPassword(),
+            _updatePasswordBtn()
+
+          ],
+        ),
+      ),
+    );
   }
   Widget _guestScreen(){
     return Container();
@@ -427,30 +448,26 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
       Icon(Icons.person_pin,color: C.BASE_BLUE,size: D.default_80,),
-       InkWell(onTap: ()async{
+        Expanded(child: Text(Constants.currentUser!.name!,style: S.h1(color: Colors.black87),),),
+
+        InkWell(onTap: ()async{
          await Constants.prefs!.setString(Constants.SAVED_PHONE_KEY!,"");
          await Constants.prefs!.setString(Constants.SAVED_PASSWORD_KEY!,"");
          Apis.TOKEN_VALUE="";
          Constants.currentUser=null;
          userProviderModel!.currentUser=null;
          MyUtils.navigateAsFirstScreen(context, SplashScreen());
-       },child:  Container(
-         margin: EdgeInsets.all(D.default_10),
-         child: Column(children: [
-           Text(Constants.currentUser!.name!,style: S.h1(color: Colors.black87),),
-           Container(
-             padding: EdgeInsets.only(left:D.default_10,right:D.default_10,top:D.default_5,bottom:D.default_5),
-             decoration: BoxDecoration(
-               borderRadius: BorderRadius.circular(D.default_5),
-               color: C.BASE_BLUE,
+       },child: Container(
+          padding: EdgeInsets.only(left:D.default_10,right:D.default_10,top:D.default_5,bottom:D.default_5),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(D.default_5),
+            color: Colors.white,
 
-             ),
-             child: Row(children: [
-               Text(tr("logout"),style: S.h4(color:Colors.white),),
-               Icon(Icons.logout,color: Colors.white,size: D.default_20,)
-             ],),)
-
-         ],),),)
+          ),
+          child: Row(children: [
+            Text(tr("logout"),style: S.h4(color:Colors.black),),
+            Icon(Icons.logout,color: Colors.black,size: D.default_20,)
+          ],),))
     ],),);
   }
   Widget _updateBtn() {
@@ -467,22 +484,22 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
               );
         },
         child: Container(
-          width: D.default_200,
+          width: D.default_120,
           margin: EdgeInsets.all(D.default_30),
           padding: EdgeInsets.only(
-              left: D.default_20,
-              right: D.default_20,
-              top: D.default_10,
-              bottom: D.default_10),
+              left: D.default_10,
+              right: D.default_10,
+              top: D.default_5,
+              bottom: D.default_5),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(D.default_10),
               color: C.BASE_BLUE,
               boxShadow: [
                 BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
-                    offset: Offset(2, 2),
-                    blurRadius: 4,
-                    spreadRadius: 2)
+                    offset: Offset(1, 1),
+                    blurRadius: 1,
+                    spreadRadius: 1)
               ]),
           child: Text(
             tr("edit"),
@@ -505,26 +522,143 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
           );
         },
         child: Container(
-          width: D.default_200,
+          width: D.default_120,
           margin: EdgeInsets.all(D.default_30),
           padding: EdgeInsets.only(
-              left: D.default_20,
-              right: D.default_20,
-              top: D.default_10,
-              bottom: D.default_10),
+              left: D.default_10,
+              right: D.default_10,
+              top: D.default_5,
+              bottom: D.default_5),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(D.default_10),
               color: C.BASE_BLUE,
               boxShadow: [
                 BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
-                    offset: Offset(2, 2),
-                    blurRadius: 4,
-                    spreadRadius: 2)
+                    offset: Offset(1, 1),
+                    blurRadius: 1,
+                    spreadRadius: 1)
               ]),
           child: Text(
             tr("edit"),
             style: S.h2(color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+    );
+  }
+  Widget _myCartsBtn(Function onTap,String title) {
+    return Center(
+      child: InkWell(
+        onTap: () {
+          onTap();
+        },
+        child: Container(
+          width: D.default_130,
+          margin: EdgeInsets.only(left:D.default_30,right: D.default_30),
+          padding: EdgeInsets.only(
+              left: D.default_10,
+              right: D.default_10,
+              top: D.default_10,
+              bottom: D.default_10),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(D.default_10),
+              color: selectedTap==1?C.BASE_BLUE:Colors.grey[600],
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    offset: Offset(1, 1),
+                    blurRadius: 1,
+                    spreadRadius: 1)
+              ]),
+          child: Text(
+            title,
+            style: S.h2(color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+    );
+  }
+  Widget _myInfoBtn(Function onTap,String title) {
+    return Center(
+      child: InkWell(
+        onTap: () {
+          onTap();
+        },
+        child: Container(
+          width: D.default_130,
+          margin: EdgeInsets.only(left:D.default_30,right: D.default_30),
+          padding: EdgeInsets.only(
+              left: D.default_10,
+              right: D.default_10,
+              top: D.default_10,
+              bottom: D.default_10),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(D.default_10),
+              color: selectedTap==0?C.BASE_BLUE:Colors.grey[600],
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    offset: Offset(1, 1),
+                    blurRadius: 1,
+                    spreadRadius: 1)
+              ]),
+          child: Text(
+            title,
+            style: S.h2(color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+    );
+  }
+  Widget _myCartsScreen(){
+    return Container();
+  }
+Widget _noCarts(){
+    return Container(
+      height: MediaQuery.of(context).size.height*0.7,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+        Text(tr("dont_have_cart_title"),style: S.h1(color: C.BASE_BLUE),),
+        Text(tr("dont_have_cart_subtitle"),style: S.h2(color: Colors.grey),),
+        SizedBox(height: D.default_40,),
+        _addCartBtn(),
+          
+        ],),
+    );
+}
+  Widget _addCartBtn() {
+    return Center(
+      child: InkWell(
+        onTap: () {
+
+        },
+        child: Container(
+          width: D.default_250,
+          margin: EdgeInsets.all(D.default_30),
+          padding: EdgeInsets.only(
+              left: D.default_10,
+              right: D.default_10,
+              top: D.default_5,
+              bottom: D.default_5),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(D.default_15),
+              color: C.BASE_BLUE,
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    offset: Offset(1, 1),
+                    blurRadius: 1,
+                    spreadRadius: 1)
+              ]),
+          child: Text(
+            tr("add_cart"),
+            style: S.h1(color: Colors.white),
             textAlign: TextAlign.center,
           ),
         ),
