@@ -63,7 +63,7 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
           widget.showSettings?_actionBar():Container(height: 0,),
           Expanded(child:
             Stack(
-              alignment:AlignmentDirectional.bottomStart,
+              alignment:AlignmentDirectional.bottomEnd,
               children: [
               widget.body,
               Positioned(child: InkWell(

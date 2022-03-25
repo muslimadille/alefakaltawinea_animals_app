@@ -130,6 +130,7 @@ class AdoptionProviderModel with ChangeNotifier{
     if(categoriesList.isNotEmpty){
       getAnimals(categoriesList[0].id!);
     }
+    getMyAnimals();
     notifyListeners();
   }
   void setAnimalsPager(AnimalPagerListModel value){
