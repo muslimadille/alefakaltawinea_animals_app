@@ -5,7 +5,6 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:flutter/material.dart';
-
 import '../../modules/settings/settings_screen.dart';
 
 class ActionBarWidget extends StatelessWidget {
@@ -14,6 +13,7 @@ class ActionBarWidget extends StatelessWidget {
   Color backgroundColor;
   bool showSearch;
   bool enableShadow;
+  bool showShare;
   BuildContext cxt;
   bool showSetting;
    ActionBarWidget(
@@ -23,7 +23,8 @@ class ActionBarWidget extends StatelessWidget {
          this.backgroundColor=C.BASE_BLUE,
          this.showSearch=false,
          this.enableShadow=true,
-         this.showSetting=true
+         this.showSetting=true,
+         this.showShare=false
        });
 
   @override
@@ -46,6 +47,7 @@ class ActionBarWidget extends StatelessWidget {
         children: [
           _backBtn(),
           showSearch?_searchBtn(context):Container(),
+          showShare?_shareBtn(context):Container(),
           Expanded(child: Center(child: Text(title,style: S.h1(color:textColor),),)),
           settingsBtn()
 
@@ -66,6 +68,13 @@ class ActionBarWidget extends StatelessWidget {
       child:InkWell(onTap: () {
         MyUtils.navigate(context, SearchScreen(title));
       }, child: Icon(Icons.search,color: textColor,size: D.default_25,),) ,
+    );
+  }
+  Widget _shareBtn(BuildContext context){
+    return Container(
+      child:InkWell(onTap: () {
+        MyUtils.share();
+      }, child: Icon(Icons.ios_share,color: textColor,size: D.default_25,),) ,
     );
   }
   Widget settingsBtn(){

@@ -60,14 +60,13 @@ class MyApp extends StatelessWidget {
     Constants.utilsProviderModel=utilsProviderModel;
     _initProviders(context);
 
-
-
     return  Constants.utilsProviderModel!.currentLocalName.isNotEmpty? MaterialApp(
       theme: ThemeData(
           primaryColor:C.BASE_BLUE,
           focusColor:C.BASE_BLUE
 
       ),
+
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
         locale: Constants.utilsProviderModel!.currentLocal,

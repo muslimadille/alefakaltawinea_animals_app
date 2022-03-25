@@ -31,7 +31,6 @@ setCurrentRegionIndex(int value){
       currentLocalName="English";
       Constants.SELECTED_LANGUAGE="en";
       setLanguageState("en");
-
       await Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "en");
 
     }
@@ -41,7 +40,7 @@ setCurrentRegionIndex(int value){
       setLanguageState("ar");
       await Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "ar");
     }
-    //notifyListeners();
+    notifyListeners();
 
   }
   setLanguageState(String type){
@@ -52,6 +51,6 @@ setCurrentRegionIndex(int value){
       isArabic=false;
       isEnglish=true;
     }
-    notifyListeners();
+    //notifyListeners();
   }
 }

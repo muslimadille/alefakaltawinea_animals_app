@@ -54,10 +54,16 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     Constants.prefs=prefs;
     if(prefs!.get(Constants.LANGUAGE_KEY!)!=null){
       if(prefs!.get(Constants.LANGUAGE_KEY!)=="ar"){
-        utilsProviderModel!.setCurrentLocal(ctx, Locale("ar","EG"));
+        Constants.utilsProviderModel!.setLanguageState("ar");
+        utilsProviderModel!.setCurrentLocal(ctx, Locale('ar','EG'));
       }else{
-        utilsProviderModel!.setCurrentLocal(ctx, Locale("en","US"));
+        Constants.utilsProviderModel!.setLanguageState("en");
+        utilsProviderModel!.setCurrentLocal(ctx, Locale('en','US'));
       }
+    }else{
+      Constants.utilsProviderModel!.setLanguageState("ar");
+      utilsProviderModel!.setCurrentLocal(ctx, Locale('ar','EG'));
+
     }
     initSavedUser();
   }

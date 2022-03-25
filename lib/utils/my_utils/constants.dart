@@ -14,6 +14,8 @@ class Constants extends Object{
   static List<RegionsModel> REGIONS=[];
   static String MAPS_API_KEY="AIzaSyDuvS1cZBr4opbX8FmSRyuuKixykzVY3So";
   static bool show_adoption_alert=false;
+  static String APP_LINK="https://drive.google.com/file/d/1MTmSYV6-3lBBffcsyZ_g5whBIT_dio3f/view?usp=sharing";
+
 
 
   ///888888888888888888888888888888888888888888888888888888

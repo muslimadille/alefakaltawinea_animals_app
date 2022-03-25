@@ -61,7 +61,32 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
         key: _scaffoldKey,
         body: Column(children: [
           widget.showSettings?_actionBar():Container(height: 0,),
-          Expanded(child: widget.body,),
+          Expanded(child:
+            Stack(
+              alignment:AlignmentDirectional.bottomStart,
+              children: [
+              widget.body,
+              Positioned(child: InkWell(
+                onTap: (){
+                  MyUtils.openwhatsapp(context);
+                },
+                child: Container(
+                width: D.default_70,
+                height: D.default_70,
+                margin: EdgeInsets.all(D.default_20),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(D.default_200),
+                    color: C.BASE_BLUE,
+                    boxShadow:[BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        offset:Offset(1,1),
+                        blurRadius:2,
+                        spreadRadius: 2
+                    )]
+                ),
+                child: Center(child: Icon(Icons.contact_mail,color: Colors.white,),),
+              ),))
+            ],),),
           widget.showBottomBar?HomeTabsScreen(introProviderModel,introProviderModel!=null&&widget.tag=="MainCategoriesScreen"):Container()
         ],),
       ),);

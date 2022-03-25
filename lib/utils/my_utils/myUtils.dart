@@ -8,11 +8,19 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_intro/flutter_intro.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../modules/categories_screen/mainCategoriesScreen.dart';
 import 'baseDimentions.dart';
 import 'baseTextStyle.dart';
 import 'myColors.dart';
+import 'dart:async';
+import 'dart:io';
+import 'package:flutter_share/flutter_share.dart';
+
+import 'package:flutter/material.dart';
+import 'package:path_provider/path_provider.dart';
 
 class MyUtils{
 
@@ -278,6 +286,32 @@ class MyUtils{
 
   static Future<bool> _onWillNotPop() async {
     return  false;
+  }
+  static Future<void> share() async {
+    await FlutterShare.share(
+        title: 'تطبيق أليفك ',
+        linkUrl: Constants.APP_LINK);
+  }
+  static openwhatsapp(BuildContext context) async{
+    var whatsapp ="+201100034032";
+    var whatsappURl_android = "whatsapp://send?phone="+whatsapp+"&text=";
+    var whatappURL_ios ="https://wa.me/$whatsapp?text=${Uri.parse("")}";
+    if(Platform.isIOS){
+      // for iOS phone only
+      if( await canLaunch(whatappURL_ios)){
+        await launch(whatappURL_ios, forceSafariVC: false);
+      }else{
+        await Fluttertoast.showToast(msg: "الرجاء تنزيل whatsapp لتتمكن من التواصل معنا");
+      }
+    }else{
+      // android , web
+      if( await canLaunch(whatsappURl_android)){
+        await launch(whatsappURl_android);
+      }else{
+        await Fluttertoast.showToast(msg: "الرجاء تنزيل whatsapp لتتمكن من التواصل معنا");
+
+      }
+    }
   }
 
 

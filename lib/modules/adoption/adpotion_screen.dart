@@ -218,8 +218,8 @@ Widget _noData(){
                 adoptionProviderModel!.animalPagerListModel!.data![index].photo!.isNotEmpty?adoptionProviderModel!.animalPagerListModel!.data![index].photo!:Res.DEFAULT_IMAGE,
                 radius: D.default_150,
                 fit: BoxFit.cover,
-                width: D.default_120,
-                height: D.default_120,
+                width: D.default_110,
+                height: D.default_110,
 
               ),)),
           Container(

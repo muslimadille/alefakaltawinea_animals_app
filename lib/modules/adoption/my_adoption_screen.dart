@@ -15,9 +15,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'add_adoption_screen.dart';
-import 'animal_details_screen.dart';
 
 class MyAdoptionScreen extends StatefulWidget {
   const MyAdoptionScreen({Key? key}) : super(key: key);
@@ -45,7 +43,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
       tag: "MyAdoptionScreen",
       body: Column(
         children: [
-          ActionBarWidget("", context,backgroundColor: Colors.white,textColor: C.BASE_BLUE,enableShadow: false,),
+          ActionBarWidget("", context,backgroundColor: Colors.white,textColor: C.BASE_BLUE,enableShadow: false,showShare: true,),
           Expanded(
               child:Container(
                 color: Colors.white,
@@ -114,7 +112,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
   Widget _categoryList() {
     return Container(
       margin: EdgeInsets.only(left:D.default_10,right:D.default_10),
-      height: D.default_90,
+      height: D.default_80,
       width: double.infinity,
       child: ListView.builder(
           itemCount: adoptionProviderModel!.categoriesList.length,
@@ -130,8 +128,8 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
                   child: TransitionImage(
                     adoptionProviderModel!.categoriesList[index].photo!,
                     radius: D.default_200,
-                    width: D.default_70,
-                    height: D.default_70,
+                    width: D.default_60,
+                    height: D.default_60,
                     strokeColor: adoptionProviderModel!.selectedCategoryIndex==index?C.ADAPTION_COLOR:Colors.grey,
                     backgroundColor: adoptionProviderModel!.selectedCategoryIndex==index?C.ADAPTION_COLOR:Colors.white,
                     fit: BoxFit.fitWidth,
@@ -147,10 +145,10 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
       child: CustomScrollView(slivers: [
         SliverGrid(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3,
-              crossAxisSpacing: D.default_10,
-              mainAxisSpacing: D.default_10,
-              childAspectRatio: 0.9,
+              crossAxisCount: 2,
+              crossAxisSpacing: D.default_5,
+              mainAxisSpacing: D.default_5,
+              childAspectRatio: 1.18,
             ),
             delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
@@ -183,38 +181,49 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
           }
         },
         child:Container(
-          width: D.default_80,
-          height: D.default_100,
           margin: EdgeInsets.all(D.default_5),
           padding: EdgeInsets.all(D.default_2),
 
           child: Column(
             children: [
               Expanded(
-                  child: Center(child: TransitionImage(
-                    adoptionProviderModel!.myAnimalsPagerListModel!.data![index].photo!,
-                    radius: D.default_300,
-                    fit: BoxFit.cover,
-                    width: D.default_90,
-                    height: D.default_90,
-                  ),)),
+                  child: Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(D.default_150),
+                        color: Colors.white,
+                        boxShadow:[BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            offset:Offset(1,1),
+                            blurRadius:2,
+                            spreadRadius: 2
+                        )]
+                    ),
+                    child: TransitionImage(
+                      adoptionProviderModel!.animalPagerListModel!.data![index].photo!.isNotEmpty?adoptionProviderModel!.animalPagerListModel!.data![index].photo!:Res.DEFAULT_IMAGE,
+                      radius: D.default_150,
+                      fit: BoxFit.cover,
+                      width: D.default_110,
+                      height: D.default_110,
+
+                    ),)),
               Container(
                 child: Center(
                   child: Text(
-                    adoptionProviderModel!.myAnimalsPagerListModel!.data![index].type!,
-                    style: S.h3(color: C.BASE_BLUE),
+                    adoptionProviderModel!.animalPagerListModel!.data![index].type!,
+                    style: S.h1(color: C.BASE_BLUE),
                   ),
                 ),
               ),
               Text(
-                "المزيد..",
-                style: S.h6(color: Colors.grey),
+                tr("more"),
+                style: S.h4(color: Colors.grey),
               )
 
             ],
           ),
         ));
   }
+
 
   List<adoptionCategory> categories = [
     adoptionCategory(),
