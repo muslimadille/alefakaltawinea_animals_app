@@ -11,14 +11,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class RegistrationScreen extends StatefulWidget {
-  const RegistrationScreen({Key? key}) : super(key: key);
+class RegisterationPop extends StatefulWidget {
+  const RegisterationPop({Key? key}) : super(key: key);
 
   @override
-  _RegistrationScreenState createState() => _RegistrationScreenState();
+  _RegisterationPopState createState() => _RegisterationPopState();
 }
 
-class _RegistrationScreenState extends State<RegistrationScreen> with InputValidationMixin {
+class _RegisterationPopState extends State<RegisterationPop> with InputValidationMixin {
   TextEditingController _phoneController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
@@ -43,49 +43,48 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
   Widget build(BuildContext context) {
     userProviderModel = Provider.of<UserProviderModel>(context, listen: true);
 
-    return BaseScreen(
-        showSettings: false,
-        showBottomBar: false,
-        tag: "RegistrationScreen",
-        body: userProviderModel!.isLoading
-            ? LoadingProgress()
-            : SingleChildScrollView(
+    return Container(
+      color: Colors.white.withOpacity(0.93),
+      child: userProviderModel!.isLoading
+          ? LoadingProgress()
+          : SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+                margin: EdgeInsets.only(top: D.default_120,bottom: D.default_30,left: D.default_50,right: D.default_50),
+                child: Center(
+                  child: Text(
+                    tr("register_header2"),
+                    style: S.h1Bold(color: C.ADAPTION_COLOR),
+                    textAlign: TextAlign.center,
+                  ),
+                )),
+            Container(
+              padding: EdgeInsets.only(top: D.default_20,bottom: D.default_20,left: D.default_50,right: D.default_50),
+              child: Form(
+                key: _registerFormGlobalKey,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Container(
-                      margin: EdgeInsets.only(top: D.default_150,bottom: D.default_30,left: D.default_50,right: D.default_50),
-                        child: Center(
-                          child: Text(
-                            tr("register_header"),
-                            style: S.h1Bold(color: C.BASE_BLUE),
-                            textAlign: TextAlign.center,
-                          ),
-                        )),
-                    Container(
-                      padding: EdgeInsets.only(top: D.default_20,bottom: D.default_20,left: D.default_50,right: D.default_50),
-                      child: Form(
-                        key: _registerFormGlobalKey,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            _name(),
-                            _alifakName(),
-                            _email(),
-                            _phone(),
-                            _password(),
-                            _confirmPassword(),
-                            SizedBox(height: D.default_20,),
-                            _registerBtn(),
-                          ],
-                        ),
-                      ),
-                    )
+                    _name(),
+                    _alifakName(),
+                    _email(),
+                    _phone(),
+                    _password(),
+                    _confirmPassword(),
+                    SizedBox(height: D.default_20,),
+                    _registerBtn(),
                   ],
                 ),
-              ));
+              ),
+            )
+          ],
+        ),
+      ),
+    );
   }
 
   Widget _coditions() {
@@ -100,7 +99,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
                     value: true,
                     groupValue: _accept,
                     toggleable: true,
-                    activeColor: C.BASE_BLUE,
+                    activeColor: C.ADAPTION_COLOR,
                     onChanged: (val) {
                       setState(() {
                         _accept = val as bool;
@@ -111,13 +110,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
             ),
             _showTermsError
                 ? Container(
-                    padding: EdgeInsets.only(
-                        left: D.default_20, right: D.default_20),
-                    child: Text(
-                      tr("terms_error"),
-                      style: S.h4(color: Colors.red),
-                    ),
-                  )
+              padding: EdgeInsets.only(
+                  left: D.default_20, right: D.default_20),
+              child: Text(
+                tr("terms_error"),
+                style: S.h4(color: Colors.red),
+              ),
+            )
                 : Container()
           ],
         ));
@@ -142,16 +141,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
               borderSide: BorderSide(color: Colors.grey),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: C.BASE_BLUE),
+              borderSide: BorderSide(color: C.ADAPTION_COLOR),
             ),
             border: UnderlineInputBorder(
-                borderSide: BorderSide(color: C.BASE_BLUE)),
+                borderSide: BorderSide(color: C.ADAPTION_COLOR)),
             errorStyle: S.h4(color: Colors.red),
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           ),
           keyboardType: TextInputType.text,
           obscureText: false,
-          cursorColor: C.BASE_BLUE,
+          cursorColor: C.ADAPTION_COLOR,
           autofocus: false,
         ));
   }
@@ -167,16 +166,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
               borderSide: BorderSide(color: Colors.grey),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: C.BASE_BLUE),
+              borderSide: BorderSide(color: C.ADAPTION_COLOR),
             ),
             border: UnderlineInputBorder(
-                borderSide: BorderSide(color: C.BASE_BLUE)),
+                borderSide: BorderSide(color: C.ADAPTION_COLOR)),
             errorStyle: S.h4(color: Colors.red),
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           ),
           keyboardType: TextInputType.text,
           obscureText: false,
-          cursorColor: C.BASE_BLUE,
+          cursorColor: C.ADAPTION_COLOR,
           autofocus: false,
         ));
   }
@@ -200,16 +199,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
               borderSide: BorderSide(color: Colors.grey),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: C.BASE_BLUE),
+              borderSide: BorderSide(color: C.ADAPTION_COLOR),
             ),
             border: UnderlineInputBorder(
-                borderSide: BorderSide(color: C.BASE_BLUE)),
+                borderSide: BorderSide(color: C.ADAPTION_COLOR)),
             errorStyle: S.h4(color: Colors.red),
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           ),
           keyboardType: TextInputType.text,
           obscureText: false,
-          cursorColor: C.BASE_BLUE,
+          cursorColor: C.ADAPTION_COLOR,
           autofocus: false,
         ));
   }
@@ -238,10 +237,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
                 borderSide: BorderSide(color: Colors.grey),
               ),
               focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: C.BASE_BLUE),
+                borderSide: BorderSide(color: C.ADAPTION_COLOR),
               ),
               border: UnderlineInputBorder(
-                  borderSide: BorderSide(color: C.BASE_BLUE)),
+                  borderSide: BorderSide(color: C.ADAPTION_COLOR)),
               errorStyle: S.h4(color: Colors.red),
               contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
               suffixIcon: IconButton(
@@ -261,7 +260,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
               )),
           keyboardType: TextInputType.text,
           obscureText: passwordobsecure,
-          cursorColor: C.BASE_BLUE,
+          cursorColor: C.ADAPTION_COLOR,
           autofocus: false,
         ));
   }
@@ -290,10 +289,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
                 borderSide: BorderSide(color: Colors.grey),
               ),
               focusedBorder: UnderlineInputBorder(
-                borderSide: BorderSide(color: C.BASE_BLUE),
+                borderSide: BorderSide(color: C.ADAPTION_COLOR),
               ),
               border: UnderlineInputBorder(
-                  borderSide: BorderSide(color: C.BASE_BLUE)),
+                  borderSide: BorderSide(color: C.ADAPTION_COLOR)),
               errorStyle: S.h4(color: Colors.red),
               contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
               suffixIcon: IconButton(
@@ -313,7 +312,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
               )),
           keyboardType: TextInputType.text,
           obscureText: confirmpasswordobsecure,
-          cursorColor: C.BASE_BLUE,
+          cursorColor: C.ADAPTION_COLOR,
           autofocus: false,
         ));
   }
@@ -340,16 +339,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
               borderSide: BorderSide(color: Colors.grey),
             ),
             focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: C.BASE_BLUE),
+              borderSide: BorderSide(color: C.ADAPTION_COLOR),
             ),
             border: UnderlineInputBorder(
-                borderSide: BorderSide(color: C.BASE_BLUE)),
+                borderSide: BorderSide(color: C.ADAPTION_COLOR)),
             errorStyle: S.h4(color: Colors.red),
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           ),
           keyboardType: TextInputType.phone,
           obscureText: false,
-          cursorColor: C.BASE_BLUE,
+          cursorColor: C.ADAPTION_COLOR,
           autofocus: false,
         ));
   }
@@ -358,7 +357,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
     return Center(
       child: InkWell(
         onTap: () {
-           _onRegisterClicked();
+          _onRegisterClicked();
         },
         child: Container(
           width: D.default_250,
@@ -370,7 +369,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
               bottom: D.default_10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(D.default_10),
-              color: C.BASE_BLUE,
+              color: C.ADAPTION_COLOR,
               boxShadow: [
                 BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
@@ -391,7 +390,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
   Widget _header() {
     return Container(
       padding: EdgeInsets.all(D.default_10),
-      color: C.BASE_BLUE,
+      color: C.ADAPTION_COLOR,
       child: Center(
         child: Text(
           tr("profile_info"),

@@ -42,10 +42,10 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
         children: [
           Container(
             margin: EdgeInsets.only(top:D.default_150,bottom: D.default_30),
-              child: Center(child: Text(tr("welcome_back"),style: S.h1(color: C.BASE_BLUE),textAlign: TextAlign.center,),)),
+              child: Center(child: Text(tr("welcome_back"),style: S.h1Bold(color: C.BASE_BLUE),textAlign: TextAlign.center,),)),
           _header(),
           Container(
-            padding: EdgeInsets.all(D.default_20),
+            padding: EdgeInsets.all(D.default_50),
             child: Form(
               key: _loginFormGlobalKey,
               child: Column(
@@ -67,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
         _onLoginClicked();
       },
       child: Container(
-        width: D.default_200,
+        width: D.default_150,
         margin: EdgeInsets.all(D.default_30),
         padding: EdgeInsets.only(left:D.default_20,right: D.default_20,top: D.default_10,bottom: D.default_10),
         decoration: BoxDecoration(
@@ -80,12 +80,12 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
                 spreadRadius: 2
             )]
         ),
-        child: Text(tr("login"),style: S.h2(color: Colors.white),textAlign:TextAlign.center ,),),),);
+        child: Text(tr("login"),style: S.h1(color: Colors.white),textAlign:TextAlign.center ,),),),);
   }
   Widget _header(){
     return Container(
       padding: EdgeInsets.all(D.default_10),
-      child: Center(child: Text(tr("login_header"),style: S.h1(color: C.BASE_BLUE),textAlign: TextAlign.center,),),);
+      child: Center(child: Text(tr("login_header"),style: S.h1Bold(color: C.BASE_BLUE),textAlign: TextAlign.center,),),);
   }
   Widget _password(){
     return Container(
@@ -105,8 +105,8 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
           } ,
           style: S.h4(color: Colors.black),
           decoration:  InputDecoration(
-            hintText: tr("enter_password"),
-            hintStyle:S.h2(color: Colors.grey) ,
+            labelText: tr("enter_password"),
+            labelStyle:S.h2(color: Colors.grey) ,
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ) ,
@@ -148,8 +148,8 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
             }
           },
           decoration:  InputDecoration(
-            hintText: tr("enter_phone"),
-            hintStyle:S.h2(color: Colors.grey) ,
+            labelText: tr("phone"),
+            labelStyle:S.h2(color: Colors.grey) ,
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),
             ) ,

@@ -45,7 +45,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
       tag: "MyAdoptionScreen",
       body: Column(
         children: [
-          ActionBarWidget(tr("adoption"), context,backgroundColor: Colors.white,textColor: C.ADAPTION_COLOR,enableShadow: false,),
+          ActionBarWidget("", context,backgroundColor: Colors.white,textColor: C.BASE_BLUE,enableShadow: false,),
           Expanded(
               child:Container(
                 color: Colors.white,
@@ -75,6 +75,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
         }
       },
       child: Container(
+        width: D.default_200,
           margin: EdgeInsets.only(left:D.default_10,right:D.default_10),
           padding: EdgeInsets.only(top:D.default_10,bottom:D.default_10,left:D.default_20,right:D.default_20),
           decoration: BoxDecoration(
@@ -84,7 +85,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
           child: Center(
             child: Text(
               tr("add_adoption"),
-              style: S.h4(color: Colors.white),
+              style: S.h1(color: Colors.white),
               textAlign: TextAlign.center,
             ),
           )),
@@ -93,7 +94,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
   Widget _myOffersBtn() {
     return Container(
         margin: EdgeInsets.only(left:D.default_10,right:D.default_10),
-        padding: EdgeInsets.only(top:D.default_10,bottom:D.default_10,left:D.default_20,right:D.default_20),
+        padding: EdgeInsets.only(top:D.default_8,bottom:D.default_8,left:D.default_30,right:D.default_30),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(D.default_15),
           color: C.ADAPTION_COLOR,
@@ -101,7 +102,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
         child: Center(
           child: Text(
             tr("my_adoption"),
-            style: S.h4(color: Colors.white),
+            style: S.h2(color: Colors.white),
             textAlign: TextAlign.center,
           ),
         ));
@@ -164,8 +165,8 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
     return Center(child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("صفحتك للتبني فارغة",style: S.h1(color: C.ADAPTION_COLOR),),
-        Text("يبدو أنك لم تقم بإضافة أي اليف في صفحتك حتي الأن",style: S.h3(color: Colors.grey),),
+        Text(tr("empty_adoption"),style: S.h1Bold(color: C.ADAPTION_COLOR),),
+        Text(tr("u_dont_add_adoption"),style: S.h3(color: Colors.grey),),
         SizedBox(height: D.default_20,),
         Container(
           margin: EdgeInsets.all(D.default_30),

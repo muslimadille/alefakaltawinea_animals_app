@@ -628,7 +628,7 @@ Widget _noCarts(){
         Text(tr("dont_have_cart_subtitle"),style: S.h2(color: Colors.grey),),
         SizedBox(height: D.default_40,),
         _addCartBtn(),
-          
+
         ],),
     );
 }

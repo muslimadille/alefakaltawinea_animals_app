@@ -16,6 +16,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'add_adoption_screen.dart';
+import 'adoption_register_pop.dart';
 import 'animal_details_screen.dart';
 import 'my_adoption_screen.dart';
 
@@ -43,24 +44,29 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
       showSettings: false,
       showBottomBar: true,
       tag: "AdoptionScreen",
-      body: Column(
+      body: Stack(
+        fit:StackFit.expand,
         children: [
-          ActionBarWidget(tr(""), context,backgroundColor: Colors.white,textColor: C.BASE_BLUE,enableShadow: false,),
-          Expanded(
-              child:Container(
-                color: Colors.white,
-                child: Column(
-                children: [
-                  _categoryList(),
-                  Row(children: [
-                    Expanded(child: _addBtn(),),
-                    Expanded(child: _myOffersBtn(),),
-                  ],),
-                  adoptionProviderModel!.isLoading?Expanded(child: LoadingProgress()): Expanded(flex: 1,child: _animalsList())
-                ],
-              ),))
-        ],
-      ),
+          Column(
+            children: [
+              ActionBarWidget(tr(""), context,backgroundColor: Colors.white,textColor: C.BASE_BLUE,enableShadow: false,),
+              Expanded(
+                  child:Container(
+                    color: Colors.white,
+                    child: Column(
+                      children: [
+                        _categoryList(),
+                        Row(children: [
+                          Expanded(child: _addBtn(),),
+                          Expanded(child: _myOffersBtn(),),
+                        ],),
+                        adoptionProviderModel!.isLoading?Expanded(child: LoadingProgress()): Expanded(flex: 1,child: _animalsList())
+                      ],
+                    ),))
+            ],
+          ),
+          Constants.currentUser!=null?Container():RegisterationPop()
+        ],)
     );
   }
 
@@ -74,7 +80,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
         }
       },
       child: Container(
-          margin: EdgeInsets.only(left:D.default_10,right:D.default_10),
+          margin: EdgeInsets.only(left:D.default_20,right:D.default_20),
           padding: EdgeInsets.only(top:D.default_10,bottom:D.default_10,left:D.default_20,right:D.default_20),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(D.default_15),
@@ -83,7 +89,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
           child: Center(
             child: Text(
               tr("add_adoption"),
-              style: S.h4(color: Colors.white),
+              style: S.h2(color: Colors.white),
               textAlign: TextAlign.center,
             ),
           )),
@@ -99,7 +105,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
         }
       },
       child: Container(
-          margin: EdgeInsets.only(left:D.default_10,right:D.default_10),
+          margin: EdgeInsets.only(left:D.default_20,right:D.default_20),
           padding: EdgeInsets.only(top:D.default_10,bottom:D.default_10,left:D.default_20,right:D.default_20),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(D.default_15),
@@ -108,7 +114,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
           child: Center(
             child: Text(
               tr("my_adoption"),
-              style: S.h4(color: Colors.white),
+              style: S.h2(color: Colors.white),
               textAlign: TextAlign.center,
             ),
           )),
@@ -121,7 +127,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
   Widget _categoryList() {
     return Container(
       margin: EdgeInsets.only(left:D.default_10,right:D.default_10),
-      height: D.default_90,
+      height: D.default_80,
       width: double.infinity,
       child: ListView.builder(
           itemCount: adoptionProviderModel!.categoriesList.length,
@@ -138,8 +144,8 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                   TransitionImage(
                   adoptionProviderModel!.categoriesList[index].photo!,
                   radius: D.default_200,
-                  width: D.default_70,
-                  height: D.default_70,
+                  width: D.default_60,
+                  height: D.default_60,
                   strokeColor: adoptionProviderModel!.selectedCategoryIndex==index?C.ADAPTION_COLOR:Colors.grey,
                   backgroundColor: adoptionProviderModel!.selectedCategoryIndex==index?C.ADAPTION_COLOR:Colors.white,
                   fit: BoxFit.fitWidth,
@@ -155,10 +161,10 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
       child: CustomScrollView(slivers: [
       SliverGrid(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            crossAxisSpacing: D.default_10,
-            mainAxisSpacing: D.default_10,
-            childAspectRatio: 0.9,
+            crossAxisCount: 2,
+            crossAxisSpacing: D.default_5,
+            mainAxisSpacing: D.default_5,
+            childAspectRatio: 1.18,
           ),
           delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
@@ -178,7 +184,7 @@ Widget _noData(){
           height: D.default_80,
         ),
         SizedBox(height: D.default_20,),
-        Text("لا توجد حيوانات متاحة حاليا في هذا القسم",style: S.h3(color: C.BASE_BLUE),)
+        Text(tr("no_animals"),style: S.h3(color: C.BASE_BLUE),)
       ],),);
 }
   Widget _animalsListItem(int index) {
@@ -191,32 +197,42 @@ Widget _noData(){
         }
       },
       child:Container(
-      width: D.default_80,
-      height: D.default_100,
       margin: EdgeInsets.all(D.default_5),
       padding: EdgeInsets.all(D.default_2),
 
       child: Column(
         children: [
           Expanded(
-              child: Center(child: TransitionImage(
-                adoptionProviderModel!.animalPagerListModel!.data![index].photo!,
-                radius: D.default_300,
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(D.default_150),
+                    color: Colors.white,
+                    boxShadow:[BoxShadow(
+                        color: Colors.grey.withOpacity(0.5),
+                        offset:Offset(1,1),
+                        blurRadius:2,
+                        spreadRadius: 2
+                    )]
+                ),
+                child: TransitionImage(
+                adoptionProviderModel!.animalPagerListModel!.data![index].photo!.isNotEmpty?adoptionProviderModel!.animalPagerListModel!.data![index].photo!:Res.DEFAULT_IMAGE,
+                radius: D.default_150,
                 fit: BoxFit.cover,
-                width: D.default_90,
-                height: D.default_90,
+                width: D.default_120,
+                height: D.default_120,
+
               ),)),
           Container(
             child: Center(
               child: Text(
                 adoptionProviderModel!.animalPagerListModel!.data![index].type!,
-                style: S.h3(color: C.BASE_BLUE),
+                style: S.h1(color: C.BASE_BLUE),
               ),
             ),
           ),
           Text(
-            "المزيد..",
-            style: S.h6(color: Colors.grey),
+            tr("more"),
+            style: S.h4(color: Colors.grey),
           )
 
         ],
@@ -233,6 +249,11 @@ Widget _noData(){
     adoptionCategory(),
     adoptionCategory()
   ];
+}
+Widget _registerPopUp(){
+  return Container(
+
+  );
 }
 
 class adoptionCategory {

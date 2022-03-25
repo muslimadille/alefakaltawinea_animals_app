@@ -5,7 +5,7 @@ import 'package:alefakaltawinea_animals_app/modules/categories_screen/provider/c
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../utils/my_utils/myColors.dart';
@@ -56,39 +56,50 @@ class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
         ],));
   }
   Widget _adotionAlert(){
-    return Container(
+    return Directionality(textDirection: TextDirection.rtl, child: Container(
       color: Colors.white.withOpacity(0.8),
-      child: Column(children: [
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
         Expanded(child: Container()),
         Container(
           padding: EdgeInsets.all(D.default_10),
-          color: C.ADAPTION_COLOR.withOpacity(0.8),
+          color: C.ADAPTION_COLOR,
           height: D.default_200,
           width: double.infinity,
-          child: Column(children: [
-            Expanded(child: Container(
-              margin: EdgeInsets.only(right: D.default_10,top:D.default_10),
-              child: Text(tr("hadeth"),style: S.h2(color: Colors.white),),),),
-            InkWell(
-              onTap: (){
-                categoriesProviderModel!.showHadeth=false;
-                categoriesProviderModel!.notifyListeners();
-                MyUtils.navigate(context, AdoptionScreen());
-              },
-              child: Container(child:
-            Row(children: [
-              Checkbox(
-                  side: BorderSide(color: Colors.white),
-                  value: false, onChanged: (value){
-                categoriesProviderModel!.showHadeth=false;
-                categoriesProviderModel!.notifyListeners();
-                MyUtils.navigate(context, AdoptionScreen());
-              }),
-              Text(tr("hadeth_check"),style: S.h3(color: Colors.white),)
-            ],),),)
-          ],),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(child: Container(
+                margin: EdgeInsets.only(right: D.default_10,top:D.default_10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                  Text(tr("hadeth_start"),style: S.h1(color: Colors.orangeAccent),),
+                  Text(tr("hadeth")+tr("hadeth_end"),style: S.h1(color: Colors.white),),
+                ],),),),
+              InkWell(
+                onTap: (){
+                  categoriesProviderModel!.showHadeth=false;
+                  categoriesProviderModel!.notifyListeners();
+                  MyUtils.navigate(context, AdoptionScreen());
+                },
+                child: Container(child:
+                Row(children: [
+                  Checkbox(
+                      side: BorderSide(color: Colors.white),
+                      checkColor: Colors.white,
+                      activeColor: Colors.white,
+                      value: true, onChanged: (value){
+                    categoriesProviderModel!.showHadeth=false;
+                    categoriesProviderModel!.notifyListeners();
+                    MyUtils.navigate(context, AdoptionScreen());
+                  }),
+                  Text(tr("hadeth_check"),style: S.h2(color: Colors.white),)
+                ],),),)
+            ],),
         )
       ],),
-    );
+    ));
   }
 }

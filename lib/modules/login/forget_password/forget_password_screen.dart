@@ -44,16 +44,17 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> with InputV
       body:  Form(
         key:_registerFormGlobalKey ,
         child: Container(
+          padding: EdgeInsets.all(D.default_50),
             child:Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SizedBox(height: D.default_150,),
+                SizedBox(height: D.default_200,),
                 _header(),
-                _operationMessage(),
-                SizedBox(height: D.default_100,),
+                //_operationMessage(),
+                SizedBox(height: D.default_80,),
                 _password(),
                 _confirmPassword(),
-                SizedBox(height: D.default_30,),
+                SizedBox(height: D.default_50,),
                 _submitBtn(context),
 
               ],)

@@ -34,13 +34,14 @@ class _PhoneScreenState extends State<PhoneScreen> with InputValidationMixin{
           child:Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: D.default_150,),
+              SizedBox(height: MediaQuery.of(context).size.height*0.35,),
               _header(),
-              _operationMessage(),
-              SizedBox(height: D.default_100,),
+              //_operationMessage(),
+              SizedBox(height: D.default_20,),
               _phone(),
               SizedBox(height: D.default_30,),
               _nextBtn(),
+              SizedBox(height: D.default_80,),
               _loginPart()
 
             ],)
@@ -91,7 +92,8 @@ class _PhoneScreenState extends State<PhoneScreen> with InputValidationMixin{
   }
   Widget _header(){
     return Container(
-        child: Center(child: Text(widget.title,style: S.h1(color: C.BASE_BLUE),textAlign: TextAlign.center,),));
+        child:
+        Center(child: Text(widget.title,style: S.h1(color: C.BASE_BLUE),textAlign: TextAlign.center,),));
   }
   Widget _operationMessage(){
     return Container(
@@ -118,7 +120,7 @@ class _PhoneScreenState extends State<PhoneScreen> with InputValidationMixin{
                   spreadRadius: 2
               )]
           ),
-          child: Center(child: Text(tr('send'),style: S.h1(color: Colors.white),textAlign: TextAlign.center,),)),);
+          child: Center(child: Text(widget.otpFalge!="ForgetPasswordScreen"?tr('send'):tr('return'),style: S.h1(color: Colors.white),textAlign: TextAlign.center,),)),);
   }
   Widget _loginPart(){
     return Container(

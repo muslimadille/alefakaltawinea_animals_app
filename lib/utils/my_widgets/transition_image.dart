@@ -126,7 +126,7 @@ class _TransitionImageState extends State<TransitionImage> {
         : widget.url.isEmpty
         ? Image.asset(
       Res.DEFAULT_IMAGE,
-      fit: widget.fit ?? BoxFit.contain,
+      fit: widget.fit ?? BoxFit.cover,
       color: widget.fillColor,
     )
         : widget.url.contains("assets")

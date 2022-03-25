@@ -52,10 +52,10 @@ class _OtpScreenState extends State<OtpScreen> {
           child:Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: D.default_150,),
+              SizedBox(height: D.default_250,),
               _header(),
               _operationMessage(),
-              SizedBox(height: D.default_100,),
+              SizedBox(height: D.default_30,),
               _otpField(),
               _useCodeBtn(),
               SizedBox(height: D.default_10,),
@@ -66,7 +66,7 @@ class _OtpScreenState extends State<OtpScreen> {
   }
   Widget _header(){
     return Container(
-        child: Center(child: Text(widget.title,style: S.h1(color: C.BASE_BLUE),textAlign: TextAlign.center,),));
+        child: Center(child: Text(tr("active_acount"),style: S.h1(color: C.BASE_BLUE),textAlign: TextAlign.center,),));
   }
   Widget _operationMessage(){
     return Container(

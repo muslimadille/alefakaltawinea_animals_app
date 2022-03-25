@@ -117,40 +117,12 @@
   "my_info": "Profile",
   "dont_have_cart_title": "Your carts list is empty",
   "dont_have_cart_subtitle": "Looks like you haven't added any cards to your hand yet",
-  "add_cart": "Add cart"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  "add_cart": "Add cart",
+  "more": "More...",
+  "return": "recovery",
+  "active_acount": "Account Activation",
+  "enter_alifakname": "alifak name",
+  "empty_adoption": "Your adoption page is empty",
+  "u_dont_add_adoption": "you looks like dont add any animal",
+  "register_header2":"Welcome\nWe need a minute from you\n Fill in the information to create your own account"
 }
