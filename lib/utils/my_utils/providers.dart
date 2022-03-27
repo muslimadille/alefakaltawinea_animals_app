@@ -51,6 +51,6 @@ setCurrentRegionIndex(int value){
       isArabic=false;
       isEnglish=true;
     }
-    //notifyListeners();
+    notifyListeners();
   }
 }
