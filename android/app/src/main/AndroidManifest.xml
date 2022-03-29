@@ -11,7 +11,7 @@
 
     <application
 
-        android:label="alefakaltawinea_animals_app"
+        android:label="Alefak"
         android:name="${applicationName}"
         android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher">
