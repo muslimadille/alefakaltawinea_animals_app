@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'modules/adoption/provider/adoption_provider_model.dart';
 import 'modules/ads/provider/ads_slider_provider.dart';
+import 'modules/cart/provider/cart_provider.dart';
 import 'modules/categories_screen/provider/categories_provider_model.dart';
 import 'modules/homeTabsScreen/provider/bottom_bar_provider_model.dart';
 import 'modules/homeTabsScreen/provider/intro_provider_model.dart';
@@ -40,6 +41,7 @@ void main() async{
       ChangeNotifierProvider<OtpProviderModel>(create: (ctx) => OtpProviderModel(),),
       ChangeNotifierProvider<AdoptionProviderModel>(create: (ctx) => AdoptionProviderModel(),),
       ChangeNotifierProvider<NotificationProvider>(create: (ctx) => NotificationProvider(),),
+      ChangeNotifierProvider<CartProvider>(create: (ctx) => CartProvider(),),
 
     ],
     child: EasyLocalization(
@@ -59,7 +61,7 @@ class MyApp extends StatelessWidget {
     utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: true);
     Constants.utilsProviderModel=utilsProviderModel;
     _initProviders(context);
-
+    utilsProviderModel.isArabic?utilsProviderModel.setCurrentLocal(context, Locale('ar', 'EG')):utilsProviderModel.setCurrentLocal(context, Locale('en', 'US'));
     return  Constants.utilsProviderModel!.currentLocalName.isNotEmpty? MaterialApp(
       theme: ThemeData(
           primaryColor:C.BASE_BLUE,

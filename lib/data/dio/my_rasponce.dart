@@ -6,6 +6,11 @@ import 'package:alefakaltawinea_animals_app/modules/login/data/user_data.dart';
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/data/serviceProvidersModel.dart';
 import 'package:alefakaltawinea_animals_app/modules/spalshScreen/data/regions_model.dart';
 
+import '../../modules/cart/add_cart_respose_model.dart';
+import '../../modules/cart/my_carts_model.dart';
+import '../../modules/offers/offer_details/offer_code_model.dart';
+import '../../modules/spalshScreen/data/app_info_model.dart';
+
 class MyResponse<T> extends Object {
   final TAG = "MyResponse";
 
@@ -73,7 +78,21 @@ class MyResponse<T> extends Object {
       case AnimalPagerListModel:
         _data = AnimalPagerListModel.fromJson(json) as T;
         break;
-
+      case AppInfoModel:
+        _data = AppInfoModel.fromJson(json) as T;
+        break;
+      case AddCartResponseModel:
+        _data = AddCartResponseModel.fromJson(json) as T;
+        break;
+      case MyCartsModel:
+        _data = MyCartsModel.fromJson(json) as T;
+        break;
+      case String:
+        _data = json as T;
+        break;
+      case OfferCodeModel:
+        _data = OfferCodeModel.fromJson(json) as T;
+        break;
       default:_data = null;
     }
   }

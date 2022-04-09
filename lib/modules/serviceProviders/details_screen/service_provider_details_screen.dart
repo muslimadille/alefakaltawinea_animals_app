@@ -110,7 +110,7 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
                     child: Text(widget.serviceProviderData.address!,style: S.h4(color: Colors.grey),),)),
                   InkWell(onTap: (){
                     _launchMapsUrl(
-                        widget.serviceProviderData.latitude!.isNotEmpty?double.parse(widget.serviceProviderData!.latitude!):0.0,
+                        widget.serviceProviderData.latitude!.isNotEmpty?double.parse(widget.serviceProviderData.latitude!):0.0,
                         widget.serviceProviderData.longitude!.isNotEmpty?double.parse(widget.serviceProviderData.longitude!):0.0);
                   },child:  Container(
                     padding: EdgeInsets.only(left: D.default_10,right: D.default_10,top: D.default_5,bottom: D.default_5),
@@ -183,7 +183,7 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
     ],);
   }
   _launchURLBrowser() async {
-    final String ure=widget.serviceProviderData.website!??"";
+    final String ure=widget.serviceProviderData.website??"";
     String  url = ure;
     if (await canLaunch(url)) {
       await launch(url);

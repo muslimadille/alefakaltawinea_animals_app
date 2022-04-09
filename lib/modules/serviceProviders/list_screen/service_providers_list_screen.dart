@@ -88,7 +88,7 @@ class _ServiceProviderListScreenState extends State<ServiceProviderListScreen>  
         }):Center(child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("لا توجد عروض متاحة حاليا في هذا القسم",style: S.h3(color:Color(int.parse(widget.selectedCategory!.color!.replaceAll("#", "0xff"))) ),)
+        Text(tr("no_offers"),style: S.h3(color:Color(int.parse(widget.selectedCategory!.color!.replaceAll("#", "0xff"))) ),)
       ],),);
   }
   Widget _actionBar(){

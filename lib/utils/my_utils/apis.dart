@@ -41,8 +41,15 @@ class Apis{
   static String ADD_FAV="${BASE_URL}/add-fav";
   static String GET_FAV="${BASE_URL}/favs";
   ///................notification.............
-
   static String GET_NOTIFICATIONS="${BASE_URL}/notifications";
+  ///.................static info......................
+
+  static String GET_APP_INFO="${BASE_URL}/static_info";
+  ///.............. CARTS..................................
+  static String UPLOAD_CART_IMAGE="${BASE_URL}/upload-photo";
+  static String ADD_CART="${BASE_URL}/add-card";
+  static String USER_CART="${BASE_URL}/my-cards";
+  static String USE_OFFER="${BASE_URL}/use-offer";
 
 
 

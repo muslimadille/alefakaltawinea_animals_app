@@ -73,7 +73,7 @@ class _ServiceProviderOffersScreenState extends State<ServiceProviderOffersScree
         height: D.default_60,
     ),
     SizedBox(height: D.default_20,),
-    Text("لا توجد عروض متاحة حاليا",style: S.h3(color: C.BASE_BLUE),)
+    Text(tr("no_offers"),style: S.h3(color: C.BASE_BLUE),)
     ],),);
   }
 }

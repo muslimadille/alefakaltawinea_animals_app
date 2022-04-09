@@ -126,5 +126,25 @@
   "enter_alifakname": "alifak name",
   "empty_adoption": "Your adoption page is empty",
   "u_dont_add_adoption": "you looks like dont add any animal",
-  "register_header2":"Welcome\nWe need a minute from you\n Fill in the information to create your own account"
+  "register_header2":"Welcome\nWe need a minute from you\n Fill in the information to create your own account",
+  "subscribe": "Subscribe",
+  "intro_title": "welcome with us\nAlefak co-operative card\nThe first pet co-op discount card",
+  "skip": "Skip",
+  "intro_cost_title": "Only 199 riyals and the tax is on us",
+  "intro_offer_for_u": "Plus exclusive offers for you",
+  "clinic": "veterinary clinics",
+  "home_care": "Home care",
+  "pet_stores": "Pet stores",
+  "adoption_offers": "Adoption offers",
+  "intro_title_tow": "And get discounts and free services for your pet",
+  "no_offers": "There are no offers available at the moment"
+
+
+
+
+
+
+
+
+
 }

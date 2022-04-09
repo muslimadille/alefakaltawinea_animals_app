@@ -41,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            margin: EdgeInsets.only(top:D.default_150,bottom: D.default_30),
+            margin: EdgeInsets.only(top:D.default_50,bottom: D.default_30),
               child: Center(child: Text(tr("welcome_back"),style: S.h1Bold(color: C.BASE_BLUE),textAlign: TextAlign.center,),)),
           _header(),
           Container(
@@ -120,7 +120,7 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
                 setState(() {
                   passwordobsecure?passwordobsecure=false:passwordobsecure=true;
                 });
-              },icon: Icon((passwordobsecure??false) ? Icons.visibility_off : Icons.visibility,color: Colors.grey,),),
+              },icon: Icon((passwordobsecure) ? Icons.visibility_off : Icons.visibility,color: Colors.grey,),),
             errorStyle: S.h4(color: Colors.red),
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           ),

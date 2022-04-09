@@ -55,7 +55,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Container(
-                      margin: EdgeInsets.only(top: D.default_150,bottom: D.default_30,left: D.default_50,right: D.default_50),
+                      margin: EdgeInsets.only(top: D.default_30,bottom: D.default_30,left: D.default_50,right: D.default_50),
                         child: Center(
                           child: Text(
                             tr("register_header"),
@@ -253,7 +253,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
                   });
                 },
                 icon: Icon(
-                  (passwordobsecure ?? false)
+                  (passwordobsecure)
                       ? Icons.visibility_off
                       : Icons.visibility,
                   color: Colors.grey,

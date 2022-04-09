@@ -72,6 +72,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   void initState() {
     super.initState();
     getRegions();
+    getAppInfo();
     userProviderModel=Provider.of<UserProviderModel>(context,listen: false);
     //intro=_myIntro();
     _initPref(context);
@@ -131,6 +132,12 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   void getRegions(){
     regionsApi.getRegions().then((value) {
       Constants.REGIONS=value.data;
+    });
+
+  }
+  void getAppInfo(){
+    regionsApi.getAppInfo().then((value) {
+      Constants.APP_INFO=value.data;
     });
 
   }

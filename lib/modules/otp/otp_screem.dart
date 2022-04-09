@@ -52,7 +52,6 @@ class _OtpScreenState extends State<OtpScreen> {
           child:Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              SizedBox(height: D.default_250,),
               _header(),
               _operationMessage(),
               SizedBox(height: D.default_30,),

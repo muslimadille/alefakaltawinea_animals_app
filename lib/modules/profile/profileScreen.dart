@@ -1,5 +1,6 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/provider/bottom_bar_provider_model.dart';
+import 'package:alefakaltawinea_animals_app/modules/intro/intro_screen.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/data/user_data.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/provider/user_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/spalshScreen/data/regions_model.dart';
@@ -15,9 +16,13 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/action_bar_widget.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../cart/add_cart_screen.dart';
+import '../cart/my_carts_model.dart';
+import '../cart/provider/cart_provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -46,18 +51,19 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
   BottomBarProviderModel?bottomBarProviderModel;
   UtilsProviderModel?utilsProviderModel;
   int selectedTap=0;
+  List<MyCart>myCarts=[];
+  CartProvider? cartProvider;
 
 
   @override
   void initState() {
     super.initState();
+    cartProvider=Provider.of<CartProvider>(context,listen: false);
     bottomBarProviderModel=Provider.of<BottomBarProviderModel>(context,listen: false);
     utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: false);
-
-
     if(Constants.currentUser!=null){
       userProviderModel = Provider.of<UserProviderModel>(context, listen: false);
-
+      cartProvider!.getMyCart();
       _initUserData();
     }
   }
@@ -71,6 +77,8 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
     bottomBarProviderModel=Provider.of<BottomBarProviderModel>(context,listen: true);
     userProviderModel = Provider.of<UserProviderModel>(context, listen: true);
     utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: true);
+    cartProvider=Provider.of<CartProvider>(context,listen: true);
+
 
     return BaseScreen(
       showSettings: false,
@@ -85,21 +93,19 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
     return Column(
       children:[
         ActionBarWidget("",context,backgroundColor: Colors.white,textColor: C.BASE_BLUE,enableShadow: false,),
-        Expanded(child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              _Logout(),
-              _tapsPart(),
-              selectedTap==0?_profileDataScreen():_noCarts()
-
-            ],
-          ),
+        Expanded(child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            _Logout(),
+            _tapsPart(),
+            selectedTap==0?Expanded(child: _profileDataScreen()):Expanded(child: cartProvider!.myCarts.isNotEmpty?_myCartsScreen():_noCarts())
+          ],
         ))]
       ,);
   }
   Widget _tapsPart(){
     return Container(
+      height: D.default_50,
       margin: EdgeInsets.only(left: D.default_30,right: D.default_30),
       child: Row(children: [
         _myInfoBtn((){
@@ -115,7 +121,7 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
     ],),);
   }
   Widget _profileDataScreen(){
-    return Container(
+    return SingleChildScrollView(child: Container(
       padding: EdgeInsets.all(D.default_20),
       child: Form(
         key: _profileFormGlobalKey,
@@ -138,7 +144,7 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
           ],
         ),
       ),
-    );
+    ),);
   }
   Widget _guestScreen(){
     return Container();
@@ -442,6 +448,7 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
 
   Widget _Logout(){
     return Container(
+      height: D.default_80,
       margin: EdgeInsets.all(D.default_15),
       child: Row(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -615,7 +622,97 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
     );
   }
   Widget _myCartsScreen(){
-    return Container();
+    return Column(children: [
+      Expanded(child: Container(
+        child: ListView.builder(itemBuilder: (context,index){
+          return _cartItem(index) ;
+        },
+          itemCount: cartProvider!.myCarts.length,
+        ),
+      ),),
+      _addCartBtn()
+    ],);
+  }
+  Widget _cartItem(int index){
+    return Directionality(textDirection: TextDirection.ltr, child: Container(
+      padding: EdgeInsets.all(D.default_10),
+      margin: EdgeInsets.only(top:D.default_10,bottom: D.default_10,left: D.default_20,right: D.default_20),
+      width: MediaQuery.of(context).size.width*0.7
+      ,height: D.default_230,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(D.default_10),
+          color: C.CART_COLOR,
+          boxShadow:[BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              offset:Offset(3,3),
+              blurRadius:3,
+              spreadRadius: 0.5
+          )]
+      ),
+      child: Row(children: [
+        Column(children: [
+          SizedBox(height: D.default_50,),
+          Container(
+            width: D.default_80,
+            height: D.default_80,
+            child: TransitionImage(cartProvider!.myCarts[index].photo??"",
+              strokeColor: Colors.black.withOpacity(0.7),
+              width: D.default_80,
+              height: D.default_80,
+              radius: D.default_200,
+              fit:BoxFit.cover),),
+          SizedBox(height: D.default_20,),
+          TransitionImage("assets/images/logo_name_blue.png",
+              width: D.default_50,
+              height: D.default_50,
+              fit:BoxFit.cover)
+        ],),
+        SizedBox(width: D.default_20,),
+        Expanded(child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("PET IDENTIFICATION ",style: S.h1(),),
+            SizedBox(height: D.default_10,),
+            Text("NAME OF PET ",style: S.h3(color: Colors.grey),),
+            Text(cartProvider!.myCarts[index].name??"",style: S.h4(color: Colors.black),),
+            SizedBox(height: D.default_10,),
+            Text("ADDRESS",style: S.h3(color: Colors.grey),),
+            Text(cartProvider!.myCarts[index].country??"",style: S.h4(color: Colors.black),),
+            Expanded(child: Container()),
+            Text("PET OWNER NAME",style: S.h3(color: Colors.grey),),
+            Text(Constants.currentUser!.name??"",style: S.h4(color: Colors.black),),
+            SizedBox(height: D.default_10,),
+
+
+
+
+
+
+          ],
+        ),),
+        Column(
+          children: [
+            TransitionImage("assets/images/flag.png",
+                width: D.default_50,
+                height: D.default_50,
+                fit:BoxFit.cover),
+            Expanded(child: Center(child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              Text("GENDER",style: S.h3(color: Colors.grey),),
+              Text(cartProvider!.myCarts[index].gender??"",style: S.h4(color: Colors.black),),
+            ],),),),
+            TransitionImage("assets/images/barcode.png",
+                width: D.default_50,
+                height: D.default_50,
+                fit:BoxFit.cover),
+          ],
+        ),
+
+
+
+      ],),
+    ));
   }
 Widget _noCarts(){
     return Container(
@@ -636,7 +733,7 @@ Widget _noCarts(){
     return Center(
       child: InkWell(
         onTap: () {
-
+          MyUtils.navigate(context, AddCartScreen());
         },
         child: Container(
           width: D.default_250,

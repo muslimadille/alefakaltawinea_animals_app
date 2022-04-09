@@ -1,7 +1,9 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
+import 'package:alefakaltawinea_animals_app/modules/profile/no_profile_screen.dart';
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/data/serviceProvidersModel.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/action_bar_widget.dart';
@@ -49,7 +51,11 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
   }
   Widget _cobonBtn(){
     return Container(child: Center(child: MaterialButton(onPressed: (){
-      MyUtils.navigate(context, OfferCodeScreen(widget.serviceProviderData.offers![widget.index]));
+      if(Constants.currentUser!=null){
+        MyUtils.navigate(context, OfferCodeScreen(widget.serviceProviderData,widget.serviceProviderData.offers![widget.index]));
+      }else{
+        MyUtils.navigate(context, NoProfileScreen());
+      }
     },
     child: Container(
       width: D.default_160,

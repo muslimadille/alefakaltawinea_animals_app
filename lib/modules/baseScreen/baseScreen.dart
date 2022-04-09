@@ -34,6 +34,7 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
   IntroProviderModel?introProviderModel;
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   SharedPreferences? prefs;
+  UtilsProviderModel?utilsProviderModel;
 
 
 
@@ -42,7 +43,7 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
   @override
   void initState() {
     super.initState();
-
+    utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: false);
      SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
@@ -56,6 +57,7 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
+    utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: true);
     introProviderModel =Provider.of<IntroProviderModel>(context, listen: true);
     return SafeArea(child: Scaffold(
         key: _scaffoldKey,
@@ -63,7 +65,7 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
           widget.showSettings?_actionBar():Container(height: 0,),
           Expanded(child:
             Stack(
-              alignment:AlignmentDirectional.bottomEnd,
+              alignment:AlignmentDirectional.center,
               children: [
               widget.body,
               Positioned(child: InkWell(
@@ -85,7 +87,7 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
                     )]
                 ),
                 child: Center(child: Icon(Icons.contact_mail,color: Colors.white,),),
-              ),))
+              ),),bottom: 0,left: utilsProviderModel!.isArabic?0:null,right: utilsProviderModel!.isEnglish?0:null)
             ],),),
           widget.showBottomBar?HomeTabsScreen(introProviderModel,introProviderModel!=null&&widget.tag=="MainCategoriesScreen"):Container()
         ],),

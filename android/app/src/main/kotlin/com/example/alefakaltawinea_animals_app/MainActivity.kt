@@ -1,4 +1,4 @@
-package com.example.alefakaltawinea_animals_app
+package com.alefakeltawinea.alefakaltawinea_animals_app
 
 import io.flutter.embedding.android.FlutterActivity
 

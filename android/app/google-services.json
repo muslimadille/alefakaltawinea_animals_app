@@ -7,17 +7,33 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:710525246132:android:8b7e57f27a0b035bd3d5e1",
+        "mobilesdk_app_id": "1:710525246132:android:9c03f5e819e3cffcd3d5e1",
         "android_client_info": {
-          "package_name": "com.example.alefakaltawinea_animals_app"
+          "package_name": "com.alefakeltawinea.alefakaltawinea_animals_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "710525246132-cius6b8c0l9mjplrmqp0k4nvr718ohur.apps.googleusercontent.com",
+          "client_id": "710525246132-k88tl44e7eoirclmn1flae96sblabn7q.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.alefakaltawinea_animals_app",
+            "package_name": "com.alefakeltawinea.alefakaltawinea_animals_app",
+            "certificate_hash": "f254cc5d9389db86cbba158ea98cee30ce4c0e09"
+          }
+        },
+        {
+          "client_id": "710525246132-mlj65k076ri7s3uvblpon3sfg2ij2qur.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alefakeltawinea.alefakaltawinea_animals_app",
+            "certificate_hash": "0c1a521320229765b000766ed0dde37d7e0be6b3"
+          }
+        },
+        {
+          "client_id": "710525246132-nv0c9eotbgq0j3dhrb5afp90hh9r8inb.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.alefakeltawinea.alefakaltawinea_animals_app",
             "certificate_hash": "eba47f85563510e5fb199bdacd88d995e3dfbe15"
           }
         },

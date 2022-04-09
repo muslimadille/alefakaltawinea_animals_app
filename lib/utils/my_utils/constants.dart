@@ -3,6 +3,8 @@ import 'package:alefakaltawinea_animals_app/modules/spalshScreen/data/regions_mo
 import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../modules/spalshScreen/data/app_info_model.dart';
+
 class Constants extends Object{
   static String? SELECTED_LANGUAGE="ar";
   static String? LANGUAGE_KEY="LANGUAGE_KEY";
@@ -14,6 +16,7 @@ class Constants extends Object{
   static List<RegionsModel> REGIONS=[];
   static String MAPS_API_KEY="AIzaSyDuvS1cZBr4opbX8FmSRyuuKixykzVY3So";
   static bool show_adoption_alert=false;
+  static AppInfoModel? APP_INFO;
   static String APP_LINK="https://drive.google.com/file/d/1MTmSYV6-3lBBffcsyZ_g5whBIT_dio3f/view?usp=sharing";
 
 
