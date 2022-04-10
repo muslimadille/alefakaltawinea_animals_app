@@ -16,7 +16,8 @@ class RegisterationApi{
       "region_id":regionId,
       "state_id":stateId,
       "password":password,
-      "password_confirmation":confirmPass
+      "password_confirmation":confirmPass,
+      "alefak_name":"alefak_name"
     };
     final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_POST, url,body: body);
     if (response != null && response.statusCode == 200) {
