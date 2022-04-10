@@ -127,6 +127,9 @@ flutter:
     - assets/images/app_icon.png
     - assets/images/flag.png
     - assets/images/barcode.png
+    - assets/images/qr_icon_black.png
+    - assets/images/qr_icon_blue.png
+
     - assets/strings/ar-EG.json
     - assets/strings/en-US.json
     - assets/fonts/cairo_font.ttf

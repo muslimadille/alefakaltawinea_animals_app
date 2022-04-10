@@ -41,7 +41,7 @@ class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
       tag: "MainCategoriesScreen",
       showBottomBar: true,
         showSettings: true,
-        showIntro: true,
+        showIntro: false,
         body: categoriesProviderModel!.isLoading?LoadingProgress():
         Stack(
           fit:StackFit.expand,

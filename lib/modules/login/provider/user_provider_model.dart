@@ -16,6 +16,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../serviceProviderAccount/SpHomeScreen.dart';
+
 class UserProviderModel with ChangeNotifier{
 
   ///.....ui controllers.........
@@ -40,7 +42,11 @@ class UserProviderModel with ChangeNotifier{
          setIsLoading(false);
          await Constants.prefs!.setString(Constants.SAVED_PHONE_KEY!,phone);
          await Constants.prefs!.setString(Constants.SAVED_PASSWORD_KEY!,password);
-         MyUtils.navigateAsFirstScreen(ctx, MainCategoriesScreen());
+         if(user.userTypeId.toString()=="6"){
+           MyUtils.navigateAsFirstScreen(ctx, SpHomeScreen());
+         }else{
+           MyUtils.navigateAsFirstScreen(ctx, MainCategoriesScreen());
+         }
        }else{
          setIsLoading(false);
          /// NAVIGATE TO SMS SCREEN

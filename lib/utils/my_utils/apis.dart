@@ -50,6 +50,9 @@ class Apis{
   static String ADD_CART="${BASE_URL}/add-card";
   static String USER_CART="${BASE_URL}/my-cards";
   static String USE_OFFER="${BASE_URL}/use-offer";
+  static String SCAN_CODE="${BASE_URL}/scan-code";
+
+
 
 
 

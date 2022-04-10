@@ -1,0 +1,41 @@
+import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import '../../../data/dio/my_rasponce.dart';
+import '../../../utils/my_utils/apis.dart';
+import '../../../utils/my_widgets/web_view.dart';
+import '../../offers/offer_details/offer_code_model.dart';
+import '../data/scan_code_api.dart';
+import '../data/scan_code_model.dart';
+
+
+class ScanCodeProvider with ChangeNotifier{
+  ///.....ui controllers.........
+  bool isLoading=false;
+  void setIsLoading(bool value){
+    isLoading=value;
+    notifyListeners();
+  }
+  ScanCodeModel? scanCodeModel;
+  ScanCodeApi scanCodeApi=ScanCodeApi();
+  scanCode(BuildContext ctx,String code,int confirm) async {
+    scanCodeModel=null;
+    setIsLoading(true);
+    MyResponse<ScanCodeModel> response =
+    await scanCodeApi.scanCode(code,confirm: confirm);
+    if (response.status == Apis.CODE_SUCCESS){
+      scanCodeModel=response.data as ScanCodeModel;
+      setIsLoading(false);
+    }else if(response.status == Apis.CODE_SUCCESS &&response.data==null){
+      setIsLoading(false);
+      await Fluttertoast.showToast(msg: "${response.msg}");
+    }else{
+      setIsLoading(false);
+      await Fluttertoast.showToast(msg: "${response.msg}");
+    }
+    notifyListeners();
+  }
+
+
+
+}

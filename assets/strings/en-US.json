@@ -137,7 +137,13 @@
   "pet_stores": "Pet stores",
   "adoption_offers": "Adoption offers",
   "intro_title_tow": "And get discounts and free services for your pet",
-  "no_offers": "There are no offers available at the moment"
+  "no_offers": "There are no offers available at the moment",
+  "code_tap": "scan code",
+  "try_again_code": "Try again",
+  "wrong_code": "Wrong or unavailable code"
+
+
+
 
 
 

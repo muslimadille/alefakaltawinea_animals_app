@@ -12,6 +12,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../utils/my_utils/apis.dart';
+import '../login/provider/user_provider_model.dart';
+import '../spalshScreen/spalshScreen.dart';
 import 'about_screen.dart';
 import 'add_store_screen.dart';
 import 'contact_us_screen.dart';
@@ -26,9 +29,17 @@ class SettingScreen extends StatefulWidget {
 
 class _SettingScreenState extends State<SettingScreen> {
   UtilsProviderModel? utilsProviderModel;
+  UserProviderModel? userProviderModel;
+
   bool _showLangAlert=false;
   @override
+  void initState() {
+    super.initState();
+    userProviderModel=Provider.of<UserProviderModel>(context,listen: false);
+  }
+  @override
   Widget build(BuildContext context) {
+    userProviderModel=Provider.of<UserProviderModel>(context,listen: true);
     utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: true);
     return Stack(children: [
       BaseScreen(
@@ -86,6 +97,14 @@ class _SettingScreenState extends State<SettingScreen> {
                         _itemText(tr("Terms_and_Conditions"), (){
                           MyUtils.navigate(context, TermsScreen());
                         }),
+                        Constants.currentUser!.userTypeId.toString()=="6"? _itemText(tr("logout"), ()async{
+                          await Constants.prefs!.setString(Constants.SAVED_PHONE_KEY!,"");
+                          await Constants.prefs!.setString(Constants.SAVED_PASSWORD_KEY!,"");
+                          Apis.TOKEN_VALUE="";
+                          Constants.currentUser=null;
+                          userProviderModel!.currentUser=null;
+                          MyUtils.navigateAsFirstScreen(context, SplashScreen());
+                        }):Container()
                       ],
                     ),
                   ),

@@ -36,6 +36,7 @@ class CartProvider with ChangeNotifier{
     notifyListeners();
   }
   getMyCart({int shop_id=0,int offer_id=0}) async {
+    myCarts.clear();
     setIsLoading(true);
     MyResponse<MyCartsModel> response =
     await cartApi.getMyCarts();

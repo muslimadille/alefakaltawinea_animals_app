@@ -20,6 +20,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import '../notifications/notifications_screen.dart';
+import '../serviceProviderAccount/SpHomeScreen.dart';
+import '../serviceProviderAccount/code_scanner_screen.dart';
 import 'provider/intro_provider_model.dart';
 
 
@@ -39,6 +41,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
   AnimationController? _animationController;
   Animation<double>? _animation;
   BottomBarProviderModel?bottomBarProviderModel;
+  bool isServiceProvider=false;
 @override
   void initState() {
     super.initState();
@@ -48,6 +51,14 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
 
   @override
   Widget build(BuildContext context) {
+  if(Constants.currentUser!=null){
+    if(Constants.currentUser!.userTypeId.toString()=="6"){
+      isServiceProvider=true;
+    }
+    else{
+      isServiceProvider=false;
+    }
+  }
     bottomBarProviderModel=Provider.of<BottomBarProviderModel>(context,listen: true);
     return  _bottomBar();
   }
@@ -89,7 +100,10 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
           )]
       ),
       child: Row(
-        children: [
+        children: isServiceProvider?[
+          _SpHomeBtn(),
+          _SpScanCodeBtn(),
+        ]:[
           _homeBtn(),
           _favBtn(),
           _closestBtn(),
@@ -185,6 +199,35 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
           ]
       ),));
   }
+  Widget _SpHomeBtn(){
+    return Expanded(
+        child: InkWell(onTap: (){
+          bottomBarProviderModel!.setSelectedScreen(0);
+          MyUtils.navigateAsFirstScreen(context, SpHomeScreen());
+        }
+          ,child:Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:[
+                TransitionImage(bottomBarProviderModel!.selectedScreen==0?Res.IC_HOME_BLUE:Res.IC_HOME_GREY,width: D.default_25,height: D.default_25,),
+                Center(child:Text(tr("home"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==0?C.BASE_BLUE:Colors.grey),),)
+              ]
+          ),));
+  }
+  Widget _SpScanCodeBtn(){
+    return Expanded(
+        child: InkWell(onTap: (){
+          bottomBarProviderModel!.setSelectedScreen(1);
+          MyUtils.navigateAsFirstScreen(context, CodeScannerScreen());
+        }
+          ,child:Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:[
+                TransitionImage(bottomBarProviderModel!.selectedScreen==1?"assets/images/qr_icon_blue.png":"assets/images/qr_icon_black.png",width: D.default_25,height: D.default_25,),
+                Center(child:Text(tr("code_tap"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==1?C.BASE_BLUE:Colors.grey),),)
+              ]
+          ),));
+  }
+
 
 }
 
