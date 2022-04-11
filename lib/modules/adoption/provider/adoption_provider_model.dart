@@ -11,9 +11,14 @@ class AdoptionProviderModel with ChangeNotifier{
 
   ///.....ui controllers.........
   bool isLoading=false;
+  bool shoewRegister=false;
   int selectedCategoryIndex=0;
   void setIsLoading(bool value){
     isLoading=value;
+    notifyListeners();
+  }
+  void setShowRegister(bool value){
+    shoewRegister=value;
     notifyListeners();
   }
   void setSelectedCategoryIndex(int value){

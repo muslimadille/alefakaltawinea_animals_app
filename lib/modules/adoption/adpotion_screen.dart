@@ -65,7 +65,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                     ),))
             ],
           ),
-          Constants.currentUser!=null?Container():RegisterationPop()
+          Constants.currentUser==null&&adoptionProviderModel!.shoewRegister?RegisterationPop():Container()
         ],)
     );
   }
@@ -76,7 +76,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
         if(Constants.currentUser!=null){
           MyUtils.navigate(context, AddAdoptionScreen());
         }else{
-          MyUtils.navigate(context, NoProfileScreen());
+          adoptionProviderModel!.setShowRegister(true);
         }
       },
       child: Container(
@@ -101,7 +101,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
         if(Constants.currentUser!=null){
           MyUtils.navigate(context, MyAdoptionScreen());
         }else{
-          MyUtils.navigate(context, NoProfileScreen());
+          adoptionProviderModel!.setShowRegister(true);
         }
       },
       child: Container(
@@ -195,6 +195,7 @@ Widget _noData(){
         }else{
           MyUtils.navigate(context, NoProfileScreen());
         }
+        adoptionProviderModel!.setShowRegister(true);
       },
       child:Container(
       margin: EdgeInsets.all(D.default_5),

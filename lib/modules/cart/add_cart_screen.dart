@@ -94,7 +94,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
 
   Widget _whiteContainer() {
     return Container(
-      margin: EdgeInsets.only(top: D.default_250),
+      margin: EdgeInsets.only(top: D.default_180),
       height: double.infinity,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -167,8 +167,11 @@ class _AddCartScreenState extends State<AddCartScreen> {
     return Container(
       child: Column(
         children: [
-          _paymentBtn(),
-          _cancelBtn(),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+            _paymentBtn(),
+            _cancelBtn(),],),
           SizedBox(
             height: D.default_10,
           ),
@@ -187,7 +190,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
 
   Widget _header() {
     return Container(
-      margin: EdgeInsets.only(top: D.default_70),
+      margin: EdgeInsets.only(top: D.default_40),
       child: Text(
         tr("intro_title"),
         style: S.h1Bold(color: Colors.white),
@@ -237,7 +240,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
           _addCard();
           },
         child: Container(
-          width: D.default_150,
+          width: D.default_130,
           margin: EdgeInsets.all(D.default_5),
           padding: EdgeInsets.only(
               left: D.default_10,
@@ -271,7 +274,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
           Navigator.pop(context);
         },
         child: Container(
-          width: D.default_150,
+          width: D.default_130,
           margin: EdgeInsets.all(D.default_5),
           padding: EdgeInsets.only(
               left: D.default_10,
