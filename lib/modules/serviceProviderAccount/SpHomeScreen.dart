@@ -81,8 +81,9 @@ class _SpHomeScreenState extends State<SpHomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     DotsIndicator(
-                      dotsCount: 1,
-                      position: 0,
+                      dotsCount: Constants.currentUser!.photos!.length,
+                      position: Constants.currentUser!.photos!.isNotEmpty?
+                      _currentSliderPager.toDouble():0,
                       decorator: DotsDecorator(
                           color: C.BASE_BLUE.withOpacity(0.3),
                           activeColor: C.BASE_BLUE,
@@ -200,23 +201,13 @@ class _SpHomeScreenState extends State<SpHomeScreen> {
   }
   List<Widget >_sliderItem(){
     List<Widget>items=[];
-    items.add(
-        Container(child:
-        Column(children: [
-          Expanded(child: TransitionImage(
-            Constants.currentUser!.bannerPhoto??'',
-            fit: BoxFit.cover,
-            width: double.infinity,
-          )),
 
-        ],),)
-    );
-    for(int i=0;i<1;i++){
+    for(int i=0;i<Constants.currentUser!.photos!.length;i++){
       items.add(
           Container(child:
           Column(children: [
             Expanded(child: TransitionImage(
-              Constants.currentUser!.bannerPhoto!,
+              Constants.currentUser!.photos![i].photo!,
               fit: BoxFit.cover,
               width: double.infinity,
             )),

@@ -94,15 +94,15 @@ class _SettingScreenState extends State<SettingScreen> {
                         _itemText(tr("contact_us"), () {
                           MyUtils.navigate(context, ContactUsScreen());
                         }),
-                        _itemText(tr("Terms_and_Conditions"), (){
+                         _itemText(tr("Terms_and_Conditions"), (){
                           MyUtils.navigate(context, TermsScreen());
                         }),
                         Constants.currentUser!.userTypeId.toString()=="6"? _itemText(tr("logout"), ()async{
                           await Constants.prefs!.setString(Constants.SAVED_PHONE_KEY!,"");
                           await Constants.prefs!.setString(Constants.SAVED_PASSWORD_KEY!,"");
                           Apis.TOKEN_VALUE="";
-                          Constants.currentUser=null;
                           userProviderModel!.currentUser=null;
+                          Constants.currentUser=null;
                           MyUtils.navigateAsFirstScreen(context, SplashScreen());
                         }):Container()
                       ],

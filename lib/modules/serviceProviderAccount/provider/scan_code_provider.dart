@@ -24,8 +24,14 @@ class ScanCodeProvider with ChangeNotifier{
     MyResponse<ScanCodeModel> response =
     await scanCodeApi.scanCode(code,confirm: confirm);
     if (response.status == Apis.CODE_SUCCESS){
-      scanCodeModel=response.data as ScanCodeModel;
+      if(confirm==0){scanCodeModel=response.data as ScanCodeModel;
       setIsLoading(false);
+      }
+      else{
+        setIsLoading(false);
+        await Fluttertoast.showToast(msg: "${response.msg}");
+      }
+
     }else if(response.status == Apis.CODE_SUCCESS &&response.data==null){
       setIsLoading(false);
       await Fluttertoast.showToast(msg: "${response.msg}");

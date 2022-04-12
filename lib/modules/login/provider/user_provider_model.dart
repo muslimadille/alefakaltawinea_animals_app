@@ -16,6 +16,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../intro/intro_screen.dart';
 import '../../serviceProviderAccount/SpHomeScreen.dart';
 
 class UserProviderModel with ChangeNotifier{
@@ -45,7 +46,7 @@ class UserProviderModel with ChangeNotifier{
          if(user.userTypeId.toString()=="6"){
            MyUtils.navigateAsFirstScreen(ctx, SpHomeScreen());
          }else{
-           MyUtils.navigateAsFirstScreen(ctx, MainCategoriesScreen());
+           MyUtils.navigateAsFirstScreen(ctx, IntroScreen());
          }
        }else{
          setIsLoading(false);

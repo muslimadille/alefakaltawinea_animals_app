@@ -140,7 +140,13 @@
   "no_offers": "There are no offers available at the moment",
   "code_tap": "scan code",
   "try_again_code": "Try again",
-  "wrong_code": "Wrong or unavailable code"
+  "wrong_code": "Wrong or unavailable code",
+  "remains_times": "Remaining number of times to use",
+  "total_usage": "Total number of times this offer was used",
+  "times": "Times"
+
+
+
 
 
 
