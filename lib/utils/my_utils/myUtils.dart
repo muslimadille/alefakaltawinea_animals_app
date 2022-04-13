@@ -293,7 +293,7 @@ class MyUtils{
         linkUrl: Constants.APP_LINK);
   }
   static openwhatsapp(BuildContext context) async{
-    var whatsapp ="+201100034032";
+    var whatsapp ="${Constants.APP_INFO!.whatsapp}";
     var whatsappURl_android = "whatsapp://send?phone="+whatsapp+"&text=";
     var whatappURL_ios ="https://wa.me/$whatsapp?text=${Uri.parse("")}";
     if(Platform.isIOS){

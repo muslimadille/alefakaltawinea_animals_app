@@ -7,6 +7,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -78,15 +79,9 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
                 margin: EdgeInsets.all(D.default_20),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(D.default_200),
-                    color: C.BASE_BLUE,
-                    boxShadow:[BoxShadow(
-                        color: Colors.grey.withOpacity(0.5),
-                        offset:Offset(1,1),
-                        blurRadius:2,
-                        spreadRadius: 2
-                    )]
+                  
                 ),
-                child: Center(child: Icon(Icons.contact_mail,color: Colors.white,),),
+                child: Center(child: TransitionImage("assets/images/whatsapp.png",width: D.default_50,height: D.default_50,fit: BoxFit.fitWidth,),),
               ),),bottom: 0,left: utilsProviderModel!.isArabic?0:null,right: utilsProviderModel!.isEnglish?0:null)
             ],),),
           widget.showBottomBar?HomeTabsScreen(introProviderModel,introProviderModel!=null&&widget.tag=="MainCategoriesScreen"):Container()

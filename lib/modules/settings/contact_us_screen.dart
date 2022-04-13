@@ -45,7 +45,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> with  InputValidation
                   margin: EdgeInsets.only(top:D.default_150,bottom: D.default_30),
                   child: Center(child: Text(tr("contact_header1"),style: S.h1(color: C.BASE_BLUE),textAlign: TextAlign.center,),)),
               Container(
-                  child: Center(child: Text(tr("920010001"),style: S.h1(),textAlign: TextAlign.center,),)),
+                  child: Center(child: Text(tr("${Constants.APP_INFO!.phone!}"),style: S.h1(),textAlign: TextAlign.center,),)),
               _header(),
               Container(
                 padding: EdgeInsets.all(D.default_20),

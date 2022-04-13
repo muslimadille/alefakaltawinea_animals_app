@@ -9,6 +9,8 @@ import 'package:alefakaltawinea_animals_app/utils/my_widgets/action_bar_widget.d
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:webview_flutter/webview_flutter.dart';
+
 
 
 class TermsScreen extends StatefulWidget {
@@ -35,7 +37,9 @@ class _TermsScreenState extends State<TermsScreen> {
               Expanded(
                 child: Container(
                   padding: EdgeInsets.all(D.default_20),
-                  child: Text(tr("Terms_and_Conditions"),style: S.h4(color: Colors.grey[400]),),),
+                  child: WebView(initialUrl: Constants.APP_INFO!.conditions,
+
+                  ),),
               )
             ],
           ),
