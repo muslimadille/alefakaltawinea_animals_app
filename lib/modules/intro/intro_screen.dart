@@ -8,6 +8,7 @@ import '../../utils/my_utils/myUtils.dart';
 import '../../utils/my_widgets/transition_image.dart';
 import '../baseScreen/baseScreen.dart';
 import '../cart/add_cart_screen.dart';
+import '../categories_screen/mainCategoriesScreen.dart';
 
 class IntroScreen extends StatefulWidget {
   const IntroScreen({Key? key}) : super(key: key);
@@ -90,7 +91,11 @@ class _IntroScreenState extends State<IntroScreen> {
                         Container(
                           padding: EdgeInsets.only(top: D.default_30,left:D.default_50,right: D.default_50),child: Text(tr("intro_cost_title"),style: S.h1Bold(color: C.BASE_BLUE)),)
                       ],),top:D.default_200),
-                      Positioned(child: Container(child: Text(tr("skip"),style: S.h1Bold(color: C.BASE_BLUE),),),bottom: D.default_40,)
+                      Positioned(child: InkWell(
+                        onTap: (){
+                          MyUtils.navigateAsFirstScreen(context, MainCategoriesScreen());
+                        },
+                        child: Text(tr("skip"),style: S.h1Bold(color: C.BASE_BLUE),),),bottom: D.default_40,)
                     ],
                   )))
         ],

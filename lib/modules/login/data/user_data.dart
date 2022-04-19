@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/data/offer_model.dart';
+
+import '../../serviceProviders/list_screen/data/photo_model.dart';
 UserData userDataFromJson(String str) => UserData.fromJson(json.decode(str));
 String userDataToJson(UserData data) => json.encode(data.toJson());
 class UserData {
@@ -26,7 +28,9 @@ class UserData {
       this.color, 
       this.userTypeId, 
       this.token, 
-      this.activate,});
+      this.activate,
+    this.photos
+  });
 
   UserData.fromJson(dynamic json) {
     id = json['id'];
@@ -56,6 +60,12 @@ class UserData {
     userTypeId = json['user_type_id'];
     token = json['token'];
     activate = json['activate'];
+    if (json['photos'] != null) {
+      photos = <PhotoModel>[];
+      json['photos'].forEach((v) {
+        photos!.add(new PhotoModel.fromJson(v));
+      });
+    }
   }
   int? id;
   String? name;
@@ -79,6 +89,8 @@ class UserData {
   String? userTypeId;
   String? token;
   dynamic? activate;
+  List<PhotoModel>? photos;
+
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -106,6 +118,9 @@ class UserData {
     map['user_type_id'] = userTypeId;
     map['token'] = token;
     map['activate'] = activate;
+    if (this.photos != null) {
+      map['photos'] = this.photos!.map((v) => v.toJson()).toList();
+    }
     return map;
   }
 
