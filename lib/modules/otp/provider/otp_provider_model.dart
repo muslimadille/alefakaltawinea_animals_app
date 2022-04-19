@@ -22,13 +22,13 @@ class OtpProviderModel with ChangeNotifier{
     notifyListeners();
   }
   ///......active account....................
-  activeAccount(String phone,String code,BuildContext ctx,UserData user) async {
+  activeAccount(String phone,String code,BuildContext ctx) async {
     setIsLoading(true);
     MyResponse<UserData> response =
     await otpApi.activeAccount(phone,code);
     if (response.status == Apis.CODE_SUCCESS&&response.data!=null){
       Constants.currentUser=response.data;
-      Apis.TOKEN_VALUE=user.token!;
+      Apis.TOKEN_VALUE=Constants.currentUser!.token!;
       setIsLoading(false);
       MyUtils.navigateAsFirstScreen(ctx, MainCategoriesScreen());
     }else if(response.status == Apis.CODE_SHOW_MESSAGE){

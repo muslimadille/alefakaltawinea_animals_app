@@ -150,7 +150,7 @@ setCurrentUserData(UserData user){
     if (response.status == Apis.CODE_SUCCESS){
       setIsLoading(false);
       Constants.prefs!.clear();
-      Constants.currentUser!=null;
+      Constants.currentUser=null;
       MyUtils.navigate(ctx, LoginScreen());
 
     }else if(response.status == Apis.CODE_SHOW_MESSAGE ){

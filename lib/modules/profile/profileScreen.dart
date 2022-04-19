@@ -63,6 +63,7 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
     utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: false);
     if(Constants.currentUser!=null){
       userProviderModel = Provider.of<UserProviderModel>(context, listen: false);
+      userProviderModel!.currentUser=Constants.currentUser!;
       cartProvider!.getMyCart();
       _initUserData();
     }
@@ -85,7 +86,7 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
       showBottomBar: true,
       tag: "ProfileScreen",
       body: userProviderModel!.isLoading?LoadingProgress():
-      userProviderModel!.currentUser!=null?_ProfileScreen():_guestScreen(),
+      Constants.currentUser!=null?_ProfileScreen():_guestScreen(),
     );
   }
 
@@ -150,9 +151,9 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
     return Container();
   }
   void _initUserData(){
-    _nameController.text=userProviderModel!.currentUser!.name!;
-    _phoneController.text=userProviderModel!.currentUser!.phone!;
-    _emailController.text=userProviderModel!.currentUser!.email!;
+    _nameController.text=Constants.currentUser!.name!;
+    _phoneController.text=Constants.currentUser!.phone!;
+    _emailController.text=Constants.currentUser!.email!;
   }
   Widget _region(){
     return Container(

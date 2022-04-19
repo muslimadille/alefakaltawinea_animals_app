@@ -18,9 +18,7 @@ class Constants extends Object{
   static bool show_adoption_alert=false;
   static AppInfoModel? APP_INFO;
   static String APP_LINK="https://drive.google.com/file/d/1MTmSYV6-3lBBffcsyZ_g5whBIT_dio3f/view?usp=sharing";
-
-
-
+  static String isAdoptionAlertAccepted="isAdoptionAlertAccepted";
   ///888888888888888888888888888888888888888888888888888888
   static UtilsProviderModel? utilsProviderModel;
 

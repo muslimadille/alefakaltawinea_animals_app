@@ -2,6 +2,7 @@ import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/data/offer_model.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/action_bar_widget.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/cupertino.dart';
@@ -47,7 +48,7 @@ class _OfferCodeScreenState extends State<OfferCodeScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children:[
             ActionBarWidget("", context,backgroundColor: Colors.white,textColor: C.BASE_BLUE,enableShadow: false,),
-            Expanded(child: cartProvider!.myCarts.isNotEmpty?_codePart():_noCarts())
+            Expanded(child: cartProvider!.isLoading?LoadingProgress():cartProvider!.myCarts.isNotEmpty?_codePart():_noCarts())
           ] ),);
   }
   Widget _codePart(){

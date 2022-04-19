@@ -12,6 +12,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_widgets/action_bar_widget.d
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:otp_text_field/otp_text_field.dart';
 import 'package:otp_text_field/style.dart';
 import 'package:provider/provider.dart';
@@ -78,10 +79,12 @@ class _OtpScreenState extends State<OtpScreen> {
         if(widget.otpFalge=="ForgetPasswordScreen"){
           MyUtils.navigate(context, ForgetPasswordScreen(widget.phone!, _userCode));
         }else{
-          otpProviderModel!.activeAccount(Constants.currentUser!.phone!, widget.code, context, Constants.currentUser!);
+          otpProviderModel!.activeAccount(Constants.currentUser!=null?Constants.currentUser!.phone!:widget.phone!, _userCode, context);
         }
         //MyUtils.navigateAsFirstScreen(context, MainCategoriesScreen());
         ///call api here
+      }else{
+        Fluttertoast.showToast(msg:tr("كود التفعيل غير صحيح"));
       }
 
     }

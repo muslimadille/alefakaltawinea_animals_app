@@ -13,13 +13,13 @@ class CategoriesProviderModel with ChangeNotifier {
 
   void setIsLoading(bool value){
     isLoading=value;
-    //notifyListeners();
+    notifyListeners();
   }
   /// ..........categories...........
   List<CategoriesDataModel> categoriesList=[];
   GetCategoriesListApi getCategoriesListApi=GetCategoriesListApi();
   getCategoriesList() async {
-    //setIsLoading(true);
+    setIsLoading(true);
     categoriesList.clear();
     MyResponse<List<CategoriesDataModel>> response =
         await getCategoriesListApi.getCategoriesList();

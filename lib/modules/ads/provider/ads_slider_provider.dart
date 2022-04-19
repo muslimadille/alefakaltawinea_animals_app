@@ -11,14 +11,14 @@ class AdsSliderProviderModel with ChangeNotifier {
   bool isLoading=false;
   void setIsLoading(bool value){
     isLoading=value;
-    //notifyListeners();
+    notifyListeners();
   }
   /// ..........categories...........
   List<Data> adsSliderModelList=[];
   GetAds_sliderApi getAds_sliderApi=GetAds_sliderApi();
   getAdsSlider() async {
     adsSliderModelList.clear();
-    //setIsLoading(true);
+    setIsLoading(true);
     MyResponse<List<Data>> response =
     await getAds_sliderApi.getAdsSlider();
 

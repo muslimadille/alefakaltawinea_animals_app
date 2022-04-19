@@ -79,7 +79,7 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
                 margin: EdgeInsets.all(D.default_20),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(D.default_200),
-                  
+
                 ),
                 child: Center(child: TransitionImage("assets/images/whatsapp.png",width: D.default_50,height: D.default_50,fit: BoxFit.fitWidth,),),
               ),),bottom: 0,left: utilsProviderModel!.isArabic?0:null,right: utilsProviderModel!.isEnglish?0:null)
