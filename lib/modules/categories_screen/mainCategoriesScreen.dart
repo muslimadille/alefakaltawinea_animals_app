@@ -75,7 +75,7 @@ class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                  Text(tr("hadeth_start"),style: S.h1(color: Colors.orangeAccent),),
+                  Text(tr("hadeth_start"),style: S.h1(color: Colors.white),),
                   Text(tr("hadeth")+tr("hadeth_end"),style: S.h1(color: Colors.white),),
                 ],),),),
               InkWell(

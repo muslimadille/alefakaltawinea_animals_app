@@ -31,7 +31,7 @@ class UserProviderModel with ChangeNotifier{
   UserData? currentUser;
   LoginApi loginApi=LoginApi();
   UpdateProfileApi updateProfileApi=UpdateProfileApi();
-  login(String phone,String password,BuildContext ctx) async {
+  login(String phone,String password,BuildContext ctx,bool isSplash) async {
     setIsLoading(true);
     MyResponse<UserData> response =
     await loginApi.login(phone, password);
@@ -46,7 +46,12 @@ class UserProviderModel with ChangeNotifier{
          if(user.userTypeId.toString()=="6"){
            MyUtils.navigateAsFirstScreen(ctx, SpHomeScreen());
          }else{
-           MyUtils.navigateAsFirstScreen(ctx, IntroScreen());
+           bool isShowed=await Constants.prefs!.getBool("intro${Constants.currentUser!.id}")??false;
+           if(!isShowed){
+             MyUtils.navigateAsFirstScreen(ctx, IntroScreen());
+           }else{
+             MyUtils.navigateAsFirstScreen(ctx, MainCategoriesScreen());
+           }
          }
        }else{
          setIsLoading(false);
@@ -59,9 +64,11 @@ class UserProviderModel with ChangeNotifier{
       /// NAVIGATE TO SMS SCREEN
       MyUtils.navigate(ctx, PhoneScreen(tr("login"), tr("register_otp")));
     }else if(response.status == Apis.CODE_SHOW_MESSAGE ){
+
       print("login error: ${response.msg}");
       setIsLoading(false);
-      await Fluttertoast.showToast(msg: "${response.msg}");
+      if(!isSplash){await Fluttertoast.showToast(msg: "${response.msg}");}
+
     }
     notifyListeners();
 

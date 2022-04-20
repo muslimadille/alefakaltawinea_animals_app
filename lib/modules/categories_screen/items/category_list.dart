@@ -8,6 +8,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../utils/my_utils/baseTextStyle.dart';
+import '../../../utils/my_utils/constants.dart';
 import '../../../utils/my_utils/resources.dart';
 import '../../../utils/my_widgets/transition_image.dart';
 import '../data/categories_model.dart';
@@ -46,8 +47,15 @@ class _CategoryListState extends State<CategoryList> {
             widget.categoriesProviderModel,
                 (){_onItemClick(index);});
       },)),
-      Expanded(child: InkWell(onTap: (){
-        widget.categoriesProviderModel!.showHadeth=true;
+      Expanded(child: InkWell(onTap: ()async{
+        bool hadeathState=await Constants.prefs!.getBool(Constants.currentUser!.id.toString())??false;
+        if(!hadeathState){
+          widget.categoriesProviderModel!.showHadeth=true;
+          await Constants.prefs!.setBool(Constants.currentUser!.id.toString(),true);
+        }else{
+          widget.categoriesProviderModel!.showHadeth=false;
+          MyUtils.navigate(context, AdoptionScreen());
+        }
         widget.categoriesProviderModel!.notifyListeners();
       },
         child: Container(color: Color(int.parse(adaption.color!.replaceAll("#", "0xff"))),width: MediaQuery.of(context).size.width,

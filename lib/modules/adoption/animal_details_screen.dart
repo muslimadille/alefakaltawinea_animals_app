@@ -119,6 +119,8 @@ class _AnimalDetailsScreenState extends State<AnimalDetailsScreen> {
 
       child: Column(
         children: [
+          _infoItem(tr("name"),data.name??".........."),
+          Container(color: Colors.grey[400],height: D.default_1,width: double.infinity,),
           _infoItem(tr("age"),data.age!),
           Container(color: Colors.grey[400],height: D.default_1,width: double.infinity,),
           _infoItem(tr("gendar"),data.gender!),
@@ -134,6 +136,10 @@ class _AnimalDetailsScreenState extends State<AnimalDetailsScreen> {
           _infoItem(tr("status"),data.healthStatus!),
           Container(color: Colors.grey[400],height: D.default_1,width: double.infinity,),
           _infoItem(tr("condition"),data.conditions!),
+          Container(color: Colors.grey[400],height: D.default_1,width: double.infinity,),
+          _infoItem(tr("add_date"),data.createdAt!=null?data.createdAt!.split("T")[0]:"......."),
+          Container(color: Colors.grey[400],height: D.default_1,width: double.infinity,),
+          _infoItem(tr("contact_phone"),data.phone??".........."),
         ],
       ),
     ),);

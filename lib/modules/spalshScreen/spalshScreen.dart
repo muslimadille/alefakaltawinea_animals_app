@@ -126,12 +126,15 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
 
   initSavedUser(){
     if( Constants.prefs!.get(Constants.SAVED_PHONE_KEY!)!=null&&Constants.prefs!.get(Constants.SAVED_PASSWORD_KEY!)!=null){
-      userProviderModel!.login(Constants.prefs!.get(Constants.SAVED_PHONE_KEY!).toString(),Constants.prefs!.get(Constants.SAVED_PASSWORD_KEY!).toString(),context);
+      userProviderModel!.login(Constants.prefs!.get(Constants.SAVED_PHONE_KEY!).toString(),Constants.prefs!.get(Constants.SAVED_PASSWORD_KEY!).toString(),context,true);
     }
   }
   void getRegions(){
     regionsApi.getRegions().then((value) {
       Constants.REGIONS=value.data;
+      for(int i=0;i<Constants.REGIONS.length;i++){
+        Constants.REGIONS[i].name=Constants.REGIONS[i].name!.replaceAll("منطقة", "");
+      }
     });
 
   }

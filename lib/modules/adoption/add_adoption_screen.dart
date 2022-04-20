@@ -231,7 +231,7 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
             }
           },
           decoration: InputDecoration(
-            labelText: tr("phone"),
+            labelText: tr("contact_phone"),
             labelStyle: S.h4(color: Colors.grey),
             enabledBorder: UnderlineInputBorder(
               borderSide: BorderSide(color: Colors.grey),

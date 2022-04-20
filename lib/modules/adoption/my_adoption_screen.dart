@@ -55,7 +55,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
                       children: [
                       _myOffersBtn()
                     ],),
-                    adoptionProviderModel!.isLoading?Expanded(child: LoadingProgress()): Expanded(flex: 1,child: _animalsList())
+                    adoptionProviderModel!.isLoading?Expanded(flex:1,child: LoadingProgress(),): Expanded(flex: 1,child: _animalsList())
                   ],
                 ),))
         ],
@@ -140,7 +140,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
   }
 
   Widget _animalsList() {
-    return adoptionProviderModel!.myAnimalsPagerListModel!=null&&adoptionProviderModel!.myAnimalsPagerListModel!.data!.isNotEmpty?Container(
+    return adoptionProviderModel!.isLoading?LoadingProgress():adoptionProviderModel!.myAnimalsPagerListModel!=null&&adoptionProviderModel!.myAnimalsPagerListModel!.data!.isNotEmpty?Container(
       padding: EdgeInsets.all(D.default_10),
       child: CustomScrollView(slivers: [
         SliverGrid(

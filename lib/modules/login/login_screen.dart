@@ -182,12 +182,12 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
     if (_loginFormGlobalKey.currentState!.validate()) {
       _loginFormGlobalKey.currentState!.save();
       //call login api
-      userProviderModel!.login(_phoneController.text, _passwordController.text,context);
+      userProviderModel!.login(_phoneController.text, _passwordController.text,context,false);
     }
   }
  initSavedUser(){
   if( Constants.prefs!.get(Constants.SAVED_PHONE_KEY!)!=null&&Constants.prefs!.get(Constants.SAVED_PASSWORD_KEY!)!=null){
-    userProviderModel!.login(Constants.prefs!.get(Constants.SAVED_PHONE_KEY!).toString(),Constants.prefs!.get(Constants.SAVED_PASSWORD_KEY!).toString(),context);
+    userProviderModel!.login(Constants.prefs!.get(Constants.SAVED_PHONE_KEY!).toString(),Constants.prefs!.get(Constants.SAVED_PASSWORD_KEY!).toString(),context,false);
   }
  }
 }

@@ -128,7 +128,9 @@ class AnimalData {
       this.thumb, 
       this.categoryId, 
       this.stop, 
-      this.user,});
+      this.user,
+    this.phone
+  });
 
   AnimalData.fromJson(dynamic json) {
     id = json['id'];
@@ -149,6 +151,7 @@ class AnimalData {
     categoryId = json['category_id'];
     stop = json['stop'];
     name=json['name'];
+    phone=json['phone'];
     user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
   int? id;
@@ -170,6 +173,7 @@ class AnimalData {
   String? stop;
   User? user;
   String?name;
+  String?phone;
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
@@ -191,6 +195,7 @@ class AnimalData {
     map['category_id'] = categoryId;
     map['stop'] = stop;
     map['name']=name;
+    map['phone']=phone;
     if (user != null) {
       map['user'] = user?.toJson();
     }

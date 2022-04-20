@@ -12,6 +12,7 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../modules/categories_screen/mainCategoriesScreen.dart';
+import '../../modules/spalshScreen/data/regions_model.dart';
 import 'baseDimentions.dart';
 import 'baseTextStyle.dart';
 import 'myColors.dart';
@@ -226,6 +227,10 @@ class MyUtils{
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
+        List<Get_states>states=[];
+        for(int i=0;i<Constants.REGIONS.length;i++){
+          states.addAll(Constants.REGIONS[i].getStates!);
+        }
         // return object of type Dialog
         return WillPopScope(
             onWillPop: isDismissible ? _onWillPop : _onWillNotPop,
@@ -246,15 +251,18 @@ class MyUtils{
                         height: D.default_260,
                         width:D.default_300 ,
                         child: ListView.builder(
-                            itemCount: Constants.REGIONS.length,
+                            itemCount: states.length,
                             itemBuilder:(context,index){
                               return Container(
                                   child: Row(children: [
-                                    Radio(value: true, groupValue:utilsProviderModel!.currentRegionIndex==index,toggleable: true,activeColor:C.BASE_BLUE, onChanged: ( val ){
+                                    Radio(value: true, groupValue:utilsProviderModel!.currentStateId==states[index].id,toggleable: true,activeColor:C.BASE_BLUE, onChanged: ( val ){
                                       bool currentValue=val as bool ;
-                                      currentValue?utilsProviderModel.setCurrentRegionIndex(index):(){};
+                                      if(currentValue){
+                                        utilsProviderModel.setCurrentStateIndex(states[index].id!);
+                                        utilsProviderModel.setCurrentRegionIndex(Constants.REGIONS.indexOf(Constants.REGIONS.where((element) => element.id==states[index].regionId).first));
+                                      }
                                     }),
-                                    Text(Constants.REGIONS[index].name!, style: S.h2(color: Colors.black))
+                                    Text(states[index].name!, style: S.h2(color: Colors.black))
                                   ],));
                             }),),
                       Container(width: double.infinity,height: D.default_1,color: Colors.grey,),
@@ -262,7 +270,7 @@ class MyUtils{
                           child:Row(mainAxisAlignment: MainAxisAlignment.end,children: [
                         InkWell(onTap: ()async{
                           UserData user=userProviderModel!.currentUser!;
-                          user.regionId=Constants.REGIONS[utilsProviderModel!.currentRegionIndex].id.toString();
+                          user.regionId=states[utilsProviderModel!.currentRegionIndex].regionId.toString();
                           userProviderModel.setCurrentUserData(user);
                             Navigator.pop(context);
                         },child: Container(

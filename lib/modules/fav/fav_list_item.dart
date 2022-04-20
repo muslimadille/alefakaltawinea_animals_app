@@ -65,7 +65,7 @@ class _FavListItemState extends State<FavListItem> {
                   Expanded(child: Text(
                     widget.serviceProvidersProviderModel!.favList[widget.index].name!
                     ,style: S.h3(color:C.BASE_BLUE),),),
-                  InkWell(
+                 /* InkWell(
                     onTap: (){
                       widget.serviceProvidersProviderModel!.setFav(widget.serviceProvidersProviderModel!.favList[widget.index].id!);
                       setState(() {
@@ -77,7 +77,7 @@ class _FavListItemState extends State<FavListItem> {
                       fav_icon:Res.IC_FAV_BLUE,
                       height: D.default_25,
                       width: D.default_25,
-                    ),)
+                    ),)*/
 
                 ],),
             )

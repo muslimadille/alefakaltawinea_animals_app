@@ -86,7 +86,7 @@ class _SearchScreenState extends State<SearchScreen>  {
         itemCount: serviceProvidersProviderModel!.searchServiceProviderModel!.data!.length,
         padding: EdgeInsets.all(D.default_10),
         itemBuilder: (context,index){
-          return  SearchListItem(index,serviceProvidersProviderModel);
+          return  SearchListItem(index);
         }):Center(child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [

@@ -34,8 +34,16 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
   void initState() {
     super.initState();
     adoptionProviderModel=Provider.of<AdoptionProviderModel>(context,listen: false);
-    adoptionProviderModel!.getCategoriesList();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      adoptionProviderModel!.getCategoriesList();
+    });
 
+
+  }
+  @override
+  void dispose() {
+    adoptionProviderModel!.setShowRegister(false);
+    super.dispose();
   }
   @override
   Widget build(BuildContext context) {
@@ -60,7 +68,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                           Expanded(child: _addBtn(),),
                           Expanded(child: _myOffersBtn(),),
                         ],),
-                        adoptionProviderModel!.isLoading?Expanded(child: LoadingProgress()): Expanded(flex: 1,child: _animalsList())
+                        adoptionProviderModel!.isLoading||adoptionProviderModel!.animalPagerListModel==null?Expanded(child: LoadingProgress()): Expanded(flex: 1,child: _animalsList())
                       ],
                     ),))
             ],
@@ -156,7 +164,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
   }
 
   Widget _animalsList() {
-    return adoptionProviderModel!.animalPagerListModel!=null&&adoptionProviderModel!.animalPagerListModel!.data!.isNotEmpty?Container(
+    return adoptionProviderModel!.animalPagerListModel!.data!.isNotEmpty?Container(
       padding: EdgeInsets.all(D.default_10),
       child: CustomScrollView(slivers: [
       SliverGrid(
@@ -193,9 +201,8 @@ Widget _noData(){
         if(Constants.currentUser!=null){
           MyUtils.navigate(context, AnimalDetailsScreen(index));
         }else{
-          MyUtils.navigate(context, NoProfileScreen());
+          adoptionProviderModel!.setShowRegister(true);
         }
-        adoptionProviderModel!.setShowRegister(true);
       },
       child:Container(
       margin: EdgeInsets.all(D.default_5),

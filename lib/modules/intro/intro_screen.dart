@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../utils/my_utils/baseDimentions.dart';
+import '../../utils/my_utils/constants.dart';
 import '../../utils/my_utils/myColors.dart';
 import '../../utils/my_utils/myUtils.dart';
 import '../../utils/my_widgets/transition_image.dart';
@@ -92,7 +93,8 @@ class _IntroScreenState extends State<IntroScreen> {
                           padding: EdgeInsets.only(top: D.default_30,left:D.default_50,right: D.default_50),child: Text(tr("intro_cost_title"),style: S.h1Bold(color: C.BASE_BLUE)),)
                       ],),top:D.default_200),
                       Positioned(child: InkWell(
-                        onTap: (){
+                        onTap: ()async{
+                          await Constants.prefs!.setBool("intro${Constants.currentUser!.id}",true);
                           MyUtils.navigateAsFirstScreen(context, MainCategoriesScreen());
                         },
                         child: Text(tr("skip"),style: S.h1Bold(color: C.BASE_BLUE),),),bottom: D.default_40,)

@@ -7,24 +7,32 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class SearchListItem extends StatefulWidget {
   int index;
-  ServiceProvidersProviderModel? serviceProvidersProviderModel;
 
-  SearchListItem(this.index,this.serviceProvidersProviderModel);
+  SearchListItem(this.index);
 
   @override
   _SearchListItemState createState() => _SearchListItemState();
 }
 
 class _SearchListItemState extends State<SearchListItem> {
+  ServiceProvidersProviderModel? serviceProvidersProviderModel;
+@override
+  void initState() {
+  serviceProvidersProviderModel=Provider.of<ServiceProvidersProviderModel>(context,listen: false);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    serviceProvidersProviderModel=Provider.of<ServiceProvidersProviderModel>(context,listen: true);
+
     return InkWell(
       onTap: (){
-        MyUtils.navigate(context, ServiceProviderDetailsScreen(widget.serviceProvidersProviderModel!.searchServiceProviderModel!.data![widget.index]));
+        MyUtils.navigate(context, ServiceProviderDetailsScreen(serviceProvidersProviderModel!.searchServiceProviderModel!.data![widget.index]));
       },
       child: Container(
         margin: EdgeInsets.all(D.default_10),
@@ -46,7 +54,7 @@ class _SearchListItemState extends State<SearchListItem> {
             Container(
               padding: EdgeInsets.all(D.default_10),
               decoration: BoxDecoration(
-                image: DecorationImage(image: NetworkImage(widget.serviceProvidersProviderModel!.searchServiceProviderModel!.data![widget.index].bannerPhoto!,
+                image: DecorationImage(image: NetworkImage(serviceProvidersProviderModel!.searchServiceProviderModel!.data![widget.index].bannerPhoto!,
                 ),fit:BoxFit.cover),
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(D.default_10),topRight: Radius.circular(D.default_10)),
                 color: Colors.white,
@@ -63,18 +71,19 @@ class _SearchListItemState extends State<SearchListItem> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Expanded(child: Text(
-                    widget.serviceProvidersProviderModel!.searchServiceProviderModel!.data![widget.index].name!
+                    serviceProvidersProviderModel!.searchServiceProviderModel!.data![widget.index].name!
                     ,style: S.h3(color:C.BASE_BLUE),),),
                   InkWell(
-                    onTap: (){
-                      widget.serviceProvidersProviderModel!.setFav(widget.serviceProvidersProviderModel!.searchServiceProviderModel!.data![widget.index].id!);
+                    onTap: () async {
+                     await serviceProvidersProviderModel!.setFav(serviceProvidersProviderModel!.searchServiceProviderModel!.data![widget.index].id!);
                       setState(() {
-                        fav_icon=Res.IC_FAV_BLUE;
+                        serviceProvidersProviderModel!.searchServiceProviderModel!.data![widget.index].is_fav==0?
+                        fav_icon=Res.IC_FAV_GREY:fav_icon=Res.IC_FAV_BLUE;
                       });
                     },
                     child: TransitionImage(
-                      widget.serviceProvidersProviderModel!.searchServiceProviderModel!.data![widget.index].is_fav==0?
-                      fav_icon:Res.IC_FAV_BLUE,
+                      serviceProvidersProviderModel!.searchServiceProviderModel!.data![widget.index].is_fav==0?
+                      Res.IC_FAV_GREY:Res.IC_FAV_BLUE,
                       height: D.default_25,
                       width: D.default_25,
                     ),)
@@ -98,7 +107,7 @@ class _SearchListItemState extends State<SearchListItem> {
                 )]
             ),
             child:TransitionImage(
-              widget.serviceProvidersProviderModel!.searchServiceProviderModel!.data![widget.index].photo!,
+              serviceProvidersProviderModel!.searchServiceProviderModel!.data![widget.index].photo!,
               radius: D.default_10,
               fit: BoxFit.cover,
               width: double.infinity,

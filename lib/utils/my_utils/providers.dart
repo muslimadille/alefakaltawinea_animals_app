@@ -5,17 +5,27 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 
+import '../../modules/spalshScreen/data/regions_model.dart';
+
 class UtilsProviderModel with ChangeNotifier {
   bool isArabic=true;
   bool isEnglish=false;
   Locale currentLocal =Locale('ar', 'EG');
   String currentLocalName="العربية";
   int currentRegionIndex=0;
+  int currentStateId=-1;
 
-setCurrentRegionIndex(int value){
+
+
+  setCurrentRegionIndex(int value){
   currentRegionIndex=value;
   notifyListeners();
 }
+  setCurrentStateIndex(int value){
+    currentStateId=value;
+    Constants.currentState=value;
+    notifyListeners();
+  }
   setCurrentLocal(BuildContext ctx,Locale locale)  async {
     await ctx.setLocale(locale);
     await EasyLocalization.of(ctx)!.setLocale(locale);

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:alefakaltawinea_animals_app/modules/cart/provider/cart_provider.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -17,6 +19,8 @@ import 'package:http_parser/http_parser.dart';
 
 import 'add_cart_model.dart';
 import 'cart_api.dart';
+import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
+
 
 
 class AddCartScreen extends StatefulWidget {
@@ -42,13 +46,26 @@ class _AddCartScreenState extends State<AddCartScreen> {
   CartProvider? cartProvider;
 
   bool isKeboardopened=false;
+  late StreamSubscription<bool> keyboardSubscription;
+
 
 
   @override
   void initState() {
     super.initState();
+    var keyboardVisibilityController = KeyboardVisibilityController();
+    keyboardSubscription = keyboardVisibilityController.onChange.listen((bool visible) {
+      setState(() {
+        isKeboardopened=visible;
+      });
+    });
     cartProvider=Provider.of<CartProvider>(context,listen: false);
     _addItem();
+  }
+  @override
+  void dispose() {
+    keyboardSubscription.cancel();
+    super.dispose();
   }
 
   @override
@@ -81,7 +98,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
                     child: Stack(
                       alignment: AlignmentDirectional.topCenter,
                       children: [
-                        _header(),
+                        isKeboardopened?Container():_header(),
                         _whiteContainer(),
                       ],
                     )))
@@ -94,7 +111,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
 
   Widget _whiteContainer() {
     return Container(
-      margin: EdgeInsets.only(top: D.default_180),
+      margin: EdgeInsets.only(top: isKeboardopened?0:D.default_180),
       height: double.infinity,
       width: double.infinity,
       decoration: BoxDecoration(
@@ -164,7 +181,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
   }
 
   Widget _buttonsPart() {
-    return Container(
+    return isKeboardopened?Container():Container(
       child: Column(
         children: [
           Row(
