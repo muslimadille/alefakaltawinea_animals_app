@@ -133,7 +133,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     regionsApi.getRegions().then((value) {
       Constants.REGIONS=value.data;
       for(int i=0;i<Constants.REGIONS.length;i++){
-        Constants.REGIONS[i].name=Constants.REGIONS[i].name!.replaceAll("منطقة", "");
+        Constants.STATES.addAll( Constants.REGIONS[i].getStates!);
       }
     });
 

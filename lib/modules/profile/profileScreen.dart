@@ -179,8 +179,10 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
                 MyUtils.regionsDialog(context,utilsProviderModel,userProviderModel,isDismissible:true);
               },
               child: Center(child: Text(
-                userProviderModel!.currentUser!.regionId!=null&&userProviderModel!.currentUser!.regionId!.isNotEmpty?Constants.REGIONS.firstWhere((element) => element.id.toString()==userProviderModel!.currentUser!.regionId!).getStates!.where((element) => element.id==Constants.currentState).single.name!
-                    :RegionsModel(id: -1,name: tr("select_city")).name!
+                userProviderModel!.currentUser!.stateId!=null&&userProviderModel!.currentUser!.stateId!.isNotEmpty?
+                   Constants.STATES[utilsProviderModel!.currentStateIndex].id.toString()== userProviderModel!.currentUser!.stateId?
+                Constants.STATES.firstWhere((element) => element.id.toString()==userProviderModel!.currentUser!.stateId!).name!:Constants.STATES[utilsProviderModel!.currentStateIndex].name!
+                    :Get_states(id: -1,name: tr("select_city")).name!
     ,style: S.h3(color: Colors.white),),),)
 
         )

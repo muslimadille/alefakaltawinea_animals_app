@@ -227,10 +227,7 @@ class MyUtils{
       context: context,
       barrierDismissible: false,
       builder: (BuildContext context) {
-        List<Get_states>states=[];
-        for(int i=0;i<Constants.REGIONS.length;i++){
-          states.addAll(Constants.REGIONS[i].getStates!);
-        }
+
         // return object of type Dialog
         return WillPopScope(
             onWillPop: isDismissible ? _onWillPop : _onWillNotPop,
@@ -251,18 +248,18 @@ class MyUtils{
                         height: D.default_260,
                         width:D.default_300 ,
                         child: ListView.builder(
-                            itemCount: states.length,
+                            itemCount: Constants.STATES.length,
                             itemBuilder:(context,index){
                               return Container(
                                   child: Row(children: [
-                                    Radio(value: true, groupValue:utilsProviderModel!.currentStateId==states[index].id,toggleable: true,activeColor:C.BASE_BLUE, onChanged: ( val ){
+                                    Radio(value: true, groupValue:Constants.STATES[utilsProviderModel!.currentStateIndex].id==Constants.STATES[index].id,toggleable: true,activeColor:C.BASE_BLUE, onChanged: ( val ){
                                       bool currentValue=val as bool ;
                                       if(currentValue){
-                                        utilsProviderModel.setCurrentStateIndex(states[index].id!);
-                                        utilsProviderModel.setCurrentRegionIndex(Constants.REGIONS.indexOf(Constants.REGIONS.where((element) => element.id==states[index].regionId).first));
+                                        utilsProviderModel.setCurrentStateIndex(index);
+                                        utilsProviderModel.setCurrentRegionIndex(Constants.REGIONS.indexOf(Constants.REGIONS.where((element) => element.id==Constants.STATES[index].regionId).first));
                                       }
                                     }),
-                                    Text(states[index].name!, style: S.h2(color: Colors.black))
+                                    Text(Constants.STATES[index].name!, style: S.h2(color: Colors.black))
                                   ],));
                             }),),
                       Container(width: double.infinity,height: D.default_1,color: Colors.grey,),
@@ -270,7 +267,8 @@ class MyUtils{
                           child:Row(mainAxisAlignment: MainAxisAlignment.end,children: [
                         InkWell(onTap: ()async{
                           UserData user=userProviderModel!.currentUser!;
-                          user.regionId=states[utilsProviderModel!.currentRegionIndex].regionId.toString();
+                          user.regionId=Constants.STATES[utilsProviderModel!.currentRegionIndex].regionId.toString();
+                          user.stateId=Constants.STATES[utilsProviderModel!.currentStateIndex].id.toString();
                           userProviderModel.setCurrentUserData(user);
                             Navigator.pop(context);
                         },child: Container(

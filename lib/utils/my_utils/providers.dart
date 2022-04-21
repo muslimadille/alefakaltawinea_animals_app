@@ -13,7 +13,7 @@ class UtilsProviderModel with ChangeNotifier {
   Locale currentLocal =Locale('ar', 'EG');
   String currentLocalName="العربية";
   int currentRegionIndex=0;
-  int currentStateId=-1;
+  int currentStateIndex=0;
 
 
 
@@ -22,7 +22,7 @@ class UtilsProviderModel with ChangeNotifier {
   notifyListeners();
 }
   setCurrentStateIndex(int value){
-    currentStateId=value;
+    currentStateIndex=value;
     Constants.currentState=value;
     notifyListeners();
   }

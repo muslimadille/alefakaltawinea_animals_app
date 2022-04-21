@@ -14,6 +14,7 @@ class Constants extends Object{
   static String? SAVED_PHONE_KEY="SAVED_PHONE";
   static String? SAVED_PASSWORD_KEY="SAVED_PASSWORD";
   static List<RegionsModel> REGIONS=[];
+  static List<Get_states> STATES=[];
   static int currentState=currentUser!=null?int.parse(currentUser!.stateId!.isNotEmpty?currentUser!.stateId??"0":"0"):REGIONS[0].getStates![0].id!;
   static String MAPS_API_KEY="AIzaSyDuvS1cZBr4opbX8FmSRyuuKixykzVY3So";
   static bool show_adoption_alert=false;

@@ -63,7 +63,6 @@ class MyApp extends StatelessWidget {
     utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: true);
     Constants.utilsProviderModel=utilsProviderModel;
     _initProviders(context);
-    utilsProviderModel.isArabic?utilsProviderModel.setCurrentLocal(context, Locale('ar', 'EG')):utilsProviderModel.setCurrentLocal(context, Locale('en', 'US'));
     return  Constants.utilsProviderModel!.currentLocalName.isNotEmpty? MaterialApp(
       theme: ThemeData(
           primaryColor:C.BASE_BLUE,
@@ -73,7 +72,7 @@ class MyApp extends StatelessWidget {
 
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
-        locale: Constants.utilsProviderModel!.currentLocal,
+        locale: utilsProviderModel.isArabic?Locale('ar', 'EG'):Locale('en', 'US'),
         debugShowCheckedModeBanner: false,
         home: BaseScreen(
           tag: "SplashScreen",

@@ -27,7 +27,7 @@ class CartProvider with ChangeNotifier{
     await cartApi.addCart(body);
     if (response.status == Apis.CODE_SUCCESS){
       setIsLoading(false);
-      MyUtils.navigate(ctx, WebPage(response.data.url));
+      MyUtils.navigateReplaceCurrent(ctx, WebPage(response.data.url));
     }else if(response.status == Apis.CODE_SUCCESS &&response.data==null){
       setIsLoading(false);
     }else{
