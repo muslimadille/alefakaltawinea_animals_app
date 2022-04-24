@@ -27,28 +27,28 @@ class UtilsProviderModel with ChangeNotifier {
     notifyListeners();
   }
   setCurrentLocal(BuildContext ctx,Locale locale)  async {
-    await ctx.setLocale(locale);
     await EasyLocalization.of(ctx)!.setLocale(locale);
+    await ctx.setLocale(locale);
     currentLocal=locale;
     if(locale==Locale('ar', 'EG')){
       currentLocalName="العربية";
       Constants.SELECTED_LANGUAGE="ar";
-      setLanguageState("ar");
       await Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "ar");
-
+      setLanguageState("ar");
     }
     else if(locale==Locale('en', 'US')){
       currentLocalName="English";
       Constants.SELECTED_LANGUAGE="en";
-      setLanguageState("en");
       await Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "en");
+      setLanguageState("en");
 
     }
     else{
       currentLocalName="العربية";
       Constants.SELECTED_LANGUAGE="ar";
-      setLanguageState("ar");
       await Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "ar");
+      setLanguageState("ar");
+
     }
     notifyListeners();
 

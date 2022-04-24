@@ -25,7 +25,8 @@ import '../cart/my_carts_model.dart';
 import '../cart/provider/cart_provider.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({Key? key}) : super(key: key);
+  int selectedTap;
+   ProfileScreen({this.selectedTap=0,Key? key}) : super(key: key);
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -58,6 +59,7 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
   @override
   void initState() {
     super.initState();
+
     cartProvider=Provider.of<CartProvider>(context,listen: false);
     bottomBarProviderModel=Provider.of<BottomBarProviderModel>(context,listen: false);
     utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: false);
@@ -67,6 +69,10 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
       cartProvider!.getMyCart();
       _initUserData();
     }
+    setState(() {
+      selectedTap=widget.selectedTap;
+    });
+
   }
   @override
   void dispose() async{

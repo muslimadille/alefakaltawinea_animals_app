@@ -39,7 +39,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
   List<TextEditingController> _cityControllers = [];
   List<TextEditingController> _familyControllers = [];
   List<String> _selectedGenders = [];
-  List<String> _genders = ["ذكر", "انثى"];
+  List<String> _genders = [tr("male"), tr("female")];
   List<String> _uploadedImages = [];
   List<dynamic>_imagesFiles=[];
   CartApi cartApi=CartApi();
@@ -163,7 +163,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
                   child: Row(
                     children: [
                       Text(
-                        tr("الجنس:"),
+                        tr("gendar")+":",
                         style: S.h2(color: Colors.grey),
                       ),
                       _genderSpinner(index)
@@ -193,8 +193,9 @@ class _AddCartScreenState extends State<AddCartScreen> {
             height: D.default_10,
           ),
           Text(
-            tr("عندك أليف آخر وتحتاج بطاقة إضافية"),
-            style: S.h1(color: C.BASE_BLUE),
+            tr("haveApet"),
+            style: S.h2(color: C.BASE_BLUE),
+            textAlign:TextAlign.center ,
           ),
           _addCartBtn(),
           SizedBox(
@@ -223,7 +224,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
           _addItem();
         },
         child: Container(
-          width: D.default_260,
+          width: D.default_100*2.8,
           margin: EdgeInsets.all(D.default_10),
           padding: EdgeInsets.only(
               left: D.default_10,
@@ -241,7 +242,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
                     spreadRadius: 1)
               ]),
           child: Text(
-            tr("إنشاء بطاقة أخرى بخصم 20%"),
+            tr("new_cart"),
             style: S.h1Bold(color: Colors.white),
             textAlign: TextAlign.center,
           ),
@@ -275,7 +276,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
                     spreadRadius: 1)
               ]),
           child: Text(
-            tr("شراء"),
+            tr("pay"),
             style: S.h1Bold(color: Colors.white),
             textAlign: TextAlign.center,
           ),
@@ -309,7 +310,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
                     spreadRadius: 1)
               ]),
           child: Text(
-            tr("إلغاء"),
+            tr("cancel"),
             style: S.h1Bold(color: Colors.white),
             textAlign: TextAlign.center,
           ),
@@ -390,7 +391,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              tr("اسم أليفك") + ":",
+              tr("your_pet_name") + ":",
               style: S.h2(color: Colors.grey),
             ),
             Expanded(
@@ -428,7 +429,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              tr("النوع") + ":",
+              tr("type") + ":",
               style: S.h2(color: Colors.grey),
             ),
             Expanded(
@@ -465,7 +466,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              tr("الفصيلة") + ":",
+              tr("family") + ":",
               style: S.h2(color: Colors.grey),
             ),
             Expanded(
@@ -502,7 +503,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              tr("البلد") + ":",
+              tr("country") + ":",
               style: S.h2(color: Colors.grey),
             ),
             Expanded(

@@ -28,15 +28,17 @@ class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
   @override
   void initState() {
     super.initState();
-    var _categoriesProviderModel=Provider.of<CategoriesProviderModel>(context,listen: false);
-    adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: false);
-    adsSliderProviderModel!.getAdsSlider();
-    _categoriesProviderModel.getCategoriesList();
+    categoriesProviderModel=Provider.of<CategoriesProviderModel>(context,listen: false);
+    WidgetsBinding.instance!.addPostFrameCallback((_){
+      adsSliderProviderModel!.getAdsSlider();
+      categoriesProviderModel!.getCategoriesList();
+    });
+
   }
   @override
   Widget build(BuildContext context) {
     categoriesProviderModel=Provider.of<CategoriesProviderModel>(context,listen: true);
-
+    adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: true);
     return  BaseScreen(
       tag: "MainCategoriesScreen",
       showBottomBar: true,

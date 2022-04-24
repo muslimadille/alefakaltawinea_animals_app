@@ -40,12 +40,16 @@ class BaseDioUtils {
 
         return handler.next(response);
       }, onError: (DioError e, ErrorInterceptorHandler handler) async {
-        var url = "${e.response!.realUri.path}";
+       /* var url = "${e.response!.realUri.path}";
+
         print("$url : ERROR : ${e.error}");
         print("$url : ERROR : ${e.message}");
         print("$url : ERROR : ${e.response?.data}");
         print("$url : ERROR : ${e.response?.statusCode}");
-        print("$url : ERROR : ${e.response?.statusMessage}");
+        print("$url : ERROR : ${e.response?.statusMessage}");*/
+        if(e.message.contains("Connection closed before full header was received")){
+          initDio();
+        }
 
         return handler.next(e);
       }));
@@ -157,8 +161,22 @@ class BaseDioUtils {
           break;
       }
     } catch (e) {
+
       var error = e as DioError;
-      response = error.response!;
+      if(error.message.contains("Connection closed before full header was received")){
+        await request(requestType, url,body: body, contentType:contentType,
+          queryParameters:queryParameters,
+          headers:headers,
+          requestOption:requestOption,
+          isToCache:isToCache,
+          forceRefresh:forceRefresh,
+          daysToCache:daysToCache,
+          hoursToCache:hoursToCache,
+        );
+      }else{
+        response = error.response!;
+      }
+
     }
 
     printResponse(url, response);

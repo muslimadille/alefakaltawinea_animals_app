@@ -146,7 +146,18 @@
   "times": "Times",
   "add_date": "Adding Date",
   "name":"Name",
-  "contact_phone": "Contact Number"
+  "contact_phone": "Contact Number",
+  "country": "Country",
+  "family": "Family",
+  "your_pet_name":"Your pet name",
+  "pay": "Pay",
+  "new_cart": "Create another card with 20% discount",
+  "haveApet": "You have another pet and you need an additional card",
+  "male": "Male",
+  "female": "Female"
+
+
+
 
 
 

@@ -29,7 +29,7 @@ typedef dynamic OnItemClickListener();
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await EasyLocalization.ensureInitialized();
-  HttpOverrides.global =  MyHttpOverrides();//handel ssl shackoff error CERTIFICATE_VERIFY_FAILED
+  //HttpOverrides.global =  MyHttpOverrides();//handel ssl shackoff error CERTIFICATE_VERIFY_FAILED
   runApp(MultiProvider(
     providers: [
       ChangeNotifierProvider<IntroProviderModel>(create: (ctx) => IntroProviderModel(),),
@@ -55,13 +55,43 @@ void main() async{
   ));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  SharedPreferences? prefs;
+  UtilsProviderModel? utilsProviderModel;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: false);
+    _initPref(context);
+  }
   @override
   Widget build(BuildContext context) {
-    UtilsProviderModel utilsProviderModel;
     utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: true);
     Constants.utilsProviderModel=utilsProviderModel;
+    if(utilsProviderModel!.isArabic){
+       context.setLocale(Locale('ar', 'EG'));
+       EasyLocalization.of(context)!.setLocale(Locale('ar', 'EG'));
+       utilsProviderModel!.currentLocalName="العربية";
+       Constants.SELECTED_LANGUAGE="ar";
+       utilsProviderModel!.setLanguageState("ar");
+       Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "ar");
+    }else{
+      context.setLocale(Locale('en', 'US'));
+      EasyLocalization.of(context)!.setLocale(Locale('en', 'US'));
+      utilsProviderModel!.currentLocalName="English";
+      Constants.SELECTED_LANGUAGE="en";
+      utilsProviderModel!.setLanguageState("en");
+      Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "en");
+    }
     _initProviders(context);
     return  Constants.utilsProviderModel!.currentLocalName.isNotEmpty? MaterialApp(
       theme: ThemeData(
@@ -72,7 +102,7 @@ class MyApp extends StatelessWidget {
 
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
-        locale: utilsProviderModel.isArabic?Locale('ar', 'EG'):Locale('en', 'US'),
+        locale: utilsProviderModel!.isArabic?Locale('ar', 'EG'):Locale('en', 'US'),
         debugShowCheckedModeBanner: false,
         home: BaseScreen(
           tag: "SplashScreen",
@@ -80,14 +110,33 @@ class MyApp extends StatelessWidget {
         showSettings: false,
         body: SplashScreen())):Container();
   }
+
   void _initProviders(BuildContext context){
 
   }
+
+  void _initPref(BuildContext ctx)async{
+    prefs =  await SharedPreferences.getInstance();
+    Constants.prefs=prefs;
+    if(prefs!.get(Constants.LANGUAGE_KEY!)!=null){
+      if(prefs!.get(Constants.LANGUAGE_KEY!)=="ar"){
+        Constants.utilsProviderModel!.setLanguageState("ar");
+        utilsProviderModel!.setCurrentLocal(ctx, Locale('ar','EG'));
+      }else{
+        Constants.utilsProviderModel!.setLanguageState("en");
+        utilsProviderModel!.setCurrentLocal(ctx, Locale('en','US'));
+      }
+    }else{
+      Constants.utilsProviderModel!.setLanguageState("ar");
+      utilsProviderModel!.setCurrentLocal(ctx, Locale('ar','EG'));
+
+    }
+  }
 }
-class MyHttpOverrides extends HttpOverrides{
+/*class MyHttpOverrides extends HttpOverrides{
   @override
   HttpClient createHttpClient(SecurityContext? context) {
     return super.createHttpClient(context)..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
   }
-}
+}*/
 

@@ -51,11 +51,12 @@ class _WebPageState extends State<WebPage> {
       onPageFinished: (value){
         print("$value" );
         if (value.toString().contains("success-callback")){
-          MyUtils.navigateReplaceCurrent(context, ProfileScreen());
+          Fluttertoast.showToast(msg:tr("تمت عملية الدفع بنجاح"));
+          MyUtils.navigateReplaceCurrent(context, ProfileScreen(selectedTap: 1,));
         }
         if(value.toString().contains("error-callback")){
-          Navigator.pop(context);
           Fluttertoast.showToast(msg:tr("فشل عملية الدفع حاول مرة اخري"));
+          Navigator.pop(context);
         }
 
       },
@@ -63,7 +64,8 @@ class _WebPageState extends State<WebPage> {
         webViewController.currentUrl().then((value) {
           print("$value");
           if (value.toString().contains("success-callback")){
-            MyUtils.navigateReplaceCurrent(context, ProfileScreen());
+            Fluttertoast.showToast(msg:tr("تمت عملية الدفع بنجاح"));
+            MyUtils.navigateReplaceCurrent(context, ProfileScreen(selectedTap: 1,));
           }
           if(value.toString().contains("error-callback")){
             Navigator.pop(context);
@@ -73,7 +75,8 @@ class _WebPageState extends State<WebPage> {
       },
       navigationDelegate: (NavigationRequest request) {
         if (request.url.contains("success")){
-          MyUtils.navigateReplaceCurrent(context, ProfileScreen());
+          Fluttertoast.showToast(msg:tr("تمت عملية الدفع بنجاح"));
+          MyUtils.navigateReplaceCurrent(context, ProfileScreen(selectedTap: 1,));
           return NavigationDecision.prevent;
         }
 

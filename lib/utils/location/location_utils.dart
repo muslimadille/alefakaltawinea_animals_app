@@ -1,4 +1,6 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:location/location.dart';
+
 
 class LocationUtils{
   static Future<Position> getLocationPermission()async{
@@ -7,12 +9,13 @@ class LocationUtils{
 
     // Test if location services are enabled.
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
+    /*if (!serviceEnabled) {
+      Geolocator.requestPermission();
       // Location services are not enabled don't continue
       // accessing the position and request users of the
       // App to enable the location services.
       return Future.error('Location services are disabled.');
-    }
+    }*/
 
     permission = await Geolocator.checkPermission();
     if (permission == LocationPermission.denied) {
