@@ -41,7 +41,7 @@ class Apis{
   static String ADD_FAV="${BASE_URL}/add-fav";
   static String GET_FAV="${BASE_URL}/favs";
   ///................notification.............
-  static String GET_NOTIFICATIONS="${BASE_URL}/notifications";
+  static String GET_NOTIFICATIONS="${BASE_URL}/new-notifications";
   ///.................static info......................
 
   static String GET_APP_INFO="${BASE_URL}/static_info";

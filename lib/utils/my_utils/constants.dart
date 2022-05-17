@@ -1,6 +1,7 @@
 import 'package:alefakaltawinea_animals_app/modules/login/data/user_data.dart';
 import 'package:alefakaltawinea_animals_app/modules/spalshScreen/data/regions_model.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
+import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../modules/spalshScreen/data/app_info_model.dart';
@@ -21,6 +22,7 @@ class Constants extends Object{
   static AppInfoModel? APP_INFO;
   static String APP_LINK="https://drive.google.com/file/d/1MTmSYV6-3lBBffcsyZ_g5whBIT_dio3f/view?usp=sharing";
   static String isAdoptionAlertAccepted="isAdoptionAlertAccepted";
+  static BuildContext? mainContext;
   ///888888888888888888888888888888888888888888888888888888
   static UtilsProviderModel? utilsProviderModel;
 

@@ -38,8 +38,12 @@ class _AddCartScreenState extends State<AddCartScreen> {
   List<TextEditingController> _typeControllers = [];
   List<TextEditingController> _cityControllers = [];
   List<TextEditingController> _familyControllers = [];
+  List<TextEditingController> _dateOfBirthControllers = [];
+
   List<String> _selectedGenders = [];
-  List<String> _genders = [tr("male"), tr("female")];
+  List<String> _genders = [tr("male"), tr("female"),tr("Did_not_matter")];
+  List<String> _selectedTypes = [];
+  List<String> _types = [tr("Dog"), tr("cat"),tr("bird"),tr("reptile"),tr("rabbit"),tr("Hamster"),tr("fish"),tr("livestock"),tr("camel"),tr("Horse"),tr("turtle"),tr("turtle")];
   List<String> _uploadedImages = [];
   List<dynamic>_imagesFiles=[];
   CartApi cartApi=CartApi();
@@ -146,10 +150,24 @@ class _AddCartScreenState extends State<AddCartScreen> {
         child: Column(
           children: [
             _addImagePart(index),
-            _bitName(index),
+            Row(children: [
+              Expanded(child: _bitName(index)),
+              SizedBox(width: D.default_10,),
+              Expanded(child: _bitDate(index)),],),
             Row(
               children: [
-                Expanded(child: _bitType(index)),
+                Expanded(
+                    child: Container(
+                      child: Row(
+                        children: [
+                          Text(
+                            tr("type")+":",
+                            style: S.h2(color: Colors.grey),
+                          ),
+                          _typeSpinner(index)
+                        ],
+                      ),
+                    )),
                 SizedBox(
                   width: D.default_20,
                 ),
@@ -422,20 +440,20 @@ class _AddCartScreenState extends State<AddCartScreen> {
     );
   }
 
-  Widget _bitType(int index) {
+  Widget _bitDate(int index) {
     return Column(
       children: [
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              tr("type") + ":",
+              tr("date_birth") + ":",
               style: S.h2(color: Colors.grey),
             ),
             Expanded(
                 child: Container(
                     child: TextFormField(
-              controller: _typeControllers[index],
+              controller: _dateOfBirthControllers[index],
               decoration: InputDecoration(
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.transparent),
@@ -448,7 +466,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
                 errorStyle: S.h4(color: Colors.red),
                 contentPadding: EdgeInsets.all(D.default_5),
               ),
-              keyboardType: TextInputType.text,
+              keyboardType: TextInputType.datetime,
               obscureText: false,
               cursorColor: C.BASE_BLUE,
               autofocus: false,
@@ -503,7 +521,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              tr("country") + ":",
+              tr("bit_country") + ":",
               style: S.h2(color: Colors.grey),
             ),
             Expanded(
@@ -539,6 +557,8 @@ class _AddCartScreenState extends State<AddCartScreen> {
     _itemsCount = _itemsCount + 1;
     _imagesFiles.add(null);
     _selectedGenders.add(_genders[0]);
+    _selectedTypes.add(_types[0]);
+    _dateOfBirthControllers.add(TextEditingController());
     _familyControllers.add(TextEditingController());
     _bitNameControllers.add(TextEditingController());
     _typeControllers.add(TextEditingController());
@@ -590,13 +610,56 @@ class _AddCartScreenState extends State<AddCartScreen> {
       ),
     );
   }
+  Widget _typeSpinner(int index) {
+    return Container(
+      height: D.default_50,
+      margin: EdgeInsets.only(
+          left: D.default_5, right: D.default_5, top: D.default_10),
+      padding: EdgeInsets.only(left: D.default_20, right: D.default_20),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(D.default_5),
+          border: Border.all(color: Colors.grey)),
+      child: Center(
+        child: DropdownButton<String>(
+          underline: Container(),
+          menuMaxHeight: D.default_200,
+          borderRadius: BorderRadius.all(Radius.circular(D.default_10)),
+          style: TextStyle(color: Colors.blue),
+          hint: Container(
+            margin: EdgeInsets.all(D.default_10),
+            child: Text(
+              _selectedTypes[index],
+              style: S.h2(color: Colors.grey),
+            ),
+          ),
+          isExpanded: false,
+          items: _types.map((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Container(
+                child: Text(
+                  value,
+                  style: S.h4(color: Colors.grey),
+                ),
+              ),
+            );
+          }).toList(),
+          onChanged: (value) {
+            setState(() {
+              _selectedTypes[index] = value!;
+            });
+          },
+        ),
+      ),
+    );
+  }
   void _addCard(){
     Carts cartsDatas=Carts();
     List<AddCartModel>cartsList=[];
     for(int i=0;i<_bitNameControllers.length;i++){
       AddCartModel addCartModel=AddCartModel();
       addCartModel.name=_bitNameControllers[i].text;
-      addCartModel.kind=_typeControllers[i].text;
+      addCartModel.kind=_selectedTypes[i];
       addCartModel.family=_familyControllers[i].text;
       addCartModel.gender=_selectedGenders[i];
       addCartModel.photo=_uploadedImages[i];

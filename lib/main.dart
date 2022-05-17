@@ -70,39 +70,25 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     // TODO: implement initState
     super.initState();
+    initPref();
     utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: false);
-    _initPref(context);
+    Constants.utilsProviderModel=utilsProviderModel;
+
+
   }
   @override
   Widget build(BuildContext context) {
     utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: true);
-    Constants.utilsProviderModel=utilsProviderModel;
-    if(utilsProviderModel!.isArabic){
-       context.setLocale(Locale('ar', 'EG'));
-       EasyLocalization.of(context)!.setLocale(Locale('ar', 'EG'));
-       utilsProviderModel!.currentLocalName="العربية";
-       Constants.SELECTED_LANGUAGE="ar";
-       utilsProviderModel!.setLanguageState("ar");
-       Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "ar");
-    }else{
-      context.setLocale(Locale('en', 'US'));
-      EasyLocalization.of(context)!.setLocale(Locale('en', 'US'));
-      utilsProviderModel!.currentLocalName="English";
-      Constants.SELECTED_LANGUAGE="en";
-      utilsProviderModel!.setLanguageState("en");
-      Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "en");
-    }
-    _initProviders(context);
-    return  Constants.utilsProviderModel!.currentLocalName.isNotEmpty? MaterialApp(
+    Constants.mainContext=context;
+    return  utilsProviderModel!.currentLocalName.isNotEmpty? MaterialApp(
       theme: ThemeData(
           primaryColor:C.BASE_BLUE,
           focusColor:C.BASE_BLUE
 
       ),
-
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
-        locale: utilsProviderModel!.isArabic?Locale('ar', 'EG'):Locale('en', 'US'),
+        locale: Constants.utilsProviderModel!.currentLocal,
         debugShowCheckedModeBanner: false,
         home: BaseScreen(
           tag: "SplashScreen",
@@ -111,28 +97,13 @@ class _MyAppState extends State<MyApp> {
         body: SplashScreen())):Container();
   }
 
-  void _initProviders(BuildContext context){
-
-  }
-
-  void _initPref(BuildContext ctx)async{
-    prefs =  await SharedPreferences.getInstance();
-    Constants.prefs=prefs;
-    if(prefs!.get(Constants.LANGUAGE_KEY!)!=null){
-      if(prefs!.get(Constants.LANGUAGE_KEY!)=="ar"){
-        Constants.utilsProviderModel!.setLanguageState("ar");
-        utilsProviderModel!.setCurrentLocal(ctx, Locale('ar','EG'));
-      }else{
-        Constants.utilsProviderModel!.setLanguageState("en");
-        utilsProviderModel!.setCurrentLocal(ctx, Locale('en','US'));
-      }
-    }else{
-      Constants.utilsProviderModel!.setLanguageState("ar");
-      utilsProviderModel!.setCurrentLocal(ctx, Locale('ar','EG'));
-
-    }
-  }
+void initPref()async{
+  prefs =  await SharedPreferences.getInstance();
+  Constants.prefs=prefs;
 }
+
+}
+
 /*class MyHttpOverrides extends HttpOverrides{
   @override
   HttpClient createHttpClient(SecurityContext? context) {

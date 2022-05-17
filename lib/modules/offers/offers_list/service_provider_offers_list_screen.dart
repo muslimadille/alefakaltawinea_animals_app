@@ -44,11 +44,11 @@ class _ServiceProviderOffersScreenState extends State<ServiceProviderOffersScree
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                   Expanded(child: Container(child: Text(widget.serviceProviderData.offers![index].title!,style: S.h2(color: C.BASE_BLUE),),),),
-                  Container(
+                    double.parse(widget.serviceProviderData.offers![index]!.price!)>0?Container(
                     margin:EdgeInsets.only(left:D.default_10,right:D.default_10),
-                    child: Text("${widget.serviceProviderData.offers![index]!.discountValue!}${tr("curncy")}",style: S.h2(color: C.BASE_BLUE),),)
+                    child: Text("${widget.serviceProviderData.offers![index]!.discountValue!}${tr("curncy")}",style: S.h2(color: C.BASE_BLUE),),):Container()
                 ],),
-                  Text("${tr("init_price")} ${widget.serviceProviderData.offers![index]!.price}${tr("curncy")}-${tr("wafer")}${_getDescoundRaio(index)}% ${tr("with_alifak_cart")}",style: S.h4(color: Colors.grey)),
+                  double.parse(widget.serviceProviderData.offers![index]!.price!)>0?Text("${tr("init_price")} ${widget.serviceProviderData.offers![index]!.price}${tr("curncy")}-${tr("wafer")}${_getDescoundRaio(index)}% ${tr("with_alifak_cart")}",style: S.h4(color: Colors.grey)):Container(),
 
                 ],),
             ),);

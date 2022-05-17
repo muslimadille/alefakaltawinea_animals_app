@@ -12,6 +12,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../modules/categories_screen/mainCategoriesScreen.dart';
+import '../../modules/settings/change_language_dialog_widget.dart';
+import '../../modules/settings/regions_dialog_widget.dart';
 import '../../modules/spalshScreen/data/regions_model.dart';
 import 'baseDimentions.dart';
 import 'baseTextStyle.dart';
@@ -28,19 +30,19 @@ class MyUtils{
   /// ........... navigation utils................................
   static void navigate(BuildContext context,Widget screen){
     Navigator.of(context).push(MaterialPageRoute(builder: (context) => screen)).then((value) {
-      Constants.utilsProviderModel!.setCurrentLocal(context, Constants.utilsProviderModel!.currentLocal);
+      //Constants.utilsProviderModel!.setCurrentLocal(context, Constants.utilsProviderModel!.currentLocal);
     });
   }
   static void navigateAsFirstScreen(BuildContext context,Widget screen){
     Navigator.of(context).popUntil((route) => route.isFirst);
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => screen)).then((value) {
-      Constants.utilsProviderModel!.setCurrentLocal(context, Constants.utilsProviderModel!.currentLocal);
+      //Constants.utilsProviderModel!.setCurrentLocal(context, Constants.utilsProviderModel!.currentLocal);
     });
   }
 
   static void navigateReplaceCurrent(BuildContext context,Widget screen){
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => screen)).then((value) {
-      Constants.utilsProviderModel!.setCurrentLocal(context, Constants.utilsProviderModel!.currentLocal);
+      //Constants.utilsProviderModel!.setCurrentLocal(context, Constants.utilsProviderModel!.currentLocal);
     });
   }
   ///========================intor utils===================================================
@@ -152,67 +154,12 @@ class MyUtils{
     showDialog(
       context: context,
       barrierDismissible: false,
-      builder: (BuildContext context) {
-        // return object of type Dialog
+      builder: (BuildContext context) {// return object of type Dialog
         return WillPopScope(
             onWillPop: isDismissible ? _onWillPop : _onWillNotPop,
             child: AlertDialog(
               contentPadding: EdgeInsets.all(0),
-              content:Container(
-
-                  height: D.default_300,
-                  child:Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(D.default_10),
-                        child: Text(tr("select_language"),style: S.h1(color: C.BASE_BLUE),textAlign:TextAlign.center ,),),
-                      Container(width: double.infinity,height: D.default_1,color: Colors.grey,),
-                      Container(
-                          padding: EdgeInsets.all(D.default_10),
-                          child: Row(children: [
-                            Radio(value: true, groupValue:utilsProviderModel!.isArabic,toggleable: true,activeColor:C.BASE_BLUE, onChanged: ( val ){
-                              bool currentValue=val as bool ;
-                              currentValue?utilsProviderModel.setLanguageState("ar"):utilsProviderModel.setLanguageState("en");
-
-                            }),
-                            Text("العربية", style: S.h2(color: Colors.black))
-                          ],)),
-                         Container(width: double.infinity,height: D.default_1,color: Colors.grey,),
-                      Container(
-                          padding: EdgeInsets.all(D.default_10),
-                          child: Row(children: [
-                            Radio(value: true, groupValue:utilsProviderModel.isEnglish, toggleable: true,activeColor:C.BASE_BLUE,onChanged: ( val ){
-                              bool currentValue=val as bool ;
-                              currentValue?utilsProviderModel.setLanguageState("en"):utilsProviderModel.setLanguageState("ar");
-                            }),
-                            Text("English", style: S.h2(color: Colors.black))
-                          ],)),
-                      Container(width: double.infinity,height: D.default_1,color: Colors.grey,),
-                      Container(child:Row(mainAxisAlignment: MainAxisAlignment.end,children: [
-                        InkWell(onTap: ()async{
-                          if(utilsProviderModel.isArabic){
-                            await utilsProviderModel.setCurrentLocal(context, Locale("ar","EG"));
-                            //Navigator.pop(context);
-                            MyUtils.navigate(context, MainCategoriesScreen());
-
-                          }else{
-                            await utilsProviderModel.setCurrentLocal(context, Locale("en","US"));
-                            //Navigator.pop(context);
-                            MyUtils.navigate(context, MainCategoriesScreen());
-                          }
-                        },child: Container(
-                            padding: EdgeInsets.all(D.default_15),
-                            child: Text(tr("confirm"), style: S.h2(color: C.BASE_BLUE))),),
-                        InkWell(onTap: (){
-                          Navigator.pop(context);
-                        },child: Container(
-                            padding: EdgeInsets.all(D.default_15),
-                            child: Text(tr("cancel"), style: S.h2(color: C.BASE_BLUE))),)
-                      ],))
-
-                    ],)),
+              content:ChangeLanguageDialogWidget(),
             ));
       },
     );
@@ -233,55 +180,7 @@ class MyUtils{
             onWillPop: isDismissible ? _onWillPop : _onWillNotPop,
             child: AlertDialog(
               contentPadding: EdgeInsets.all(0),
-              content:Container(
-                width:D.default_200,
-                  height: D.default_400,
-                  child:Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(D.default_10),
-                        child: Text(tr("select_city"),style: S.h1(color: C.BASE_BLUE),textAlign:TextAlign.center ,),),
-                      Container(width: double.infinity,height: D.default_1,color: Colors.grey,),
-                      Container(
-                        height: D.default_260,
-                        width:D.default_300 ,
-                        child: ListView.builder(
-                            itemCount: Constants.STATES.length,
-                            itemBuilder:(context,index){
-                              return Container(
-                                  child: Row(children: [
-                                    Radio(value: true, groupValue:Constants.STATES[utilsProviderModel!.currentStateIndex].id==Constants.STATES[index].id,toggleable: true,activeColor:C.BASE_BLUE, onChanged: ( val ){
-                                      bool currentValue=val as bool ;
-                                      if(currentValue){
-                                        utilsProviderModel.setCurrentStateIndex(index);
-                                        utilsProviderModel.setCurrentRegionIndex(Constants.REGIONS.indexOf(Constants.REGIONS.where((element) => element.id==Constants.STATES[index].regionId).first));
-                                      }
-                                    }),
-                                    Text(Constants.STATES[index].name!, style: S.h2(color: Colors.black))
-                                  ],));
-                            }),),
-                      Container(width: double.infinity,height: D.default_1,color: Colors.grey,),
-                      Container(
-                          child:Row(mainAxisAlignment: MainAxisAlignment.end,children: [
-                        InkWell(onTap: ()async{
-                          UserData user=userProviderModel!.currentUser!;
-                          user.regionId=Constants.STATES[utilsProviderModel!.currentRegionIndex].regionId.toString();
-                          user.stateId=Constants.STATES[utilsProviderModel!.currentStateIndex].id.toString();
-                          userProviderModel.setCurrentUserData(user);
-                            Navigator.pop(context);
-                        },child: Container(
-                            padding: EdgeInsets.all(D.default_15),
-                            child: Text(tr("confirm"), style: S.h2(color: C.BASE_BLUE))),),
-                        InkWell(onTap: (){
-                          Navigator.pop(context);
-                        },child: Container(
-                            padding: EdgeInsets.all(D.default_15),
-                            child: Text(tr("cancel"), style: S.h2(color: C.BASE_BLUE))),)
-                      ],))
-
-                    ],)),
+              content:RegionsDialogWidget(),
             ));
       },
     );
@@ -321,4 +220,7 @@ class MyUtils{
   }
 
 
+}
+
+class ChangeLangageDialogWidget {
 }

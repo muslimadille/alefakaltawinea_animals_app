@@ -4,6 +4,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
+import 'package:easy_localization/easy_localization.dart'hide TextDirection;
 import 'package:flutter/material.dart';
 import '../../modules/settings/settings_screen.dart';
 
@@ -13,6 +14,7 @@ class ActionBarWidget extends StatelessWidget {
   Color backgroundColor;
   bool showSearch;
   bool enableShadow;
+  bool showBack;
   bool showShare;
   BuildContext cxt;
   bool showSetting;
@@ -24,7 +26,8 @@ class ActionBarWidget extends StatelessWidget {
          this.showSearch=false,
          this.enableShadow=true,
          this.showSetting=true,
-         this.showShare=false
+         this.showShare=false,
+         this.showBack=true
        });
 
   @override
@@ -48,20 +51,17 @@ class ActionBarWidget extends StatelessWidget {
           _backBtn(),
           showSearch?_searchBtn(context):Container(),
           showShare?_shareBtn(context):Container(),
-          Expanded(child: Center(child: Text(title,style: S.h1(color:textColor),),)),
+          Expanded(child: Center(child: Directionality(textDirection: EasyLocalization.of(context)!.currentLocale==Locale('ar', 'EG')?TextDirection.rtl:TextDirection.ltr,child: Text(title,style: S.h1(color:textColor),),),)),
           settingsBtn()
-
-
-
         ],),
     ));
   }
   Widget _backBtn(){
-    return Container(
+    return showBack?Container(
       child:IconButton(onPressed: () {
         Navigator.of(cxt).pop();
       }, icon: Icon(Icons.arrow_back_ios,color: textColor,size: D.default_25,),) ,
-    );
+    ):Container(width: D.default_80,);
   }
   Widget _searchBtn(BuildContext context){
     return Container(

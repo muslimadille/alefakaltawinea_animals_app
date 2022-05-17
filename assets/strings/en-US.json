@@ -154,7 +154,26 @@
   "new_cart": "Create another card with 20% discount",
   "haveApet": "You have another pet and you need an additional card",
   "male": "Male",
-  "female": "Female"
+  "female": "Female",
+  "hello": "Hello%s",
+  "Did_not_matter": "Didn't matter",
+  "Dog": "Dog",
+  "cat": "cat",
+  "bird": "bird",
+  "reptile": "reptile",
+  "rabbit": "rabbit",
+  "Hamster": "Hamster",
+  "fish": "fish",
+  "livestock": "livestock",
+  "camel": "camel",
+  "Horse": "Horse",
+  "turtle": "turtle",
+  "monkey": "monkey",
+  "bit_country":"City",
+  "yes": "Yes",
+  "no": "No"
+
+
 
 
 

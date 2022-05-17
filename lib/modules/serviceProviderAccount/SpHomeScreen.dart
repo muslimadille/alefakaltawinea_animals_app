@@ -81,7 +81,7 @@ class _SpHomeScreenState extends State<SpHomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     DotsIndicator(
-                      dotsCount: Constants.currentUser!.photos!.length,
+                      dotsCount: Constants.currentUser!.photos!.isNotEmpty?Constants.currentUser!.photos!.length:1,
                       position: Constants.currentUser!.photos!.isNotEmpty?
                       _currentSliderPager.toDouble():0,
                       decorator: DotsDecorator(
@@ -202,6 +202,17 @@ class _SpHomeScreenState extends State<SpHomeScreen> {
   List<Widget >_sliderItem(){
     List<Widget>items=[];
 
+    items.add(
+        Container(child:
+        Column(children: [
+          Expanded(child: TransitionImage(
+            Constants.currentUser!.bannerPhoto!,
+            fit: BoxFit.cover,
+            width: double.infinity,
+          )),
+
+        ],),)
+    );
     for(int i=0;i<Constants.currentUser!.photos!.length;i++){
       items.add(
           Container(child:
@@ -242,11 +253,11 @@ class _SpHomeScreenState extends State<SpHomeScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(child: Container(child: Text(Constants.currentUser!.offers![index].title!,style: S.h2(color: C.BASE_BLUE),),),),
-                        Container(
+                      double.parse(Constants.currentUser!.offers![index]!.price!)>0?  Container(
                           margin:EdgeInsets.only(left:D.default_10,right:D.default_10),
-                          child: Text("${Constants.currentUser!.offers![index]!.discountValue!}${tr("curncy")}",style: S.h2(color: C.BASE_BLUE),),)
+                          child: Text("${Constants.currentUser!.offers![index]!.discountValue!}${tr("curncy")}",style: S.h2(color: C.BASE_BLUE),),):Container()
                       ],),
-                    Text("${tr("init_price")} ${Constants.currentUser!.offers![index]!.price}${tr("curncy")}-${tr("wafer")}${_getDescoundRaio(index)}% ${tr("with_alifak_cart")}",style: S.h4(color: Colors.grey)),
+                    double.parse(Constants.currentUser!.offers![index]!.price!)>0?Text("${tr("init_price")} ${Constants.currentUser!.offers![index]!.price}${tr("curncy")}-${tr("wafer")}${_getDescoundRaio(index)}% ${tr("with_alifak_cart")}",style: S.h4(color: Colors.grey)):Container(),
 
                   ],),
               ),);

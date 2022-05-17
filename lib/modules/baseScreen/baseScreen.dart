@@ -48,6 +48,8 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
      SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
+    Constants.utilsProviderModel!.setCurrentLocal(context,Constants.utilsProviderModel!.currentLocal);
+
 
   }
 
@@ -74,9 +76,9 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
                   MyUtils.openwhatsapp(context);
                 },
                 child: Container(
-                width: D.default_70,
-                height: D.default_70,
-                margin: EdgeInsets.all(D.default_20),
+                width: D.default_50,
+                height: D.default_50,
+                margin: EdgeInsets.only(bottom:D.default_5,left:D.default_5,right:D.default_5),
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(D.default_200),
 

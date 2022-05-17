@@ -165,11 +165,11 @@ class _CodeScannerScreenState extends State<CodeScannerScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Expanded(child: Container(child: Text(scanCodeProvider!.scanCodeModel!.offer!.title!,style: S.h1Bold(color: C.BASE_BLUE),),),),
-              Container(
+             double.parse(scanCodeProvider!.scanCodeModel!.offer!.price!)>0? Container(
                 margin:EdgeInsets.only(left:D.default_10,right:D.default_10),
-                child: Text("${scanCodeProvider!.scanCodeModel!.offer!.discountValue!}${tr("curncy")}",style: S.h2(color: C.BASE_BLUE),),)
+                child: Text("${scanCodeProvider!.scanCodeModel!.offer!.discountValue!}${tr("curncy")}",style: S.h2(color: C.BASE_BLUE),),):Container()
             ],),
-          Text("${tr("init_price")} ${scanCodeProvider!.scanCodeModel!.offer!.price}${tr("curncy")}-${tr("wafer")}${_getDescoundRaio()}% ${tr("with_alifak_cart")}",style: S.h4(color: Colors.grey)),
+          double.parse(scanCodeProvider!.scanCodeModel!.offer!.price!)>0?Text("${tr("init_price")} ${scanCodeProvider!.scanCodeModel!.offer!.price}${tr("curncy")}-${tr("wafer")}${_getDescoundRaio()}% ${tr("with_alifak_cart")}",style: S.h4(color: Colors.grey)):Container(),
 
         ],),
     );

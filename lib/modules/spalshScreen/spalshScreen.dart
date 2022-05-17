@@ -48,26 +48,6 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   UserProviderModel?userProviderModel;
   RegionsApi regionsApi=RegionsApi();
 
-  void _initPref(BuildContext ctx)async{
-    utilsProviderModel=Provider.of<UtilsProviderModel>(ctx,listen: false);
-    prefs =  await SharedPreferences.getInstance();
-    Constants.prefs=prefs;
-    if(prefs!.get(Constants.LANGUAGE_KEY!)!=null){
-      if(prefs!.get(Constants.LANGUAGE_KEY!)=="ar"){
-        Constants.utilsProviderModel!.setLanguageState("ar");
-        utilsProviderModel!.setCurrentLocal(ctx, Locale('ar','EG'));
-      }else{
-        Constants.utilsProviderModel!.setLanguageState("en");
-        utilsProviderModel!.setCurrentLocal(ctx, Locale('en','US'));
-      }
-    }else{
-      Constants.utilsProviderModel!.setLanguageState("ar");
-      utilsProviderModel!.setCurrentLocal(ctx, Locale('ar','EG'));
-
-    }
-    initSavedUser();
-  }
-
   @override
   void initState() {
     super.initState();
@@ -75,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     getAppInfo();
     userProviderModel=Provider.of<UserProviderModel>(context,listen: false);
     //intro=_myIntro();
-    _initPref(context);
+    //_initPref(context);
     adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: false);
     adsSliderProviderModel!.getAdsSlider();
     /*_controller=AnimationController(vsync: this,duration:Duration(milliseconds: 2000));
@@ -91,7 +71,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
 
       await Future.delayed(Duration(milliseconds: 5000)).then((value) {
-        MyUtils.navigate(context, ChoceLanguageScreen());
+        MyUtils.navigateReplaceCurrent(context, ChoceLanguageScreen());
       });
     });
 
@@ -99,8 +79,12 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   }
   @override
   Widget build(BuildContext context) {
+    utilsProviderModel=Provider.of<UtilsProviderModel>(Constants.mainContext!,listen: true);
+    Constants.utilsProviderModel=utilsProviderModel;
     adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: true);
     userProviderModel=Provider.of<UserProviderModel>(context,listen: true);
+    _initPref(context);
+    setLocal();
 
     return BaseScreen(
         tag: "SplashScreen",
@@ -143,5 +127,38 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       Constants.APP_INFO=value.data;
     });
 
+  }
+  void _initPref(BuildContext ctx)async{
+    if(Constants.prefs!.get(Constants.LANGUAGE_KEY!)!=null){
+      if(Constants.prefs!.get(Constants.LANGUAGE_KEY!)=="ar"){
+        Constants.utilsProviderModel!.setLanguageState("ar");
+        Constants.utilsProviderModel!.setCurrentLocal(ctx, Locale('ar','EG'));
+      }else{
+        Constants.utilsProviderModel!.setLanguageState("en");
+        Constants.utilsProviderModel!.setCurrentLocal(ctx, Locale('en','US'));
+      }
+    }else{
+      Constants.utilsProviderModel!.setLanguageState("ar");
+      Constants.utilsProviderModel!.setCurrentLocal(ctx, Locale('ar','EG'));
+
+    }
+
+  }
+  void setLocal()async{
+    if(Constants.utilsProviderModel!.isArabic){
+      await context.setLocale(Locale('ar', 'EG'));
+      await EasyLocalization.of(context)!.setLocale(Locale('ar', 'EG'));
+      Constants.utilsProviderModel!.currentLocalName="العربية";
+      Constants.SELECTED_LANGUAGE="ar";
+      Constants.utilsProviderModel!.setLanguageState("ar");
+      await Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "ar");
+    }else{
+      await context.setLocale(Locale('en', 'US'));
+      await EasyLocalization.of(context)!.setLocale(Locale('en', 'US'));
+      Constants.utilsProviderModel!.currentLocalName="English";
+      Constants.SELECTED_LANGUAGE="en";
+      Constants.utilsProviderModel!.setLanguageState("en");
+      await Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "en");
+    }
   }
 }

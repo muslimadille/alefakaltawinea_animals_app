@@ -13,24 +13,25 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-import 'offer_code_screen.dart';
+import '../offers/offer_details/offer_code_screen.dart';
+import 'data/notification_model.dart';
+import 'notification_code_screen.dart';
 
-class OfferDetailsScreen extends StatefulWidget {
-  Data serviceProviderData;
-  int index;
-  OfferDetailsScreen(this.serviceProviderData,this.index);
+class NotificationDetailsScreen extends StatefulWidget {
+  NotificationModel notificationModel;
+  NotificationDetailsScreen(this.notificationModel);
 
   @override
-  _OfferDetailsScreenState createState() => _OfferDetailsScreenState();
+  _NotificationDetailsScreenState createState() => _NotificationDetailsScreenState();
 }
 
-class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
+class _NotificationDetailsScreenState extends State<NotificationDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseScreen(
         showSettings: false,
         showBottomBar: true,
-        tag: "OfferDetailsScreen",
+        tag: "NotificationDetailsScreen",
         body: Column(
           children: [
             ActionBarWidget("", context,enableShadow: false,backgroundColor: Colors.white,textColor: C.BASE_BLUE,),
@@ -51,55 +52,55 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
   Widget _offerText(){
     return Container(
       margin: EdgeInsets.only(bottom:D.default_20,left:D.default_20,right:D.default_20),
-        child: double.parse(widget.serviceProviderData.offers![widget.index].price!)>0?
-        Text("${tr("descount")} ${_getDescoundRaio(widget.index)}%${tr("for")} ${widget.serviceProviderData.offers![widget.index].title}",style: S.h1(color: C.BASE_BLUE)):
-        Text("${widget.serviceProviderData.offers![widget.index].title}",style: S.h1(color: C.BASE_BLUE)),
+      child: double.parse(widget.notificationModel.price!)>0?
+      Text("${tr("descount")} ${_getDescoundRaio()}%${tr("for")} ${widget.notificationModel.title}",style: S.h1(color: C.BASE_BLUE)):
+      Text("${widget.notificationModel.title}",style: S.h1(color: C.BASE_BLUE)),
 
     );
   }
   Widget _cobonBtn(){
     return Container(child: Center(child: MaterialButton(onPressed: (){
       if(Constants.currentUser!=null){
-        MyUtils.navigate(context, OfferCodeScreen(widget.serviceProviderData,widget.serviceProviderData.offers![widget.index]));
+        MyUtils.navigate(context, NotificationCodeScreen(widget.notificationModel));
       }else{
         MyUtils.navigate(context, NoProfileScreen());
       }
     },
-    child: Container(
-      width: D.default_160,
-      margin: EdgeInsets.all(D.default_20),
-      padding: EdgeInsets.all(D.default_5),
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(D.default_10),
-          color: C.BASE_BLUE,
-          boxShadow:[BoxShadow(
-              color: Colors.grey.withOpacity(0.3),
-              offset:Offset(1,1),
-              blurRadius:1,
-              spreadRadius: 1
-          )]
-      ),
-      child: Center(child: Text(tr("use_offer"),style: S.h2(color: Colors.white),),),),),),);
+      child: Container(
+        width: D.default_160,
+        margin: EdgeInsets.all(D.default_20),
+        padding: EdgeInsets.all(D.default_5),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(D.default_10),
+            color: C.BASE_BLUE,
+            boxShadow:[BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                offset:Offset(1,1),
+                blurRadius:1,
+                spreadRadius: 1
+            )]
+        ),
+        child: Center(child: Text(tr("use_offer"),style: S.h2(color: Colors.white),),),),),),);
   }
   Widget _cobonInfo(){
     return Container(
       margin: EdgeInsets.only(left: D.default_20,right: D.default_20),
       child: Column(
         children: [
-          double.parse(widget.serviceProviderData.offers![widget.index].price!)>0?
-          _cobonInfoItem(tr("save_amount"),"${double.parse(widget.serviceProviderData.offers![widget.index].price!)-double.parse(widget.serviceProviderData.offers![widget.index].discountValue!)} ${tr("curncy")}")
-          :Container(),
-          double.parse(widget.serviceProviderData.offers![widget.index].price!)>0?_devider():Container(),
-          _cobonInfoItem(tr("valed_to"),"${widget.serviceProviderData.offers![widget.index].expirationDate!}"),
+          double.parse(widget.notificationModel.price!)>0?
+          _cobonInfoItem(tr("save_amount"),"${double.parse(widget.notificationModel.price!)-double.parse(widget.notificationModel.discountValue!)} ${tr("curncy")}")
+              :Container(),
+          double.parse(widget.notificationModel.price!)>0?_devider():Container(),
+          _cobonInfoItem(tr("valed_to"),"${widget.notificationModel.expirationDate!}"),
           _devider(),
-          double.parse(widget.serviceProviderData.offers![widget.index].usageTimes!)>0?
-          _cobonInfoItem(tr("num_of_use"),"${widget.serviceProviderData.offers![widget.index].usageTimes!}"):Container(),
-          double.parse(widget.serviceProviderData.offers![widget.index].usageTimes!)>0?
+          double.parse(widget.notificationModel.usageTimes!)>0?
+          _cobonInfoItem(tr("num_of_use"),"${widget.notificationModel.usageTimes!}"):Container(),
+          double.parse(widget.notificationModel.usageTimes!)>0?
           _devider():Container(),
           _cobonInfoItem(tr("cupon_holder_hint"),""),
           _devider()
 
-    ],),) ;
+        ],),) ;
   }
   Widget _devider(){
     return Container(width: double.infinity,height: D.default_1,color: Colors.grey,);
@@ -108,11 +109,11 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
     return Container(
       padding: EdgeInsets.only(left: D.default_10,right: D.default_10,top:D.default_10),
       child: Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        Text("${title} ",style: S.h2(color: Colors.black45),),
-        Text("${content} ",style: S.h2(color: Colors.black45),),
-      ],),);
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text("${title} ",style: S.h2(color: Colors.black45),),
+          Text("${content} ",style: S.h2(color: Colors.black45),),
+        ],),);
   }
   Widget _providerInfo(){
     return Column(children: [
@@ -128,7 +129,7 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
                 color: Colors.white,
               ),
               child: TransitionImage(
-                widget.serviceProviderData.bannerPhoto!,
+                widget.notificationModel.shop!.bannerPhoto!,
                 fit: BoxFit.cover,
                 radius: D.default_20,
                 width: double.infinity,
@@ -152,7 +153,7 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
                 )]
             ),
             child:TransitionImage(
-              widget.serviceProviderData.photo!,
+              widget.notificationModel.shop!.photo!,
               radius: D.default_10,
               fit: BoxFit.cover,
               width: double.infinity,
@@ -170,7 +171,7 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(child: Text(
-                widget.serviceProviderData.name!
+                widget.notificationModel.shop!.name??""
                 ,style: S.h1(color:C.BASE_BLUE),),),
 
 
@@ -181,33 +182,33 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
     ],);
   }
 
-  double _getDescoundRaio(int index){
-    double price=double.parse(widget.serviceProviderData.offers![index].price!);
-    double discount=double.parse(widget.serviceProviderData.offers![index].discountValue!);
+  double _getDescoundRaio(){
+    double price=double.parse(widget.notificationModel.price!);
+    double discount=double.parse(widget.notificationModel.discountValue!);
     double raio=((price-discount)/price)*100;
     return raio.toInt().toDouble();
 
   }
- List<Widget>  _benifitsList(){
-   List<Widget> beni=[];
-   beni.add(
-     Container(
-       margin: EdgeInsets.only(left:D.default_20,right:D.default_20,top: D.default_5),
-       child: Row(
-       children: [
-         Expanded(child: Text(tr("offer_terms"),style: S.h1(color: Colors.grey),textAlign:TextAlign.start ,))
-       ],),)
-   );
-   for(int i=0;i<widget.serviceProviderData.offers![widget.index].features!.length;i++){
-     beni.add(
-         Container(
-           margin: EdgeInsets.only(left:D.default_20,right:D.default_20,top: D.default_5),
-           child: Row(
-             children: [
-               Expanded(child: Text("-${widget.serviceProviderData.offers![widget.index].features![i].ar}",style: S.h3(color:Colors.grey),textAlign:TextAlign.start ,))
-             ],),)
-     );
-   }
-   return beni ;
+  List<Widget>  _benifitsList(){
+    List<Widget> beni=[];
+    beni.add(
+        Container(
+          margin: EdgeInsets.only(left:D.default_20,right:D.default_20,top: D.default_5),
+          child: Row(
+            children: [
+              Expanded(child: Text(tr("offer_terms"),style: S.h1(color: Colors.grey),textAlign:TextAlign.start ,))
+            ],),)
+    );
+    for(int i=0;i<widget.notificationModel.features!.length;i++){
+      beni.add(
+          Container(
+            margin: EdgeInsets.only(left:D.default_20,right:D.default_20,top: D.default_5),
+            child: Row(
+              children: [
+                Expanded(child: Text("-${widget.notificationModel.features![i].ar}",style: S.h3(color:Colors.grey),textAlign:TextAlign.start ,))
+              ],),)
+      );
+    }
+    return beni ;
   }
 }

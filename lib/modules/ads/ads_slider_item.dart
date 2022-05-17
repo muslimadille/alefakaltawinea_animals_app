@@ -73,7 +73,7 @@ class _AdsSliderItemState extends State<AdsSliderItem> {
         ],),
       ),
         Container(
-          height: D.default_35,
+          height: D.default_40,
           color: Colors.white,
           width: double.infinity,
           padding: EdgeInsets.only(top:D.default_10),
@@ -84,7 +84,7 @@ class _AdsSliderItemState extends State<AdsSliderItem> {
             children: [
               Expanded(child: Text(
                 widget.AdsItem.name!
-                ,style: S.h2(color:C.BASE_BLUE),textAlign: TextAlign.center,),),
+                ,style: S.h3(color:C.BASE_BLUE),textAlign: TextAlign.center,),),
             ],),
         )
       ],),);

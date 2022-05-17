@@ -43,6 +43,11 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
   TextEditingController _reasonController = TextEditingController();
   TextEditingController _statusController = TextEditingController();
   TextEditingController _conditionsController = TextEditingController();
+  List<String> _genders = [tr("male"), tr("female"),tr("Did_not_matter")];
+  List<String> _selectedGenders = [];
+  List<String> _vacationStats = [tr("yes"), tr("no")];
+  List<String> _selectedVacationStats = [];
+  String _selectedCity="";
   final _registerFormGlobalKey = GlobalKey<FormState>();
   File? _cLassImage = null;
   bool imageValid=true;
@@ -50,6 +55,9 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
 
   void initState() {
     super.initState();
+    _getCitiesNameList();
+    _selectedGenders.add(_genders[0]);
+    _selectedVacationStats.add(_vacationStats[0]);
     adoptionProviderModel=Provider.of<AdoptionProviderModel>(context,listen: false);
     if(widget.data!=null){
        _nameController.text = widget.data!.name??"";
@@ -286,34 +294,12 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
   Widget _gender() {
     return Container(
         width: double.infinity,
-        child: TextFormField(
-          controller: _genderController,
-          validator: (name) {
-            if (isFieldNotEmpty(name!)) {
-              return null;
-            } else {
-              return tr("");
-            }
-          },
-          decoration: InputDecoration(
-            labelText: tr("gendar"),
-            labelStyle: S.h4(color: Colors.grey),
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey),
-            ),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: C.ADAPTION_COLOR),
-            ),
-            border: UnderlineInputBorder(
-                borderSide: BorderSide(color: C.ADAPTION_COLOR)),
-            errorStyle: S.h4(color: Colors.red),
-            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-          ),
-          keyboardType: TextInputType.text,
-          obscureText: false,
-          cursorColor: C.ADAPTION_COLOR,
-          autofocus: false,
-        ));
+        child: Column(children: [
+          Container(child: Row(children: [
+            Text(tr("gendar"),style: S.h4(color: Colors.grey),),
+            _genderSpinner(0)],),margin: EdgeInsets.only(left: D.default_20,right: D.default_20),),
+          Container(width: MediaQuery.of(context).size.width,height: D.default_1,color: Colors.grey,)
+        ],));
   }
   Widget _type() {
     return Container(
@@ -350,66 +336,22 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
   Widget _vacation() {
     return Container(
         width: double.infinity,
-        child: TextFormField(
-          controller: _vaccitionController,
-          validator: (name) {
-            if (isFieldNotEmpty(name!)) {
-              return null;
-            } else {
-              return tr("");
-            }
-          },
-          decoration: InputDecoration(
-            labelText: tr("vaccation"),
-            labelStyle: S.h4(color: Colors.grey),
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey),
-            ),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: C.ADAPTION_COLOR),
-            ),
-            border: UnderlineInputBorder(
-                borderSide: BorderSide(color: C.ADAPTION_COLOR)),
-            errorStyle: S.h4(color: Colors.red),
-            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-          ),
-          keyboardType: TextInputType.text,
-          obscureText: false,
-          cursorColor: C.ADAPTION_COLOR,
-          autofocus: false,
-        ));
+        child: Column(children: [
+          Container(child: Row(children: [
+            Text(tr("vaccation"),style: S.h4(color: Colors.grey),),
+            _vacationsSpinner(0)],),margin: EdgeInsets.only(left: D.default_20,right: D.default_20),),
+          Container(width: MediaQuery.of(context).size.width,height: D.default_1,color: Colors.grey,)
+        ],));
   }
   Widget _city() {
     return Container(
         width: double.infinity,
-        child: TextFormField(
-          controller: _cityController,
-          validator: (name) {
-            if (isFieldNotEmpty(name!)) {
-              return null;
-            } else {
-              return tr("");
-            }
-          },
-          decoration: InputDecoration(
-            labelText: tr("city"),
-            labelStyle: S.h4(color: Colors.grey),
-            enabledBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey),
-            ),
-            focusedBorder: UnderlineInputBorder(
-              borderSide: BorderSide(color: C.ADAPTION_COLOR),
-            ),
-            border: UnderlineInputBorder(
-                borderSide: BorderSide(color: C.ADAPTION_COLOR)),
-            errorStyle: S.h4(color: Colors.red),
-            contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-          ),
-          keyboardType: TextInputType.text,
-          obscureText: false,
-          cursorColor: C.ADAPTION_COLOR,
-          autofocus: false,
-        ));
+        child: Column(children: [
+          Container(child: Row(children: [
+            Text(tr("city"),style: S.h4(color: Colors.grey),),
+            _citySpinner()],),margin: EdgeInsets.only(left: D.default_20,right: D.default_20),),
+          Container(width: MediaQuery.of(context).size.width,height: D.default_1,color: Colors.grey,)
+        ],));
   }
   Widget _reason() {
     return Container(
@@ -593,9 +535,9 @@ Widget _addBtn(){
             "category_id":adoptionProviderModel!.categoriesList[adoptionProviderModel!.selectedCategoryIndex].id,
             "age":_ageController.text,
             "type":_typeController.text,
-            "gender":_genderController.text,
-            "vaccination":_vaccitionController.text,
-            "city":_cityController.text,
+            "gender":_selectedGenders[0],
+            "vaccination":_selectedVacationStats[0],
+            "city":_selectedCity,
             "reason_to_give_up":_reasonController.text,
             "health_status":_statusController.text,
             "conditions":_conditionsController.text,
@@ -656,5 +598,144 @@ Widget _addBtn(){
           ),
         )),);
   }
+  Widget _genderSpinner(int index) {
+    return Container(
+      height: D.default_50,
+      margin: EdgeInsets.only(
+          left: D.default_5, right: D.default_5, top: D.default_10),
+      padding: EdgeInsets.only(left: D.default_20, right: D.default_20),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(D.default_5),
+          ),
+      child: Center(
+        child: DropdownButton<String>(
+          underline: Container(),
+          menuMaxHeight: D.default_200,
+          borderRadius: BorderRadius.all(Radius.circular(D.default_10)),
+          style: TextStyle(color: Colors.blue),
+          hint: Container(
+            margin: EdgeInsets.all(D.default_10),
+            child: Text(
+              _selectedGenders[index],
+              style: S.h2(color: Colors.grey),
+            ),
+          ),
+          isExpanded: false,
+          items: _genders.map((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Container(
+                child: Text(
+                  value,
+                  style: S.h4(color: Colors.grey),
+                ),
+              ),
+            );
+          }).toList(),
+          onChanged: (value) {
+            setState(() {
+              _selectedGenders[index] = value!;
+            });
+          },
+        ),
+      ),
+    );
+  }
+  Widget _vacationsSpinner(int index) {
+    return Container(
+      height: D.default_50,
+      margin: EdgeInsets.only(
+          left: D.default_5, right: D.default_5, top: D.default_10),
+      padding: EdgeInsets.only(left: D.default_20, right: D.default_20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(D.default_5),
+      ),
+      child: Center(
+        child: DropdownButton<String>(
+          underline: Container(),
+          menuMaxHeight: D.default_200,
+          borderRadius: BorderRadius.all(Radius.circular(D.default_10)),
+          style: TextStyle(color: Colors.blue),
+          hint: Container(
+            margin: EdgeInsets.all(D.default_10),
+            child: Text(
+              _selectedVacationStats[index],
+              style: S.h2(color: Colors.grey),
+            ),
+          ),
+          isExpanded: false,
+          items: _vacationStats.map((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Container(
+                child: Text(
+                  value,
+                  style: S.h4(color: Colors.grey),
+                ),
+              ),
+            );
+          }).toList(),
+          onChanged: (value) {
+            setState(() {
+              _selectedVacationStats[index] = value!;
+            });
+          },
+        ),
+      ),
+    );
+  }
+  Widget _citySpinner() {
+    return Container(
+      height: D.default_50,
+      margin: EdgeInsets.only(
+          left: D.default_5, right: D.default_5, top: D.default_10),
+      padding: EdgeInsets.only(left: D.default_20, right: D.default_20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(D.default_5),
+      ),
+      child: Center(
+        child: DropdownButton<String>(
+          underline: Container(),
+          menuMaxHeight: D.default_200,
+          borderRadius: BorderRadius.all(Radius.circular(D.default_10)),
+          style: TextStyle(color: Colors.blue),
+          hint: Container(
+            margin: EdgeInsets.all(D.default_10),
+            child: Text(
+              _selectedCity,
+              style: S.h2(color: Colors.grey),
+            ),
+          ),
+          isExpanded: false,
+          items: _citiesList.map((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Container(
+                child: Text(
+                  value,
+                  style: S.h4(color: Colors.grey),
+                ),
+              ),
+            );
+          }).toList(),
+          onChanged: (value) {
+            setState(() {
+              _selectedCity = value!;
+            });
+          },
+        ),
+      ),
+    );
+  }
+  List<String>_citiesList=[];
+  _getCitiesNameList(){
+    for(int i=0;i<Constants.STATES.length;i++){
+      _citiesList.add(Constants.STATES[i].name??"");
+    }
+    setState(() {
+      _selectedCity=_citiesList[0];
+    });
+  }
+
 
 }

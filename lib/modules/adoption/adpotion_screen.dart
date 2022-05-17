@@ -187,11 +187,6 @@ Widget _noData(){
     return Center(child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        TransitionImage(Res.OFFER_ICON,
-          width: D.default_80,
-          height: D.default_80,
-        ),
-        SizedBox(height: D.default_20,),
         Text(tr("no_animals"),style: S.h3(color: C.BASE_BLUE),)
       ],),);
 }

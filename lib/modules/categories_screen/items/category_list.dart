@@ -48,7 +48,7 @@ class _CategoryListState extends State<CategoryList> {
                 (){_onItemClick(index);});
       },)),
       Expanded(child: InkWell(onTap: ()async{
-        bool hadeathState=await Constants.prefs!.getBool(Constants.currentUser!.id.toString())??false;
+        bool hadeathState=Constants.currentUser!=null?await Constants.prefs!.getBool(Constants.currentUser!.id.toString())??false:true;
         if(!hadeathState){
           widget.categoriesProviderModel!.showHadeth=true;
           await Constants.prefs!.setBool(Constants.currentUser!.id.toString(),true);

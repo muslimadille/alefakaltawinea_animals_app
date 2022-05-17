@@ -24,6 +24,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
   TextEditingController _confirmPasswordController = TextEditingController();
   TextEditingController _nameController = TextEditingController();
   TextEditingController _alifakController = TextEditingController();
+  List<String> _genders = [tr("male"), tr("female"),tr("Did_not_matter")];
+  List<String> _selectedGenders = [];
 
   TextEditingController _emailController = TextEditingController();
   bool passwordobsecure = true;
@@ -36,6 +38,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
   @override
   void initState() {
     super.initState();
+    _selectedGenders.add(_genders[0]);
     userProviderModel = Provider.of<UserProviderModel>(context, listen: false);
   }
 
@@ -71,8 +74,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            _name(),
                             _alifakName(),
+                            _gender(),
+                            _name(),
                             _email(),
                             _phone(),
                             _password(),
@@ -86,6 +90,59 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
                   ],
                 ),
               ));
+  }
+  Widget _gender() {
+    return Container(
+        width: double.infinity,
+        child: Column(children: [
+          Container(child: Row(children: [
+            Text(tr("gendar"),style: S.h4(color: Colors.grey),),
+            _genderSpinner(0)],),margin: EdgeInsets.only(left: D.default_20,right: D.default_20),),
+          Container(width: MediaQuery.of(context).size.width,height: D.default_1,color: Colors.grey,)
+        ],));
+  }
+  Widget _genderSpinner(int index) {
+    return Container(
+      height: D.default_50,
+      margin: EdgeInsets.only(
+          left: D.default_5, right: D.default_5, top: D.default_10),
+      padding: EdgeInsets.only(left: D.default_20, right: D.default_20),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(D.default_5),
+      ),
+      child: Center(
+        child: DropdownButton<String>(
+          underline: Container(),
+          menuMaxHeight: D.default_200,
+          borderRadius: BorderRadius.all(Radius.circular(D.default_10)),
+          style: TextStyle(color: Colors.blue),
+          hint: Container(
+            margin: EdgeInsets.all(D.default_10),
+            child: Text(
+              _selectedGenders[index],
+              style: S.h2(color: Colors.grey),
+            ),
+          ),
+          isExpanded: false,
+          items: _genders.map((String value) {
+            return DropdownMenuItem<String>(
+              value: value,
+              child: Container(
+                child: Text(
+                  value,
+                  style: S.h4(color: Colors.grey),
+                ),
+              ),
+            );
+          }).toList(),
+          onChanged: (value) {
+            setState(() {
+              _selectedGenders[index] = value!;
+            });
+          },
+        ),
+      ),
+    );
   }
 
   Widget _coditions() {

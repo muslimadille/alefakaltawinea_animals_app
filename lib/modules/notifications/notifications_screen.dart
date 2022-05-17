@@ -18,6 +18,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
+import '../offers/offer_details/offer_details_screen.dart';
+import 'notification_details_screen.dart';
+
 
 
 class NotificationsScreen extends StatefulWidget {
@@ -61,7 +64,7 @@ class _NotificationsScreenState extends State<NotificationsScreen>  {
         itemBuilder: (context,index){
           return InkWell(
             onTap: (){
-              MyUtils.navigate(context, ServiceProviderDetailsScreen(notificationProvider!.notificationsList[index]));
+              MyUtils.navigate(context, NotificationDetailsScreen( notificationProvider!.notificationsList[index]));
             },
             child:  Container(
             margin: EdgeInsets.only(top:D.default_10,bottom:D.default_10),
@@ -72,13 +75,13 @@ class _NotificationsScreenState extends State<NotificationsScreen>  {
                 Container(
                   margin: EdgeInsets.only(left:D.default_10,right: D.default_10),
                   child: TransitionImage(
-                    notificationProvider!.notificationsList[index].photo??"",
+                    notificationProvider!.notificationsList[index].shop!.photo??"",
                     fit: BoxFit.cover,
                     width: D.default_80,
                     height: D.default_80,
                     padding: EdgeInsets.all(D.default_10),
                     backgroundColor: Colors.white,),),
-                Expanded(child: Text(notificationProvider!.notificationsList[index].offers![0].title!,style: S.h4(color: Colors.white),))
+                Expanded(child: Text(notificationProvider!.notificationsList[index].title!,style: S.h4(color: Colors.white),))
               ],),
           ),)
           ;

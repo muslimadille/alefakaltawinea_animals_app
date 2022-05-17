@@ -8,6 +8,7 @@ import 'package:alefakaltawinea_animals_app/modules/spalshScreen/data/regions_mo
 
 import '../../modules/cart/add_cart_respose_model.dart';
 import '../../modules/cart/my_carts_model.dart';
+import '../../modules/notifications/data/notification_model.dart';
 import '../../modules/offers/offer_details/offer_code_model.dart';
 import '../../modules/serviceProviderAccount/data/scan_code_model.dart';
 import '../../modules/spalshScreen/data/app_info_model.dart';
@@ -46,7 +47,11 @@ class MyResponse<T> extends Object {
       if(_status=="400"){
         _data=null;
       }else{
-        _checkType(json['data']);
+        if(json['data'].toString()=="[]"){
+          _data=null;
+        }else{
+          _checkType(json['data']);
+        }
       }    }
 
 
@@ -132,7 +137,13 @@ class MyResponse<T> extends Object {
       _data = (json as List)
           .map((item) => RegionsModel.fromJson(item))
           .toList() as T;
-    }  else {
+    }
+    else if("$T".contains("List<NotificationModel>")){
+      _data = (json as List)
+          .map((item) => NotificationModel.fromJson(item))
+          .toList() as T;
+    }
+    else {
       _data = null;
       return false;
     }

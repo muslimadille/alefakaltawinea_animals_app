@@ -8,16 +8,15 @@ import 'notification_model.dart';
 
 class NotificationApi{
 
-  Future<MyResponse<List<Data>>> getNotification() async {
+  Future<MyResponse<List<NotificationModel>>> getNotification() async {
     final url = "${Apis.GET_NOTIFICATIONS}";
     final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_GET, url);
     if (response != null && response.statusCode == 200) {
-      return MyResponse<List<Data>>.fromJson(
+      return MyResponse<List<NotificationModel>>.fromJson(
           json.decode(jsonEncode(response.data)));
     } else {
-      return MyResponse<List<Data>>.init(Apis.CODE_ERROR, "", null);
+      return MyResponse<List<NotificationModel>>.init(Apis.CODE_ERROR, "", null);
     }
   }
-
-
+  
 }

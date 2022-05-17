@@ -4,14 +4,19 @@ import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/categories_screen/provider/categories_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../utils/my_utils/myColors.dart';
 import '../../utils/my_utils/myUtils.dart';
+import '../../utils/my_widgets/action_bar_widget.dart';
 import '../adoption/adpotion_screen.dart';
+import '../spalshScreen/data/regions_api.dart';
 import 'items/category_list.dart';
+import 'package:sprintf/sprintf.dart';
+
 
 class MainCategoriesScreen extends StatefulWidget {
    MainCategoriesScreen();
@@ -24,10 +29,12 @@ class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
   AdsSliderProviderModel?adsSliderProviderModel;
 
   CategoriesProviderModel?categoriesProviderModel;
+  RegionsApi regionsApi=RegionsApi();
 
   @override
   void initState() {
     super.initState();
+    getRegions();
     categoriesProviderModel=Provider.of<CategoriesProviderModel>(context,listen: false);
     WidgetsBinding.instance!.addPostFrameCallback((_){
       adsSliderProviderModel!.getAdsSlider();
@@ -42,13 +49,14 @@ class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
     return  BaseScreen(
       tag: "MainCategoriesScreen",
       showBottomBar: true,
-        showSettings: true,
+        showSettings: false,
         showIntro: false,
         body: categoriesProviderModel!.isLoading?LoadingProgress():
         Stack(
           fit:StackFit.expand,
           children: [
           Column(children: [
+            ActionBarWidget(Constants.currentUser!=null?"${sprintf(tr("hello"),[Constants.currentUser!.name])}":"", context,showSetting: true,backgroundColor: Colors.white,textColor: C.BASE_BLUE,showBack: false,),
             Container(height: MediaQuery.of(context).size.height*0.30,child: AdsSlider(),),
             Expanded(child:  Container(
               color: Colors.white,
@@ -103,5 +111,15 @@ class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
         )
       ],),
     ));
+  }
+  void getRegions(){
+    Constants.STATES.clear();
+    regionsApi.getRegions().then((value) {
+      Constants.REGIONS=value.data;
+      for(int i=0;i<Constants.REGIONS.length;i++){
+        Constants.STATES.addAll( Constants.REGIONS[i].getStates!);
+      }
+    });
+
   }
 }

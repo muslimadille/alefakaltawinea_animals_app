@@ -24,13 +24,13 @@ class NotificationProvider with ChangeNotifier {
     isLoading=value;
     notifyListeners();
   }
-  List<Data> notificationsList=[];
+  List<NotificationModel> notificationsList=[];
   /// ..........categories...........
   NotificationApi notificationApi=NotificationApi();
   getNotificationsList() async {
     notificationsList.clear();
     setIsLoading(true);
-    MyResponse<List<Data>> response =
+    MyResponse<List<NotificationModel>> response =
     await notificationApi.getNotification();
     if (response.status == Apis.CODE_SUCCESS &&response.data!=null){
       notificationsList.addAll(response.data);

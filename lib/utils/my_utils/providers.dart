@@ -27,10 +27,11 @@ class UtilsProviderModel with ChangeNotifier {
     notifyListeners();
   }
   setCurrentLocal(BuildContext ctx,Locale locale)  async {
-    await EasyLocalization.of(ctx)!.setLocale(locale);
-    await ctx.setLocale(locale);
     currentLocal=locale;
+    await EasyLocalization.of(Constants.mainContext!)!.setLocale(locale);
+    await ctx.setLocale(locale);
     if(locale==Locale('ar', 'EG')){
+
       currentLocalName="العربية";
       Constants.SELECTED_LANGUAGE="ar";
       await Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "ar");
@@ -50,8 +51,8 @@ class UtilsProviderModel with ChangeNotifier {
       setLanguageState("ar");
 
     }
-    notifyListeners();
 
+    notifyListeners();
   }
   setLanguageState(String type){
     if(type=="ar"){

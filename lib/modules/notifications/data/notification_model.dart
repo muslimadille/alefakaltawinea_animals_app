@@ -1,6 +1,98 @@
-import '../../serviceProviders/list_screen/data/photo_model.dart';
+import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/data/offer_model.dart';
+import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/data/serviceProvidersModel.dart';
+
+import '../../serviceProviderAccount/data/scan_code_model.dart';
 
 class NotificationModel {
+  int? id;
+  String? title;
+  String? userId;
+  String? price;
+  String? discountValue;
+  String? expirationDate;
+  String? code;
+  String? usageTimes;
+  List<Features>? features;
+  String? userUsage;
+  String? notificationDate;
+  Shop? shop;
+
+  NotificationModel(
+      {this.id,
+        this.title,
+        this.userId,
+        this.price,
+        this.discountValue,
+        this.expirationDate,
+        this.code,
+        this.usageTimes,
+        this.features,
+        this.userUsage,
+        this.notificationDate,
+        this.shop});
+
+  NotificationModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    title = json['title'];
+    userId = json['user_id'];
+    price = json['price'];
+    discountValue = json['discount_value'];
+    expirationDate = json['expiration_date'];
+    code = json['code'];
+    usageTimes = json['usage_times'];
+    if (json['features'] != null) {
+      features = <Features>[];
+      json['features'].forEach((v) {
+        features!.add(new Features.fromJson(v));
+      });
+    }
+    userUsage = json['user_usage'];
+    notificationDate = json['notification_date'];
+    shop = json['shop'] != null ? new Shop.fromJson(json['shop']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['title'] = this.title;
+    data['user_id'] = this.userId;
+    data['price'] = this.price;
+    data['discount_value'] = this.discountValue;
+    data['expiration_date'] = this.expirationDate;
+    data['code'] = this.code;
+    data['usage_times'] = this.usageTimes;
+    if (this.features != null) {
+      data['features'] = this.features!.map((v) => v.toJson()).toList();
+    }
+    data['user_usage'] = this.userUsage;
+    data['notification_date'] = this.notificationDate;
+    if (this.shop != null) {
+      data['shop'] = this.shop!.toJson();
+    }
+    return data;
+  }
+}
+
+class Features {
+  String? ar;
+  String? en;
+
+  Features({this.ar, this.en});
+
+  Features.fromJson(Map<String, dynamic> json) {
+    ar = json['ar'];
+    en = json['en'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['ar'] = this.ar;
+    data['en'] = this.en;
+    return data;
+  }
+}
+
+class Shop {
   int? id;
   String? name;
   String? address;
@@ -9,7 +101,7 @@ class NotificationModel {
   String? email;
   String? website;
   String? photo;
-  List<PhotoModel>? photos;
+  List<Photos>? photos;
   String? bannerPhoto;
   String? offerPhoto;
   String? longitude;
@@ -21,14 +113,14 @@ class NotificationModel {
   String? isOnline;
   int? isFav;
   String? categoryId;
-  List<Offers>? offers;
+  List<OfferModel>? offers;
   String? color;
   String? userTypeId;
   String? token;
   String? activate;
-  dynamic distance;
+  String? distance;
 
-  NotificationModel(
+  Shop(
       {this.id,
         this.name,
         this.address,
@@ -56,7 +148,7 @@ class NotificationModel {
         this.activate,
         this.distance});
 
-  NotificationModel.fromJson(Map<String, dynamic> json) {
+  Shop.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     address = json['address'];
@@ -66,9 +158,9 @@ class NotificationModel {
     website = json['website'];
     photo = json['photo'];
     if (json['photos'] != null) {
-      photos = <PhotoModel>[];
+      photos = <Photos>[];
       json['photos'].forEach((v) {
-        photos!.add(PhotoModel.fromJson(v));
+        photos!.add(new Photos.fromJson(v));
       });
     }
     bannerPhoto = json['banner_photo'];
@@ -83,9 +175,9 @@ class NotificationModel {
     isFav = json['is_fav'];
     categoryId = json['category_id'];
     if (json['offers'] != null) {
-      offers = <Offers>[];
+      offers = <OfferModel>[];
       json['offers'].forEach((v) {
-        offers!.add(new Offers.fromJson(v));
+        offers!.add(new OfferModel.fromJson(v));
       });
     }
     color = json['color'];
@@ -93,7 +185,6 @@ class NotificationModel {
     token = json['token'];
     activate = json['activate'];
     distance = json['distance'];
-
   }
 
   Map<String, dynamic> toJson() {
@@ -132,93 +223,31 @@ class NotificationModel {
   }
 }
 
-class Offers {
+class Photos {
   int? id;
   String? userId;
-  String? price;
-  String? discountValue;
-  String? expirationDate;
-  String? title;
-  String? titleEn;
-  String? code;
-  String? usageTimes;
-  List<Features>? features;
+  String? photo;
   String? createdAt;
   String? updatedAt;
-  String? stop;
 
-  Offers(
-      {this.id,
-        this.userId,
-        this.price,
-        this.discountValue,
-        this.expirationDate,
-        this.title,
-        this.titleEn,
-        this.code,
-        this.usageTimes,
-        this.features,
-        this.createdAt,
-        this.updatedAt,
-        this.stop});
+  Photos({this.id, this.userId, this.photo, this.createdAt, this.updatedAt});
 
-  Offers.fromJson(Map<String, dynamic> json) {
+  Photos.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     userId = json['user_id'];
-    price = json['price'];
-    discountValue = json['discount_value'];
-    expirationDate = json['expiration_date'];
-    title = json['title'];
-    titleEn = json['title_en'];
-    code = json['code'];
-    usageTimes = json['usage_times'];
-    if (json['features'] != null) {
-      features = <Features>[];
-      json['features'].forEach((v) {
-        features!.add(new Features.fromJson(v));
-      });
-    }
+    photo = json['photo'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    stop = json['stop'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['id'] = this.id;
     data['user_id'] = this.userId;
-    data['price'] = this.price;
-    data['discount_value'] = this.discountValue;
-    data['expiration_date'] = this.expirationDate;
-    data['title'] = this.title;
-    data['title_en'] = this.titleEn;
-    data['code'] = this.code;
-    data['usage_times'] = this.usageTimes;
-    if (this.features != null) {
-      data['features'] = this.features!.map((v) => v.toJson()).toList();
-    }
+    data['photo'] = this.photo;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
-    data['stop'] = this.stop;
     return data;
   }
 }
 
-class Features {
-  String? ar;
-  String? en;
-
-  Features({this.ar, this.en});
-
-  Features.fromJson(Map<String, dynamic> json) {
-    ar = json['ar'];
-    en = json['en'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['ar'] = this.ar;
-    data['en'] = this.en;
-    return data;
-  }
-}
