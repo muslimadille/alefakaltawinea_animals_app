@@ -125,6 +125,7 @@ flutter:
     - assets/images/defult_img.png
     - assets/images/logo_new_img.png
     - assets/images/spalsh_bg.png
+    - assets/images/spalsh_bg_ar.png
     - assets/images/onboarding_bg.png
     - assets/images/adoption_new_img.png
     - assets/images/cart_img.png

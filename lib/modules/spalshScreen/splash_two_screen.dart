@@ -36,7 +36,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Expanded(child: TransitionImage(Res.ONBOARDING_BG,fit: BoxFit.cover,padding: EdgeInsets.all(D.default_10),),),
+            Expanded(child: TransitionImage(EasyLocalization.of(context)!.currentLocale==Locale('ar', 'EG')?"assets/images/spalsh_bg_ar.png":Res.ONBOARDING_BG,fit: BoxFit.cover,padding: EdgeInsets.all(D.default_10),),),
             _buttonsPart(),
             _termsPart()
 
