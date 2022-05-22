@@ -204,7 +204,7 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
            margin: EdgeInsets.only(left:D.default_20,right:D.default_20,top: D.default_5),
            child: Row(
              children: [
-               Expanded(child: Text("-${widget.serviceProviderData.offers![widget.index].features![i].ar}",style: S.h3(color:Colors.grey),textAlign:TextAlign.start ,))
+               Expanded(child: Text("-${EasyLocalization.of(context)!.locale==Locale('ar', 'EG')?widget.serviceProviderData.offers![widget.index].features![i].ar:widget.serviceProviderData.offers![widget.index].features![i].en}",style: S.h3(color:Colors.grey),textAlign:TextAlign.start ,))
              ],),)
      );
    }

@@ -85,8 +85,8 @@ class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                  Text(tr("hadeth_start"),style: S.h1(color: Colors.white),),
-                  Text(tr("hadeth")+tr("hadeth_end"),style: S.h1(color: Colors.white),),
+                  Text(tr("hadeth_start"),style: S.h2(color: Colors.white),),
+                  Text(tr("hadeth")+tr("hadeth_end"),style: S.h2(color: Colors.white),),
                 ],),),),
               InkWell(
                 onTap: (){
@@ -105,7 +105,7 @@ class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
                     categoriesProviderModel!.notifyListeners();
                     MyUtils.navigate(context, AdoptionScreen());
                   }),
-                  Text(tr("hadeth_check"),style: S.h2(color: Colors.white),)
+                  Text(tr("hadeth_check"),style: S.h3(color: Colors.white),)
                 ],),),)
             ],),
         )
