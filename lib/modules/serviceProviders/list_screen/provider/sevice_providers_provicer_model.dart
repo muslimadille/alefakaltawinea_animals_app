@@ -35,12 +35,20 @@ class ServiceProvidersProviderModel with ChangeNotifier {
   getServiceProvidersList(int categoryId,int page,{String lat="",String long="",String keyword="",String state_id=""}) async {
     if(page==1) {
       serviceProviderModel = null;
+      setIsLoading(true);
     }
-    setIsLoading(true);
     MyResponse<ServiceProviderModel> response =
     await getServiceProvidersApi.getServiceProviders(categoryId, page,keyword: keyword);
     if (response.status == Apis.CODE_SUCCESS &&response.data!=null){
+      ServiceProviderModel model=response.data;
+      if(page>1){
+        serviceProviderModel!.data!.addAll(model.data!);
+        notifyListeners();
+
+      }else{
         setServiceProviderModel(response.data);
+      }
+
       setIsLoading(false);
     }else if(response.status == Apis.CODE_SUCCESS &&response.data==null){
       setIsLoading(false);

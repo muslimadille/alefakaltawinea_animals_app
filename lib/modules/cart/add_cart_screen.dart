@@ -43,7 +43,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
   List<String> _selectedGenders = [];
   List<String> _genders = [tr("male"), tr("female"),tr("Did_not_matter")];
   List<String> _selectedTypes = [];
-  List<String> _types = [tr("Dog"), tr("cat"),tr("bird"),tr("reptile"),tr("rabbit"),tr("Hamster"),tr("fish"),tr("livestock"),tr("camel"),tr("Horse"),tr("turtle"),tr("turtle")];
+  List<String> _types = [tr("Dog"), tr("cat"),tr("bird"),tr("reptile"),tr("rabbit"),tr("Hamster"),tr("fish"),tr("livestock"),tr("camel"),tr("Horse"),tr("turtle"),tr("turtle"),tr("other")];
   List<String> _uploadedImages = [];
   List<dynamic>_imagesFiles=[];
   CartApi cartApi=CartApi();
@@ -415,7 +415,8 @@ class _AddCartScreenState extends State<AddCartScreen> {
             Expanded(
                 child: Container(
                     child: TextFormField(
-              controller: _bitNameControllers[index],
+                      style: S.h3(),
+                      controller: _bitNameControllers[index],
               decoration: InputDecoration(
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.transparent),
@@ -439,11 +440,28 @@ class _AddCartScreenState extends State<AddCartScreen> {
       ],
     );
   }
+  Future<void> _selectDate(BuildContext context,TextEditingController controller) async {
+    DateTime firstDate = DateTime(2000);
+    DateTime lastDate = DateTime.now();
 
+    final DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate:DateTime.now(),
+        firstDate: firstDate,
+        lastDate: lastDate);
+    if (pickedDate != null ){
+      setState(() {
+        controller.text="${pickedDate.year}/${pickedDate.month}/${pickedDate.day}";
+      });
+    }
+
+  }
   Widget _bitDate(int index) {
     return Column(
       children: [
-        Row(
+        InkWell(onTap: (){
+          _selectDate(context,_dateOfBirthControllers[index]);
+        },child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
@@ -453,26 +471,28 @@ class _AddCartScreenState extends State<AddCartScreen> {
             Expanded(
                 child: Container(
                     child: TextFormField(
-              controller: _dateOfBirthControllers[index],
-              decoration: InputDecoration(
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.transparent),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: C.BASE_BLUE),
-                ),
-                border: UnderlineInputBorder(
-                    borderSide: BorderSide(color: C.BASE_BLUE)),
-                errorStyle: S.h4(color: Colors.red),
-                contentPadding: EdgeInsets.all(D.default_5),
-              ),
-              keyboardType: TextInputType.datetime,
-              obscureText: false,
-              cursorColor: C.BASE_BLUE,
-              autofocus: false,
-            )))
+                      enabled: false,
+                      style: S.h3(),
+                      controller: _dateOfBirthControllers[index],
+                      decoration: InputDecoration(
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.transparent),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: C.BASE_BLUE),
+                        ),
+                        border: UnderlineInputBorder(
+                            borderSide: BorderSide(color: C.BASE_BLUE)),
+                        errorStyle: S.h4(color: Colors.red),
+                        contentPadding: EdgeInsets.all(D.default_5),
+                      ),
+                      keyboardType: TextInputType.datetime,
+                      obscureText: false,
+                      cursorColor: C.BASE_BLUE,
+                      autofocus: false,
+                    )))
           ],
-        ),
+        ),),
         Container(height: D.default_1, color: Colors.grey),
       ],
     );
@@ -490,7 +510,8 @@ class _AddCartScreenState extends State<AddCartScreen> {
             Expanded(
                 child: Container(
                     child: TextFormField(
-              controller: _familyControllers[index],
+                      style: S.h3(),
+                      controller: _familyControllers[index],
               decoration: InputDecoration(
                 enabledBorder: UnderlineInputBorder(
                   borderSide: BorderSide(color: Colors.transparent),
@@ -527,6 +548,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
             Expanded(
                 child: Container(
                     child: TextFormField(
+                      style: S.h3(),
                       controller: _cityControllers[index],
                       decoration: InputDecoration(
                         enabledBorder: UnderlineInputBorder(

@@ -51,17 +51,7 @@ class _IntroScreenState extends State<IntroScreen> {
                       Positioned(child:
                       Column(children: [
                         Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(D.default_10)),
-                              color: Colors.white,
-                              boxShadow: [
-                                BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    offset: Offset(1, 1),
-                                    blurRadius: 1,
-                                    spreadRadius: 0.5)
-                              ]),
-                          child: TransitionImage("assets/images/cart_img.png",
+                          child: TransitionImage("assets/images/new_card.png",
                               width: MediaQuery.of(context).size.width*0.7,
                               fit:BoxFit.fitWidth
                           ),

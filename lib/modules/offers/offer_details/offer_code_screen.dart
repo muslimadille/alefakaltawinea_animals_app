@@ -92,162 +92,159 @@ List<Widget> carts(){
     return items;
 }
   Widget _cartItem(int index){
-    return Directionality(textDirection: TextDirection.ltr, child:  Container(
-      padding: EdgeInsets.all(D.default_10),
-      margin: EdgeInsets.only(top:D.default_10+(D.default_100*index),bottom: D.default_10,left: D.default_20,right: D.default_20),
-      width: MediaQuery.of(context).size.width*0.9
-      ,height: D.default_230,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(D.default_10),
-          color: C.CART_COLOR,
-          boxShadow:[BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              offset:Offset(0,0),
-              blurRadius:8,
-              spreadRadius: 3
-          )]
-      ),
-      child: InkWell(
+    return Directionality(textDirection: TextDirection.ltr, child:
+    Container(
+        padding: EdgeInsets.only(left: D.default_5,right: D.default_5),
+        margin: EdgeInsets.only(top:D.default_10+(D.default_100*index),bottom: D.default_10,left: D.default_20,right: D.default_20),        width: MediaQuery.of(context).size.width*7,
+        height: D.default_260,
+        decoration: BoxDecoration(
+          image: DecorationImage(image:AssetImage("assets/images/bit_card_bg.png")),
+          borderRadius: BorderRadius.circular(D.default_10),),
+
+        child: InkWell(
           onTap: (){
             setState(() {
               _selectedIndex=index;
               cartProvider!.useCode(widget.serviceProviderData.id!, widget.offerModel.id!, cartProvider!.myCarts[index].id!);
             });
           },
-          child:Row(children: [
-        Container(
-          width: D.default_70,
-          child: Column(children: [
-            SizedBox(height: D.default_50,),
-            TransitionImage(cartProvider!.myCarts[index].photo??"",
-                strokeColor: Colors.black.withOpacity(0.7),
-                width: D.default_80,
-                height: D.default_80,
-                radius: D.default_200,
-                fit:BoxFit.cover),
-            SizedBox(height: D.default_20,),
-            TransitionImage("assets/images/logo_name_blue.png",
-                width: D.default_50,
-                height: D.default_50,
-                fit:BoxFit.cover)
-          ],),),
-        SizedBox(width: D.default_20,),
-        Expanded(child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          child: Stack(
+          alignment:AlignmentDirectional.center,
+          fit:StackFit.expand,
           children: [
-            Text("PET IDENTIFICATION ",style: S.h1(),),
-            SizedBox(height: D.default_10,),
-            Text("NAME OF PET ",style: S.h3(color: Colors.grey),),
-            Text(cartProvider!.myCarts[index].name??"",style: S.h4(color: Colors.black),),
-            SizedBox(height: D.default_10,),
-            Text("ADDRESS",style: S.h3(color: Colors.grey),),
-            Text(cartProvider!.myCarts[index].country??"",style: S.h4(color: Colors.black),),
-            Expanded(child: Container()),
-            Text("PET OWNER NAME",style: S.h3(color: Colors.grey),),
-            Text(Constants.currentUser!.name??"",style: S.h4(color: Colors.black),),
-            SizedBox(height: D.default_10,),
+            Positioned(child: TransitionImage("assets/images/bit_cart_dog_logo.png",width: MediaQuery.of(context).size.width,height: D.default_200,
+              fit: BoxFit.fill,),bottom: D.default_20,left: 0,right: 0,),
+            Container(
+              width: MediaQuery.of(context).size.width*0.7
+              ,height: D.default_230,
+              child: Column(children: [
+                Container(decoration:BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(D.default_10),topRight: Radius.circular(D.default_10)),
+                    boxShadow:[BoxShadow(
+                        color: Colors.grey.withOpacity(0.9),
+                        offset:Offset(1,0),
+                        blurRadius:1,
+                        spreadRadius: 1
+                    )]
+                ),
+                  height: D.default_40,
+                  width: MediaQuery.of(context).size.width,
+                  child: Center(child:  Text("PET IDENTIFICATION هوية الحيوان الأليف",style: S.h3(color: Colors.white),),),
+                ),
+                Container(height: D.default_2,width:MediaQuery.of(context).size.width ,color: Colors.black,margin: EdgeInsets.only(top: D.default_2,bottom: D.default_2),),
+                Expanded(child:Container(
+                  margin: EdgeInsets.only(bottom: D.default_65,left:D.default_20,right: D.default_70,top: D.default_10),
+                  child:  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: D.default_5,bottom: D.default_10),
+                        child: TransitionImage(
+                          cartProvider!.myCarts[index].photo??"",
+                          height: double.infinity,
+                          width: D.default_70,
+                          fit: BoxFit.cover,
+                          strokeColor: Colors.black,
+                          strokeWidth: D.default_2,
+                        ),),
+                      Expanded(child: Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            cartDataItem("Name of pet","اسم الأليف",cartProvider!.myCarts[index].name??""),
+                            cartDataItem("Address","البلد",cartProvider!.myCarts[index].country??""),
+                            cartDataItem("Breed","الفصيلة",cartProvider!.myCarts[index].family??""),
+                            cartDataItem("Gender","الجنس",cartProvider!.myCarts[index].gender??""),
+                            cartDataItem("owner name","اسم المربي",Constants.currentUser!.name??""),
+                            cartDataItem("Expiration date","انتهاء البطاقة",cartProvider!.myCarts[index].expiration_at??"")
+                          ],),))
 
-          ],
-        ),),
-        Column(
-          children: [
-            TransitionImage("assets/images/flag.png",
-                width: D.default_50,
-                height: D.default_50,
-                fit:BoxFit.cover),
-            Expanded(child: Center(child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("GENDER",style: S.h3(color: Colors.grey),),
-                Text(cartProvider!.myCarts[index].gender??"",style: S.h4(color: Colors.black),),
-              ],),),),
-            TransitionImage("assets/images/barcode.png",
-                width: D.default_50,
-                height: D.default_50,
-                fit:BoxFit.cover),
-          ],
-        ),
+                    ],),))
+              ],),
+            ),
+          ],),)));
+  }
+  Widget cartDataItem(String nameEn,String nameAr,String value){
+    return Container(margin: EdgeInsets.only(left:D.default_5,right:D.default_8),
+      child: Row(children: [
+        Text(nameEn,style: S.h5(color: Colors.black),textAlign: TextAlign.start,),
+        Expanded(child:Text(value,style: S.h5(color: Colors.black),textAlign: TextAlign.center,)),
+        Text(nameAr,style: S.h5(color: Colors.black),textAlign: TextAlign.end,)
 
-
-
-      ],)),
-    ),);
+      ],),);
   }
 
-Widget _selectedCart(int index){
-    return Directionality(textDirection: TextDirection.ltr, child: Container(
-      padding: EdgeInsets.all(D.default_10),
-      margin: EdgeInsets.only(top:D.default_10,bottom: D.default_10,left: D.default_20,right: D.default_20),
-      width: MediaQuery.of(context).size.width*0.9
-      ,height: D.default_230,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(D.default_10),
-          color: C.CART_COLOR,
-          boxShadow:[BoxShadow(
-              color: Colors.grey.withOpacity(0.2),
-              offset:Offset(0,0),
-              blurRadius:8,
-              spreadRadius: 3
-          )]
-      ),
-      child: Row(children: [
-        Container(
-          width: D.default_70,
-          child: Column(children: [
-            SizedBox(height: D.default_50,),
-            TransitionImage(cartProvider!.myCarts[index].photo??"",
-                strokeColor: Colors.black.withOpacity(0.7),
-                width: D.default_80,
-                height: D.default_80,
-                radius: D.default_200,
-                fit:BoxFit.cover),
-            SizedBox(height: D.default_20,),
-            TransitionImage("assets/images/logo_name_blue.png",
-                width: D.default_50,
-                height: D.default_50,
-                fit:BoxFit.cover)
-          ],),),
-        SizedBox(width: D.default_20,),
-        Expanded(child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+
+  Widget _selectedCart(int index){
+    return Directionality(textDirection: TextDirection.ltr, child:
+    Container(
+        padding: EdgeInsets.only(left: D.default_5,right: D.default_5),
+        margin: EdgeInsets.only(top:D.default_10,left: D.default_20,right: D.default_20),
+        width: MediaQuery.of(context).size.width*7,
+        height: D.default_260,
+        decoration: BoxDecoration(
+          image: DecorationImage(image:AssetImage("assets/images/bit_card_bg.png")),
+          borderRadius: BorderRadius.circular(D.default_10),),
+
+        child: Stack(
+          alignment:AlignmentDirectional.center,
+          fit:StackFit.expand,
           children: [
-            Text("PET IDENTIFICATION ",style: S.h1(),),
-            SizedBox(height: D.default_10,),
-            Text("NAME OF PET ",style: S.h3(color: Colors.grey),),
-            Text(cartProvider!.myCarts[index].name??"",style: S.h4(color: Colors.black),),
-            SizedBox(height: D.default_10,),
-            Text("ADDRESS",style: S.h3(color: Colors.grey),),
-            Text(cartProvider!.myCarts[index].country??"",style: S.h4(color: Colors.black),),
-            Expanded(child: Container()),
-            Text("PET OWNER NAME",style: S.h3(color: Colors.grey),),
-            Text(Constants.currentUser!.name??"",style: S.h4(color: Colors.black),),
-            SizedBox(height: D.default_10,),
+            Positioned(child: TransitionImage("assets/images/bit_cart_dog_logo.png",width: MediaQuery.of(context).size.width,height: D.default_200,
+              fit: BoxFit.fill,),bottom: D.default_20,left: 0,right: 0,),
+            Container(
+              width: MediaQuery.of(context).size.width*0.7
+              ,height: D.default_230,
+              child: Column(children: [
+                Container(decoration:BoxDecoration(
+                    color: Colors.black,
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(D.default_10),topRight: Radius.circular(D.default_10)),
+                    boxShadow:[BoxShadow(
+                        color: Colors.grey.withOpacity(0.9),
+                        offset:Offset(1,0),
+                        blurRadius:1,
+                        spreadRadius: 1
+                    )]
+                ),
+                  height: D.default_40,
+                  width: MediaQuery.of(context).size.width,
+                  child: Center(child:  Text("PET IDENTIFICATION هوية الحيوان الأليف",style: S.h3(color: Colors.white),),),
+                ),
+                Container(height: D.default_2,width:MediaQuery.of(context).size.width ,color: Colors.black,margin: EdgeInsets.only(top: D.default_2,bottom: D.default_2),),
+                Expanded(child:Container(
+                  margin: EdgeInsets.only(bottom: D.default_65,left:D.default_20,right: D.default_70,top: D.default_10),
+                  child:  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Container(
+                        margin: EdgeInsets.only(top: D.default_5,bottom: D.default_10),
+                        child: TransitionImage(
+                          cartProvider!.myCarts[index].photo??"",
+                          height: double.infinity,
+                          width: D.default_70,
+                          fit: BoxFit.cover,
+                          strokeColor: Colors.black,
+                          strokeWidth: D.default_2,
+                        ),),
+                      Expanded(child: Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            cartDataItem("Name of pet","اسم الأليف",cartProvider!.myCarts[index].name??""),
+                            cartDataItem("Address","البلد",cartProvider!.myCarts[index].country??""),
+                            cartDataItem("Breed","الفصيلة",cartProvider!.myCarts[index].family??""),
+                            cartDataItem("Gender","الجنس",cartProvider!.myCarts[index].gender??""),
+                            cartDataItem("owner name","اسم المربي",Constants.currentUser!.name??""),
+                            cartDataItem("Expiration date","انتهاء البطاقة",cartProvider!.myCarts[index].expiration_at??"")
+                          ],),))
 
-          ],
-        ),),
-        Column(
-          children: [
-            TransitionImage("assets/images/flag.png",
-                width: D.default_50,
-                height: D.default_50,
-                fit:BoxFit.cover),
-            Expanded(child: Center(child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text("GENDER",style: S.h3(color: Colors.grey),),
-                Text(cartProvider!.myCarts[index].gender??"",style: S.h4(color: Colors.black),),
-              ],),),),
-            TransitionImage("assets/images/barcode.png",
-                width: D.default_50,
-                height: D.default_50,
-                fit:BoxFit.cover),
-          ],
-        ),
-
-
-
-      ],),
-    ));
+                    ],),))
+              ],),
+            ),
+          ],)));
 }
   Widget _noCarts(){
     return Container(

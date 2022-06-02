@@ -71,9 +71,8 @@ class _ServiceProviderListScreenState extends State<ServiceProviderListScreen>  
         },
         onLoading: () async {
           _currentLoadedPage=_currentLoadedPage+1;
-          serviceProvidersProviderModel!.getServiceProvidersList(widget.selectedCategory!.id!, _currentLoadedPage);
-
-          //_refreshController.loadFailed();
+          await serviceProvidersProviderModel!.getServiceProvidersList(widget.selectedCategory!.id!, _currentLoadedPage);
+          _refreshController.loadComplete();
         },
       )
       ,)

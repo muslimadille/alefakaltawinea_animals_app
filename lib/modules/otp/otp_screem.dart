@@ -58,8 +58,8 @@ class _OtpScreenState extends State<OtpScreen> {
               SizedBox(height: D.default_30,),
               _otpField(),
               _useCodeBtn(),
-              SizedBox(height: D.default_10,),
-              Center(child:Text("${widget.code}",style: S.h4(color:Colors.grey),textAlign:TextAlign.center ,))
+              SizedBox(height: D.default_20,),
+              _resendCodeBtn(),
 
             ],)
       ),),);
@@ -103,7 +103,27 @@ class _OtpScreenState extends State<OtpScreen> {
           ),
         child: Center(child: Text(tr("submit"),style: S.h1(color: Colors.white),textAlign: TextAlign.center,),)),);
   }
-Widget _otpField(){
+  Widget _resendCodeBtn(){
+    return InkWell(onTap: (){
+      _resendCode();
+    }
+      ,child: Container(
+          width: D.default_200,
+          padding: EdgeInsets.all(D.default_10),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(D.default_15),
+              color: C.BASE_BLUE,
+              boxShadow:[BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  offset:Offset(2,2),
+                  blurRadius:4,
+                  spreadRadius: 2
+              )]
+          ),
+          child: Center(child: Text(tr("resend"),style: S.h1(color: Colors.white),textAlign: TextAlign.center,),)),);
+  }
+
+  Widget _otpField(){
     return Directionality(textDirection: TextDirection.ltr, child: Container(
       padding: EdgeInsets.all(D.default_30),
       child: OTPTextField(
@@ -130,9 +150,10 @@ Widget _otpField(){
       otpProviderModel!.getCode(widget.phone!, context);
     }
  }
-  void _resendCode(){
+  void _resendCode()async{
     if(widget.phone!=null){
-      otpProviderModel!.getCode(widget.phone!, context);
+      await otpProviderModel!.getCode(widget.phone!, context);
+      widget.code=otpProviderModel!.activation_code.toString();
     }else{
       otpProviderModel!.getCode(Constants.currentUser!.phone!, context);
     }

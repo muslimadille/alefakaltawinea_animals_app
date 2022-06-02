@@ -137,6 +137,11 @@ flutter:
     - assets/images/qr_icon_black.png
     - assets/images/qr_icon_blue.png
     - assets/images/whatsapp.png
+    - assets/images/bit_card_bg.png
+    - assets/images/bit_cart_dog_logo.png
+    - assets/images/new_card.png
+
+
 
 
     - assets/strings/ar-EG.json

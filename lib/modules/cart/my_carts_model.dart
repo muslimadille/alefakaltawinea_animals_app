@@ -89,6 +89,7 @@ class MyCart {
   String? userId;
   String? createdAt;
   String? updatedAt;
+  String? expiration_at;
 
   MyCart(
       {this.id,
@@ -101,7 +102,9 @@ class MyCart {
         this.status,
         this.userId,
         this.createdAt,
-        this.updatedAt});
+        this.updatedAt,
+        this.expiration_at
+      });
 
   MyCart.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -115,6 +118,7 @@ class MyCart {
     userId = json['user_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    expiration_at=json['expiration_at'];
   }
 
   Map<String, dynamic> toJson() {
@@ -130,6 +134,8 @@ class MyCart {
     data['user_id'] = this.userId;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    data['expiration_at'] = this.expiration_at;
+
     return data;
   }
 }

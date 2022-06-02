@@ -14,7 +14,8 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 
 class TermsScreen extends StatefulWidget {
-  const TermsScreen({Key? key}) : super(key: key);
+  bool hideButtomBar;
+   TermsScreen({this.hideButtomBar=false,Key? key}) : super(key: key);
 
   @override
   _TermsScreenState createState() => _TermsScreenState();
@@ -27,13 +28,13 @@ class _TermsScreenState extends State<TermsScreen> {
     return Stack(children: [
       BaseScreen(
         showSettings: false,
-        showBottomBar: true,
+        showBottomBar: !widget.hideButtomBar,
         tag: "TermsScreen",
         body: Container(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ActionBarWidget(tr("Terms_and_Conditions"), context),
+              ActionBarWidget(tr("Terms_and_Conditions"), context,showSetting: !widget.hideButtomBar,),
               Expanded(
                 child: Container(
                   padding: EdgeInsets.all(D.default_20),

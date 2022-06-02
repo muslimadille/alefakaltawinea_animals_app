@@ -110,7 +110,7 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
                   },child:  Container(
                     padding: EdgeInsets.only(left: D.default_10,right: D.default_10,top: D.default_5,bottom: D.default_5),
                     decoration: BoxDecoration(
-                        color: Colors.black45,
+                        color: C.BASE_BLUE,
                         borderRadius: BorderRadius.circular(D.default_10),
                         boxShadow:[BoxShadow(
                             color: Colors.grey.withOpacity(0.5),
@@ -133,10 +133,10 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
                   launch("tel://0${widget.serviceProviderData.phone!}");
                 },child: Row(children: [
                   Container(
-                    child: Icon(Icons.local_phone,color: Colors.grey,size: D.default_20,),),
+                    child: Icon(Icons.local_phone,color: C.BASE_BLUE,size: D.default_20,),),
                   Container(
                     padding:EdgeInsets.only(left:D.default_10,right:D.default_10),
-                    child: Text(widget.serviceProviderData.phone!,style: S.h4(color: Colors.grey),),),
+                    child: Text(widget.serviceProviderData.phone!,style: S.h4(color: C.BASE_BLUE),),),
                   widget.serviceProviderData.website!.isNotEmpty?InkWell(onTap: ()async{
                     await _launchURLBrowser();
                   },

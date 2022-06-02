@@ -156,7 +156,7 @@
   "male": "Male",
   "female": "Female",
   "hello": "Hello%s",
-  "Did_not_matter": "Didn't matter",
+  "Did_not_matter": "Didn't knew",
   "Dog": "Dog",
   "cat": "cat",
   "bird": "bird",
@@ -171,7 +171,11 @@
   "monkey": "monkey",
   "bit_country":"City",
   "yes": "Yes",
-  "no": "No"
+  "no": "No",
+  "other": "Other",
+  "resend": "Resend",
+  "date_birth": "Date of birth"
+
 
 
 

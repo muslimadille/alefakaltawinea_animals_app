@@ -13,6 +13,7 @@ import '../baseScreen/baseScreen.dart';
 import '../categories_screen/mainCategoriesScreen.dart';
 import '../login/login_screen.dart';
 import '../registeration/registration_screen.dart';
+import '../settings/terms_screen.dart';
 
 class OnBoardingScreen extends StatefulWidget {
   const OnBoardingScreen({Key? key}) : super(key: key);
@@ -58,7 +59,11 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             _onRememberMeChanged(value!);
           }
       ),
-      Text(tr("terms_text"),style: S.h3(color: Colors.white),)
+      InkWell(onTap: (){
+        MyUtils.navigate(context, TermsScreen(hideButtomBar: true,));
+      },
+        child: Text(tr("terms_text"),style: S.h3(color: Colors.white),),
+      )
 
     ],),);
   }
