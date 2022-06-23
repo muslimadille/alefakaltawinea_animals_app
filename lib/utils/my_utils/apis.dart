@@ -51,6 +51,10 @@ class Apis{
   static String USER_CART="${BASE_URL}/my-cards";
   static String USE_OFFER="${BASE_URL}/use-offer";
   static String SCAN_CODE="${BASE_URL}/scan-code";
+  static String CHECK_COBON="${BASE_URL}/check-cobon";
+
+
+
 
 
 

@@ -112,8 +112,8 @@ List<Widget> carts(){
           alignment:AlignmentDirectional.center,
           fit:StackFit.expand,
           children: [
-            Positioned(child: TransitionImage("assets/images/bit_cart_dog_logo.png",width: MediaQuery.of(context).size.width,height: D.default_200,
-              fit: BoxFit.fill,),bottom: D.default_20,left: 0,right: 0,),
+            Positioned(child: TransitionImage("assets/images/bit_cart_dog_logo.png",width: MediaQuery.of(context).size.width,height: D.default_180,
+              fit: BoxFit.fitWidth,),bottom: D.default_30,left: 0,right: 0,),
             Container(
               width: MediaQuery.of(context).size.width*0.7
               ,height: D.default_230,
@@ -134,7 +134,7 @@ List<Widget> carts(){
                 ),
                 Container(height: D.default_2,width:MediaQuery.of(context).size.width ,color: Colors.black,margin: EdgeInsets.only(top: D.default_2,bottom: D.default_2),),
                 Expanded(child:Container(
-                  margin: EdgeInsets.only(bottom: D.default_65,left:D.default_20,right: D.default_70,top: D.default_10),
+                  margin: EdgeInsets.only(bottom: D.default_65,left:D.default_20,right: D.default_80,top: D.default_10),
                   child:  Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.center,

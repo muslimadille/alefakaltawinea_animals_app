@@ -88,7 +88,9 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
             ],),),
           widget.showBottomBar?HomeTabsScreen(introProviderModel,introProviderModel!=null&&widget.tag=="MainCategoriesScreen"):Container()
         ],),
-      ),);
+      resizeToAvoidBottomInset: true,
+
+    ),);
   }
   Widget _actionBar(){
     return Container(

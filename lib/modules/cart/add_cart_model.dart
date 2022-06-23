@@ -38,13 +38,15 @@ class AddCartModel {
 }
 class Carts{
   List<AddCartModel>?cards=[];
-  Carts({this.cards});
+  String? code;
+  Carts({this.cards,this.code});
   Carts.fromJson(Map<String, dynamic> json) {
     if (json['cards'] != null) {
       cards = <AddCartModel>[];
       json['cards'].forEach((v) {
         cards!.add(new AddCartModel.fromJson(v));
       });
+      code=json["code"];
     }
 
   }
@@ -54,6 +56,7 @@ class Carts{
     if (this.cards != null) {
       data['cards'] = this.cards!.map((v) => v.toJson()).toList();
     }
+    data["code"]=code;
     return data;
   }
 }

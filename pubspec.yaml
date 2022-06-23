@@ -62,6 +62,8 @@ dependencies:
   flutter_keyboard_visibility: ^5.1.1
   location: ^4.3.0
   sprintf: ^6.0.0
+  modal_bottom_sheet: ^2.0.0
+
 
 
 

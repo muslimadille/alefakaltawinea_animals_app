@@ -1,5 +1,8 @@
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:sprintf/sprintf.dart';
 import '../../../data/dio/my_rasponce.dart';
 import '../../../utils/my_utils/apis.dart';
 import '../../../utils/my_widgets/web_view.dart';
@@ -7,6 +10,7 @@ import '../../offers/offer_details/offer_code_model.dart';
 import '../add_cart_model.dart';
 import '../add_cart_respose_model.dart';
 import '../cart_api.dart';
+import '../cobon_model.dart';
 import '../my_carts_model.dart';
 
 
@@ -15,6 +19,12 @@ class CartProvider with ChangeNotifier{
   bool isLoading=false;
   int selectedCategoryIndex=0;
   String offerCode="";
+  String cobon="";
+  bool showCobonPart=false;
+  void setShowCobonPart(bool value){
+    showCobonPart=value;
+    notifyListeners();
+  }
   void setIsLoading(bool value){
     isLoading=value;
     notifyListeners();
@@ -24,7 +34,7 @@ class CartProvider with ChangeNotifier{
   addCart(BuildContext ctx,Carts body) async {
     setIsLoading(true);
     MyResponse<AddCartResponseModel> response =
-    await cartApi.addCart(body);
+    await cartApi.addCart(body,cobon);
     if (response.status == Apis.CODE_SUCCESS){
       setIsLoading(false);
       MyUtils.navigateReplaceCurrent(ctx, WebPage(response.data.url));
@@ -35,6 +45,7 @@ class CartProvider with ChangeNotifier{
     }
     notifyListeners();
   }
+
   getMyCart({int shop_id=0,int offer_id=0}) async {
     myCarts.clear();
     setIsLoading(true);
@@ -70,5 +81,25 @@ class CartProvider with ChangeNotifier{
     notifyListeners();
   }
 
-
+  checkCobon(BuildContext ctx,String cobone) async {
+    cobon="";
+    setIsLoading(true);
+    MyResponse<CobonModel> response =
+    await cartApi.checkCobon(cobone);
+    if (response.status == Apis.CODE_SUCCESS){
+      setIsLoading(false);
+      CobonModel cobonModel=response.data;
+      cobon=cobonModel.code??"";
+      await Fluttertoast.showToast(msg:sprintf(tr("available_code"),[cobonModel.percent]) ??"" );
+      setShowCobonPart(false);
+    }else if(response.status == Apis.CODE_SHOW_MESSAGE){
+      setIsLoading(false);
+      setShowCobonPart(false);
+      await Fluttertoast.showToast(msg:response.msg??"" );
+    }else{
+      setIsLoading(false);
+      setShowCobonPart(false);
+    }
+    notifyListeners();
+  }
 }

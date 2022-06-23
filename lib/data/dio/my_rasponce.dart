@@ -7,6 +7,7 @@ import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen
 import 'package:alefakaltawinea_animals_app/modules/spalshScreen/data/regions_model.dart';
 
 import '../../modules/cart/add_cart_respose_model.dart';
+import '../../modules/cart/cobon_model.dart';
 import '../../modules/cart/my_carts_model.dart';
 import '../../modules/notifications/data/notification_model.dart';
 import '../../modules/offers/offer_details/offer_code_model.dart';
@@ -113,6 +114,10 @@ class MyResponse<T> extends Object {
       case ScanCodeModel:
         _data = ScanCodeModel.fromJson(json) as T;
         break;
+      case CobonModel:
+        _data = CobonModel.fromJson(json) as T;
+        break;
+
       default:_data = null;
     }
   }

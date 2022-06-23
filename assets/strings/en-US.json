@@ -174,26 +174,10 @@
   "no": "No",
   "other": "Other",
   "resend": "Resend",
-  "date_birth": "Date of birth"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  "date_birth": "Date of birth",
+  "cobon_add": "Add discount coupon",
+  "check": "Check",
+  "available_code": "discount coupon with %s %"
 
 
 

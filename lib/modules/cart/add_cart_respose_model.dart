@@ -1,6 +1,6 @@
 class AddCartResponseModel {
   String? url;
-  int? price;
+  dynamic price;
 
 
 

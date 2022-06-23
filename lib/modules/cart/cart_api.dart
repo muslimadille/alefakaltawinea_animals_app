@@ -7,6 +7,7 @@ import '../../utils/my_utils/apis.dart';
 import '../offers/offer_details/offer_code_model.dart';
 import 'add_cart_model.dart';
 import 'add_cart_respose_model.dart';
+import 'cobon_model.dart';
 import 'my_carts_model.dart';
 
 class CartApi{
@@ -20,9 +21,10 @@ class CartApi{
       return MyResponse<String>.init(Apis.CODE_ERROR, "", null);
     }
   }
-  Future<MyResponse<AddCartResponseModel>> addCart(Carts body) async {
+  Future<MyResponse<AddCartResponseModel>> addCart(Carts carts,String cobon) async {
     final url = "${Apis.ADD_CART}";
-    final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_POST, url,body: body.toJson());
+    carts.code=cobon;
+    final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_POST, url,body: carts.toJson());
     if (response != null && response.statusCode == 200) {
       return MyResponse<AddCartResponseModel>.fromJson(
           json.decode(jsonEncode(response.data)));
@@ -53,6 +55,19 @@ class CartApi{
           json.decode(jsonEncode(response.data)));
     } else {
       return MyResponse<OfferCodeModel>.init(Apis.CODE_ERROR, "", null);
+    }
+  }
+  Future<MyResponse<CobonModel>> checkCobon(String cobon) async {
+    final url = "${Apis.CHECK_COBON}";
+    Map<String,String>body={
+      "code":cobon
+    };
+    final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_POST, url,body: body);
+    if (response != null && response.statusCode == 200) {
+      return MyResponse<CobonModel>.fromJson(
+          json.decode(jsonEncode(response.data)));
+    } else {
+      return MyResponse<CobonModel>.init(Apis.CODE_ERROR, "", null);
     }
   }
 

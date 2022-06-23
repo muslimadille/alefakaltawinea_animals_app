@@ -6,10 +6,13 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
 import 'package:provider/provider.dart';
 import '../../utils/my_utils/baseDimentions.dart';
 import '../../utils/my_utils/myColors.dart';
 import '../../utils/my_utils/resources.dart';
+import '../../utils/my_widgets/cobon_widget.dart';
 import '../../utils/my_widgets/laoding_view.dart';
 import '../../utils/my_widgets/transition_image.dart';
 import '../baseScreen/baseScreen.dart';
@@ -72,6 +75,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
     super.dispose();
   }
 
+
   @override
   Widget build(BuildContext context) {
     cartProvider=Provider.of<CartProvider>(context,listen: true);
@@ -108,7 +112,15 @@ class _AddCartScreenState extends State<AddCartScreen> {
                     )))
           ],
         ),
-        cartProvider!.isLoading?LoadingProgress():Container()
+        cartProvider!.isLoading?LoadingProgress():Container(),
+          cartProvider!.showCobonPart?Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Expanded(child: InkWell(onTap: (){
+                cartProvider!.setShowCobonPart(false);
+              },)),
+            CobonWidget()
+          ],):Container()
       ],),
     );
   }
@@ -216,6 +228,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
             textAlign:TextAlign.center ,
           ),
           _addCartBtn(),
+          _cobonBtn(),
           SizedBox(
             height: D.default_20,
           ),
@@ -268,6 +281,42 @@ class _AddCartScreenState extends State<AddCartScreen> {
       ),
     );
   }
+  Widget _cobonBtn() {
+    return Center(
+      child: InkWell(
+        onTap: () {
+          setState(() {
+            cartProvider!.setShowCobonPart(true);
+          });
+        },
+        child: Container(
+          width: D.default_100*2.8,
+          margin: EdgeInsets.all(D.default_10),
+          padding: EdgeInsets.only(
+              left: D.default_10,
+              right: D.default_10,
+              top: D.default_8,
+              bottom: D.default_8),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(D.default_15),
+              color: C.BASE_BLUE,
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    offset: Offset(1, 1),
+                    blurRadius: 1,
+                    spreadRadius: 1)
+              ]),
+          child: Text(
+            tr("cobon_add"),
+            style: S.h1Bold(color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+    );
+  }
+
 
   Widget _paymentBtn() {
     return Center(
@@ -575,6 +624,9 @@ class _AddCartScreenState extends State<AddCartScreen> {
   }
 
 
+
+
+
   void _addItem() {
     _itemsCount = _itemsCount + 1;
     _imagesFiles.add(null);
@@ -690,6 +742,27 @@ class _AddCartScreenState extends State<AddCartScreen> {
     }
     cartsDatas.cards=cartsList;
     cartProvider!.addCart(context, cartsDatas);
+  }
+
+
+  static void showBottomSheet(BuildContext context,Widget body,double height){
+    showMaterialModalBottomSheet(
+      context: context,
+      backgroundColor:Colors.transparent,
+      builder: (context) => SingleChildScrollView(
+        controller: ModalScrollController.of(context),
+        child: Container(
+          width: double.infinity,
+          height: height,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.only(topLeft: Radius.circular(D.default_20),topRight:Radius.circular(D.default_20)),
+            color: Colors.white,
+          ),
+          child: body,
+
+        ),
+      ),
+    );
   }
 
 }
