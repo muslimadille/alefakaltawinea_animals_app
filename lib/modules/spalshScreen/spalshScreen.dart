@@ -22,10 +22,12 @@ import 'package:flutter_intro/flutter_intro.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../app_states/provider/app_state_provider.dart';
 import 'choce_language_screen.dart';
 import 'data/regions_api.dart';
 import 'data/regions_api.dart';
 import 'data/regions_api.dart';
+import 'maintainance_screen.dart';
 
 
 
@@ -38,40 +40,31 @@ class SplashScreen extends StatefulWidget{
 
 class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMixin{
 
-  bool _isLoading=true;
-  //AnimationController? _controller;
-  //Animation<double>? _animation;
-  //Intro? intro;
   AdsSliderProviderModel?adsSliderProviderModel;
   SharedPreferences? prefs;
   UtilsProviderModel? utilsProviderModel;
   UserProviderModel?userProviderModel;
   RegionsApi regionsApi=RegionsApi();
+  AppStataProviderModel?appStataProviderModel;
 
   @override
   void initState() {
     super.initState();
     getRegions();
     getAppInfo();
+    appStataProviderModel=Provider.of<AppStataProviderModel>(context,listen:false);
     userProviderModel=Provider.of<UserProviderModel>(context,listen: false);
-    //intro=_myIntro();
-    //_initPref(context);
     adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: false);
     adsSliderProviderModel!.getAdsSlider();
-    /*_controller=AnimationController(vsync: this,duration:Duration(milliseconds: 2000));
-    _animation=Tween<double>(begin:0.0,end: 1.0 ).animate(_controller!)..addStatusListener((status) {
-      if(status==AnimationStatus.completed){
-        setState(() {
-          intro!.start(context);
-        });
-      }
-    })..addListener(() {
-
-    });*/
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
-
+      await appStataProviderModel!.getAppActiveState();
+      await appStataProviderModel!.getApplePayState();
       await Future.delayed(Duration(milliseconds: 5000)).then((value) {
-        MyUtils.navigateReplaceCurrent(context, ChoceLanguageScreen());
+        if(appStataProviderModel!.app_active_state){
+          MyUtils.navigateAsFirstScreen(context, MaintainanceScreen());
+        }else{
+          MyUtils.navigateReplaceCurrent(context, ChoceLanguageScreen());
+        }
       });
     });
 
@@ -79,6 +72,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   }
   @override
   Widget build(BuildContext context) {
+    appStataProviderModel=Provider.of<AppStataProviderModel>(context,listen:false);
     utilsProviderModel=Provider.of<UtilsProviderModel>(Constants.mainContext!,listen: true);
     Constants.utilsProviderModel=utilsProviderModel;
     adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: true);

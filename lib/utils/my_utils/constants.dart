@@ -23,6 +23,7 @@ class Constants extends Object{
   static String APP_LINK="https://drive.google.com/file/d/1MTmSYV6-3lBBffcsyZ_g5whBIT_dio3f/view?usp=sharing";
   static String isAdoptionAlertAccepted="isAdoptionAlertAccepted";
   static BuildContext? mainContext;
+  static bool APPLE_PAY_STATE=true;
   ///888888888888888888888888888888888888888888888888888888
   static UtilsProviderModel? utilsProviderModel;
 

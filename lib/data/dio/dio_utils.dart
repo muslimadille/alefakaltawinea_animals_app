@@ -106,7 +106,7 @@ class BaseDioUtils {
         policy: forceRefresh
             ? CachePolicy.refreshForceCache
             : CachePolicy.forceCache,
-        maxStale: Duration(days: daysToCache, hours: hoursToCache))
+        maxStale: Nullable(Duration(days: daysToCache, hours: hoursToCache)))
         .toOptions()
         : authOptions;
 

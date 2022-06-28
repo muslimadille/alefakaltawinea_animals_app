@@ -14,6 +14,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'modules/adoption/provider/adoption_provider_model.dart';
 import 'modules/ads/provider/ads_slider_provider.dart';
+import 'modules/app_states/provider/app_state_provider.dart';
 import 'modules/cart/provider/cart_provider.dart';
 import 'modules/categories_screen/provider/categories_provider_model.dart';
 import 'modules/homeTabsScreen/provider/bottom_bar_provider_model.dart';
@@ -44,7 +45,7 @@ void main() async{
       ChangeNotifierProvider<NotificationProvider>(create: (ctx) => NotificationProvider(),),
       ChangeNotifierProvider<CartProvider>(create: (ctx) => CartProvider(),),
       ChangeNotifierProvider<ScanCodeProvider>(create: (ctx) => ScanCodeProvider(),),
-
+      ChangeNotifierProvider<AppStataProviderModel>(create: (ctx) => AppStataProviderModel(),),
     ],
     child: EasyLocalization(
         supportedLocales: [Locale('en', 'US'), Locale('ar', 'EG')],

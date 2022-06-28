@@ -47,7 +47,7 @@ class UserProviderModel with ChangeNotifier{
            MyUtils.navigateAsFirstScreen(ctx, SpHomeScreen());
          }else{
            bool isShowed=await Constants.prefs!.getBool("intro${Constants.currentUser!.id}")??false;
-           if(!isShowed){
+           if(!isShowed&&Constants.APPLE_PAY_STATE){
              MyUtils.navigateAsFirstScreen(ctx, IntroScreen());
            }else{
              MyUtils.navigateAsFirstScreen(ctx, MainCategoriesScreen());

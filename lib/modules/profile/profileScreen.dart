@@ -18,6 +18,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 import '../cart/add_cart_screen.dart';
@@ -738,8 +739,13 @@ Widget _noCarts(){
   Widget _addCartBtn() {
     return Center(
       child: InkWell(
-        onTap: () {
-          MyUtils.navigate(context, AddCartScreen());
+        onTap: () async{
+          if(Constants.APPLE_PAY_STATE){
+            MyUtils.navigate(context, AddCartScreen());
+          }else{
+            await Fluttertoast.showToast(msg:tr("Your request has been successfully received") );
+          }
+
         },
         child: Container(
           width: D.default_250,
