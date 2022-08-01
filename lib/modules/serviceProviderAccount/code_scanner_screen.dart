@@ -49,7 +49,7 @@ class _CodeScannerScreenState extends State<CodeScannerScreen> {
         showBottomBar: true,
         showSettings: false,
         showIntro: false,
-        body:  scanCodeProvider!.isLoading? LoadingProgress():scanCodeProvider!.scanCodeModel!=null?_offerDetails():_wrongCode());
+        body:  scanCodeProvider!.isLoading? LoadingProgress():scanCodeProvider!.scanCodeModel!=null?_offerDetails():scanCodeProvider!.isFirst?Container():_wrongCode());
   }
 
   Widget _wrongCode() {

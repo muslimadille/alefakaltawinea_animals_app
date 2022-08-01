@@ -193,7 +193,7 @@ List<Widget> carts(){
           fit:StackFit.expand,
           children: [
             Positioned(child: TransitionImage("assets/images/bit_cart_dog_logo.png",width: MediaQuery.of(context).size.width,height: D.default_200,
-              fit: BoxFit.fill,),bottom: D.default_20,left: 0,right: 0,),
+              fit: BoxFit.fill,),bottom: D.default_30,left: 0,right: 0,),
             Container(
               width: MediaQuery.of(context).size.width*0.7
               ,height: D.default_230,
