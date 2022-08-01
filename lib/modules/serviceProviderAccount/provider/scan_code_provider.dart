@@ -12,6 +12,8 @@ import '../data/scan_code_model.dart';
 class ScanCodeProvider with ChangeNotifier{
   ///.....ui controllers.........
   bool isLoading=false;
+  bool isFirst=true;
+
   void setIsLoading(bool value){
     isLoading=value;
     notifyListeners();
@@ -19,7 +21,9 @@ class ScanCodeProvider with ChangeNotifier{
   ScanCodeModel? scanCodeModel;
   ScanCodeApi scanCodeApi=ScanCodeApi();
   scanCode(BuildContext ctx,String code,int confirm) async {
+
     scanCodeModel=null;
+     isFirst=true;
     setIsLoading(true);
     MyResponse<ScanCodeModel> response =
     await scanCodeApi.scanCode(code,confirm: confirm);
@@ -39,6 +43,7 @@ class ScanCodeProvider with ChangeNotifier{
       setIsLoading(false);
       await Fluttertoast.showToast(msg: "${response.msg}");
     }
+    isFirst=false;
     notifyListeners();
   }
 
