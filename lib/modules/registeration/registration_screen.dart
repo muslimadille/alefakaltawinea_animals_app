@@ -11,6 +11,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../utils/my_widgets/action_bar_widget.dart';
+
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({Key? key}) : super(key: key);
 
@@ -52,44 +54,54 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
         tag: "RegistrationScreen",
         body: userProviderModel!.isLoading
             ? LoadingProgress()
-            : SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      margin: EdgeInsets.only(top: D.default_30,bottom: D.default_30,left: D.default_50,right: D.default_50),
-                        child: Center(
-                          child: Text(
-                            tr("register_header"),
-                            style: S.h1Bold(color: C.BASE_BLUE),
-                            textAlign: TextAlign.center,
-                          ),
-                        )),
-                    Container(
-                      padding: EdgeInsets.only(top: D.default_20,bottom: D.default_20,left: D.default_50,right: D.default_50),
-                      child: Form(
-                        key: _registerFormGlobalKey,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: [
-                            _alifakName(),
-                            _gender(),
-                            _name(),
-                            _email(),
-                            _phone(),
-                            _password(),
-                            _confirmPassword(),
-                            SizedBox(height: D.default_20,),
-                            _registerBtn(),
-                          ],
-                        ),
+            : Column(children: [
+          ActionBarWidget(
+              "", context,
+              enableShadow:false,
+              showSetting:false,
+              textColor:C.BASE_BLUE,
+              backgroundColor:Colors.white
+
+          ),
+          SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Container(
+                    margin: EdgeInsets.only(top: D.default_30,bottom: D.default_30,left: D.default_50,right: D.default_50),
+                    child: Center(
+                      child: Text(
+                        tr("register_header"),
+                        style: S.h1Bold(color: C.BASE_BLUE),
+                        textAlign: TextAlign.center,
                       ),
-                    )
-                  ],
-                ),
-              ));
+                    )),
+                Container(
+                  padding: EdgeInsets.only(top: D.default_20,bottom: D.default_20,left: D.default_50,right: D.default_50),
+                  child: Form(
+                    key: _registerFormGlobalKey,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        _alifakName(),
+                        _gender(),
+                        _name(),
+                        _email(),
+                        _phone(),
+                        _password(),
+                        _confirmPassword(),
+                        SizedBox(height: D.default_20,),
+                        _registerBtn(),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+          )
+        ],));
   }
   Widget _gender() {
     return Container(

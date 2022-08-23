@@ -12,6 +12,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../utils/my_widgets/action_bar_widget.dart';
+
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
 
@@ -37,29 +39,40 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
     userProviderModel=Provider.of<UserProviderModel>(context,listen: true);
 
     return BaseScreen( showSettings: false, showBottomBar: false, tag: "LoginScreen",
-      body: userProviderModel!.isLoading?LoadingProgress():SingleChildScrollView(child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            margin: EdgeInsets.only(top:D.default_50,bottom: D.default_30),
-              child: Center(child: Text(tr("welcome_back"),style: S.h1Bold(color: C.BASE_BLUE),textAlign: TextAlign.center,),)),
-          _header(),
-          Container(
-            padding: EdgeInsets.all(D.default_50),
-            child: Form(
-              key: _loginFormGlobalKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _phone(),
-                  _password(),
-                  SizedBox(height: D.default_10,),
-                  _forgetPassword(),
-                  _loginBtn()
+      body: userProviderModel!.isLoading?LoadingProgress():
+      Column(children: [
+        ActionBarWidget(
+            "", context,
+            enableShadow:false,
+            showSetting:false,
+            textColor:C.BASE_BLUE,
+            backgroundColor:Colors.white
 
-                ],),),)
-        ],),));
+        ),
+        SingleChildScrollView(child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+                margin: EdgeInsets.only(top:D.default_50,bottom: D.default_30),
+                child: Center(child: Text(tr("welcome_back"),style: S.h1Bold(color: C.BASE_BLUE),textAlign: TextAlign.center,),)),
+            _header(),
+            Container(
+              padding: EdgeInsets.all(D.default_50),
+              child: Form(
+                key: _loginFormGlobalKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _phone(),
+                    _password(),
+                    SizedBox(height: D.default_10,),
+                    _forgetPassword(),
+                    _loginBtn()
+
+                  ],),),)
+          ],),)
+      ],));
   }
   Widget _loginBtn(){
     return Center(child: InkWell(

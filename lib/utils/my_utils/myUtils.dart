@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_intro/flutter_intro.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../modules/categories_screen/mainCategoriesScreen.dart';
@@ -218,7 +219,21 @@ class MyUtils{
       }
     }
   }
-
+  static void basePopup({required Widget body, EdgeInsetsGeometry? padding}) {
+    Get.to(
+      Material(
+          type: MaterialType.transparency,
+          child: SafeArea(child: Container(
+            color: Colors.black.withOpacity(0.5),
+            padding: padding ?? EdgeInsets.all(D.default_20),
+            child: Center(child:Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+              body
+            ],)),)))
+      , opaque: false,
+    );
+  }
 
 }
 

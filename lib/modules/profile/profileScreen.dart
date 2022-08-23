@@ -24,6 +24,7 @@ import 'package:provider/provider.dart';
 import '../cart/add_cart_screen.dart';
 import '../cart/my_carts_model.dart';
 import '../cart/provider/cart_provider.dart';
+import 'deletAcountPopupScreen.dart';
 
 class ProfileScreen extends StatefulWidget {
   int selectedTap;
@@ -147,7 +148,8 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
             _oldPassword(),
             _password(),
             _confirmPassword(),
-            _updatePasswordBtn()
+            _updatePasswordBtn(),
+            _removeAccountBtn()
 
           ],
         ),
@@ -774,5 +776,47 @@ Widget _noCarts(){
       ),
     );
   }
+  Widget _removeAccountBtn() {
+    return Center(
+      child: InkWell(
+        onTap: () {
+          MyUtils.basePopup(body: DeletAcountPopupScreen());
+        },
+        child: Container(
+          width: D.default_200,
+          margin: EdgeInsets.all(D.default_30),
+          padding: EdgeInsets.only(
+              left: D.default_10,
+              right: D.default_10,
+              top: D.default_10,
+              bottom: D.default_10),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(D.default_10),
+              color: Colors.red,
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    offset: Offset(1, 1),
+                    blurRadius: 1,
+                    spreadRadius: 1)
+              ]),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+            Text(
+              tr("delete_account"),
+              style: S.h2(color: Colors.white),
+              textAlign: TextAlign.center,
+            ),
+            SizedBox(width: D.default_5,),
+            Icon(Icons.delete_forever,color: Colors.white,size: D.default_20,),
+
+          ],),
+        ),
+      ),
+    );
+  }
+
 
 }

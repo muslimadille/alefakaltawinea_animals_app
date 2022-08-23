@@ -177,7 +177,10 @@
   "date_birth": "Date of birth",
   "cobon_add": "Add discount coupon",
   "check": "Check",
-  "available_code": "discount coupon with %s %"
+  "available_code": "discount coupon with %s %",
+  "delete_message": "By agreeing to delete your account, all your data will be erased from our databases and you will not be able to access this account again",
+  "delete_account": "Delete Account"
+
 
 
 
