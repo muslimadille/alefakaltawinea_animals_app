@@ -219,23 +219,26 @@ class MyUtils{
       }
     }
   }
-  static void basePopup({required Widget body, EdgeInsetsGeometry? padding}) {
-    Get.to(
-      Material(
-          type: MaterialType.transparency,
-          child: SafeArea(child: Container(
-            color: Colors.black.withOpacity(0.5),
-            padding: padding ?? EdgeInsets.all(D.default_20),
-            child: Center(child:Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-              body
-            ],)),)))
-      , opaque: false,
+  static void basePopup(BuildContext context,{required Widget body, EdgeInsetsGeometry? padding}) {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        opaque: false, // set to false
+        pageBuilder: (_, __, ___) {
+          return
+            Scaffold(
+                backgroundColor: Colors.white.withOpacity(0.5),
+              body:SafeArea(child: Container(
+              color: Colors.black.withOpacity(0.5),
+              padding: padding ?? EdgeInsets.all(D.default_20),
+              child: Center(child:Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  body
+                ],)),)));
+        },
+      ),
     );
   }
 
 }
 
-class ChangeLangageDialogWidget {
-}

@@ -82,7 +82,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: true);
     Constants.mainContext=context;
-    return  utilsProviderModel!.currentLocalName.isNotEmpty? GetMaterialApp(
+    return  utilsProviderModel!.currentLocalName.isNotEmpty? MaterialApp(
       theme: ThemeData(
           primaryColor:C.BASE_BLUE,
           focusColor:C.BASE_BLUE
@@ -90,7 +90,7 @@ class _MyAppState extends State<MyApp> {
       ),
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,
-        locale: Constants.utilsProviderModel!.currentLocal,
+        locale: utilsProviderModel!.currentLocal,
         debugShowCheckedModeBanner: false,
         home: BaseScreen(
           tag: "SplashScreen",

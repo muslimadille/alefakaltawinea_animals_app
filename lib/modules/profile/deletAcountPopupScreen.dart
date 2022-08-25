@@ -51,7 +51,7 @@ class _DeletAcountPopupScreenState extends State<DeletAcountPopupScreen> with In
             children: [
               InkWell(
                 onTap:(){
-                  Get.back();
+                  Navigator.pop(context);
                 },
                 child: Icon(Icons.cancel,color: Colors.red,size: D.default_30,),)],),
           SizedBox(height:D.default_10),
@@ -105,7 +105,7 @@ class _DeletAcountPopupScreenState extends State<DeletAcountPopupScreen> with In
   Widget _deleteBtn() {
     return InkWell(
       onTap: () async{
-        Get.back();
+        Navigator.pop(context);
       },
       child: Container(
         margin: EdgeInsets.all(D.default_30),

@@ -78,7 +78,7 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
   }
   @override
   void dispose() async{
-    await bottomBarProviderModel!.setSelectedScreen(0);
+    //await bottomBarProviderModel!.setSelectedScreen(0);
     super.dispose();
   }
   @override
@@ -780,7 +780,7 @@ Widget _noCarts(){
     return Center(
       child: InkWell(
         onTap: () {
-          MyUtils.basePopup(body: DeletAcountPopupScreen());
+          MyUtils.basePopup(context,body: DeletAcountPopupScreen());
         },
         child: Container(
           width: D.default_200,

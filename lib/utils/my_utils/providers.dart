@@ -28,7 +28,7 @@ class UtilsProviderModel with ChangeNotifier {
   }
   setCurrentLocal(BuildContext ctx,Locale locale)  async {
     currentLocal=locale;
-    await EasyLocalization.of(Constants.mainContext!)!.setLocale(locale);
+    await EasyLocalization.of(ctx)!.setLocale(locale);
     await ctx.setLocale(locale);
     if(locale==Locale('ar', 'EG')){
 

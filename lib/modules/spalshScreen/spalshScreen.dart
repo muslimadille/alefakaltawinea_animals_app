@@ -57,8 +57,11 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: false);
     adsSliderProviderModel!.getAdsSlider();
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      _initPref(context);
+      setLocal();
       await appStataProviderModel!.getAppActiveState();
       await appStataProviderModel!.getApplePayState();
+
       await Future.delayed(Duration(milliseconds: 5000)).then((value) {
         if(appStataProviderModel!.app_active_state){
           MyUtils.navigateAsFirstScreen(context, MaintainanceScreen());
@@ -77,8 +80,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     Constants.utilsProviderModel=utilsProviderModel;
     adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: true);
     userProviderModel=Provider.of<UserProviderModel>(context,listen: true);
-    _initPref(context);
-    setLocal();
+
 
     return BaseScreen(
         tag: "SplashScreen",
@@ -125,33 +127,33 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   void _initPref(BuildContext ctx)async{
     if(Constants.prefs!.get(Constants.LANGUAGE_KEY!)!=null){
       if(Constants.prefs!.get(Constants.LANGUAGE_KEY!)=="ar"){
-        Constants.utilsProviderModel!.setLanguageState("ar");
-        Constants.utilsProviderModel!.setCurrentLocal(ctx, Locale('ar','EG'));
+        utilsProviderModel!.setLanguageState("ar");
+        utilsProviderModel!.setCurrentLocal(ctx, Locale('ar','EG'));
       }else{
-        Constants.utilsProviderModel!.setLanguageState("en");
-        Constants.utilsProviderModel!.setCurrentLocal(ctx, Locale('en','US'));
+        utilsProviderModel!.setLanguageState("en");
+        utilsProviderModel!.setCurrentLocal(ctx, Locale('en','US'));
       }
     }else{
-      Constants.utilsProviderModel!.setLanguageState("ar");
-      Constants.utilsProviderModel!.setCurrentLocal(ctx, Locale('ar','EG'));
+      utilsProviderModel!.setLanguageState("ar");
+      utilsProviderModel!.setCurrentLocal(ctx, Locale('ar','EG'));
 
     }
 
   }
   void setLocal()async{
-    if(Constants.utilsProviderModel!.isArabic){
+    if(utilsProviderModel!.isArabic){
       await context.setLocale(Locale('ar', 'EG'));
       await EasyLocalization.of(context)!.setLocale(Locale('ar', 'EG'));
-      Constants.utilsProviderModel!.currentLocalName="العربية";
+      utilsProviderModel!.currentLocalName="العربية";
       Constants.SELECTED_LANGUAGE="ar";
-      Constants.utilsProviderModel!.setLanguageState("ar");
+      await utilsProviderModel!.setLanguageState("ar");
       await Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "ar");
     }else{
       await context.setLocale(Locale('en', 'US'));
       await EasyLocalization.of(context)!.setLocale(Locale('en', 'US'));
-      Constants.utilsProviderModel!.currentLocalName="English";
+      utilsProviderModel!.currentLocalName="English";
       Constants.SELECTED_LANGUAGE="en";
-      Constants.utilsProviderModel!.setLanguageState("en");
+      utilsProviderModel!.setLanguageState("en");
       await Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "en");
     }
   }
