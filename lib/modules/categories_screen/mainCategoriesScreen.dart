@@ -57,10 +57,10 @@ class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
           children: [
           Column(children: [
             ActionBarWidget(Constants.currentUser!=null?"${sprintf(tr("hello"),[" ${Constants.currentUser!.name}"])}":"", context,showSetting: true,backgroundColor: Colors.white,textColor: C.BASE_BLUE,showBack: false,),
-            Container(height: MediaQuery.of(context).size.height*0.30,child: AdsSlider(),),
-            Expanded(child:  Container(
+            Expanded(child:Container(child: AdsSlider(),)),
+            Container(
               color: Colors.white,
-              child: CategoryList(context,categoriesProviderModel),))
+              child: CategoryList(context,categoriesProviderModel),)
           ],),
             categoriesProviderModel!.showHadeth?_adotionAlert():Container()
         ],));

@@ -31,23 +31,21 @@ class _CategoryListState extends State<CategoryList> {
   Widget build(BuildContext context) {
     return Column(children: [
 
-      AspectRatio(
-          aspectRatio: 1.39,
-          child: GridView.builder(
-        itemCount: widget.categoriesProviderModel!.categoriesList.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 0,
-          mainAxisSpacing: 0,
-          childAspectRatio: 1.39,
-
-        ), itemBuilder: (BuildContext context, int index) {
-        return CategoryListItem(
-            index,
-            widget.categoriesProviderModel,
-                (){_onItemClick(index);});
-      },)),
-      Expanded(child: InkWell(onTap: ()async{
+      Container(
+        height:(MediaQuery.of(context).size.height*0.6*2)/(3),
+          child:Column(children:[
+            Expanded(child:Row(children:[
+              Expanded(child:itemsList()[0]),
+              Expanded(child:itemsList()[1]),
+            ])),
+            Expanded(child:Row(children:[
+              Expanded(child:itemsList()[2]),
+              Expanded(child:itemsList()[3]),
+            ]))
+          ])),
+      Container(
+        height:(MediaQuery.of(context).size.height*0.6)/(3),
+          child:InkWell(onTap: ()async{
         bool hadeathState=Constants.currentUser!=null?await Constants.prefs!.getBool(Constants.currentUser!.id.toString())??false:true;
         if(!hadeathState){
           widget.categoriesProviderModel!.showHadeth=true;
@@ -75,10 +73,20 @@ class _CategoryListState extends State<CategoryList> {
               )),
 
             ],
-          ),),),)
+          ),),))
 
     ]);
 
+  }
+  List<Widget>itemsList(){
+    List<Widget>items=[];
+    for(int i=0;i<widget.categoriesProviderModel!.categoriesList.length;i++){
+      items.add(CategoryListItem(
+          i,
+          widget.categoriesProviderModel,
+              (){_onItemClick(i);}));
+    }
+    return items;
   }
   void _onItemClick(int index){
     if(widget.categoriesProviderModel!.categoriesList[index].id==-1){

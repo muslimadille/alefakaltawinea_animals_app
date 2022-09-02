@@ -650,7 +650,7 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
     Container(
         padding: EdgeInsets.only(left: D.default_5,right: D.default_5),
         margin: EdgeInsets.only(top:D.default_10,left: D.default_20,right: D.default_20),
-        width: MediaQuery.of(context).size.width*7,
+        width: D.default_230*2,
         height: D.default_260,
     decoration: BoxDecoration(
       image: DecorationImage(image:AssetImage("assets/images/bit_card_bg.png")),
@@ -658,12 +658,11 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
 
         child: Stack(
       alignment:AlignmentDirectional.center,
-          fit:StackFit.expand,
           children: [
-        Positioned(child: TransitionImage("assets/images/bit_cart_dog_logo.png",width: MediaQuery.of(context).size.width,height: D.default_180,
-          fit: BoxFit.fitWidth,),bottom: D.default_30,left: 0,right: 0,),
+        Positioned(child: TransitionImage("assets/images/bit_cart_dog_logo.png",width:D.default_230*2,height: D.default_180,
+         fit:BoxFit.fill),bottom: D.default_30),
       Container(
-        width: MediaQuery.of(context).size.width*0.7
+        width: D.default_230*2
         ,height: D.default_230,
         child: Column(children: [
           Container(decoration:BoxDecoration(

@@ -205,8 +205,9 @@ Widget _noData(){
 
       child: Column(
         children: [
-          Expanded(
-              child: Container(
+          Container(
+                width: D.default_110,
+                height: D.default_110,
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(D.default_150),
                     color: Colors.white,
@@ -224,7 +225,7 @@ Widget _noData(){
                 width: D.default_110,
                 height: D.default_110,
 
-              ),)),
+              ),),
           Container(
             child: Center(
               child: Text(
