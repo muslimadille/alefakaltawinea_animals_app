@@ -52,7 +52,7 @@ class UtilsProviderModel with ChangeNotifier {
 
     }
 
-    notifyListeners();
+   // notifyListeners();
   }
   setLanguageState(String type){
     if(type=="ar"){
@@ -62,6 +62,6 @@ class UtilsProviderModel with ChangeNotifier {
       isArabic=false;
       isEnglish=true;
     }
-    notifyListeners();
+    //notifyListeners();
   }
 }

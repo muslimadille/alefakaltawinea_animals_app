@@ -18,12 +18,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class BaseScreen extends StatefulWidget {
+  bool showWhatsIcon;
   String tag;
   Widget body;
   bool showSettings;
   bool showBottomBar;
   bool showIntro;
-   BaseScreen({required this.body,required this.showSettings,required this.showBottomBar,this.showIntro=false,required this.tag});
+   BaseScreen({this.showWhatsIcon=true,required this.body,required this.showSettings,required this.showBottomBar,this.showIntro=false,required this.tag});
 
 
   @override
@@ -71,7 +72,7 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
               alignment:AlignmentDirectional.center,
               children: [
               widget.body,
-              Positioned(child: InkWell(
+                widget.showWhatsIcon?Positioned(child: InkWell(
                 onTap: (){
                   MyUtils.openwhatsapp(context);
                 },
@@ -84,7 +85,7 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
 
                 ),
                 child: Center(child: TransitionImage("assets/images/whatsapp.png",width: D.default_50,height: D.default_50,fit: BoxFit.fitWidth,),),
-              ),),bottom: 0,left: utilsProviderModel!.isArabic?0:null,right: utilsProviderModel!.isEnglish?0:null)
+              ),),bottom: 0,left: utilsProviderModel!.isArabic?0:null,right: utilsProviderModel!.isEnglish?0:null):Container()
             ],),),
           widget.showBottomBar?HomeTabsScreen(introProviderModel,introProviderModel!=null&&widget.tag=="MainCategoriesScreen"):Container()
         ],),

@@ -84,20 +84,26 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
         tag: "SplashScreen",
       showSettings: false,
         showBottomBar: false,
+      showWhatsIcon:false,
         body: Stack(
           alignment:AlignmentDirectional.center,
           children: [
-            TransitionImage(Res.SPLASH_BG,width: double.infinity,height:double.infinity,fit:BoxFit.cover),
-            _logoTitleItem()
+            Container(width: double.infinity,height: double.infinity,color: C.BASE_BLUE,),
+            _logoTitleItem(),
+            Positioned(child:TransitionImage(
+              "assets/images/splash_animals.png",
+              width: MediaQuery.of(context).size.width,
+              fit: BoxFit.fitHeight,
+            ),bottom: 0.0, )
 
     ],)
     );
   }
   Widget _logoTitleItem(){
     return TransitionImage(
-      "assets/images/logo_name_blue.png",
-      width: D.default_300,
-      height: D.default_300,
+      "assets/images/logo_with_name.png",
+      width: D.default_300*0.9,
+      height: D.default_300*0.9,
     );
   }
 

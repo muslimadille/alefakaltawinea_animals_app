@@ -141,6 +141,8 @@ flutter:
     - assets/images/bit_card_bg.png
     - assets/images/bit_cart_dog_logo.png
     - assets/images/new_card.png
+    - assets/images/logo_with_name.png
+    - assets/images/splash_animals.png
     - assets/strings/ar-EG.json
     - assets/strings/en-US.json
     - assets/fonts/cairo_font.ttf
