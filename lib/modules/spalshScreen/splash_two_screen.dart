@@ -167,12 +167,5 @@ Widget _buttonsPart(){
   });
 
 
-  Intro _myIntro(){
-    List<String>descriptionsList=[
-      tr("into_brows_btn"),
-      tr("intro_login_btn"),
-      tr("intro_register_btn")
-    ];
-   return MyUtils.myIntro(descriptionsList);
-}
+
 }

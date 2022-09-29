@@ -111,7 +111,7 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
           children: [
           Center(
             child:
-        IconButton(key: introProviderModel!.intro!=null&&widget.tag=="MainCategoriesScreen"?introProviderModel!.intro!.keys[0]:Key("setting_btn"),onPressed: (){
+        IconButton(key:Key("setting_btn"),onPressed: (){
           MyUtils.navigate(context, SettingScreen());
         }, icon: Icon(Icons.segment,color: C.BASE_BLUE,size: D.default_30)))
         ],),

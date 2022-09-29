@@ -15,8 +15,6 @@ import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.da
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_intro/flutter_intro.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import '../notifications/notifications_screen.dart';
@@ -46,7 +44,6 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
   void initState() {
     super.initState();
     _controller = PersistentTabController(initialIndex: 0);
-   // _handelIntro();
 }
 
   @override
@@ -63,28 +60,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
     return  _bottomBar();
   }
  
-  List<Widget>_screens=[MainCategoriesScreen(),NearToYouScreen(),ProfileScreen(),ProfileScreen(),ProfileScreen(),ProfileScreen()];
-  /*Intro _myIntro(){
-    List<String>descriptionsList=[
-      tr("intro_settings"),
-      tr("intro_fav"),
-      tr("intro_closest_btn"),
-      tr("intro_notification_btn"),
-      tr("intro_profile_btn"),
-    ];
-    return MyUtils.myIntro(descriptionsList);
-  }*/
-  /*void _handelIntro()async{
 
-    WidgetsBinding.instance!.addPostFrameCallback((_) async {
-      if(widget.showIntro) {
-        await widget.introProviderModel!.setIntro(_myIntro());
-      }
-      setState(() async {
-        if(widget.showIntro) widget.introProviderModel!.intro!.start(context);
-      });
-    });
-  }*/
   Widget _bottomBar(){
     return Container(
       padding: EdgeInsets.all(D.default_10),
@@ -130,7 +106,6 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
   }
   Widget _favBtn(){
     return Expanded(
-      //key:widget.showIntro? widget.introProviderModel!.intro!.keys[1]:Key("_favBtn"),
       child: InkWell(onTap: (){
         bottomBarProviderModel!.setSelectedScreen(1);
         if(Constants.currentUser!=null){
@@ -150,7 +125,6 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
   }
   Widget _notificationsBtn(){
     return Expanded(
-      //key: widget.showIntro?widget.introProviderModel!.intro!.keys[3]:Key("_notificationsBtn"),
       child: InkWell(onTap: (){
         bottomBarProviderModel!.setSelectedScreen(3);
         MyUtils.navigate(context, NotificationsScreen());
@@ -165,7 +139,6 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
   }
   Widget _profileBtn(){
     return Expanded(
-     // key: widget.showIntro?widget.introProviderModel!.intro!.keys[4]:Key("_profileBtn"),
       child: InkWell(onTap: (){
         bottomBarProviderModel!.setSelectedScreen(4);
         if(Constants.currentUser!=null){
@@ -186,7 +159,6 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
   }
   Widget _closestBtn(){
     return Expanded(
-      //key: widget.showIntro?widget.introProviderModel!.intro!.keys[2]:Key("_closestBtn"),
       child:InkWell(onTap: (){
         bottomBarProviderModel!.setSelectedScreen(2);
         MyUtils.navigate(context, NearToYouScreen());
