@@ -52,12 +52,7 @@ class _ChoceLanguageScreenState extends State<ChoceLanguageScreen> {
                   height: D.default_30,
                 ),
                 _button("عربي",()async{
-                  await Constants.utilsProviderModel!.setCurrentLocal(context, Locale("en","US"));
-                  await utilsProviderModel!.setCurrentLocal(context, Locale("en","US"));
-                  await utilsProviderModel!.setLanguageState("en");
-                  await Constants.utilsProviderModel!.setCurrentLocal(context, Locale("ar","EG"));
                   await utilsProviderModel!.setCurrentLocal(context, Locale("ar","EG"));
-                  await utilsProviderModel!.setLanguageState("ar");
                   MyUtils.navigate(context, OnBoardingScreen());
                 },
 
@@ -66,12 +61,7 @@ class _ChoceLanguageScreenState extends State<ChoceLanguageScreen> {
                   height: D.default_10,
                 ),
                 _button("English",()async{
-                  await Constants.utilsProviderModel!.setCurrentLocal(context, Locale("ar","EG"));
-                  await utilsProviderModel!.setCurrentLocal(context, Locale("ar","EG"));
-                  await utilsProviderModel!.setLanguageState("ar");
-                  await Constants.utilsProviderModel!.setCurrentLocal(context, Locale("en","US"));
                   await utilsProviderModel!.setCurrentLocal(context, Locale("en","US"));
-                  await utilsProviderModel!.setLanguageState("en");
                   MyUtils.navigate(context, OnBoardingScreen());
                 }),
 

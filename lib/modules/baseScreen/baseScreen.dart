@@ -49,7 +49,7 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
      SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
-    Constants.utilsProviderModel!.setCurrentLocal(context,Constants.utilsProviderModel!.currentLocal);
+    //Constants.utilsProviderModel!.setCurrentLocal(context,Constants.utilsProviderModel!.currentLocal);
 
 
   }

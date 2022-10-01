@@ -169,6 +169,24 @@ setCurrentUserData(UserData user){
     notifyListeners();
 
   }
+  deleteAccount(BuildContext ctx,String password) async {
+    setIsLoading(true);
+    MyResponse<dynamic> response =
+    await updateProfileApi.deleteAccount(password);
+    if (response.status == Apis.CODE_SUCCESS){
+      setIsLoading(false);
+      Constants.prefs!.clear();
+      Constants.currentUser=null;
+      MyUtils.navigate(ctx, LoginScreen());
+
+    }else if(response.status == Apis.CODE_SHOW_MESSAGE ){
+      print("login error: ${response.msg}");
+      setIsLoading(false);
+      await Fluttertoast.showToast(msg: "${response.msg}");
+    }
+    notifyListeners();
+
+  }
 
 
 }

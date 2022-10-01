@@ -8,6 +8,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../modules/categories_screen/mainCategoriesScreen.dart';
@@ -120,9 +121,26 @@ class MyUtils{
       }
     }
   }
-
+  static void basePopup(BuildContext context,{required Widget body, EdgeInsetsGeometry? padding}) {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        opaque: false, // set to false
+        pageBuilder: (_, __, ___) {
+          return
+            Scaffold(
+                backgroundColor: Colors.white.withOpacity(0.5),
+              body:SafeArea(child: Container(
+              color: Colors.black.withOpacity(0.5),
+              padding: padding ?? EdgeInsets.all(D.default_20),
+              child: Center(child:Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  body
+                ],)),)));
+        },
+      ),
+    );
+  }
 
 }
 
-class ChangeLangageDialogWidget {
-}
