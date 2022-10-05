@@ -100,7 +100,7 @@
   "store_name": "Clinic or store name",
   "address": "Address",
   "resposepal": "the responsible person",
-  "noti_screen_title": "Notifications",
+  "noti_screen_title": "Exclusive Offers",
   "search": "Search",
   "curncy": "SAR",
   "init_price": "Price before discount",
@@ -177,10 +177,15 @@
   "date_birth": "Date of birth",
   "cobon_add": "Add discount coupon",
   "check": "Check",
+  "alefak_card": "Alifak Altawania card",
+  "Because they deserve your attention": "Because they deserve your love",
+  "buy_card": "Buy card",
   "available_code": "discount coupon with %s %",
   "delete_message": "By agreeing to delete your account, all your data will be erased from our databases and you will not be able to access this account again",
-  "delete_account": "Delete Account"
-
+  "delete_account": "Delete Account",
+  "shops": "Shops",
+  "Exclusive_Offers": "Exclusive Offers",
+  "card": "Card"
 
 
 

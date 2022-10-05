@@ -54,12 +54,12 @@ class _ServiceProviderListScreenState extends State<ServiceProviderListScreen>  
       showSettings: false,
         body: Column(children: [
           ActionBarWidget(widget.title, context,showSearch: serviceProvidersProviderModel!.serviceProviderModel!=null?serviceProvidersProviderModel!.serviceProviderModel!.data!.isNotEmpty:false,
-          backgroundColor: Color(int.parse(widget.selectedCategory!.color!.replaceAll("#", "0xff"))),),
+          backgroundColor: C.BASE_BLUE),
       Expanded(child:serviceProvidersProviderModel!.isLoading?LoadingProgress():SmartRefresher(
         key: _refresherKey,
         controller: _refreshController,
         enablePullUp: true,
-        child: _listitem(),
+        child: Container(color:C.BASE_ORANGE,child: _listitem(),),
         physics: BouncingScrollPhysics(),
         footer: ClassicFooter(
           loadStyle: LoadStyle.ShowWhenLoading,

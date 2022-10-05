@@ -4,6 +4,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../utils/my_utils/myColors.dart';
 import 'ads_slider_dots.dart';
 
 class AdsSlider extends StatefulWidget {
@@ -28,7 +29,7 @@ class _AdsSliderState extends State<AdsSlider> {
     adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: true);
     return Container(child: Column(children: [
       Expanded(child: Container(
-
+        color: C.BASE_ORANGE,
           child:PageView(
             children: sliderItems(),
             controller: _controller,

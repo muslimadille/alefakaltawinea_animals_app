@@ -7,7 +7,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:alefakaltawinea_animals_app/utils/providers.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,67 +25,135 @@ class ChoceLanguageScreen extends StatefulWidget {
 
 class _ChoceLanguageScreenState extends State<ChoceLanguageScreen> {
   UtilsProviderModel? utilsProviderModel;
+
   @override
   void initState() {
     super.initState();
-    utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: false);
+    utilsProviderModel =
+        Provider.of<UtilsProviderModel>(context, listen: false);
   }
+
   @override
   Widget build(BuildContext context) {
-    utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: true);
+    utilsProviderModel = Provider.of<UtilsProviderModel>(context, listen: true);
     return BaseScreen(
         tag: "SplashScreen",
         showSettings: false,
         showBottomBar: false,
-        body: Container(
-            width: double.infinity,
-            color: C.BASE_BLUE,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                TransitionImage(
-                  "assets/images/logo_name_white.png",
-                  width: D.default_150,
-                  height: D.default_150,
-                ),
-                SizedBox(
-                  height: D.default_30,
-                ),
-                _button("عربي",()async{
-                  await utilsProviderModel!.setCurrentLocal(context, Locale("ar","EG"));
-                  MyUtils.navigate(context, OnBoardingScreen());
-                },
-
-                ),
-                SizedBox(
-                  height: D.default_10,
-                ),
-                _button("English",()async{
-                  await utilsProviderModel!.setCurrentLocal(context, Locale("en","US"));
-                  MyUtils.navigate(context, OnBoardingScreen());
-                }),
-
-              ],
-            )));
+        body: Stack(
+          textDirection:TextDirection.rtl,
+          alignment: Alignment.center,
+          children: [
+            _cartWithAnimalsImage(),
+            _blueCart(),
+            _textCart(),
+            _orangeCart(),
+            _dogImage(),
+            _bottons()
+          ],
+        ));
   }
-  Widget _button(String title,Function ontClick){
-    return InkWell(onTap:(){
+  Widget _textCart(){
+    return Positioned(child: Container(
+        width: MediaQuery.of(context).size.width,
+        child:Column(children: [
+          Text('أول بطاقة إلكترونية لخصومات العيادات البيطرية ومتاجر الحيوانات',style: S.h4(color: Colors.white),textAlign: TextAlign.center),
+          Text('First digital discount card for veterinary clinics and pet shops',style: S.h4(color: Colors.white),textAlign: TextAlign.center,)
+
+        ],)),bottom:MediaQuery.of(context).size.height * 0.55 ,);
+  }
+
+  Widget _orangeCart() {
+    return Positioned(child: TransitionImage(
+      "assets/images/orange_splash_bg.png",
+      height: MediaQuery.of(context).size.height * 0.5,
+      width: MediaQuery.of(context).size.width,
+      fit: BoxFit.fill,
+    ),bottom: 0,);
+  }
+
+  Widget _blueCart() {
+    return Positioned(child: TransitionImage(
+      "assets/images/blue_splash_bg.png",
+      height: MediaQuery.of(context).size.height * 0.65,
+      width: MediaQuery.of(context).size.width,
+      fit: BoxFit.fill,
+    ),bottom: 0,);
+  }
+  Widget _dogImage() {
+    return Positioned(child: TransitionImage(
+      "assets/images/spalsh_dog.png",
+      height: MediaQuery.of(context).size.height * 0.28,
+      fit: BoxFit.fitHeight,
+    ),bottom: 0,right: -D.default_40,);
+  }
+  Widget _cartWithAnimalsImage() {
+    return Positioned(child: TransitionImage(
+      "assets/images/cart_with_animals.png",
+      height: MediaQuery.of(context).size.height * 0.28,
+      fit: BoxFit.fitHeight,
+    ),top:D.default_10,);
+  }
+
+  Widget _bottons() {
+    return Positioned(child: Container(
+
+      child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        _button("عربي", () async {
+          await Constants.utilsProviderModel!.setCurrentLocal(
+              context, Locale("en", "US"));
+          await utilsProviderModel!.setCurrentLocal(
+              context, Locale("en", "US"));
+          await utilsProviderModel!.setLanguageState("en");
+          await Constants.utilsProviderModel!.setCurrentLocal(
+              context, Locale("ar", "EG"));
+          await utilsProviderModel!.setCurrentLocal(
+              context, Locale("ar", "EG"));
+          await utilsProviderModel!.setLanguageState("ar");
+          MyUtils.navigate(context, OnBoardingScreen());
+        },
+
+        ),
+        SizedBox(
+          height: D.default_10,
+        ),
+        _button("English", () async {
+          await Constants.utilsProviderModel!.setCurrentLocal(
+              context, Locale("ar", "EG"));
+          await utilsProviderModel!.setCurrentLocal(
+              context, Locale("ar", "EG"));
+          await utilsProviderModel!.setLanguageState("ar");
+          await Constants.utilsProviderModel!.setCurrentLocal(
+              context, Locale("en", "US"));
+          await utilsProviderModel!.setCurrentLocal(
+              context, Locale("en", "US"));
+          await utilsProviderModel!.setLanguageState("en");
+          MyUtils.navigate(context, OnBoardingScreen());
+        })
+      ],),),bottom: MediaQuery.of(context).size.height*0.30,);
+  }
+
+  Widget _button(String title, Function ontClick) {
+    return InkWell(onTap: () {
       ontClick();
-    } ,child:Container(
+    }, child: Container(
       padding: EdgeInsets.all(D.default_5),
-      height:D.default_60,
+      height: D.default_60,
       width: D.default_200,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(D.default_100),),
-        border: Border.all(color: Colors.white),
-        color: C.BASE_BLUE,
       ),
       child: Center(child: Container(
         padding: EdgeInsets.all(D.default_5),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(D.default_100),),
           color: Colors.white,
-        ),child: Center(child: Text(title,style: S.h1Bold(color: C.BASE_BLUE),textAlign:TextAlign.center ,),),
+        ),
+        child: Center(child: Text(title, style: S.h1Bold(fontSize:D.h1*1.2,color: C.BASE_BLUE),
+          textAlign: TextAlign.center,),),
 
       ),),
     ));

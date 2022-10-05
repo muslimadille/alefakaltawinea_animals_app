@@ -1,6 +1,6 @@
 import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
-import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_localization/easy_localization.dart'hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_intro/flutter_intro.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -33,15 +33,64 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         showSettings: false,
         showBottomBar: false,
         body:Container(
-          color:C.BASE_BLUE,
-          child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            color: C.BASE_BLUE,
+            child: Stack(
+          textDirection:TextDirection.rtl,
+          alignment: Alignment.center,
           children: [
-            Expanded(child: TransitionImage(EasyLocalization.of(context)!.currentLocale==Locale('ar', 'EG')?"assets/images/spalsh_bg_ar.png":Res.ONBOARDING_BG,fit: BoxFit.cover,padding: EdgeInsets.all(D.default_10),),),
-            _buttonsPart(),
-            _termsPart()
+            _cartWithAnimalsImage(),
+            _blueCart(),
+            _textCart(),
+            _orangeCart(),
+            _navigationPart(),
+            _buyCardbutton()
+          ],
+        )),);
+  }
+  Widget _orangeCart() {
+    return Positioned(child: TransitionImage(
+      "assets/images/orange_splash_bg.png",
+      height: MediaQuery.of(context).size.height * 0.5,
+      width: MediaQuery.of(context).size.width,
+      fit: BoxFit.fill,
+    ),bottom: 0,);
+  }
+  Widget _textCart(){
+    return Positioned(child: Container(
+        width: MediaQuery.of(context).size.width,
+        child:Column(children: [
+          Text(tr("alefak_card"),style: S.h1Bold(color: Colors.white,fontSize: D.h1*1.5),textAlign: TextAlign.center),
+          Text(tr("Because they deserve your attention"),style: S.h2(color: Colors.white),textAlign: TextAlign.center,)
 
-          ],),));
+        ],)),bottom:MediaQuery.of(context).size.height * 0.54 ,);
+  }
+  Widget _blueCart() {
+    return Positioned(child: TransitionImage(
+      "assets/images/move_splash_bg.png",
+      height: MediaQuery.of(context).size.height * 0.65,
+      width: MediaQuery.of(context).size.width,
+      fit: BoxFit.fill,
+    ),bottom: 0,);
+  }
+
+  Widget _cartWithAnimalsImage() {
+    return Positioned(child: TransitionImage(
+      "assets/images/cart_with_animals.png",
+      height: MediaQuery.of(context).size.height * 0.28,
+      fit: BoxFit.fitHeight,
+    ),top:D.default_10,);
+  }
+  Widget _navigationPart(){
+    return Positioned(child: Container(
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        _buttonsPart(),
+        _termsPart()
+      ],),),bottom: 0,);
   }
   Widget _termsPart(){
     return Container(
@@ -165,6 +214,29 @@ Widget _buttonsPart(){
       // TODO: Forget the user
     }
   });
+  Widget _buyCardbutton() {
+    return Positioned(child: InkWell(onTap: () {
+      MyUtils.navigate(context, LoginScreen());
+    }, child: Container(
+      padding: EdgeInsets.all(D.default_5),
+      height: D.default_60,
+      width: D.default_200,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(D.default_100),),
+      ),
+      child: Center(child: Container(
+        padding: EdgeInsets.all(D.default_5),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(D.default_100),),
+          color: Colors.white,
+        ),
+        child: Center(child: Text(tr("buy_card"), style: S.h1Bold(color: C.BASE_BLUE),
+          textAlign: TextAlign.center,),),
+
+      ),),
+    )),bottom: MediaQuery.of(context).size.height*0.35,);
+  }
+
 
 
 

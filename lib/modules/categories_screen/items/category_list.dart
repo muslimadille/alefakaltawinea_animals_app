@@ -9,8 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../utils/my_utils/baseTextStyle.dart';
 import '../../../utils/my_utils/constants.dart';
+import '../../../utils/my_utils/myColors.dart';
 import '../../../utils/my_utils/resources.dart';
 import '../../../utils/my_widgets/transition_image.dart';
+import '../../notifications/notifications_screen.dart';
 import '../data/categories_model.dart';
 import 'category_list_item.dart';
 
@@ -30,60 +32,77 @@ class _CategoryListState extends State<CategoryList> {
   @override
   Widget build(BuildContext context) {
     return Column(children: [
+      Expanded(child: Row(children: [
+        Expanded(child: CategoryListItem(
+          title:tr("clinic") ,
+            image:"assets/images/clinics_img.png",
+            onItemClickListener:(){_onItemClick(0);})),
+        Expanded(child: CategoryListItem(
+            title:tr("shops") ,
+            image:"assets/images/shops_img.png",
+            onItemClickListener:(){_onItemClick(1);}),)
+      ],),),
+      Expanded(child: Row(children: [
+        Expanded(child: CategoryListItem(
+            title:tr("home_care") ,
+            image:"assets/images/home_care-img.png",
+            onItemClickListener:(){_onItemClick(2);}),),
+        Expanded(child: CategoryListItem(
+            title:tr("Exclusive_Offers") ,
+            image:"assets/images/excloseve_offers.png",
+            onItemClickListener:(){
+              MyUtils.navigate(context, NotificationsScreen());
+            }),)
 
-      AspectRatio(
-          aspectRatio: 1.39,
-          child: GridView.builder(
-        itemCount: widget.categoriesProviderModel!.categoriesList.length,
-        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 0,
-          mainAxisSpacing: 0,
-          childAspectRatio: 1.39,
-
-        ), itemBuilder: (BuildContext context, int index) {
-        return CategoryListItem(
-            index,
-            widget.categoriesProviderModel,
-                (){_onItemClick(index);});
-      },)),
-      Expanded(child: InkWell(onTap: ()async{
-        bool hadeathState=Constants.currentUser!=null?await Constants.prefs!.getBool(Constants.currentUser!.id.toString())??false:true;
-        if(!hadeathState){
-          widget.categoriesProviderModel!.showHadeth=true;
-          await Constants.prefs!.setBool(Constants.currentUser!.id.toString(),true);
-        }else{
-          widget.categoriesProviderModel!.showHadeth=false;
-          MyUtils.navigate(context, AdoptionScreen());
-        }
-        widget.categoriesProviderModel!.notifyListeners();
-      },
-        child: Container(color: Color(int.parse(adaption.color!.replaceAll("#", "0xff"))),width: MediaQuery.of(context).size.width,
-          child: Row(
-            children: [
-              Expanded(child: Container(
-                child: Center(
-                  child: Text(
-                      adaption.name!,
-                      style: S.h1Bold(color: Colors.white)),
-                ),)),
-              Expanded(child: TransitionImage(
-                adaption.photo!,
-                fit: BoxFit.fitHeight,
-                padding: EdgeInsets.only(top:D.default_5,bottom:D.default_5),
-                width: double.infinity,
-              )),
-
-            ],
-          ),),),)
+      ],),),
+      Expanded(child:_adoptionItem(),)
 
     ]);
 
   }
+  Widget _adoptionItem(){
+    return  InkWell(onTap: ()async{
+      bool hadeathState=Constants.currentUser!=null?await Constants.prefs!.getBool(Constants.currentUser!.id.toString())??false:true;
+      if(!hadeathState){
+        widget.categoriesProviderModel!.showHadeth=true;
+        await Constants.prefs!.setBool(Constants.currentUser!.id.toString(),true);
+      }else{
+        widget.categoriesProviderModel!.showHadeth=false;
+        MyUtils.navigate(context, AdoptionScreen());
+      }
+      widget.categoriesProviderModel!.notifyListeners();
+    },
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        margin: EdgeInsets.all(D.default_10),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(D.default_10),
+            color: C.BASE_BLUE,
+            boxShadow:[BoxShadow(
+                color: Colors.grey.withOpacity(0.5),
+                offset:Offset(1,1),
+                blurRadius:1,
+                spreadRadius: 1
+            )]
+        ),
+        child: Row(
+          children: [
+            Expanded(child: Container(
+              child: Center(
+                child: Text(
+                    tr('adoption'),
+                    style: S.h1Bold(color: Colors.white)),
+              ),)),
+            Expanded(child: TransitionImage(
+              "assets/images/adooption_img.png",
+              fit: BoxFit.fitHeight,
+            )),
+
+          ],
+        ),),);
+  }
   void _onItemClick(int index){
     if(widget.categoriesProviderModel!.categoriesList[index].id==-1){
-      /// navigate to adoption
-
     }else{
       MyUtils.navigate(widget.ctx, ServiceProviderListScreen(widget.categoriesProviderModel!.categoriesList[index],widget.categoriesProviderModel!.categoriesList[index].name!));
     }

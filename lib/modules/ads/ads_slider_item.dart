@@ -28,65 +28,33 @@ class _AdsSliderItemState extends State<AdsSliderItem> {
         alignment:AlignmentDirectional.bottomCenter ,
         children: [
         Container(
+        margin: EdgeInsets.only(left: D.default_10,right: D.default_10),
         width: double.infinity,
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(0),
-            color: Colors.white,
-            boxShadow:[BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                offset:Offset(3,3),
-                blurRadius:3,
-                spreadRadius: 0.5
-            )]
-        ),
-        child: Stack(children: [
-          Column(children: [
-            Expanded(child: TransitionImage(
-              widget.AdsItem.bannerPhoto!,
-              fit: BoxFit.cover,
-              width: double.infinity,
-            )),
+        child:Column(children: [
+          Expanded(child: TransitionImage(
+            widget.AdsItem.bannerPhoto!,
+            fit: BoxFit.cover,
+            radius:D.default_15,
+            width: double.infinity,
+          )),
+          Container(
+            height: D.default_40,
+            color: C.BASE_ORANGE,
+            width: double.infinity,
+            padding: EdgeInsets.only(top:D.default_10),
 
-          ],),
-          /*widget.AdsItem.photo!.isNotEmpty? Positioned(child: Container(
-            padding: EdgeInsets.all(D.default_5),
-            margin: EdgeInsets.only(left:D.default_10,right:D.default_10,top: D.default_10),
-            width: D.default_60,
-            height: D.default_60,
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(D.default_5) ),
-                color: Colors.white,
-                boxShadow:[BoxShadow(
-                    color: Colors.grey.withOpacity(0.5),
-                    offset:Offset(4,4),
-                    blurRadius:4,
-                    spreadRadius: 2
-                )]
-            ),
-            child:TransitionImage(
-              widget.AdsItem.photo!,
-              radius: D.default_10,
-              fit: BoxFit.cover,
-              width: double.infinity,
-            ) ,
-          ),):Container(),*/
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(child: Text(
+                  widget.AdsItem.name!
+                  ,style: S.h3(color:Colors.white),textAlign: TextAlign.center,),),
+              ],),
+          )
         ],),
-      ),
-        Container(
-          height: D.default_40,
-          color: Colors.white,
-          width: double.infinity,
-          padding: EdgeInsets.only(top:D.default_10),
 
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Expanded(child: Text(
-                widget.AdsItem.name!
-                ,style: S.h3(color:C.BASE_BLUE),textAlign: TextAlign.center,),),
-            ],),
-        )
+        ),
       ],),);
   }
 }

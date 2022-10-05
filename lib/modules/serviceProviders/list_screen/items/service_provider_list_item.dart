@@ -65,7 +65,7 @@ class _ServiceProviderListItemState extends State<ServiceProviderListItem> {
               children: [
                 Expanded(child: Text(
                   widget.serviceProvidersProviderModel!.serviceProviderModel!.data![widget.index].name!
-                  ,style: S.h3(color:widget.color),),),
+                  ,style: S.h3(color:C.BASE_BLUE),),),
                 InkWell(
                   onTap: (){
                     widget.serviceProvidersProviderModel!.setFav(widget.serviceProvidersProviderModel!.serviceProviderModel!.data![widget.index].id!);

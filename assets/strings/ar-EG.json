@@ -103,7 +103,7 @@
  "store_name": "اسم العيادة أو المتجر",
  "address": "العنوان",
  "resposepal": "الشخص المسؤل",
- "noti_screen_title": "الإشعارات",
+ "noti_screen_title": "عروض حصرية",
  "search": "بحث",
  "curncy": "ريال",
  "init_price": "السعر قبل الخصم",
@@ -179,9 +179,19 @@
  "date_birth": "تاريخ الميلاد",
  "cobon_add": "أضف كوبون خصم",
  "check": "استخدام الكوبون",
+ "alefak_card": "بطاقة أليفك التعاونية",
+ "Because they deserve your attention": "لأنهم يستحقون الحب",
+ "buy_card": "شراء البطاقة",
  "available_code": "تم إضافة كود خصم  بقيمة%s %",
  "delete_message": "بالموافقة علي حذف حسابك سيتم مسح كل البيانات الخاصة بك من قواعد البيانات الخاصة بنا ولن تستطيع الدخول علي هذا الحساب مرة اخري",
- "delete_account": "حذف الحساب"
+ "delete_account": "حذف الحساب",
+ "shops": "متاجر",
+ "Exclusive_Offers": "عروض حصرية",
+ "card": "البطاقة"
+
+
+
+
 
 
 }

@@ -51,19 +51,19 @@ class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
       showBottomBar: true,
         showSettings: false,
         showIntro: false,
-        body: categoriesProviderModel!.isLoading?LoadingProgress():
+        body: Container(
+          color: C.BASE_ORANGE,
+          child: categoriesProviderModel!.isLoading?LoadingProgress():
         Stack(
           fit:StackFit.expand,
           children: [
-          Column(children: [
-            ActionBarWidget(Constants.currentUser!=null?"${sprintf(tr("hello"),[" ${Constants.currentUser!.name}"])}":"", context,showSetting: true,backgroundColor: Colors.white,textColor: C.BASE_BLUE,showBack: false,),
-            Container(height: MediaQuery.of(context).size.height*0.30,child: AdsSlider(),),
-            Expanded(child:  Container(
-              color: Colors.white,
-              child: CategoryList(context,categoriesProviderModel),))
-          ],),
+            Column(children: [
+              ActionBarWidget(Constants.currentUser!=null?"${sprintf(tr("hello"),[" ${Constants.currentUser!.name}"])}":"", context,showSetting: true,backgroundColor: C.BASE_ORANGE,textColor: Colors.white,showBack: false,),
+              Container(height: MediaQuery.of(context).size.height*0.30,child: AdsSlider(),),
+              Expanded(child:CategoryList(context,categoriesProviderModel))
+            ],),
             categoriesProviderModel!.showHadeth?_adotionAlert():Container()
-        ],));
+          ],),));
   }
   Widget _adotionAlert(){
     return Directionality(textDirection: TextDirection.rtl, child: Container(

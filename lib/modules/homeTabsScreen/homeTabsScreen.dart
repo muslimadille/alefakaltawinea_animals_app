@@ -17,6 +17,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
+import '../cart/add_cart_screen.dart';
 import '../notifications/notifications_screen.dart';
 import '../serviceProviderAccount/SpHomeScreen.dart';
 import '../serviceProviderAccount/code_scanner_screen.dart';
@@ -127,13 +128,13 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
     return Expanded(
       child: InkWell(onTap: (){
         bottomBarProviderModel!.setSelectedScreen(3);
-        MyUtils.navigate(context, NotificationsScreen());
+        MyUtils.navigate(context, AddCartScreen());
       }
         ,child:Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
-          TransitionImage(bottomBarProviderModel!.selectedScreen==3?Res.IC_NOTIFICATIONS_BLUE:Res.IC_NOTIFICATIONS_GREY,width: D.default_25,height: D.default_25,),
-          Center(child:Text(tr("notifications"),style: S.h5(color: bottomBarProviderModel!.selectedScreen==3?C.BASE_BLUE:Colors.grey),),)
+          TransitionImage("assets/images/card_ic.png",width: D.default_25,height: D.default_25,),
+          Center(child:Text(tr("card"),style: S.h5(color: bottomBarProviderModel!.selectedScreen==3?C.BASE_BLUE:Colors.grey),),)
         ]
     ),));
   }
