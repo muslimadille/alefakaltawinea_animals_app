@@ -43,49 +43,59 @@ class _RegisterationPopState extends State<RegisterationPop> with InputValidatio
   @override
   Widget build(BuildContext context) {
     userProviderModel = Provider.of<UserProviderModel>(context, listen: true);
+    return Column(children: [
+      ActionBarWidget(
+          "", context,
+          enableShadow:false,
+          showSetting:false,
+          textColor:C.ADAPTION_COLOR,
+          showBack: true,
+          backgroundColor:Colors.transparent
 
-    return Container(
-      color: Colors.white.withOpacity(0.93),
-      child: userProviderModel!.isLoading
-          ? LoadingProgress()
-          : SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-                margin: EdgeInsets.only(top: D.default_120,bottom: D.default_30,left: D.default_50,right: D.default_50),
-                child: Center(
-                  child: Text(
-                    tr("register_header2"),
-                    style: S.h1Bold(color: C.ADAPTION_COLOR),
-                    textAlign: TextAlign.center,
-                  ),
-                )),
-            Container(
-              padding: EdgeInsets.only(top: D.default_20,bottom: D.default_20,left: D.default_50,right: D.default_50),
-              child: Form(
-                key: _registerFormGlobalKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    _name(),
-                    _alifakName(),
-                    _email(),
-                    _phone(),
-                    _password(),
-                    _confirmPassword(),
-                    SizedBox(height: D.default_20,),
-                    _registerBtn(),
-                  ],
-                ),
-              ),
-            )
-          ],
-        ),
       ),
-    );
+      Container(
+        color: Colors.white.withOpacity(0.93),
+        child: userProviderModel!.isLoading
+            ? LoadingProgress()
+            : SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                  margin: EdgeInsets.only(top: D.default_120,bottom: D.default_30,left: D.default_50,right: D.default_50),
+                  child: Center(
+                    child: Text(
+                      tr("register_header2"),
+                      style: S.h1Bold(color: C.ADAPTION_COLOR),
+                      textAlign: TextAlign.center,
+                    ),
+                  )),
+              Container(
+                padding: EdgeInsets.only(top: D.default_20,bottom: D.default_20,left: D.default_50,right: D.default_50),
+                child: Form(
+                  key: _registerFormGlobalKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _name(),
+                      //_alifakName(),
+                      _email(),
+                      _phone(),
+                      _password(),
+                      _confirmPassword(),
+                      SizedBox(height: D.default_20,),
+                      _registerBtn(),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      )
+    ],);
   }
 
   Widget _coditions() {

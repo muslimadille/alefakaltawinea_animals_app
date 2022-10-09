@@ -23,6 +23,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../app_states/provider/app_state_provider.dart';
+import '../introWizard/intro_wizard_screen.dart';
 import 'choce_language_screen.dart';
 import 'data/regions_api.dart';
 import 'data/regions_api.dart';
@@ -61,14 +62,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       setLocal();
       await appStataProviderModel!.getAppActiveState();
       await appStataProviderModel!.getApplePayState();
-
-      await Future.delayed(Duration(milliseconds: 5000)).then((value) {
-        if(appStataProviderModel!.app_active_state){
-          MyUtils.navigateAsFirstScreen(context, MaintainanceScreen());
-        }else{
-          MyUtils.navigateReplaceCurrent(context, ChoceLanguageScreen());
-        }
-      });
+      login();
     });
 
 
@@ -110,11 +104,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
   }
 
 
-  initSavedUser(){
-    if( Constants.prefs!.get(Constants.SAVED_PHONE_KEY!)!=null&&Constants.prefs!.get(Constants.SAVED_PASSWORD_KEY!)!=null){
-      userProviderModel!.login(Constants.prefs!.get(Constants.SAVED_PHONE_KEY!).toString(),Constants.prefs!.get(Constants.SAVED_PASSWORD_KEY!).toString(),context,true);
-    }
-  }
+
   void getRegions(){
     regionsApi.getRegions().then((value) {
       Constants.REGIONS=value.data;
@@ -140,8 +130,12 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
         utilsProviderModel!.setCurrentLocal(ctx, Locale('en','US'));
       }
     }else{
-      utilsProviderModel!.setLanguageState("ar");
-      utilsProviderModel!.setCurrentLocal(ctx, Locale('ar','EG'));
+      await context.setLocale(Locale('ar', 'EG'));
+      await EasyLocalization.of(context)!.setLocale(Locale('ar', 'EG'));
+      utilsProviderModel!.currentLocalName="العربية";
+      Constants.SELECTED_LANGUAGE="ar";
+      await utilsProviderModel!.setLanguageState("ar");
+      await Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "ar");
 
     }
 
@@ -161,6 +155,21 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
       Constants.SELECTED_LANGUAGE="en";
       utilsProviderModel!.setLanguageState("en");
       await Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "en");
+    }
+  }
+  void login()async{
+    String phone=await Constants.prefs!.getString(Constants.SAVED_PHONE_KEY!)??"";
+    String password=await Constants.prefs!.getString(Constants.SAVED_PASSWORD_KEY!)??"";
+    if(phone.isNotEmpty&&password.isNotEmpty){
+      userProviderModel!.login(phone, password,context,false);
+    }else{
+      await Future.delayed(Duration(milliseconds: 1000)).then((value) {
+        if(appStataProviderModel!.app_active_state){
+          MyUtils.navigateAsFirstScreen(context, MaintainanceScreen());
+        }else{
+          MyUtils.navigateReplaceCurrent(context, ChoceLanguageScreen());
+        }
+      });
     }
   }
 }

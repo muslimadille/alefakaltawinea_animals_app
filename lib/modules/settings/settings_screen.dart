@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../utils/my_utils/apis.dart';
+import '../cart/add_cart_screen.dart';
 import '../login/provider/user_provider_model.dart';
 import '../spalshScreen/spalshScreen.dart';
 import 'about_screen.dart';
@@ -87,7 +88,9 @@ class _SettingScreenState extends State<SettingScreen> {
 
                             )
                           ],),
-                        _itemText(tr("subscrib"), () {}),
+                        _itemText(tr("buy_card"), () {
+                          MyUtils.navigate(context, AddCartScreen());
+                        }),
                         _itemText(tr("add_your_shop"), (){
                           MyUtils.navigate(context, AddStoreScreen());
                         }),

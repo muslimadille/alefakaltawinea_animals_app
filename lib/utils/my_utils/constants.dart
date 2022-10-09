@@ -24,6 +24,11 @@ class Constants extends Object{
   static String isAdoptionAlertAccepted="isAdoptionAlertAccepted";
   static BuildContext? mainContext;
   static bool APPLE_PAY_STATE=true;
+  static String IS_FIRST_TIME="IS_FIRST_TIME";
+  static String TERMS_CHECK="TERMS_CHECK";
+
+
+
   ///888888888888888888888888888888888888888888888888888888
   static UtilsProviderModel? utilsProviderModel;
 

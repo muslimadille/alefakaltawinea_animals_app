@@ -13,6 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
+import '../../utils/my_widgets/action_bar_widget.dart';
+
 class ContactUsScreen extends StatefulWidget {
   const ContactUsScreen({Key? key}) : super(key: key);
 
@@ -41,6 +43,15 @@ class _ContactUsScreenState extends State<ContactUsScreen> with  InputValidation
           SingleChildScrollView(child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              ActionBarWidget(
+                  tr("contact_us"), context,
+                  enableShadow:false,
+                  showSetting:true,
+                  textColor:Colors.white,
+                  showBack: true,
+                  backgroundColor:C.BASE_BLUE
+
+              ),
               Container(
                   margin: EdgeInsets.only(top:D.default_150,bottom: D.default_30),
                   child: Center(child: Text(tr("contact_header1"),style: S.h1(color: C.BASE_BLUE),textAlign: TextAlign.center,),)),

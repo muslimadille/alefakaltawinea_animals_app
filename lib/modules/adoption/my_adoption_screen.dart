@@ -130,8 +130,8 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
                     radius: D.default_200,
                     width: D.default_60,
                     height: D.default_60,
-                    strokeColor: adoptionProviderModel!.selectedCategoryIndex==index?C.ADAPTION_COLOR:Colors.grey,
-                    backgroundColor: adoptionProviderModel!.selectedCategoryIndex==index?C.ADAPTION_COLOR:Colors.white,
+                    strokeColor: adoptionProviderModel!.selectedCategoryIndex==index?C.ADAPTION_COLOR:Colors.grey[400],
+                    backgroundColor: adoptionProviderModel!.selectedCategoryIndex==index?C.ADAPTION_COLOR:Colors.grey[400],
                     fit: BoxFit.fitWidth,
                     padding: EdgeInsets.all(D.default_5),
                   ),));

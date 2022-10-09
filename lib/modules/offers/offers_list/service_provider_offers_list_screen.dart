@@ -8,6 +8,8 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ServiceProviderOffersScreen extends StatefulWidget {
   Data serviceProviderData;
@@ -24,7 +26,9 @@ class _ServiceProviderOffersScreenState extends State<ServiceProviderOffersScree
       margin: EdgeInsets.only(top: D.default_10),
       child: Column(children: [
       Expanded(child:
-      widget.serviceProviderData.offers!.isNotEmpty?ListView.separated(
+      widget.serviceProviderData.offers!.isNotEmpty?
+      widget.serviceProviderData.categoryId=="4"?_shopsOffersList():
+      ListView.separated(
           itemCount: widget.serviceProviderData.offers!.length,
           padding: EdgeInsets.only(top:D.default_10,bottom:D.default_10),
           itemBuilder: (context,index){
@@ -48,7 +52,7 @@ class _ServiceProviderOffersScreenState extends State<ServiceProviderOffersScree
                     margin:EdgeInsets.only(left:D.default_10,right:D.default_10),
                     child: Text("${widget.serviceProviderData.offers![index]!.discountValue!}${tr("curncy")}",style: S.h2(color: C.BASE_BLUE),),):Container()
                 ],),
-                  double.parse(widget.serviceProviderData.offers![index]!.price!)>0?Text("${tr("init_price")} ${widget.serviceProviderData.offers![index]!.price}${tr("curncy")}-${tr("wafer")}${_getDescoundRaio(index)}% ${tr("with_alifak_cart")}",style: S.h4(color: Colors.grey)):Container(),
+                  double.parse(widget.serviceProviderData.offers![index]!.price!)>0?Text("${tr("init_price")} ${widget.serviceProviderData.offers![index]!.price}${tr("curncy")}-${tr("wafer")}${_getDescoundRaio(index)}%",style: S.h4(color: Colors.grey)):Container(),
 
                 ],),
             ),);
@@ -57,6 +61,46 @@ class _ServiceProviderOffersScreenState extends State<ServiceProviderOffersScree
       },):_noData())
     ],),);
   }
+  Widget _shopsOffersList() {
+    return widget.serviceProviderData.offers!.isNotEmpty?Container(
+      padding: EdgeInsets.all(D.default_10),
+      child: CustomScrollView(slivers: [
+        SliverGrid(
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: D.default_5,
+              mainAxisSpacing: D.default_5,
+              childAspectRatio: 1,
+            ),
+            delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                return Container(
+                  margin: EdgeInsets.all(D.default_5),
+                  child: InkWell(
+                    onTap: (){
+                      if((widget.serviceProviderData.offers![index].url??"")!=""){
+                        _launchURLBrowser(widget.serviceProviderData.offers![index].url??"");
+                      }
+                    },
+                    child: TransitionImage(
+                    widget.serviceProviderData.offers![index].photo??"",
+                    fit: BoxFit.cover,
+                    radius: D.default_10,
+                  ),),);
+              },
+              childCount: widget.serviceProviderData.offers!.length,
+              semanticIndexOffset: 1,
+            )),
+      ]),):_noData();
+  }
+  _launchURLBrowser(String url) async {
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      Fluttertoast.showToast(msg: tr("cant_opn_url"),backgroundColor: Colors.red,textColor: Colors.white,);
+    }
+  }
+
   double _getDescoundRaio(int index){
     double price=double.parse(widget.serviceProviderData.offers![index].price!);
     double discount=double.parse(widget.serviceProviderData.offers![index].discountValue!);

@@ -4,14 +4,17 @@ import 'package:easy_localization/easy_localization.dart'hide TextDirection;
 import 'package:flutter/material.dart';
 import 'package:flutter_intro/flutter_intro.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:provider/provider.dart';
 
 import '../../utils/my_utils/baseDimentions.dart';
 import '../../utils/my_utils/baseTextStyle.dart';
+import '../../utils/my_utils/constants.dart';
 import '../../utils/my_utils/myColors.dart';
 import '../../utils/my_utils/myUtils.dart';
 import '../baseScreen/baseScreen.dart';
 import '../categories_screen/mainCategoriesScreen.dart';
 import '../login/login_screen.dart';
+import '../login/provider/user_provider_model.dart';
 import '../registeration/registration_screen.dart';
 import '../settings/terms_screen.dart';
 
@@ -25,6 +28,17 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Intro? intro;
   bool rememberMe = false;
+  UserProviderModel?userProviderModel;
+  @override
+  void initState() {
+    super.initState();
+    userProviderModel=Provider.of<UserProviderModel>(context,listen: false);
+    if(Constants.prefs!.getBool(Constants.TERMS_CHECK)??false){
+      setState(() {
+        rememberMe=true;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +103,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _buttonsPart(),
-        _termsPart()
+        (Constants.prefs!.getBool(Constants.TERMS_CHECK)??true)?_termsPart():Container(height: D.default_40,)
       ],),),bottom: 0,);
   }
   Widget _termsPart(){
@@ -109,6 +123,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           }
       ),
       InkWell(onTap: (){
+
         MyUtils.navigate(context, TermsScreen(hideButtomBar: true,));
       },
         child: Text(tr("terms_text"),style: S.h3(color: Colors.white),),
@@ -209,7 +224,9 @@ Widget _buttonsPart(){
     rememberMe = newValue;
 
     if (rememberMe) {
-      // TODO: Here goes your functionality that remembers the user.
+      if(!(Constants.prefs!.getBool(Constants.TERMS_CHECK)??false)){
+        Constants.prefs!.setBool(Constants.TERMS_CHECK,true);
+      }
     } else {
       // TODO: Forget the user
     }

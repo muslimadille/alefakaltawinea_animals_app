@@ -172,7 +172,7 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
             crossAxisCount: 2,
             crossAxisSpacing: D.default_5,
             mainAxisSpacing: D.default_5,
-            childAspectRatio: 1.18,
+            childAspectRatio: 1,
           ),
           delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
@@ -219,10 +219,10 @@ Widget _noData(){
                 ),
                 child: TransitionImage(
                 adoptionProviderModel!.animalPagerListModel!.data![index].photo!.isNotEmpty?adoptionProviderModel!.animalPagerListModel!.data![index].photo!:Res.DEFAULT_IMAGE,
-                radius: D.default_150,
+                radius: D.default_200,
                 fit: BoxFit.cover,
-                width: D.default_110,
-                height: D.default_110,
+                width: D.default_150,
+                height: D.default_150,
 
               ),)),
           Container(

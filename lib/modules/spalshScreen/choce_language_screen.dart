@@ -15,6 +15,7 @@ import '../../utils/my_utils/baseDimentions.dart';
 import '../../utils/my_utils/constants.dart';
 import '../../utils/my_utils/myColors.dart';
 import '../baseScreen/baseScreen.dart';
+import '../introWizard/intro_wizard_screen.dart';
 
 class ChoceLanguageScreen extends StatefulWidget {
   const ChoceLanguageScreen({Key? key}) : super(key: key);
@@ -113,7 +114,11 @@ class _ChoceLanguageScreenState extends State<ChoceLanguageScreen> {
           await utilsProviderModel!.setCurrentLocal(
               context, Locale("ar", "EG"));
           await utilsProviderModel!.setLanguageState("ar");
-          MyUtils.navigate(context, OnBoardingScreen());
+          if(/*Constants.prefs!.getBool(Constants.IS_FIRST_TIME)??*/true){
+            MyUtils.navigateReplaceCurrent(context, IntroWizardScreen());
+          }else{
+            MyUtils.navigate(context, OnBoardingScreen());
+          }
         },
 
         ),
@@ -131,8 +136,11 @@ class _ChoceLanguageScreenState extends State<ChoceLanguageScreen> {
           await utilsProviderModel!.setCurrentLocal(
               context, Locale("en", "US"));
           await utilsProviderModel!.setLanguageState("en");
-          MyUtils.navigate(context, OnBoardingScreen());
-        })
+          if(/*Constants.prefs!.getBool(Constants.IS_FIRST_TIME)??*/true){
+            MyUtils.navigateReplaceCurrent(context, IntroWizardScreen());
+          }else{
+            MyUtils.navigate(context, OnBoardingScreen());
+          }        })
       ],),),bottom: MediaQuery.of(context).size.height*0.30,);
   }
 

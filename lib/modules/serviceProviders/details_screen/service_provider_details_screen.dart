@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../utils/my_widgets/action_bar_widget.dart';
+
 
 class ServiceProviderDetailsScreen extends StatefulWidget {
   Data serviceProviderData;
@@ -27,10 +29,12 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
   Widget build(BuildContext context) {
     return BaseScreen(
       tag: "ServiceProviderDetailsScreen",
-      showSettings: true,
+      showSettings: false,
       showBottomBar: true,
       showIntro: false,
       body:Column(children: [
+        ActionBarWidget("", context,textColor:C.BASE_BLUE,showSearch:false,
+            backgroundColor: Colors.white),
         _infoCard(),
         Expanded(child: ServiceProviderOffersScreen(widget.serviceProviderData))
       ],)
@@ -55,6 +59,17 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
           Column(children: [
             Expanded(child: Container(child: Column(children: [
               Expanded(child: Container(
+                  margin: EdgeInsets.only(left: D.default_10,right: D.default_10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(D.default_10),
+                      color: Colors.white,
+                      boxShadow:[BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          offset:Offset(3,3),
+                          blurRadius:3,
+                          spreadRadius: 0.5
+                      )]
+                  ),
                   child:PageView(
                     children: _sliderItem(),
                     controller: _controller,
@@ -151,11 +166,11 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
           ],),
           Positioned(child: Container(
             padding: EdgeInsets.all(D.default_5),
-            margin: EdgeInsets.all(D.default_10),
+            margin: EdgeInsets.only(left:D.default_10,right: D.default_10),
             width: D.default_60,
             height: D.default_60,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(D.default_10),
+                borderRadius: BorderRadius.circular(D.default_5),
                 color: Colors.white,
                 boxShadow:[BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
@@ -198,12 +213,14 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
   List<Widget >_sliderItem(){
     List<Widget>items=[];
     items.add(
-        Container(child:
+        Container(
+          child:
         Column(children: [
           Expanded(child: TransitionImage(
             widget.serviceProviderData.bannerPhoto??'',
             fit: BoxFit.cover,
             width: double.infinity,
+            radius: D.default_10,
           )),
 
         ],),)
@@ -216,6 +233,7 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
               widget.serviceProviderData.photos![i].photo!,
               fit: BoxFit.cover,
               width: double.infinity,
+              radius: D.default_10,
             )),
 
           ],),)
@@ -223,4 +241,5 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
     }
     return items;
   }
+
 }

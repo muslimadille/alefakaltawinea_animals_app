@@ -18,6 +18,7 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
 import '../cart/add_cart_screen.dart';
+import '../my_cards/my_cards_screen.dart';
 import '../notifications/notifications_screen.dart';
 import '../serviceProviderAccount/SpHomeScreen.dart';
 import '../serviceProviderAccount/code_scanner_screen.dart';
@@ -128,7 +129,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
     return Expanded(
       child: InkWell(onTap: (){
         bottomBarProviderModel!.setSelectedScreen(3);
-        MyUtils.navigate(context, AddCartScreen());
+        MyUtils.navigate(context, MyCardsScreen());
       }
         ,child:Column(
         mainAxisAlignment: MainAxisAlignment.center,

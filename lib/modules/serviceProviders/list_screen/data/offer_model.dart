@@ -11,6 +11,8 @@ class OfferModel {
   List<Features>? features;
   String? createdAt;
   String? updatedAt;
+  String?photo;
+  String?url;
 
   OfferModel(
       {this.id,
@@ -24,7 +26,9 @@ class OfferModel {
         this.usageTimes,
         this.features,
         this.createdAt,
-        this.updatedAt});
+        this.updatedAt,
+      this.photo,
+      this.url});
 
   OfferModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -44,6 +48,8 @@ class OfferModel {
     }
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    photo=json["photo"];
+    url=json["url"];
   }
 
   Map<String, dynamic> toJson() {
@@ -62,6 +68,8 @@ class OfferModel {
     }
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    data['photo']=this.photo;
+    data["url"]=this.url;
     return data;
   }
 }

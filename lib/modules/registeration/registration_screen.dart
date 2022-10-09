@@ -1,11 +1,9 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/provider/user_provider_model.dart';
-import 'package:alefakaltawinea_animals_app/modules/otp/otp_screem.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/input%20_validation_mixing.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
-import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -85,8 +83,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        _alifakName(),
-                        _gender(),
+                        //_alifakName(),
+                        //_gender(),
                         _name(),
                         _email(),
                         _phone(),

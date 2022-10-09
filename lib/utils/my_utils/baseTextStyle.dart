@@ -9,7 +9,7 @@ class S {
 
   static h1({Color? color, bool underline = false,TextDecoration? decoration,Color? decorationColor,double? decorationThickness, Color? shadowColor ,String? font}) =>
       TextStyle(
-          fontFamily: "ArabicUiTextLight",
+          fontFamily: font??"ArabicUiTextLight",
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
@@ -18,7 +18,7 @@ class S {
           fontSize: D.h1);
   static h1Bold({double? fontSize,Color? color, bool underline = false,TextDecoration? decoration,Color? decorationColor,double? decorationThickness, Color? shadowColor ,String? font}) =>
       TextStyle(
-          fontFamily: "ArabicUiTextLight",
+          fontFamily: font??"Nexa Regular",
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
@@ -30,7 +30,7 @@ class S {
 
   static h2({Color? color, bool underline = false, TextDecoration? decoration,Color? decorationColor,double? decorationThickness,Color? shadowColor,String? font}) =>
       TextStyle(
-          fontFamily: "ArabicUiTextLight",
+          fontFamily: font??"ArabicUiTextLight",
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
@@ -40,7 +40,7 @@ class S {
 
   static h3({Color? color, bool underline = false,TextDecoration? decoration, Color? decorationColor,double? decorationThickness,Color? shadowColor,String? font}) =>
       TextStyle(
-          fontFamily: "ArabicUiTextLight",
+          fontFamily: font??"ArabicUiTextLight",
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
@@ -50,7 +50,7 @@ class S {
 
   static h4({Color? color, bool underline = false,TextDecoration? decoration,Color? decorationColor,double? decorationThickness, Color? shadowColor,String? font}) =>
       TextStyle(
-          fontFamily: "ArabicUiTextLight",
+          fontFamily: font??"ArabicUiTextLight",
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
@@ -60,7 +60,7 @@ class S {
 
   static h5({Color? color, bool underline = false,TextDecoration? decoration,Color? decorationColor,double? decorationThickness, Color? shadowColor,String? font}) =>
       TextStyle(
-          fontFamily: "ArabicUiTextLight",
+          fontFamily: font??"ArabicUiTextLight",
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
@@ -70,7 +70,7 @@ class S {
 
   static h6({Color? color, bool underline = false, TextDecoration? decoration,Color? decorationColor,double? decorationThickness,Color? shadowColor,String? font}) =>
       TextStyle(
-          fontFamily: "ArabicUiTextLight",
+          fontFamily: font??"ArabicUiTextLight",
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
