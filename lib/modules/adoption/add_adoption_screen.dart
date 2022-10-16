@@ -22,6 +22,10 @@ import 'dart:io';
 
 import 'package:provider/provider.dart';
 
+import '../../utils/my_utils/myUtils.dart';
+import '../settings/regions_dialog_widget.dart';
+import 'delet_animal_popup.dart';
+
 
 class AddAdoptionScreen extends StatefulWidget {
   AnimalData?data;
@@ -44,20 +48,23 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
   TextEditingController _statusController = TextEditingController();
   TextEditingController _conditionsController = TextEditingController();
   List<String> _genders = [tr("male"), tr("female"),tr("Did_not_matter")];
-  List<String> _selectedGenders = [];
+  String _selectedGenders ="";
   List<String> _vacationStats = [tr("yes"), tr("no")];
-  List<String> _selectedVacationStats = [];
+  String _selectedVacationStats ="";
   String _selectedCity="";
   final _registerFormGlobalKey = GlobalKey<FormState>();
   File? _cLassImage = null;
   bool imageValid=true;
   var imageFile;
+  String selectedCity="";
 
   void initState() {
     super.initState();
     _getCitiesNameList();
-    _selectedGenders.add(_genders[0]);
-    _selectedVacationStats.add(_vacationStats[0]);
+    selectedCity=Constants.currentUser!.stateName??"";
+    _selectedGenders=_genders[0];
+    _selectedVacationStats=_vacationStats[0];
+    _selectedCity=Constants.currentUser!.regionName??widget.data!.city??_citiesList[0];
     adoptionProviderModel=Provider.of<AdoptionProviderModel>(context,listen: false);
     if(widget.data!=null){
        _nameController.text = widget.data!.name??"";
@@ -285,7 +292,7 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
             errorStyle: S.h4(color: Colors.red),
             contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
           ),
-          keyboardType: TextInputType.text,
+          keyboardType: TextInputType.number,
           obscureText: false,
           cursorColor: C.ADAPTION_COLOR,
           autofocus: false,
@@ -344,14 +351,24 @@ class _AddAdoptionScreenState extends State<AddAdoptionScreen> with InputValidat
         ],));
   }
   Widget _city() {
-    return Container(
+    return InkWell(
+      onTap: (){
+        MyUtils.basePopup(context, body: RegionsDialogWidget(onItemSelect: (state ) {
+          setState(() {
+            selectedCity=state.name??"";
+                  });
+        },) );
+      },
+      child: Container(
         width: double.infinity,
         child: Column(children: [
           Container(child: Row(children: [
             Text(tr("city"),style: S.h4(color: Colors.grey),),
-            _citySpinner()],),margin: EdgeInsets.only(left: D.default_20,right: D.default_20),),
+            SizedBox(width: D.default_20,),
+            Text(selectedCity,style: S.h4(color: Colors.grey),),
+          ],),margin: EdgeInsets.all(D.default_20),),
           Container(width: MediaQuery.of(context).size.width,height: D.default_1,color: Colors.grey,)
-        ],));
+        ],)),);
   }
   Widget _reason() {
     return Container(
@@ -483,9 +500,9 @@ Widget _addBtn(){
             "category_id":adoptionProviderModel!.categoriesList[adoptionProviderModel!.selectedCategoryIndex].id,
             "age":_ageController.text,
             "type":_typeController.text,
-            "gender":_genderController.text,
-            "vaccination":_vaccitionController.text,
-            "city":_cityController.text,
+            "gender":_selectedGenders,
+            "vaccination":_selectedVacationStats,
+            "city":selectedCity,
             "reason_to_give_up":_reasonController.text,
             "health_status":_statusController.text,
             "conditions":_conditionsController.text,
@@ -523,21 +540,24 @@ Widget _addBtn(){
 }
   Widget _editBtn(){
     return InkWell(onTap: () async {
-      if(_cLassImage!=null){
+
         if (_registerFormGlobalKey.currentState!.validate()) {
           _registerFormGlobalKey.currentState!.save();
-          MultipartFile mFile = await MultipartFile.fromFile(
-            _cLassImage!.path, filename:  _cLassImage!.path.split('/').last,
-            contentType: MediaType("image",  _cLassImage!.path.split('/').last.split(".").last),);
+          MultipartFile? mFile;
+          if(_cLassImage!=null){
+             mFile = await MultipartFile.fromFile(
+              _cLassImage!.path, filename:  _cLassImage!.path.split('/').last,
+              contentType: MediaType("image",  _cLassImage!.path.split('/').last.split(".").last),);
+          }
           FormData formData =  FormData.fromMap({
             "name":_nameController.text,
             "phone":_phoneController.text,
             "category_id":adoptionProviderModel!.categoriesList[adoptionProviderModel!.selectedCategoryIndex].id,
             "age":_ageController.text,
             "type":_typeController.text,
-            "gender":_selectedGenders[0],
-            "vaccination":_selectedVacationStats[0],
-            "city":_selectedCity,
+            "gender":_selectedGenders,
+            "vaccination":_selectedVacationStats,
+            "city":selectedCity,
             "reason_to_give_up":_reasonController.text,
             "health_status":_statusController.text,
             "conditions":_conditionsController.text,
@@ -545,11 +565,7 @@ Widget _addBtn(){
           });
           adoptionProviderModel!.editAnimal(context,formData,widget.data!.id!);
         }
-      }else{
-        setState(() {
-          imageValid=false;
-        });
-      }
+
 
     },child: Container(
         width: D.default_200,
@@ -575,7 +591,10 @@ Widget _addBtn(){
   }
   Widget _deleteBtn(){
     return InkWell(onTap: () async {
-      adoptionProviderModel!.deleteAnimal(context,widget.data!.id!);
+      MyUtils.basePopup(context,body: DeletAnimalPopupScreen(title:tr("delete_animal_msg"), onAccept:(){
+        adoptionProviderModel!.deleteAnimal(context,widget.data!.id!);
+        Navigator.pop(context);
+      },));
     },child: Container(
         width: D.default_200,
         margin: EdgeInsets.all(D.default_20),
@@ -634,7 +653,7 @@ Widget _addBtn(){
           }).toList(),
           onChanged: (value) {
             setState(() {
-              _selectedGenders[index] = value!;
+              _selectedGenders= value!;
             });
           },
         ),
@@ -677,7 +696,7 @@ Widget _addBtn(){
           }).toList(),
           onChanged: (value) {
             setState(() {
-              _selectedVacationStats[index] = value!;
+              _selectedVacationStats = value!;
             });
           },
         ),

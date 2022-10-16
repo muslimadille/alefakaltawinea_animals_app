@@ -29,7 +29,6 @@ class _AdsSliderItemState extends State<AdsSliderItem> {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: (){
-        MyUtils.navigate(context, ServiceProviderDetailsScreen(widget.AdsItem));
       },
       child: Stack(
         alignment:AlignmentDirectional.bottomCenter ,
@@ -42,7 +41,9 @@ class _AdsSliderItemState extends State<AdsSliderItem> {
           InkWell(
             onTap: ()async{
               switch(widget.AdsItem.type_id){
-                case "0":{}
+                case "0":{
+                  MyUtils.navigate(context, ServiceProviderDetailsScreen(widget.AdsItem));
+                }
                   break;
                 case "1":{
                   _launchURLBrowser(widget.AdsItem.url??"");

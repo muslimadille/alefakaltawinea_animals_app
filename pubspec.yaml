@@ -106,19 +106,24 @@ flutter:
     - assets/strings/en-US.json
     - assets/fonts/cairo_font.ttf
     - assets/fonts/ArabicUiTextLight.otf
-    - assets/fonts/NexaRegular.otf
 
 
   fonts:
-    - family: Cairo
+    - family: ArabicUiTextLight
       fonts:
-        - asset: assets/fonts/cairo_font.ttf
         - asset: assets/fonts/ArabicUiTextLight.otf
-        - asset: assets/fonts/NexaRegular.otf
-
-    - family: NexaRegular
+    - family: VEXA
       fonts:
-        - asset: assets/fonts/NexaRegular.otf
+        - asset: assets/fonts/VEXA.ttf
+    - family: ALMARIA
+      fonts:
+        - asset: assets/fonts/ALMARIA.ttf
+    - family: GRITA_LT
+      fonts:
+        - asset: assets/fonts/GRITA_LT.ttf
+    - family: MYRIAD_ARABIC
+      fonts:
+        - asset: assets/fonts/MYRIAD_ARABIC.otf
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

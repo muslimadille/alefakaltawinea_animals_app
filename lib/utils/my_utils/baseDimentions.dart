@@ -1,3 +1,5 @@
+import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
+
 import 'appConfig.dart';
 
 class D {
@@ -8,6 +10,9 @@ class D {
   static final h4 = default_14;
   static final h5 = default_12;
   static final h6 = default_10;
+  static double size(double value){
+    return value*Constants.DEVICE_RATIO;
+  }
 
   static final default_1 = dimension(1.0);
   static final default_2 = dimension(2.0);

@@ -3,6 +3,7 @@ import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen
 import 'package:alefakaltawinea_animals_app/modules/spalshScreen/splash_two_screen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/my_fonts.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
@@ -58,8 +59,8 @@ class _ChoceLanguageScreenState extends State<ChoceLanguageScreen> {
     return Positioned(child: Container(
         width: MediaQuery.of(context).size.width,
         child:Column(children: [
-          Text('أول بطاقة إلكترونية لخصومات العيادات البيطرية ومتاجر الحيوانات',style: S.h4(color: Colors.white),textAlign: TextAlign.center),
-          Text('First digital discount card for veterinary clinics and pet shops',style: S.h4(color: Colors.white),textAlign: TextAlign.center,)
+          Text('أول بطاقة إلكترونية لخصومات العيادات البيطرية ومتاجر الحيوانات',style: S.h1(color: Colors.white,font: MyFonts.MYRIAD_ARABIC),textAlign: TextAlign.center),
+          Text('First digital discount card for veterinary clinics and pet shops',style: S.h1(color: Colors.white,font: MyFonts.MYRIAD_ARABIC),textAlign: TextAlign.center,)
 
         ],)),bottom:MediaQuery.of(context).size.height * 0.55 ,);
   }
@@ -114,7 +115,7 @@ class _ChoceLanguageScreenState extends State<ChoceLanguageScreen> {
           await utilsProviderModel!.setCurrentLocal(
               context, Locale("ar", "EG"));
           await utilsProviderModel!.setLanguageState("ar");
-          if(/*Constants.prefs!.getBool(Constants.IS_FIRST_TIME)??*/true){
+          if(Constants.prefs!.getBool(Constants.IS_FIRST_TIME)??true){
             MyUtils.navigateReplaceCurrent(context, IntroWizardScreen());
           }else{
             MyUtils.navigate(context, OnBoardingScreen());
@@ -160,7 +161,7 @@ class _ChoceLanguageScreenState extends State<ChoceLanguageScreen> {
           borderRadius: BorderRadius.all(Radius.circular(D.default_100),),
           color: Colors.white,
         ),
-        child: Center(child: Text(title, style: S.h1Bold(fontSize:D.h1*1.2,color: C.BASE_BLUE),
+        child: Center(child: Text(title, style: S.h1Bold(fontSize:D.h1*1.2,color: C.BASE_BLUE,font: MyFonts.ArabicUiTextLight),
           textAlign: TextAlign.center,),),
 
       ),),

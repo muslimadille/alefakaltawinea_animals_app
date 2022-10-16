@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import '../../../utils/my_utils/baseDimentions.dart';
 import '../../../utils/my_utils/baseTextStyle.dart';
 import '../../../utils/my_utils/myColors.dart';
+import '../../../utils/my_utils/my_fonts.dart';
 import '../../../utils/my_widgets/transition_image.dart';
 
 class ForthIntroScreen extends StatefulWidget {
@@ -45,7 +46,7 @@ class _ForthIntroScreenState extends State<ForthIntroScreen> {
             width: MediaQuery.of(context).size.width,
             child: Text(
               tr("intro_4_mainTitle"),
-              style: S.h1Bold(color: Colors.white, fontSize: D.h1 * 1.5),textAlign: TextAlign.center,
+              style: S.h1Bold(color: Colors.white, fontSize:D.size(14),font: MyFonts.VEXA),textAlign: TextAlign.center,
             )),
         top: MediaQuery.of(context).size.height * 0.04);
   }
@@ -90,7 +91,7 @@ class _ForthIntroScreenState extends State<ForthIntroScreen> {
           Expanded(
             child: Text(
               title,
-              style: S.h3(color: Colors.white),
+              style: S.h3(color: Colors.white,fontSize: D.size(9)),
             ),
           )
         ],

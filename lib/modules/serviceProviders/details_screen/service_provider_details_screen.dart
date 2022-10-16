@@ -152,7 +152,7 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
                   Container(
                     padding:EdgeInsets.only(left:D.default_10,right:D.default_10),
                     child: Text(widget.serviceProviderData.phone!,style: S.h4(color: C.BASE_BLUE),),),
-                  widget.serviceProviderData.website!.isNotEmpty?InkWell(onTap: ()async{
+                  (widget.serviceProviderData.website??"").isNotEmpty?InkWell(onTap: ()async{
                     await _launchURLBrowser();
                   },
                     child: Container(
@@ -180,7 +180,7 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
                 )]
             ),
             child:TransitionImage(
-              widget.serviceProviderData.photo!,
+              (widget.serviceProviderData.photo??"").contains("https")?(widget.serviceProviderData.photo??""):"https://alefak.com/uploads/${(widget.serviceProviderData.photo??"")}",
               radius: D.default_10,
               fit: BoxFit.cover,
               width: double.infinity,
@@ -217,7 +217,7 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
           child:
         Column(children: [
           Expanded(child: TransitionImage(
-            widget.serviceProviderData.bannerPhoto??'',
+            (widget.serviceProviderData.bannerPhoto??"").contains("https")?(widget.serviceProviderData.bannerPhoto??""):"https://alefak.com/uploads/${(widget.serviceProviderData.bannerPhoto??"")}",
             fit: BoxFit.cover,
             width: double.infinity,
             radius: D.default_10,

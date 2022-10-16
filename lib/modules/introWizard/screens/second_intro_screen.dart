@@ -2,7 +2,9 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/Material.dart';
+import 'package:flutter/cupertino.dart';
 import '../../../utils/my_utils/myColors.dart';
+import '../../../utils/my_utils/my_fonts.dart';
 import '../../../utils/my_widgets/transition_image.dart';
 
 class SecondIntroScreen extends StatefulWidget {
@@ -73,8 +75,9 @@ class _SecondIntroScreenState extends State<SecondIntroScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(tr("intro2_title"),style:S.h1Bold(color:Colors.black,fontSize: D.h1*1.4,font: "NexaRegular"),textAlign: TextAlign.center,),
-          Text(tr("intro2_description"),style:S.h1(color:Colors.black),textAlign:TextAlign.center)
+          Text(tr("intro2_title"),style:S.h1Bold(color:Colors.black,fontSize:D.size(16),font: MyFonts.VEXA),textAlign: TextAlign.center,),
+          SizedBox(height: D.default_10,),
+          Text(tr("intro2_description"),style:S.h2(color:Colors.black,font: MyFonts.ALMARIA,fontSize:D.size(9)),textAlign:TextAlign.center)
         ],),),top: MediaQuery.of(context).size.height * 0.05);
   }
 

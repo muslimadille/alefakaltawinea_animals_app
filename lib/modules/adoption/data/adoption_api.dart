@@ -43,6 +43,7 @@ class AdaptionApi{
   }
   Future<MyResponse<dynamic>> setAdoptionAnimal(FormData body) async {
     final url = "${Apis.ADD_ADOPTION_ANIMALS}";
+    //print("vvvv${jsonEncode(body)}");
     final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_POST, url,body: body);
     if (response != null && response.statusCode == 200) {
       return MyResponse<dynamic>.fromJson(

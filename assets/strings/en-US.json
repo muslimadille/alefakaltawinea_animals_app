@@ -187,7 +187,8 @@
   "Exclusive_Offers": "Exclusive Offers",
   "card": "Card",
   "intro1_title": "Card\nAlefak Altawnia",
-  "intro1_description": "Electronic Card\nFor veterinary care and animal supplies",
+  "intro1_description": "Electronic Card",
+  "intro1_description2": "For veterinary care and animal supplies",
   "intro_2_title2": "Veterinary stores",
   "intro3_title": "Adoption platform",
   "intro3_description": "You can safely offer your pet for adoption\nOr adopt any animal in need of a new family",
@@ -203,5 +204,8 @@
   "intro_4_title8": "Easily discover the nearest reliable veterinary clinics or supply store in your city",
   "intro2_title": "Alefak Altawnia card",
   "intro2_description": "Save thousands of riyals annually with the strongest\nExclusive discounts on all\nSections in the application",
-  "login_header": "Login"
+  "login_header": "Login",
+  "finish": "Finish",
+  "delete_animal_msg": "are you sure to delete this item"
+
 }

@@ -34,7 +34,7 @@ class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
   @override
   void initState() {
     super.initState();
-    getRegions();
+    //getRegions();
     categoriesProviderModel=Provider.of<CategoriesProviderModel>(context,listen: false);
     WidgetsBinding.instance!.addPostFrameCallback((_){
       adsSliderProviderModel!.getAdsSlider();

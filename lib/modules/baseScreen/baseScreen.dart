@@ -61,6 +61,7 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
+    Constants.DEVICE_RATIO=MediaQuery.of(context).size.height/MediaQuery.of(context).size.width;
     utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: true);
     introProviderModel =Provider.of<IntroProviderModel>(context, listen: true);
     return SafeArea(child: Scaffold(

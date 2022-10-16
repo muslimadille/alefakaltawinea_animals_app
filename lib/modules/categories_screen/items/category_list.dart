@@ -73,11 +73,12 @@ class _CategoryListState extends State<CategoryList> {
       widget.categoriesProviderModel!.notifyListeners();
     },
       child: Container(
+        height: double.infinity,
         width: MediaQuery.of(context).size.width,
         margin: EdgeInsets.all(D.default_10),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(D.default_10),
-            color: C.BASE_BLUE,
+            color: C.ADAPTION_COLOR,
             boxShadow:[BoxShadow(
                 color: Colors.grey.withOpacity(0.5),
                 offset:Offset(1,1),
@@ -93,10 +94,12 @@ class _CategoryListState extends State<CategoryList> {
                     tr('adoption'),
                     style: S.h1Bold(color: Colors.white)),
               ),)),
-            Expanded(child: TransitionImage(
+            Expanded(flex:0,child: Container(
+              height: double.infinity,
+              child: TransitionImage(
               "assets/images/adooption_img.png",
-              fit: BoxFit.fitHeight,
-            )),
+              fit: BoxFit.fitWidth,
+            ),)),
 
           ],
         ),),);

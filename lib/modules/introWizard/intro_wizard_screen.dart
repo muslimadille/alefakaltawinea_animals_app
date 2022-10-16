@@ -70,7 +70,7 @@ class _IntroWizardScreenState extends State<IntroWizardScreen> {
       margin: EdgeInsets.only(left:D.default_10,right: D.default_10),
       width:  MediaQuery.of(context).size.width,
       child: Row(children: [
-        _nextBtn(),
+        _currentSliderPager<sliderItems.length-1?_nextBtn():Container(width: D.default_70),
         Expanded(child: _dots()),
         _skipBtn(),
 
@@ -143,7 +143,7 @@ class _IntroWizardScreenState extends State<IntroWizardScreen> {
               spreadRadius: 0.5
           )]
       ),
-      child: Center(child: Text(tr("skip"),style: S.h4(color: textColor(_currentSliderPager)),),),
+      child: Center(child: Text(tr(_currentSliderPager<sliderItems.length-1?"skip":"finish"),style: S.h4(color: textColor(_currentSliderPager)),),),
     ),);
   }
   Widget _nextBtn(){

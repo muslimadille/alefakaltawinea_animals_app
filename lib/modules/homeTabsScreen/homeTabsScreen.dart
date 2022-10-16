@@ -37,15 +37,11 @@ class HomeTabsScreen extends StatefulWidget {
 }
 
 class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStateMixin{
-  PersistentTabController? _controller;
-  AnimationController? _animationController;
-  Animation<double>? _animation;
   BottomBarProviderModel?bottomBarProviderModel;
   bool isServiceProvider=false;
 @override
   void initState() {
     super.initState();
-    _controller = PersistentTabController(initialIndex: 0);
 }
 
   @override
@@ -85,7 +81,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
           _homeBtn(),
           _favBtn(),
           _closestBtn(),
-          _notificationsBtn(),
+          _myCardsBtn(),
           _profileBtn()
 
         ],
@@ -125,11 +121,15 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         ]
     ),));
   }
-  Widget _notificationsBtn(){
+  Widget _myCardsBtn(){
     return Expanded(
       child: InkWell(onTap: (){
         bottomBarProviderModel!.setSelectedScreen(3);
-        MyUtils.navigate(context, MyCardsScreen());
+        if(Constants.currentUser!=null){
+          MyUtils.navigate(context, MyCardsScreen());
+        }else{
+          MyUtils.navigate(context, NoProfileScreen());
+        }
       }
         ,child:Column(
         mainAxisAlignment: MainAxisAlignment.center,

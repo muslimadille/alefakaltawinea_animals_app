@@ -26,6 +26,7 @@ class Constants extends Object{
   static bool APPLE_PAY_STATE=true;
   static String IS_FIRST_TIME="IS_FIRST_TIME";
   static String TERMS_CHECK="TERMS_CHECK";
+  static double DEVICE_RATIO=0.0;
 
 
 

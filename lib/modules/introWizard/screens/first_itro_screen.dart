@@ -1,6 +1,7 @@
 
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/my_fonts.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/Material.dart';
@@ -74,8 +75,13 @@ class _FirstIntroScreenState extends State<FirstIntroScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-      Text(tr("intro1_title"),style:S.h1Bold(color:Colors.white,fontSize: D.h1*1.4,font: "NexaRegular"),textAlign: TextAlign.center,),
-      Text(tr("intro1_description"),style:S.h1(color:Colors.white),textAlign:TextAlign.center)
-    ],),),bottom: MediaQuery.of(context).size.height * 0.09,);
+      Text(tr("intro1_title"),style:S.h1Bold(color:Colors.white,fontSize: D.h1*1.7,font: MyFonts.VEXA),textAlign: TextAlign.center,),
+      SizedBox(height: D.default_15,),
+      Text(tr("intro1_description"),style:S.h3(color:Colors.white,font: MyFonts.ALMARIA),textAlign:TextAlign.center),
+        SizedBox(height: D.default_10,),
+        Text(tr("intro1_description2"),style:S.h4(color:Colors.white,font:MyFonts.ALMARIA),textAlign:TextAlign.center),
+        SizedBox(height: D.default_10,),
+
+      ],),),bottom: MediaQuery.of(context).size.height * 0.09,);
   }
 }

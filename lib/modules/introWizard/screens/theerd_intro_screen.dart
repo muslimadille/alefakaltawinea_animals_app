@@ -1,9 +1,9 @@
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/Material.dart';
-
 import '../../../utils/my_utils/baseDimentions.dart';
 import '../../../utils/my_utils/baseTextStyle.dart';
 import '../../../utils/my_utils/myColors.dart';
+import '../../../utils/my_utils/my_fonts.dart';
 import '../../../utils/my_widgets/transition_image.dart';
 
 class thirdIntroScreen extends StatefulWidget {
@@ -43,8 +43,9 @@ class _thirdIntroScreenState extends State<thirdIntroScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(tr("intro3_title"),style:S.h1Bold(color:Colors.white,fontSize: D.h1*1.4,font: "NexaRegular"),textAlign: TextAlign.center,),
-          Text(tr("intro3_description"),style:S.h1(color:Colors.white),textAlign:TextAlign.center)
+          Text(tr("intro3_title"),style:S.h1Bold(color:Colors.white,fontSize:D.size(14),font: MyFonts.VEXA),textAlign: TextAlign.center,),
+          SizedBox(height: D.size(5)),
+          Text(tr("intro3_description"),style:S.h1(color:Colors.white,font: MyFonts.ALMARIA,fontSize:D.size(7)),textAlign:TextAlign.center)
         ],),),top: MediaQuery.of(context).size.height * 0.05);
   }
 

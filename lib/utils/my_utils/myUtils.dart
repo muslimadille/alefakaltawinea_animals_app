@@ -67,26 +67,8 @@ class MyUtils{
       },
     );
   }
-  static regionsDialog(BuildContext context,UtilsProviderModel? utilsProviderModel,
-  UserProviderModel?userProviderModel,
-
-      {bool isDismissible = true,}) {
-    userProviderModel=Provider.of<UserProviderModel>(context,listen: false);
-    // flutter defined function
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-
-        // return object of type Dialog
-        return WillPopScope(
-            onWillPop: isDismissible ? _onWillPop : _onWillNotPop,
-            child: AlertDialog(
-              contentPadding: EdgeInsets.all(0),
-              content:RegionsDialogWidget(),
-            ));
-      },
-    );
+  static regionsDialog(BuildContext context) {
+    basePopup(context, body: RegionsDialogWidget(onItemSelect: (Get_states ) {  },)) ;
   }
   static Future<bool> _onWillPop() async {
     return  true;

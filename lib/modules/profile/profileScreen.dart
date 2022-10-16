@@ -24,6 +24,7 @@ import 'package:provider/provider.dart';
 import '../cart/add_cart_screen.dart';
 import '../cart/my_carts_model.dart';
 import '../cart/provider/cart_provider.dart';
+import '../settings/regions_dialog_widget.dart';
 import 'deletAcountPopupScreen.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -185,13 +186,15 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
             ),
             child: InkWell(
               onTap: (){
-                MyUtils.regionsDialog(context,utilsProviderModel,userProviderModel,isDismissible:true);
+                MyUtils.basePopup(context, body: RegionsDialogWidget(onItemSelect: (state ) {
+                  /*setState(() {
+                    userProviderModel!.currentUser!.stateId=state.id.toString();
+                    userProviderModel!.currentUser!.regionId=state.regionId.toString();
+                  });*/
+                },) );
               },
               child: Center(child: Text(
-                userProviderModel!.currentUser!.stateId!=null&&userProviderModel!.currentUser!.stateId!.isNotEmpty?
-                   Constants.STATES[utilsProviderModel!.currentStateIndex].id.toString()== userProviderModel!.currentUser!.stateId?
-                Constants.STATES.firstWhere((element) => element.id.toString()==userProviderModel!.currentUser!.stateId!).name!:Constants.STATES[utilsProviderModel!.currentStateIndex].name!
-                    :Get_states(id: -1,name: tr("select_city")).name!
+                (userProviderModel!.currentUser!.stateName??"").isNotEmpty?userProviderModel!.currentUser!.stateName??"":Get_states(id: -1,name: tr("select_city")).name!
     ,style: S.h3(color: Colors.white),),),)
 
         )

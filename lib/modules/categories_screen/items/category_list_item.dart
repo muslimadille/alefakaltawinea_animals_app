@@ -57,10 +57,11 @@ class _CategoryListItemState extends State<CategoryListItem> {
             )]
         ),
       child: Column(children: [
-      Expanded(child: TransitionImage(
+      Expanded(
+          child: TransitionImage(
         widget.image,
-        fit: BoxFit.fitWidth,
-        padding: EdgeInsets.only(top: D.default_10),
+        width: double.infinity,
+        fit: BoxFit.fill,
       )),
         Container(
           height: D.default_1,
@@ -68,7 +69,7 @@ class _CategoryListItemState extends State<CategoryListItem> {
           margin: EdgeInsets.only(top:D.default_5),
         ),
       Container(
-        height: D.default_40,
+        height: D.default_30,
         child: Center(
           child: Text(widget.title,
               style: S.h2(color: Colors.white)),

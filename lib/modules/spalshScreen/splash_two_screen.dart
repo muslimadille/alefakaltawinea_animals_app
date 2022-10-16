@@ -1,3 +1,4 @@
+import 'package:alefakaltawinea_animals_app/utils/my_utils/my_fonts.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart'hide TextDirection;
@@ -75,8 +76,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     return Positioned(child: Container(
         width: MediaQuery.of(context).size.width,
         child:Column(children: [
-          Text(tr("alefak_card"),style: S.h1Bold(color: Colors.white,fontSize: D.h1*1.5),textAlign: TextAlign.center),
-          Text(tr("Because they deserve your attention"),style: S.h2(color: Colors.white),textAlign: TextAlign.center,)
+          Text(tr("alefak_card"),style: S.h1Bold(color: Colors.white,fontSize:D.size(13),font: MyFonts.VEXA),textAlign: TextAlign.center),
+          SizedBox(height: D.size(5),),
+          Text(tr("Because they deserve your attention"),style: S.h2(color: Colors.white,fontSize:D.size(8),font: MyFonts.ALMARIA),textAlign: TextAlign.center,)
 
         ],)),bottom:MediaQuery.of(context).size.height * 0.54 ,);
   }
