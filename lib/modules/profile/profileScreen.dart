@@ -187,14 +187,18 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
             child: InkWell(
               onTap: (){
                 MyUtils.basePopup(context, body: RegionsDialogWidget(onItemSelect: (state ) {
-                  /*setState(() {
+                  setState(() {
                     userProviderModel!.currentUser!.stateId=state.id.toString();
                     userProviderModel!.currentUser!.regionId=state.regionId.toString();
-                  });*/
+                    UserData user=userProviderModel!.currentUser!;
+                    user.regionId=state.regionId.toString();
+                    user.stateId=state.id.toString();
+                    user.stateName=state.name.toString();
+                    userProviderModel!.setCurrentUserData(user);
+                  });
                 },) );
               },
-              child: Center(child: Text(
-                (userProviderModel!.currentUser!.stateName??"").isNotEmpty?userProviderModel!.currentUser!.stateName??"":Get_states(id: -1,name: tr("select_city")).name!
+              child: Center(child: Text(userProviderModel!.currentUser!.stateName??""
     ,style: S.h3(color: Colors.white),),),)
 
         )
@@ -501,8 +505,8 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
               _nameController.text,
               _emailController.text,
               _phoneController.text,
-              regionId:Constants.REGIONS.firstWhere((element) => element.id.toString()==userProviderModel!.currentUser!.regionId!).id!,
-              stateId:Constants.REGIONS.firstWhere((element) => element.id.toString()==userProviderModel!.currentUser!.regionId!).getStates![0].id!
+              regionId:int.parse(userProviderModel!.currentUser!.regionId!),
+              stateId:int.parse(userProviderModel!.currentUser!.stateId!)
               );
         },
         child: Container(

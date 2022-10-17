@@ -80,12 +80,6 @@ class _RegionsDialogWidgetState extends State<RegionsDialogWidget> {
                 padding: EdgeInsets.only(left:D.default_10,right: D.default_10,top: D.default_10,bottom: D.default_10),
                 child:Row(mainAxisAlignment: MainAxisAlignment.end,children: [
                   InkWell(onTap: ()async{
-                    UserData user=userProviderModel!.currentUser!;
-                    user.regionId=filteredStates[Constants.utilsProviderModel!.currentRegionIndex].regionId.toString();
-                    user.stateId=filteredStates[Constants.utilsProviderModel!.currentStateIndex].id.toString();
-                    user.stateName=filteredStates[Constants.utilsProviderModel!.currentStateIndex].name.toString();
-
-                    userProviderModel!.setCurrentUserData(user);
                     widget.onItemSelect(filteredStates[Constants.currentState]);
                     Navigator.pop(context);
                   },child: Container(
