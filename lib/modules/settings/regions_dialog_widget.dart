@@ -137,7 +137,7 @@ class _RegionsDialogWidgetState extends State<RegionsDialogWidget> {
                 setState(() {
                   Constants.utilsProviderModel!.setCurrentStateIndex(0);
                   filteredStates.clear();
-                  filteredStates.addAll(Constants.STATES.where((element) => (element.name??"").contains(value)).toList());
+                  filteredStates.addAll(Constants.STATES.where((element) => (element.name??"").toLowerCase().contains(value.toLowerCase())).toList());
                 });
               },
 

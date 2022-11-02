@@ -61,10 +61,10 @@ class _FirstIntroScreenState extends State<FirstIntroScreen> {
     return Positioned(
       child: TransitionImage(
         "assets/images/intro_1_mobile_img.png",
-        width: MediaQuery.of(context).size.width,
+        width:D.width(100),
         fit: BoxFit.fitWidth,
       ),
-      top: MediaQuery.of(context).size.height * 0.05,
+      bottom: D.height(43),
     );
   }
   Widget _title(){
@@ -75,11 +75,11 @@ class _FirstIntroScreenState extends State<FirstIntroScreen> {
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-      Text(tr("intro1_title"),style:S.h1Bold(color:Colors.white,fontSize: D.h1*1.7,font: MyFonts.VEXA),textAlign: TextAlign.center,),
+      Text(tr("intro1_title"),style:S.h1Bold(color:Colors.white,fontSize: D.textSize(6),font: MyFonts.VEXA),textAlign: TextAlign.center,),
       SizedBox(height: D.default_15,),
-      Text(tr("intro1_description"),style:S.h3(color:Colors.white,font: MyFonts.ALMARIA),textAlign:TextAlign.center),
+      Text(tr("intro1_description"),style:S.h3(color:Colors.white,font: MyFonts.ALMARIA,fontSize: D.textSize(3)),textAlign:TextAlign.center),
         SizedBox(height: D.default_10,),
-        Text(tr("intro1_description2"),style:S.h4(color:Colors.white,font:MyFonts.ALMARIA),textAlign:TextAlign.center),
+        Text(tr("intro1_description2"),style:S.h4(color:Colors.white,font:MyFonts.ALMARIA,fontSize: D.textSize(2.5)),textAlign:TextAlign.center),
         SizedBox(height: D.default_10,),
 
       ],),),bottom: MediaQuery.of(context).size.height * 0.09,);

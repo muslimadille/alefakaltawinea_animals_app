@@ -1,15 +1,16 @@
 import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 
 import 'appConfig.dart';
 
 class D {
   ///**** Font Sizes */
-  static final h1 = default_20;
-  static final h2 = default_18;
-  static final h3 = default_16;
-  static final h4 = default_14;
-  static final h5 = default_12;
-  static final h6 = default_10;
+  static final h1 = 20.sp;
+  static final h2 = 18.sp;
+  static final h3 = 16.sp;
+  static final h4 = 14.sp;
+  static final h5 = 12.sp;
+  static final h6 = 10.sp;
   static double size(double value){
     return value*Constants.DEVICE_RATIO;
   }
@@ -79,5 +80,14 @@ class D {
         : _comparedDimension < 600.0
         ? originalDimension
         : originalDimension * 1.2;
+  }
+  static double width(double originalDimension) {
+    return originalDimension.w;
+  }
+  static double height(double originalDimension) {
+    return originalDimension.h;
+  }
+  static double textSize(double originalDimension) {
+    return originalDimension.w;
   }
 }

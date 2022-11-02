@@ -6,6 +6,8 @@ import 'package:easy_localization/src/public_ext.dart';
 import 'package:flutter/cupertino.dart';
 
 import '../../modules/spalshScreen/data/regions_model.dart';
+import 'package:get/get.dart';
+
 
 class UtilsProviderModel with ChangeNotifier {
   bool isArabic=true;
@@ -28,10 +30,9 @@ class UtilsProviderModel with ChangeNotifier {
   }
   setCurrentLocal(BuildContext ctx,Locale locale)  async {
     currentLocal=locale;
-    await EasyLocalization.of(ctx)!.setLocale(locale);
     await ctx.setLocale(locale);
+    await Get.updateLocale(locale);
     if(locale==Locale('ar', 'EG')){
-
       currentLocalName="العربية";
       Constants.SELECTED_LANGUAGE="ar";
       await Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "ar");
@@ -42,17 +43,15 @@ class UtilsProviderModel with ChangeNotifier {
       Constants.SELECTED_LANGUAGE="en";
       await Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "en");
       setLanguageState("en");
-
     }
     else{
       currentLocalName="العربية";
       Constants.SELECTED_LANGUAGE="ar";
       await Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "ar");
       setLanguageState("ar");
-
     }
 
-   // notifyListeners();
+    notifyListeners();
   }
   setLanguageState(String type){
     if(type=="ar"){
@@ -62,6 +61,6 @@ class UtilsProviderModel with ChangeNotifier {
       isArabic=false;
       isEnglish=true;
     }
-    //notifyListeners();
+    notifyListeners();
   }
 }

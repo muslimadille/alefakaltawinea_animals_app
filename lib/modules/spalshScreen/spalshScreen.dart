@@ -33,7 +33,8 @@ import 'maintainance_screen.dart';
 
 
 class SplashScreen extends StatefulWidget{
-  const SplashScreen({Key? key}) : super(key: key);
+  bool? toHome;
+   SplashScreen({this.toHome=false,Key? key}) : super(key: key);
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
@@ -168,7 +169,12 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
         if(appStataProviderModel!.app_active_state){
           MyUtils.navigateAsFirstScreen(context, MaintainanceScreen());
         }else{
-          MyUtils.navigateReplaceCurrent(context, ChoceLanguageScreen());
+          if(widget.toHome??false){
+            MyUtils.navigateReplaceCurrent(context, MainCategoriesScreen());
+          }else{
+            MyUtils.navigateReplaceCurrent(context, ChoceLanguageScreen());
+
+          }
         }
       });
     }

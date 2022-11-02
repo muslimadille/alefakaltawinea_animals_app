@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import '../../utils/my_utils/baseDimentions.dart';
 import '../../utils/my_utils/myColors.dart';
 import '../../utils/my_utils/resources.dart';
+import '../../utils/my_widgets/action_bar_widget.dart';
 import '../../utils/my_widgets/cobon_widget.dart';
 import '../../utils/my_widgets/laoding_view.dart';
 import '../../utils/my_widgets/transition_image.dart';
@@ -88,6 +89,14 @@ class _AddCartScreenState extends State<AddCartScreen> {
         children: [
         Column(
           children: [
+            ActionBarWidget(
+                "", context,
+                enableShadow:false,
+                showSetting:false,
+                textColor:Colors.white,
+                backgroundColor:C.BASE_BLUE
+
+            ),
             Expanded(
                 child: Container(
                     decoration: BoxDecoration(

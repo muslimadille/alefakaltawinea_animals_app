@@ -26,7 +26,7 @@ class _FivthIntroScreenState extends State<FivthIntroScreen> {
           Positioned(
               child:TransitionImage(
                 "assets/images/intro_4_img.png",
-                width: MediaQuery.of(context).size.width*0.6,
+                height: D.height(60),
                 fit: BoxFit.fitWidth,
               ) ,
               top: MediaQuery.of(context).size.height * 0.1),
@@ -43,8 +43,8 @@ class _FivthIntroScreenState extends State<FivthIntroScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(tr("intro5_title"),style:S.h1Bold(color:Colors.white,fontSize: D.size(14),font: MyFonts.MYRIAD_ARABIC),textAlign: TextAlign.center,),
-        ],),),bottom: MediaQuery.of(context).size.height * 0.12);
+          Text(tr("intro5_title"),style:TextStyle(color:Colors.white,fontFamily: MyFonts.MYRIAD_ARABIC,fontSize:D.textSize(8),height:D.textSize(0.45)),textAlign: TextAlign.center,),
+        ],),),bottom: D.height(10));
   }
 
 }

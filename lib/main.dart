@@ -11,6 +11,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:responsive_sizer/responsive_sizer.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'modules/adoption/provider/adoption_provider_model.dart';
 import 'modules/ads/provider/ads_slider_provider.dart';
@@ -25,6 +26,8 @@ import 'modules/otp/provider/otp_provider_model.dart';
 import 'modules/serviceProviderAccount/provider/scan_code_provider.dart';
 import 'modules/serviceProviders/list_screen/provider/sevice_providers_provicer_model.dart';
 import 'modules/spalshScreen/spalshScreen.dart';
+import 'package:sizer/sizer.dart';
+
 
 typedef dynamic OnItemClickListener();
 void main() async{
@@ -79,23 +82,24 @@ class _MyAppState extends State<MyApp> {
   }
   @override
   Widget build(BuildContext context) {
-    utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: true);
     Constants.mainContext=context;
-    return  utilsProviderModel!.currentLocalName.isNotEmpty? MaterialApp(
-      theme: ThemeData(
-          primaryColor:C.BASE_BLUE,
-          focusColor:C.BASE_BLUE
+    return  ResponsiveSizer(
+        builder: (context, orientation, deviceType) {
+          return MaterialApp(
+              theme: ThemeData(
+                  primaryColor:C.BASE_BLUE,
+                  focusColor:C.BASE_BLUE
 
-      ),
-        localizationsDelegates: context.localizationDelegates,
-        supportedLocales: context.supportedLocales,
-        locale: utilsProviderModel!.currentLocal,
-        debugShowCheckedModeBanner: false,
-        home: BaseScreen(
-          tag: "SplashScreen",
-      showBottomBar: false,
-        showSettings: false,
-        body: SplashScreen())):Container();
+              ),
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: utilsProviderModel!.currentLocal,
+              debugShowCheckedModeBanner: false,
+              home: BaseScreen(
+                  tag: "SplashScreen",
+                  showBottomBar: false,
+                  showSettings: false,
+                  body: SplashScreen()));});
   }
 
 void initPref()async{

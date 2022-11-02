@@ -63,6 +63,8 @@ dependencies:
   sprintf: ^6.0.0
   modal_bottom_sheet: ^2.0.0
   get: ^4.6.5
+  responsive_sizer: ^3.1.1
+  sizer: ^2.0.15
 
 
 

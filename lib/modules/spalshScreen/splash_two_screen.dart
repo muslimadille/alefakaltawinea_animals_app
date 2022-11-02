@@ -80,7 +80,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           SizedBox(height: D.size(5),),
           Text(tr("Because they deserve your attention"),style: S.h2(color: Colors.white,fontSize:D.size(8),font: MyFonts.ALMARIA),textAlign: TextAlign.center,)
 
-        ],)),bottom:MediaQuery.of(context).size.height * 0.54 ,);
+        ],)),bottom:D.height(54) ,);
   }
   Widget _blueCart() {
     return Positioned(child: TransitionImage(
@@ -128,7 +128,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
         MyUtils.navigate(context, TermsScreen(hideButtomBar: true,));
       },
-        child: Text(tr("terms_text"),style: S.h3(color: Colors.white),),
+        child: Text(tr("terms_text"),style: S.h2(color: Colors.white),),
       )
 
     ],),);
@@ -170,7 +170,7 @@ Widget _buttonsPart(){
             ),
           ],
         )
-        ,child: Center(child: Text(tr("brows_app_btn"),style:S.h3(color:C.BASE_BLUE)),)),));
+        ,child: Center(child: Text(tr("brows_app_btn"),style:S.h2(color:C.BASE_BLUE)),)),));
   }
   Widget _loginBtn(){
     return  Expanded(child: InkWell(
@@ -195,7 +195,7 @@ Widget _buttonsPart(){
             ),
           ],
         )
-        ,child: Center(child: Text(tr("login"),style:S.h3(color:C.BASE_BLUE)),)),));
+        ,child: Center(child: Text(tr("login"),style:S.h2(color:C.BASE_BLUE)),)),));
   }
   Widget _registerBtn(){
     return  Expanded(child: InkWell(
@@ -220,7 +220,7 @@ Widget _buttonsPart(){
             ),
           ],
         )
-        ,child: Center(child: Text(tr("register"),style:S.h3(color:C.BASE_BLUE)),)),),);
+        ,child: Center(child: Text(tr("register"),style:S.h2(color:C.BASE_BLUE)),)),),);
   }
   void _onRememberMeChanged(bool newValue) => setState(() {
     rememberMe = newValue;

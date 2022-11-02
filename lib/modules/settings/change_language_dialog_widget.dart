@@ -71,14 +71,14 @@ setState(() {
             Container(child:Row(mainAxisAlignment: MainAxisAlignment.end,children: [
               InkWell(onTap: ()async{
                 if(_utilsProviderModel!.isArabic){
-                  await Constants.utilsProviderModel!.setCurrentLocal(Constants.mainContext!, Locale("ar","EG"));
+                  await _utilsProviderModel!.setCurrentLocal(Constants.mainContext!, Locale("ar","EG"));
                   //Navigator.pop(context);
-                  MyUtils.navigate(context, SplashScreen());
+                  MyUtils.navigate(context, SplashScreen(toHome: true,));
 
                 }else{
-                  await Constants.utilsProviderModel!.setCurrentLocal(Constants.mainContext!, Locale("en","US"));
+                  await _utilsProviderModel!.setCurrentLocal(Constants.mainContext!, Locale("en","US"));
                   //Navigator.pop(context);
-                  MyUtils.navigate(context, SplashScreen());
+                  MyUtils.navigate(context, SplashScreen(toHome: true,));
                 }
               },child: Container(
                   padding: EdgeInsets.all(D.default_15),

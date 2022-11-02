@@ -116,7 +116,7 @@ class _DeletAcountPopupScreenState extends State<DeletAcountPopupScreen> with In
             bottom: D.default_5),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(D.default_15),
-            color: C.BASE_BLUE,
+            color: Colors.red,
             boxShadow: [
               BoxShadow(
                   color: Colors.grey.withOpacity(0.5),

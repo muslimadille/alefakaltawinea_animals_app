@@ -30,7 +30,7 @@ class _thirdIntroScreenState extends State<thirdIntroScreen> {
                 width: MediaQuery.of(context).size.width,
                 fit: BoxFit.fitWidth,
               ) ,
-              bottom: MediaQuery.of(context).size.height * 0.15),
+              bottom: D.height(7)),
         ],
       ),
     );
@@ -45,8 +45,8 @@ class _thirdIntroScreenState extends State<thirdIntroScreen> {
         children: [
           Text(tr("intro3_title"),style:S.h1Bold(color:Colors.white,fontSize:D.size(14),font: MyFonts.VEXA),textAlign: TextAlign.center,),
           SizedBox(height: D.size(5)),
-          Text(tr("intro3_description"),style:S.h1(color:Colors.white,font: MyFonts.ALMARIA,fontSize:D.size(7)),textAlign:TextAlign.center)
-        ],),),top: MediaQuery.of(context).size.height * 0.05);
+          Text(tr("intro3_description"),style:TextStyle(color:Colors.white,fontFamily: MyFonts.ALMARIA,fontSize:D.size(7),height:D.textSize(0.45)),textAlign:TextAlign.center)
+        ],),),top: D.height(4));
   }
 
 }

@@ -130,7 +130,7 @@ class _IntroWizardScreenState extends State<IntroWizardScreen> {
         MyUtils.navigateReplaceCurrent(context, OnBoardingScreen());
       },
       child: Container(
-      height:D.default_30,
+      height:D.height(3.5),
       width: D.default_70,
       margin: EdgeInsets.only(left: D.default_10,right: D.default_10),
       decoration: BoxDecoration(
@@ -143,7 +143,7 @@ class _IntroWizardScreenState extends State<IntroWizardScreen> {
               spreadRadius: 0.5
           )]
       ),
-      child: Center(child: Text(tr(_currentSliderPager<sliderItems.length-1?"skip":"finish"),style: S.h4(color: textColor(_currentSliderPager)),),),
+      child: Center(child: Text(tr(_currentSliderPager<sliderItems.length-1?tr("skip"):tr("finish")),style: S.h4(color: textColor(_currentSliderPager),fontSize: D.textSize(3.5)),),),
     ),);
   }
   Widget _nextBtn(){

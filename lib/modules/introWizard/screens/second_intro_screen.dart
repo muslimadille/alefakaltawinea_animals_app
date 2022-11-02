@@ -43,6 +43,8 @@ class _SecondIntroScreenState extends State<SecondIntroScreen> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Container(
+        height: D.height(18),
+        width: D.width(90),
         margin: EdgeInsets.all(D.default_20),
         child: Stack(
           alignment:AlignmentDirectional.center,
@@ -51,6 +53,7 @@ class _SecondIntroScreenState extends State<SecondIntroScreen> {
               img,
               width: MediaQuery.of(context).size.width-D.default_40,
               fit: BoxFit.fitWidth,
+              radius: D.default_10,
             ),
             Positioned(
               child: Container(
@@ -75,9 +78,9 @@ class _SecondIntroScreenState extends State<SecondIntroScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(tr("intro2_title"),style:S.h1Bold(color:Colors.black,fontSize:D.size(16),font: MyFonts.VEXA),textAlign: TextAlign.center,),
+          Text(tr("intro2_title"),style:S.h1Bold(color:Colors.black,fontSize: D.textSize(9),font: MyFonts.VEXA),textAlign: TextAlign.center,),
           SizedBox(height: D.default_10,),
-          Text(tr("intro2_description"),style:S.h2(color:Colors.black,font: MyFonts.ALMARIA,fontSize:D.size(9)),textAlign:TextAlign.center)
+          Text(tr("intro2_description"),style:TextStyle(color:Colors.black,fontFamily: MyFonts.ALMARIA,fontSize:D.size(7),height:D.textSize(0.45)),textAlign:TextAlign.center)
         ],),),top: MediaQuery.of(context).size.height * 0.05);
   }
 

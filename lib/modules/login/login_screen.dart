@@ -10,6 +10,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 import '../../utils/my_widgets/action_bar_widget.dart';
@@ -116,7 +117,7 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
               return tr("enter_password");
             }
           } ,
-          style: S.h4(color: Colors.black),
+          style: S.h2(color: Colors.black),
           decoration:  InputDecoration(
             labelText: tr("enter_password"),
             labelStyle:S.h2(color: Colors.grey) ,
@@ -177,9 +178,11 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
 
           ),
           keyboardType: TextInputType.phone,
+
           obscureText: false,
           cursorColor: C.BASE_BLUE,
           autofocus: false,
+
         )
     );
   }
@@ -195,7 +198,9 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
     if (_loginFormGlobalKey.currentState!.validate()) {
       _loginFormGlobalKey.currentState!.save();
       //call login api
-      userProviderModel!.login(_phoneController.text, _passwordController.text,context,false);
+      userProviderModel!.login(
+        MyUtils.replaceArabicNumber(_phoneController.text)
+          , _passwordController.text,context,false);
     }
   }
  initSavedUser(){
