@@ -31,7 +31,12 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
   void initState() {
     super.initState();
     adoptionProviderModel=Provider.of<AdoptionProviderModel>(context,listen: false);
-    adoptionProviderModel!.getCategoriesList();
+
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      await adoptionProviderModel!.getCategoriesList();
+      await adoptionProviderModel!.getMyAnimals();
+    });
+
 
   }
   @override
@@ -123,7 +128,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
                 child: InkWell(
                   onTap: (){
                     adoptionProviderModel!.setSelectedCategoryIndex(index);
-                    adoptionProviderModel!.getMyAnimals()();
+                    adoptionProviderModel!.setMyAnimalsFilteredList(adoptionProviderModel!.categoriesList[index].id!.toString())();
                   },
                   child: TransitionImage(
                     adoptionProviderModel!.categoriesList[index].photo!,
@@ -140,7 +145,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
   }
 
   Widget _animalsList() {
-    return adoptionProviderModel!.isLoading?LoadingProgress():adoptionProviderModel!.myAnimalsPagerListModel!=null&&adoptionProviderModel!.myAnimalsPagerListModel!.data!.isNotEmpty?Container(
+    return adoptionProviderModel!.isLoading?LoadingProgress():adoptionProviderModel!.myAnimalsPagerListModel!=null&&adoptionProviderModel!.myAnimalsFilteredList.isNotEmpty?Container(
       padding: EdgeInsets.all(D.default_10),
       child: CustomScrollView(slivers: [
         SliverGrid(
@@ -154,7 +159,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
                   (BuildContext context, int index) {
                 return _animalsListItem(index);
               },
-              childCount: adoptionProviderModel!.myAnimalsPagerListModel!.data!.length,
+              childCount: adoptionProviderModel!.myAnimalsFilteredList.length,
               semanticIndexOffset: 1,
             )),
       ]),):_noData();
@@ -175,7 +180,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
     return InkWell(
         onTap: () {
           if(Constants.currentUser!=null){
-            MyUtils.navigate(context, AddAdoptionScreen(data:adoptionProviderModel!.myAnimalsPagerListModel!.data![index]));
+            MyUtils.navigate(context, AddAdoptionScreen(data:adoptionProviderModel!.myAnimalsFilteredList[index]));
           }else{
             MyUtils.navigate(context, NoProfileScreen());
           }

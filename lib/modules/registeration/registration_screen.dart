@@ -1,4 +1,5 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
+import 'package:alefakaltawinea_animals_app/modules/login/login_screen.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/provider/user_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
@@ -9,6 +10,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../utils/my_utils/myUtils.dart';
 import '../../utils/my_widgets/action_bar_widget.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -92,6 +94,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
                         _confirmPassword(),
                         SizedBox(height: D.default_20,),
                         _registerBtn(),
+                        have_account()
                       ],
                     ),
                   ),
@@ -500,5 +503,18 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
         });
       }
     }
+  }
+  Widget have_account(){
+    return Container(child:Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(tr("have_acout"),style: S.h5(color: Colors.grey,fontSize: D.textSize(5)),),
+        SizedBox(width: D.default_10,),
+        InkWell(
+          onTap: (){
+            MyUtils.navigateReplaceCurrent(context, LoginScreen());
+          },
+          child: Text(tr("login"),style: S.h1(color: C.BASE_BLUE,fontSize: D.textSize(5)),),)
+      ],));
   }
 }

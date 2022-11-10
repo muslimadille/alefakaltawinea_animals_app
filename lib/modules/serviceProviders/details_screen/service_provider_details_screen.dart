@@ -80,9 +80,11 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
                     },
                   )
               )),
-              Container(child: Center(child: Text(
+              Container(
+                margin: EdgeInsets.only(top: D.default_10),
+                  child: Center(child: Text(
                 widget.serviceProviderData.name!
-                ,style: S.h1(color:C.BASE_BLUE),),)),
+                ,style: S.h2(color:C.BASE_BLUE),),)),
               Container(
                 color: Colors.white,
                 width: double.infinity,

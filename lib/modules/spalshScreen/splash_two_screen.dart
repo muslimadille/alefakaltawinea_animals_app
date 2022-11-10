@@ -76,9 +76,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     return Positioned(child: Container(
         width: MediaQuery.of(context).size.width,
         child:Column(children: [
-          Text(tr("alefak_card"),style: S.h1Bold(color: Colors.white,fontSize:D.size(13),font: MyFonts.VEXA),textAlign: TextAlign.center),
+          Text(tr("alefak_card"),style: S.h1Bold(color: Colors.white,fontSize:D.size(12),font: MyFonts.VEXA),textAlign: TextAlign.center),
           SizedBox(height: D.size(5),),
-          Text(tr("Because they deserve your attention"),style: S.h2(color: Colors.white,fontSize:D.size(8),font: MyFonts.ALMARIA),textAlign: TextAlign.center,)
+          Text(tr("Because they deserve your attention"),style: S.h2(color: Colors.white,fontSize:D.size(7),font: MyFonts.ALMARIA),textAlign: TextAlign.center,)
 
         ],)),bottom:D.height(54) ,);
   }
@@ -128,7 +128,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
 
         MyUtils.navigate(context, TermsScreen(hideButtomBar: true,));
       },
-        child: Text(tr("terms_text"),style: S.h2(color: Colors.white),),
+        child: Text(tr("terms_text"),style: S.h2(color: Colors.white,fontSize: D.textSize(4)),),
       )
 
     ],),);
@@ -249,7 +249,7 @@ Widget _buttonsPart(){
           borderRadius: BorderRadius.all(Radius.circular(D.default_100),),
           color: Colors.white,
         ),
-        child: Center(child: Text(tr("buy_card"), style: S.h1Bold(color: C.BASE_BLUE),
+        child: Center(child: Text(tr("buy_card"), style: S.h1Bold(color: C.BASE_BLUE,fontSize: D.textSize(5)),
           textAlign: TextAlign.center,),),
 
       ),),

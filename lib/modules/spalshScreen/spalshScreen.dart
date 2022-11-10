@@ -60,7 +60,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     adsSliderProviderModel!.getAdsSlider();
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
       _initPref(context);
-      setLocal();
+      //setLocal();
       await appStataProviderModel!.getAppActiveState();
       await appStataProviderModel!.getApplePayState();
       login();
@@ -132,13 +132,8 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
         utilsProviderModel!.setCurrentLocal(ctx, Locale('en','US'));
       }
     }else{
-      await context.setLocale(Locale('ar', 'EG'));
-      await EasyLocalization.of(context)!.setLocale(Locale('ar', 'EG'));
-      utilsProviderModel!.currentLocalName="العربية";
-      Constants.SELECTED_LANGUAGE="ar";
-      await utilsProviderModel!.setLanguageState("ar");
-      await Constants.prefs!.setString(Constants.LANGUAGE_KEY!, "ar");
-
+      utilsProviderModel!.setLanguageState("ar");
+      utilsProviderModel!.setCurrentLocal(ctx, Locale('ar','EG'));
     }
 
   }

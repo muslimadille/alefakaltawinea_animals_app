@@ -620,6 +620,7 @@ Widget _addBtn(){
   Widget _genderSpinner(int index) {
     return Container(
       height: D.default_50,
+      width: D.default_180,
       margin: EdgeInsets.only(
           left: D.default_5, right: D.default_5, top: D.default_10),
       padding: EdgeInsets.only(left: D.default_20, right: D.default_20),
@@ -633,9 +634,8 @@ Widget _addBtn(){
           borderRadius: BorderRadius.all(Radius.circular(D.default_10)),
           style: TextStyle(color: Colors.blue),
           hint: Container(
-            margin: EdgeInsets.all(D.default_10),
             child: Text(
-              _selectedGenders[index],
+              _selectedGenders,
               style: S.h2(color: Colors.grey),
             ),
           ),
@@ -678,7 +678,7 @@ Widget _addBtn(){
           hint: Container(
             margin: EdgeInsets.all(D.default_10),
             child: Text(
-              _selectedVacationStats[index],
+              _selectedVacationStats,
               style: S.h2(color: Colors.grey),
             ),
           ),

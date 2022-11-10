@@ -1,11 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/Material.dart';
-import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-
 import '../../utils/my_utils/baseDimentions.dart';
 import '../../utils/my_utils/baseTextStyle.dart';
-import '../../utils/my_utils/constants.dart';
 import '../../utils/my_utils/input _validation_mixing.dart';
 import '../../utils/my_utils/myColors.dart';
 import '../../utils/my_widgets/laoding_view.dart';

@@ -43,7 +43,7 @@ class _FivthIntroScreenState extends State<FivthIntroScreen> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Text(tr("intro5_title"),style:TextStyle(color:Colors.white,fontFamily: MyFonts.MYRIAD_ARABIC,fontSize:D.textSize(8),height:D.textSize(0.45)),textAlign: TextAlign.center,),
+          Text(tr("intro5_title"),style:TextStyle(color:Colors.white,fontFamily: MyFonts.MYRIAD_ARABIC,fontSize:D.textSize(7),height:D.textSize(0.3)),textAlign: TextAlign.center,),
         ],),),bottom: D.height(10));
   }
 

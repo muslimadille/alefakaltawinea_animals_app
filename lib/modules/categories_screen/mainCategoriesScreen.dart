@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../utils/my_utils/myColors.dart';
 import '../../utils/my_utils/myUtils.dart';
+import '../../utils/my_utils/providers.dart';
 import '../../utils/my_widgets/action_bar_widget.dart';
 import '../adoption/adpotion_screen.dart';
 import '../spalshScreen/data/regions_api.dart';
@@ -30,12 +31,14 @@ class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
 
   CategoriesProviderModel?categoriesProviderModel;
   RegionsApi regionsApi=RegionsApi();
+  UtilsProviderModel? utilsProviderModel;
 
   @override
   void initState() {
     super.initState();
     //getRegions();
     categoriesProviderModel=Provider.of<CategoriesProviderModel>(context,listen: false);
+    utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: false);
     WidgetsBinding.instance!.addPostFrameCallback((_){
 
       adsSliderProviderModel!.getAdsSlider();
@@ -45,6 +48,7 @@ class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
   }
   @override
   Widget build(BuildContext context) {
+    utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: false);
     categoriesProviderModel=Provider.of<CategoriesProviderModel>(context,listen: true);
     adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: true);
     if(adsSliderProviderModel!.adsSliderModelList.isEmpty){
@@ -84,7 +88,7 @@ class _MainCategoriesScreenState extends State<MainCategoriesScreen> {
           Container(
             padding: EdgeInsets.all(D.default_10),
             color: C.ADAPTION_COLOR,
-            height: D.default_200,
+            height: utilsProviderModel!.isArabic?D.default_200:D.default_200*1.35,
             width: double.infinity,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

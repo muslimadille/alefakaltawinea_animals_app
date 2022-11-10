@@ -29,6 +29,16 @@ class AdoptionProviderModel with ChangeNotifier{
   List<AdoptionCategoriesModel> categoriesList=[];
   AnimalPagerListModel? animalPagerListModel;
   AnimalPagerListModel? myAnimalsPagerListModel;
+  List<AnimalData> myAnimalsFilteredList=[];
+  setMyAnimalsFilteredList(String categoryId){
+    myAnimalsFilteredList.clear();
+    for(int i=0;i<myAnimalsPagerListModel!.data!.length;i++){
+      if(myAnimalsPagerListModel!.data![i].categoryId==categoryId){
+        myAnimalsFilteredList.add(myAnimalsPagerListModel!.data![i]);
+      }
+}
+    notifyListeners();
+  }
 
   AdaptionApi adoptionApi=AdaptionApi();
   getCategoriesList() async {
@@ -68,6 +78,7 @@ class AdoptionProviderModel with ChangeNotifier{
     await adoptionApi.getMyAnimals();
     if (response.status == Apis.CODE_SUCCESS &&response.data!=null){
       myAnimalsPagerListModel=response.data;
+      setMyAnimalsFilteredList(categoriesList[0].id!.toString());
       setIsLoading(false);
     }else if(response.status == Apis.CODE_SUCCESS &&response.data==null){
       setIsLoading(false);

@@ -1,6 +1,7 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/provider/user_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/otp/phone_screen.dart';
+import 'package:alefakaltawinea_animals_app/modules/registeration/registration_screen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
@@ -69,10 +70,24 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
                     _password(),
                     SizedBox(height: D.default_10,),
                     _forgetPassword(),
-                    _loginBtn()
+                    _loginBtn(),
+                    dont_have_account()
 
                   ],),),)
           ],),)
+      ],));
+  }
+  Widget dont_have_account(){
+    return Container(child:Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(tr("dont_have_acout"),style: S.h5(color: Colors.grey,fontSize: D.textSize(5)),),
+        SizedBox(width: D.default_10,),
+        InkWell(
+          onTap: (){
+            MyUtils.navigateReplaceCurrent(context, RegistrationScreen());
+          },
+          child: Text(tr("register"),style: S.h1(color: C.BASE_BLUE,fontSize: D.textSize(5)),),)
       ],));
   }
   Widget _loginBtn(){

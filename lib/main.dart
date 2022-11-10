@@ -82,6 +82,7 @@ class _MyAppState extends State<MyApp> {
   }
   @override
   Widget build(BuildContext context) {
+    utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: true);
     Constants.mainContext=context;
     return  ResponsiveSizer(
         builder: (context, orientation, deviceType) {
@@ -91,9 +92,9 @@ class _MyAppState extends State<MyApp> {
                   focusColor:C.BASE_BLUE
 
               ),
-              localizationsDelegates: context.localizationDelegates,
-              supportedLocales: context.supportedLocales,
-              locale: utilsProviderModel!.currentLocal,
+              localizationsDelegates: EasyLocalization.of(context)?.delegates,
+              supportedLocales: [Locale('en', 'US'), Locale('ar', 'EG')],
+              locale: EasyLocalization.of(context)?.currentLocale!,
               debugShowCheckedModeBanner: false,
               home: BaseScreen(
                   tag: "SplashScreen",

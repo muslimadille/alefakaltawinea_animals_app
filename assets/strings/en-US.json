@@ -85,9 +85,9 @@
   "edit_adoption_title": "Adoption form (my page)",
   "delete_adoption": "Delete",
   "edit_adoption": "Edit",
-  "hadeth": "يا عائشة إن الله رفيق يحب الرفق.ويعطي على الرفق مالا يعطي على العنف.ومالا يعطي على ما سواه.",
-  "hadeth_start": "قال رسول الله صلى الله علىه وسلم لعائشة رضي الله عنها",
-  "hadeth_end": "رواه مسلم",
+  "hadeth": "O Aisha, God is kind and loves kindness, and He gives for kindness what He does not give for violence and what He does not give for anything else.",
+  "hadeth_start": "The Messenger of God, may God bless him and grant him peace, said to Aisha, may God be pleased with her.",
+  "hadeth_end": "narrated by Muslim.",
   "hadeth_check": "I vow to fear God in any animal I adopt.",
   "subscrib": "Request a new subscription or a new card",
   "add_your_shop": "Add your clinic or store",
@@ -206,6 +206,8 @@
   "intro2_description": "Save thousands of riyals annually with the strongest\nExclusive discounts on all\nSections in the application",
   "login_header": "Login",
   "finish": "Finish",
-  "delete_animal_msg": "are you sure to delete this item"
+  "delete_animal_msg": "are you sure to delete this item",
+  "dont_have_acout": "Don't have an account?",
+  "have_acout": "have an account?"
 
 }
