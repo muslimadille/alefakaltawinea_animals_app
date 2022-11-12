@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../offers/offer_details/offer_code_screen.dart';
+import '../registeration/registration_screen.dart';
 import 'notification_offer_code_screen.dart';
 
 
@@ -65,7 +66,7 @@ class _NotificationOfferDetailsScreenState extends State<NotificationOfferDetail
       if(Constants.currentUser!=null){
         MyUtils.navigate(context, NotificationOfferCodeScreen(widget.serviceProviderData,widget.serviceProviderData.offers![widget.index]));
       }else{
-        MyUtils.navigate(context, NoProfileScreen());
+        MyUtils.navigate(context, RegistrationScreen());
       }
     },
       child: Container(

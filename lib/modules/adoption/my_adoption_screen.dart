@@ -2,6 +2,7 @@ import 'package:alefakaltawinea_animals_app/modules/adoption/data/animal_pager_l
 import 'package:alefakaltawinea_animals_app/modules/adoption/provider/adoption_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/profile/no_profile_screen.dart';
+import 'package:alefakaltawinea_animals_app/modules/registeration/registration_screen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
@@ -74,7 +75,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
         if(Constants.currentUser!=null){
           MyUtils.navigate(context, AddAdoptionScreen());
         }else{
-          MyUtils.navigate(context, NoProfileScreen());
+          MyUtils.navigate(context, RegistrationScreen());
         }
       },
       child: Container(
@@ -182,7 +183,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
           if(Constants.currentUser!=null){
             MyUtils.navigate(context, AddAdoptionScreen(data:adoptionProviderModel!.myAnimalsFilteredList[index]));
           }else{
-            MyUtils.navigate(context, NoProfileScreen());
+            MyUtils.navigate(context, RegistrationScreen());
           }
         },
         child:Container(

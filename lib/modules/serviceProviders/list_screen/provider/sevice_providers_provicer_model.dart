@@ -9,6 +9,7 @@ import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen
 import 'package:alefakaltawinea_animals_app/utils/my_utils/apis.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 
@@ -90,6 +91,7 @@ class ServiceProvidersProviderModel with ChangeNotifier {
         //currentSelectedShop=currentLocationsList[0];
       }else{
         currentSelectedShop=null;
+        await Fluttertoast.showToast(msg: "عفوا لا يوجد نتائج للعرض");
       }
         setMarkers(response.data,ctx,color,all);
       setIsLoading(false);
@@ -159,6 +161,9 @@ class ServiceProvidersProviderModel with ChangeNotifier {
         final GoogleMapController controller=await mapController.future;
 
         await controller.animateCamera(CameraUpdate.newCameraPosition(currentCameraPosition!));
+
+      }else{
+        markers.clear();
 
       }
 setIsLoading(false);

@@ -15,6 +15,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../utils/my_utils/constants.dart';
 import '../cart/add_cart_screen.dart';
 import '../profile/no_profile_screen.dart';
+import '../registeration/registration_screen.dart';
 
 class AdsSliderItem extends StatefulWidget {
   Data AdsItem;
@@ -57,7 +58,7 @@ class _AdsSliderItemState extends State<AdsSliderItem> {
                       await Fluttertoast.showToast(msg:tr("Your request has been successfully received") );
                     }
                   }else{
-                    MyUtils.navigate(context, NoProfileScreen());
+                    MyUtils.navigate(context, RegistrationScreen());
                   }
                 }
                   break;

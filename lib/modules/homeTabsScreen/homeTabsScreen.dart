@@ -20,6 +20,7 @@ import 'package:provider/provider.dart';
 import '../cart/add_cart_screen.dart';
 import '../my_cards/my_cards_screen.dart';
 import '../notifications/notifications_screen.dart';
+import '../registeration/registration_screen.dart';
 import '../serviceProviderAccount/SpHomeScreen.dart';
 import '../serviceProviderAccount/code_scanner_screen.dart';
 import 'provider/intro_provider_model.dart';
@@ -109,7 +110,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         if(Constants.currentUser!=null){
           MyUtils.navigate(context, FavScreen());
         }else{
-          MyUtils.navigate(context, NoProfileScreen());
+          MyUtils.navigate(context, RegistrationScreen());
         }
 
       }
@@ -128,7 +129,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         if(Constants.currentUser!=null){
           MyUtils.navigate(context, MyCardsScreen());
         }else{
-          MyUtils.navigate(context, NoProfileScreen());
+          MyUtils.navigate(context, RegistrationScreen());
         }
       }
         ,child:Column(
@@ -146,7 +147,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         if(Constants.currentUser!=null){
           MyUtils.navigate(context, ProfileScreen());
         }else{
-          MyUtils.navigate(context, NoProfileScreen());
+          MyUtils.navigate(context, RegistrationScreen());
         }
         //bottomBarProviderModel!.setSelectedScreen(4);
 

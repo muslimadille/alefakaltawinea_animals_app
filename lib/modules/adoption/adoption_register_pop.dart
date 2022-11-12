@@ -54,7 +54,7 @@ class _RegisterationPopState extends State<RegisterationPop> with InputValidatio
           backgroundColor:Colors.transparent
 
       ),
-      Container(
+      Expanded(child: SingleChildScrollView(child: Container(
         color: Colors.white.withOpacity(0.93),
         child: userProviderModel!.isLoading
             ? LoadingProgress()
@@ -64,7 +64,7 @@ class _RegisterationPopState extends State<RegisterationPop> with InputValidatio
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Container(
-                  margin: EdgeInsets.only(top: D.default_120,bottom: D.default_30,left: D.default_50,right: D.default_50),
+                  margin: EdgeInsets.only(top: D.default_40,bottom: D.default_30,left: D.default_50,right: D.default_50),
                   child: Center(
                     child: Text(
                       tr("register_header2"),
@@ -88,6 +88,8 @@ class _RegisterationPopState extends State<RegisterationPop> with InputValidatio
                       _confirmPassword(),
                       SizedBox(height: D.default_20,),
                       _registerBtn(),
+                      have_account()
+
                     ],
                   ),
                 ),
@@ -95,7 +97,7 @@ class _RegisterationPopState extends State<RegisterationPop> with InputValidatio
             ],
           ),
         ),
-      )
+      ),))
     ],);
   }
 
@@ -132,6 +134,19 @@ class _RegisterationPopState extends State<RegisterationPop> with InputValidatio
                 : Container()
           ],
         ));
+  }
+  Widget have_account(){
+    return Container(child:Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(tr("have_acout"),style: S.h5(color: Colors.grey,fontSize: D.textSize(5)),),
+        SizedBox(width: D.default_10,),
+        InkWell(
+          onTap: (){
+            MyUtils.navigateReplaceCurrent(context, LoginScreen());
+          },
+          child: Text(tr("login"),style: S.h1(color: C.ADAPTION_COLOR,fontSize: D.textSize(5)),),)
+      ],));
   }
 
   Widget _name() {

@@ -76,6 +76,16 @@ class _ServiceProviderOffersScreenState extends State<ServiceProviderOffersScree
                   (BuildContext context, int index) {
                 return Container(
                   margin: EdgeInsets.all(D.default_5),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(D.default_10),
+                      color: Colors.white,
+                      boxShadow:[BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          offset:Offset(1,1),
+                          blurRadius:1,
+                          spreadRadius: 0.5
+                      )]
+                  ),
                   child: InkWell(
                     onTap: (){
                       if((widget.serviceProviderData.offers![index].url??"")!=""){
@@ -83,7 +93,9 @@ class _ServiceProviderOffersScreenState extends State<ServiceProviderOffersScree
                       }
                     },
                     child: TransitionImage(
-                    widget.serviceProviderData.offers![index].photo??"",
+                      (widget.serviceProviderData.offers![index].photo??"").contains("http")?
+                      (widget.serviceProviderData.offers![index].photo??""):
+                      "https://alefak.com/uploads/${(widget.serviceProviderData.offers![index].photo??"")}",
                     fit: BoxFit.cover,
                     radius: D.default_10,
                   ),),);
