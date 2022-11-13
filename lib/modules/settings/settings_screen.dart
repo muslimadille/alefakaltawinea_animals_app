@@ -1,4 +1,5 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
+import 'package:alefakaltawinea_animals_app/modules/registeration/registration_screen.dart';
 import 'package:alefakaltawinea_animals_app/modules/settings/terms_screen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
@@ -89,7 +90,11 @@ class _SettingScreenState extends State<SettingScreen> {
                             )
                           ],),
                         _itemText(tr("buy_card"), () {
-                          MyUtils.navigate(context, AddCartScreen());
+                          if(Constants.currentUser==null){
+                            MyUtils.navigate(context, RegistrationScreen());
+                          }else{
+                            MyUtils.navigate(context, AddCartScreen());
+                          }
                         }),
                         _itemText(tr("add_your_shop"), (){
                           MyUtils.navigate(context, AddStoreScreen());

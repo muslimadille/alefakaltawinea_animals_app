@@ -25,6 +25,11 @@ class Apis{
   static String UPDATE_PROFILE="${BASE_URL}/update-profile";//used after GET_AUTH_CODE
   static String CHANGE_PASSWORD="${BASE_URL}/change-password";//used after GET_AUTH_CODE
   static String DELETE_ACCOUNT="${BASE_URL}/delete-account";//used after GET_AUTH_CODE
+  static String CONTACT_US="${BASE_URL}/contact-us";
+  static String REGISTER_SHOP="${BASE_URL}/register-shop";
+
+
+
 
 
 

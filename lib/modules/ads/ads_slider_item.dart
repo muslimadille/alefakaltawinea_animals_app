@@ -47,7 +47,11 @@ class _AdsSliderItemState extends State<AdsSliderItem> {
                 }
                   break;
                 case "1":{
-                  _launchURLBrowser(widget.AdsItem.url??"");
+                  if((widget.AdsItem.url??"").isNotEmpty){
+                    _launchURLBrowser(widget.AdsItem.url??"");
+                  }else{
+                    MyUtils.navigate(context, AddCartScreen());
+                  }
                 }
                   break;
                 case "2":{

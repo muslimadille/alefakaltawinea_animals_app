@@ -3,20 +3,17 @@ import 'package:easy_localization/easy_localization.dart' hide TextDirection;
 import 'package:flutter/Material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-
 import '../../utils/my_utils/baseDimentions.dart';
 import '../../utils/my_utils/baseTextStyle.dart';
 import '../../utils/my_utils/constants.dart';
 import '../../utils/my_utils/myColors.dart';
 import '../../utils/my_utils/myUtils.dart';
-import '../../utils/my_utils/providers.dart';
 import '../../utils/my_widgets/action_bar_widget.dart';
 import '../../utils/my_widgets/transition_image.dart';
 import '../baseScreen/baseScreen.dart';
 import '../cart/add_cart_screen.dart';
 import '../cart/provider/cart_provider.dart';
 import '../homeTabsScreen/provider/bottom_bar_provider_model.dart';
-import '../login/provider/user_provider_model.dart';
 
 class MyCardsScreen extends StatefulWidget {
   const MyCardsScreen({Key? key}) : super(key: key);
@@ -80,11 +77,11 @@ class _MyCardsScreenState extends State<MyCardsScreen> {
     return Directionality(
         textDirection: TextDirection.ltr,
         child: Container(
-            padding: EdgeInsets.only(left: D.default_5, right: D.default_5),
+            padding: EdgeInsets.only(left: D.size(2), right: D.size(2)),
             margin: EdgeInsets.only(
-                top: D.default_10, left: D.default_20, right: D.default_20),
+                top: D.size(4), left: D.size(4), right: D.size(4)),
             width: MediaQuery.of(context).size.width * 7,
-            height: D.default_260,
+            height: D.size(104),
             decoration: BoxDecoration(
               image: DecorationImage(
                   image: AssetImage("assets/images/bit_card_bg.png")),
@@ -98,10 +95,10 @@ class _MyCardsScreenState extends State<MyCardsScreen> {
                   child: TransitionImage(
                     "assets/images/bit_cart_dog_logo.png",
                     width: MediaQuery.of(context).size.width,
-                    height: D.default_180,
+                    height: D.default_200,
                     fit: BoxFit.fitWidth,
                   ),
-                  bottom: D.default_30,
+                  bottom: D.default_35,
                   left: 0,
                   right: 0,
                 ),

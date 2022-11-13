@@ -25,6 +25,7 @@ import 'modules/notifications/provider/notification_provider.dart';
 import 'modules/otp/provider/otp_provider_model.dart';
 import 'modules/serviceProviderAccount/provider/scan_code_provider.dart';
 import 'modules/serviceProviders/list_screen/provider/sevice_providers_provicer_model.dart';
+import 'modules/settings/provider/settings_provider.dart';
 import 'modules/spalshScreen/spalshScreen.dart';
 import 'package:sizer/sizer.dart';
 
@@ -49,6 +50,9 @@ void main() async{
       ChangeNotifierProvider<CartProvider>(create: (ctx) => CartProvider(),),
       ChangeNotifierProvider<ScanCodeProvider>(create: (ctx) => ScanCodeProvider(),),
       ChangeNotifierProvider<AppStataProviderModel>(create: (ctx) => AppStataProviderModel(),),
+      ChangeNotifierProvider<SettingsProvider>(create: (ctx) => SettingsProvider(),),
+
+
     ],
     child: EasyLocalization(
         supportedLocales: [Locale('en', 'US'), Locale('ar', 'EG')],

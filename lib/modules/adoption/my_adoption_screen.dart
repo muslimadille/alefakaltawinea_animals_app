@@ -205,7 +205,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
                         )]
                     ),
                     child: TransitionImage(
-                      adoptionProviderModel!.animalPagerListModel!.data![index].photo!.isNotEmpty?adoptionProviderModel!.animalPagerListModel!.data![index].photo!:Res.DEFAULT_IMAGE,
+                      adoptionProviderModel!.myAnimalsFilteredList[index].photo!.isNotEmpty?adoptionProviderModel!.myAnimalsFilteredList[index].photo!:Res.DEFAULT_IMAGE,
                       radius: D.default_150,
                       fit: BoxFit.cover,
                       width: D.default_110,
@@ -215,7 +215,7 @@ class _MyAdoptionScreenState extends State<MyAdoptionScreen> {
               Container(
                 child: Center(
                   child: Text(
-                    adoptionProviderModel!.animalPagerListModel!.data![index].type!,
+                    adoptionProviderModel!.myAnimalsFilteredList[index].type!,
                     style: S.h1(color: C.BASE_BLUE),
                   ),
                 ),

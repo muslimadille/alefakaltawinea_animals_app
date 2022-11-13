@@ -116,7 +116,7 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
   Widget _tapsPart(){
     return Container(
       height: D.default_50,
-      margin: EdgeInsets.only(left: D.default_30,right: D.default_30),
+      margin: EdgeInsets.only(left: D.default_25,right: D.default_25),
       child: Row(children: [
         _myInfoBtn((){
         setState(() {
