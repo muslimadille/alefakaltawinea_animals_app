@@ -208,6 +208,8 @@
   "finish": "Finish",
   "delete_animal_msg": "are you sure to delete this item",
   "dont_have_acout": "Don't have an account?",
-  "have_acout": "have an account?"
+  "have_acout": "have an account?",
+  "sould_out": "You have exceeded the number of times allowed to use this card in this offer."
+
 
 }

@@ -50,20 +50,33 @@ class _AdsSliderItemState extends State<AdsSliderItem> {
                   if((widget.AdsItem.url??"").isNotEmpty){
                     _launchURLBrowser(widget.AdsItem.url??"");
                   }else{
-                    MyUtils.navigate(context, AddCartScreen());
+                    if(Constants.currentUser!=null){
+                      if(Constants.APPLE_PAY_STATE){
+                        MyUtils.navigate(context, AddCartScreen());
+                      }else{
+                        await Fluttertoast.showToast(msg:tr("Your request has been successfully received") );
+                      }
+                    }else{
+                      MyUtils.navigate(context, RegistrationScreen());
+                    }
                   }
                 }
                   break;
                 case "2":{
-                  if(Constants.currentUser!=null){
-                    if(Constants.APPLE_PAY_STATE){
-                      MyUtils.navigate(context, AddCartScreen());
-                    }else{
-                      await Fluttertoast.showToast(msg:tr("Your request has been successfully received") );
-                    }
+                  if((widget.AdsItem.url??"").isNotEmpty){
+                    _launchURLBrowser(widget.AdsItem.url??"");
                   }else{
-                    MyUtils.navigate(context, RegistrationScreen());
+                    if(Constants.currentUser!=null){
+                      if(Constants.APPLE_PAY_STATE){
+                        MyUtils.navigate(context, AddCartScreen());
+                      }else{
+                        await Fluttertoast.showToast(msg:tr("Your request has been successfully received") );
+                      }
+                    }else{
+                      MyUtils.navigate(context, RegistrationScreen());
+                    }
                   }
+
                 }
                   break;
               }
