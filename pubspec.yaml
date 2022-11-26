@@ -126,6 +126,9 @@ flutter:
     - family: MYRIAD_ARABIC
       fonts:
         - asset: assets/fonts/MYRIAD_ARABIC.otf
+    - family: Vazir-Black
+      fonts:
+        - asset: assets/fonts/Vazir-Black.ttf
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

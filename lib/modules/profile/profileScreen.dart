@@ -14,6 +14,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/providers.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/action_bar_widget.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_widgets/animal_cart_widget.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart' hide TextDirection;
@@ -654,81 +655,7 @@ class _ProfileScreenState extends State<ProfileScreen> with InputValidationMixin
   }
   Widget _cartItem(int index){
     return Directionality(textDirection: TextDirection.ltr, child:
-    Container(
-        padding: EdgeInsets.only(left: D.default_5,right: D.default_5),
-        margin: EdgeInsets.only(top:D.default_10,left: D.default_20,right: D.default_20),
-        width: MediaQuery.of(context).size.width*7,
-        height: D.default_260,
-    decoration: BoxDecoration(
-      image: DecorationImage(image:AssetImage("assets/images/bit_card_bg.png")),
-    borderRadius: BorderRadius.circular(D.default_10),),
-
-        child: Stack(
-      alignment:AlignmentDirectional.center,
-          fit:StackFit.expand,
-          children: [
-        Positioned(child: TransitionImage("assets/images/bit_cart_dog_logo.png",width: MediaQuery.of(context).size.width,height: D.default_180,
-          fit: BoxFit.fitWidth,),bottom: D.default_30,left: 0,right: 0,),
-      Container(
-        width: MediaQuery.of(context).size.width*0.7
-        ,height: D.default_230,
-        child: Column(children: [
-          Container(decoration:BoxDecoration(
-            color: Colors.black,
-            borderRadius: BorderRadius.only(topLeft: Radius.circular(D.default_10),topRight: Radius.circular(D.default_10)),
-              boxShadow:[BoxShadow(
-                  color: Colors.grey.withOpacity(0.9),
-                  offset:Offset(1,0),
-                  blurRadius:1,
-                  spreadRadius: 1
-              )]
-          ),
-            height: D.default_40,
-            width: MediaQuery.of(context).size.width,
-            child: Center(child:  Text("PET IDENTIFICATION هوية الحيوان الأليف",style: S.h3(color: Colors.white),),),
-          ),
-          Container(height: D.default_2,width:MediaQuery.of(context).size.width ,color: Colors.black,margin: EdgeInsets.only(top: D.default_2,bottom: D.default_2),),
-          Expanded(child:Container(
-            margin: EdgeInsets.only(bottom: D.default_65,left:D.default_20,right: D.default_80,top: D.default_10),
-            child:  Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-            Container(
-              margin: EdgeInsets.only(top: D.default_5,bottom: D.default_10),
-              child: TransitionImage(
-              cartProvider!.myCarts[index].photo??"",
-              height: double.infinity,
-              width: D.default_70,
-              fit: BoxFit.cover,
-              strokeColor: Colors.black,
-              strokeWidth: D.default_2,
-            ),),
-                Expanded(child: Container(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                    cartDataItem("Name of pet","اسم الأليف",cartProvider!.myCarts[index].name??""),
-                    cartDataItem("Address","البلد",cartProvider!.myCarts[index].country??""),
-                      cartDataItem("Breed","الفصيلة",cartProvider!.myCarts[index].family??""),
-                      cartDataItem("Gender","الجنس",cartProvider!.myCarts[index].gender??""),
-                    cartDataItem("owner name","اسم المربي",Constants.currentUser!.name??""),
-                    cartDataItem("Expiration date","انتهاء البطاقة",cartProvider!.myCarts[index].expiration_at??"")
-                  ],),))
-
-          ],),))
-        ],),
-      ),
-    ],)));
-  }
-  Widget cartDataItem(String nameEn,String nameAr,String value){
-    return Container(margin: EdgeInsets.only(left:D.default_5,right:D.default_8 ),
-    child: Row(children: [
-      Text(nameEn,style: S.h5(color: Colors.black),textAlign: TextAlign.start,),
-      Expanded(child:Text(value,style: S.h5(color: Colors.black),textAlign: TextAlign.center,)),
-      Text(nameAr,style: S.h5(color: Colors.black),textAlign: TextAlign.end,)
-
-    ],),);
+    AnimalCartWidget(cart: cartProvider!.myCarts[index],));
   }
 Widget _noCarts(){
     return Container(
