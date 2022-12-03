@@ -4,6 +4,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/my_fonts.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +65,7 @@ class _FavListItemState extends State<FavListItem> {
                 children: [
                   Expanded(child: Text(
                     widget.serviceProvidersProviderModel!.favList[widget.index].name!
-                    ,style: S.h3(color:C.BASE_BLUE),),),
+                    ,style: S.h4(color:C.BASE_BLUE,font: MyFonts.VazirBlack),),),
                  /* InkWell(
                     onTap: (){
                       widget.serviceProvidersProviderModel!.setFav(widget.serviceProvidersProviderModel!.favList[widget.index].id!);

@@ -99,7 +99,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
           TransitionImage(bottomBarProviderModel!.selectedScreen==0?Res.IC_HOME_BLUE:Res.IC_HOME_GREY,width: D.default_25,height: D.default_25,),
-          Center(child:Text(tr("home"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==0?C.BASE_BLUE:Colors.grey),),)
+          Center(child:Text(tr("home"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==0?C.BASE_BLUE:Colors.grey),),)
         ]
     ),));
   }
@@ -118,7 +118,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
           TransitionImage(bottomBarProviderModel!.selectedScreen==1?Res.IC_FAV_BLUE:Res.IC_FAV_GREY,width: D.default_25,height: D.default_25,),
-          Center(child:Text(tr("fav"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==1?C.BASE_BLUE:Colors.grey),),)
+          Center(child:Text(tr("fav"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==1?C.BASE_BLUE:Colors.grey),),)
         ]
     ),));
   }
@@ -136,7 +136,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
           TransitionImage("assets/images/card_ic.png",width: D.default_25,height: D.default_25,),
-          Center(child:Text(tr("card"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==3?C.BASE_BLUE:Colors.grey),),)
+          Center(child:Text(tr("card"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==3?C.BASE_BLUE:Colors.grey),),)
         ]
     ),));
   }
@@ -156,7 +156,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
           TransitionImage(bottomBarProviderModel!.selectedScreen==4?Res.IC_PROFILE_BLUE:Res.IC_PROFILE_GREY,width: D.default_25,height: D.default_25,),
-          Center(child:Text(tr("profile"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==4?C.BASE_BLUE:Colors.grey),),)
+          Center(child:Text(tr("profile"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==4?C.BASE_BLUE:Colors.grey),),)
         ]
     ),));
   }
@@ -170,7 +170,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
           mainAxisAlignment: MainAxisAlignment.center,
           children:[
             TransitionImage(bottomBarProviderModel!.selectedScreen==2?Res.IC_NEAR_BLUE:Res.IC_NEAR_GREY,width: D.default_25,height: D.default_25,),
-            Center(child:Text(tr("closest"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==2?C.BASE_BLUE:Colors.grey),),)
+            Center(child:Text(tr("closest"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==2?C.BASE_BLUE:Colors.grey),),)
           ]
       ),));
   }
@@ -184,7 +184,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
               mainAxisAlignment: MainAxisAlignment.center,
               children:[
                 TransitionImage(bottomBarProviderModel!.selectedScreen==0?Res.IC_HOME_BLUE:Res.IC_HOME_GREY,width: D.default_25,height: D.default_25,),
-                Center(child:Text(tr("home"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==0?C.BASE_BLUE:Colors.grey),),)
+                Center(child:Text(tr("home"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==0?C.BASE_BLUE:Colors.grey),),)
               ]
           ),));
   }
@@ -198,7 +198,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
               mainAxisAlignment: MainAxisAlignment.center,
               children:[
                 TransitionImage(bottomBarProviderModel!.selectedScreen==1?"assets/images/qr_icon_blue.png":"assets/images/qr_icon_black.png",width: D.default_25,height: D.default_25,),
-                Center(child:Text(tr("code_tap"),style: S.h4(color: bottomBarProviderModel!.selectedScreen==1?C.BASE_BLUE:Colors.grey),),)
+                Center(child:Text(tr("code_tap"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==1?C.BASE_BLUE:Colors.grey),),)
               ]
           ),));
   }

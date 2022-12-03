@@ -22,11 +22,14 @@ class AppStataProviderModel with ChangeNotifier{
   bool apple_pay_state=true;
 
   AppStatesApi appStatesApi=AppStatesApi();
-  getAppActiveState() async {
+  getAppActiveState(BuildContext context) async {
     setIsLoading(true);
     bool response =
     await appStatesApi.getActiveState();
     app_active_state=response;
+    if(app_active_state){
+      MyUtils.navigateAsFirstScreen(context, MaintainanceScreen());
+    }
     notifyListeners();
 
   }

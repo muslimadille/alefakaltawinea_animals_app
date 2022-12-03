@@ -68,12 +68,12 @@ class _AdsSliderItemState extends State<AdsSliderItem> {
                   }else{
                     if(Constants.currentUser!=null){
                       if(Constants.APPLE_PAY_STATE){
-                        MyUtils.navigate(context, AddCartScreen());
+                        MyUtils.navigate(context, RegistrationScreen(fromaddcard: true));
                       }else{
                         await Fluttertoast.showToast(msg:tr("Your request has been successfully received") );
                       }
                     }else{
-                      MyUtils.navigate(context, RegistrationScreen());
+                      MyUtils.navigate(context, RegistrationScreen(fromaddcard: true));
                     }
                   }
 

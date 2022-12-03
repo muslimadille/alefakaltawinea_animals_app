@@ -14,7 +14,8 @@ import '../../utils/my_utils/myUtils.dart';
 import '../../utils/my_widgets/action_bar_widget.dart';
 
 class RegistrationScreen extends StatefulWidget {
-  const RegistrationScreen({Key? key}) : super(key: key);
+  bool fromaddcard;
+  RegistrationScreen({Key? key,this.fromaddcard=false}) : super(key: key);
 
   @override
   _RegistrationScreenState createState() => _RegistrationScreenState();
@@ -491,7 +492,8 @@ class _RegistrationScreenState extends State<RegistrationScreen> with InputValid
           _emailController.text,
           _phoneController.text,
           _passwordController.text,
-          _confirmPasswordController.text);
+          _confirmPasswordController.text,
+      fromaddcard: widget.fromaddcard);
     } else {
       if (_accept) {
         setState(() {

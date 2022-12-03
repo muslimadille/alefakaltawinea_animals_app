@@ -61,7 +61,7 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
       _initPref(context);
       //setLocal();
-      await appStataProviderModel!.getAppActiveState();
+      await appStataProviderModel!.getAppActiveState(context);
       await appStataProviderModel!.getApplePayState();
       login();
     });
