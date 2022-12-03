@@ -6,6 +6,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/my_fonts.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/action_bar_widget.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:dots_indicator/dots_indicator.dart';
@@ -93,7 +94,7 @@ class _NotificationDetailsScreenState extends State<NotificationDetailsScreen> {
                   margin: EdgeInsets.only(top: D.default_10),
                   child: Center(child: Text(
                     widget.notificationModel.shop!.name!
-                    ,style: S.h2(color:C.BASE_BLUE),),)),
+                    ,style: S.h4(color:C.BASE_BLUE,font: MyFonts.VazirBlack),),)),
               Container(
                 color: Colors.white,
                 width: double.infinity,

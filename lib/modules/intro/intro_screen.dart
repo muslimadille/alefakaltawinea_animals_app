@@ -12,13 +12,21 @@ import '../cart/add_cart_screen.dart';
 import '../categories_screen/mainCategoriesScreen.dart';
 
 class IntroScreen extends StatefulWidget {
-  const IntroScreen({Key? key}) : super(key: key);
+  bool fromaddcard;
+  IntroScreen({Key? key,this.fromaddcard=false}) : super(key: key);
 
   @override
   _IntroScreenState createState() => _IntroScreenState();
 }
 
 class _IntroScreenState extends State<IntroScreen> {
+  @override
+  void initState() {
+    if(widget.fromaddcard){
+      MyUtils.navigate(context, AddCartScreen());
+    }
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return  BaseScreen(

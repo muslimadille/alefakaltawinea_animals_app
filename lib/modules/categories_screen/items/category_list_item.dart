@@ -69,10 +69,10 @@ class _CategoryListItemState extends State<CategoryListItem> {
           margin: EdgeInsets.only(top:D.default_5),
         ),
       Container(
-        height: D.default_30,
+        height: D.default_35,
         child: Center(
           child: Text(widget.title,
-              style: S.h2(color: Colors.white)),
+              style: S.h1(color: Colors.white)),
         ),)],),);
   }
 }

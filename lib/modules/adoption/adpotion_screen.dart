@@ -228,7 +228,7 @@ Widget _noData(){
           Container(
             child: Center(
               child: Text(
-                adoptionProviderModel!.animalPagerListModel!.data![index].type!,
+                adoptionProviderModel!.animalPagerListModel!.data![index].name!,
                 style: S.h1(color: C.BASE_BLUE),
               ),
             ),

@@ -4,6 +4,7 @@ import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/my_fonts.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -84,7 +85,7 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
                 margin: EdgeInsets.only(top: D.default_10),
                   child: Center(child: Text(
                 widget.serviceProviderData.name!
-                ,style: S.h2(color:C.BASE_BLUE),),)),
+                ,style: S.h4(color:C.BASE_BLUE,font: MyFonts.VazirBlack),),)),
               Container(
                 color: Colors.white,
                 width: double.infinity,

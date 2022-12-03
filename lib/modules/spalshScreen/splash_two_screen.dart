@@ -235,7 +235,7 @@ Widget _buttonsPart(){
   });
   Widget _buyCardbutton() {
     return Positioned(child: InkWell(onTap: () {
-      MyUtils.navigate(context, RegistrationScreen());
+      MyUtils.navigate(context, RegistrationScreen(fromaddcard: true));
     }, child: Container(
       padding: EdgeInsets.all(D.default_5),
       height: D.default_60,

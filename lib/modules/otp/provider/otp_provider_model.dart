@@ -1,5 +1,7 @@
 import 'package:alefakaltawinea_animals_app/data/dio/my_rasponce.dart';
+import 'package:alefakaltawinea_animals_app/modules/cart/add_cart_screen.dart';
 import 'package:alefakaltawinea_animals_app/modules/categories_screen/mainCategoriesScreen.dart';
+import 'package:alefakaltawinea_animals_app/modules/intro/intro_screen.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/data/user_data.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/provider/user_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/otp/data/otp_api.dart';
@@ -22,7 +24,7 @@ class OtpProviderModel with ChangeNotifier{
     notifyListeners();
   }
   ///......active account....................
-  activeAccount(String phone,String code,BuildContext ctx) async {
+  activeAccount(String phone,String code,BuildContext ctx,{bool fromaddcard=false}) async {
     setIsLoading(true);
     MyResponse<UserData> response =
     await otpApi.activeAccount(phone,code);
@@ -30,7 +32,13 @@ class OtpProviderModel with ChangeNotifier{
       Constants.currentUser=response.data;
       Apis.TOKEN_VALUE=Constants.currentUser!.token!;
       setIsLoading(false);
-      MyUtils.navigateAsFirstScreen(ctx, MainCategoriesScreen());
+      if(Constants.APPLE_PAY_STATE){
+
+          MyUtils.navigateAsFirstScreen(ctx, IntroScreen(fromaddcard:fromaddcard));
+
+      }else{
+        MyUtils.navigateAsFirstScreen(ctx, MainCategoriesScreen());
+      }
     }else if(response.status == Apis.CODE_SHOW_MESSAGE){
       print("login error: ${response.msg}");
       setIsLoading(false);
