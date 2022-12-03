@@ -94,8 +94,10 @@ class _NotificationOfferCodeScreenState extends State<NotificationOfferCodeScree
   Widget _cartItem(int index){
     return Directionality(textDirection: TextDirection.ltr, child:
     Container(
-        padding: EdgeInsets.only(left: D.default_5,right: D.default_5),
-        margin: EdgeInsets.only(top:D.default_10+(D.default_100*index),bottom: D.default_10,left: D.default_20,right: D.default_20),        width: MediaQuery.of(context).size.width*7,
+        margin: EdgeInsets.only(
+            top:D.default_10+(D.default_100*index),
+            bottom: D.default_10,
+            ),
         child: InkWell(
           onTap: (){
             setState(() {

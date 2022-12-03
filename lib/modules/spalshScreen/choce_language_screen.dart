@@ -96,7 +96,7 @@ class _ChoceLanguageScreenState extends State<ChoceLanguageScreen> {
   Widget _cartWithAnimalsImage() {
     return Positioned(child: TransitionImage(
       "assets/images/cart_with_animals.png",
-      height: MediaQuery.of(context).size.height * 0.26,
+      height: MediaQuery.of(context).size.height * 0.22,
       fit: BoxFit.fitHeight,
     ),top:D.default_10,);
   }
