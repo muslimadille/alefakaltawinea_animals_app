@@ -60,7 +60,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             _textCart(),
             _orangeCart(),
             _navigationPart(),
-            _buyCardbutton()
+            Constants.APPLE_PAY_STATE?_buyCardbutton():Container()
+
           ],
         )),);
   }
@@ -94,7 +95,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   Widget _cartWithAnimalsImage() {
     return Positioned(child: TransitionImage(
       "assets/images/cart_with_animals.png",
-      height: MediaQuery.of(context).size.height * 0.28,
+      height: D.height(20),
       fit: BoxFit.fitHeight,
     ),top:D.default_10,);
   }
@@ -105,12 +106,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         _buttonsPart(),
-        (Constants.prefs!.getBool(Constants.TERMS_CHECK)??true)?_termsPart():Container(height: D.default_40,)
+        (Constants.prefs!.getBool(Constants.TERMS_CHECK)??true)?_termsPart():Container(height: D.height(40),)
       ],),),bottom: 0,);
   }
   Widget _termsPart(){
     return Container(
-      height: D.default_40,
+      height: D.height(7),
       margin: EdgeInsets.only(bottom: D.default_30,left: D.default_20,right: D.default_20),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -237,14 +238,11 @@ Widget _buttonsPart(){
     return Positioned(child: InkWell(onTap: () {
       MyUtils.navigate(context, RegistrationScreen(fromaddcard: true));
     }, child: Container(
-      padding: EdgeInsets.all(D.default_5),
-      height: D.default_60,
-      width: D.default_200,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(D.default_100),),
       ),
       child: Center(child: Container(
-        padding: EdgeInsets.all(D.default_5),
+        padding: EdgeInsets.only(top:D.default_5,bottom: D.default_5,left: D.default_15,right: D.default_15),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.all(Radius.circular(D.default_100),),
           color: Colors.white,

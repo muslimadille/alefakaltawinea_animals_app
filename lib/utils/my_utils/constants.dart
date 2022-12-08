@@ -27,6 +27,8 @@ class Constants extends Object{
   static String IS_FIRST_TIME="IS_FIRST_TIME";
   static String TERMS_CHECK="TERMS_CHECK";
   static double DEVICE_RATIO=0.0;
+  static double DEVICE_HEIGHT=0.0;
+  static double DEVICE_WIDTH=0.0;
 
 
 

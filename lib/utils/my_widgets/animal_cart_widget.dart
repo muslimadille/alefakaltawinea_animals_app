@@ -26,7 +26,7 @@ class _AnimalCartWidgetState extends State<AnimalCartWidget> {
             padding: EdgeInsets.only(left: D.size(2), right: D.size(2)),
             margin: EdgeInsets.only(
                 top: D.size(4), left: D.size(4), right: D.size(4)),
-            width: MediaQuery.of(context).size.width * 7,
+            width: D.size(180),
             height: D.size(104),
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -35,11 +35,11 @@ class _AnimalCartWidgetState extends State<AnimalCartWidget> {
             ),
             child: Stack(
               alignment: AlignmentDirectional.center,
-              fit: StackFit.expand,
+              fit: StackFit.loose,
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.7,
-                  height: D.default_230,
+                  width: D.size(180),
+                  height: D.size(104),
                   child: Column(
                     children: [
                       ///black banner

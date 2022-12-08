@@ -5,14 +5,14 @@ import 'appConfig.dart';
 
 class D {
   ///**** Font Sizes */
-  static final h1 = 20.sp;
-  static final h2 = 18.sp;
-  static final h3 = 16.sp;
-  static final h4 = 15.sp;
-  static final h5 = 13.sp;
-  static final h6 = 11.sp;
+  static final h1 = 20.sp*(Constants.DEVICE_RATIO>1.6?1:0.7);
+  static final h2 = 18.sp*(Constants.DEVICE_RATIO>1.6?1:0.7);
+  static final h3 = 16.sp*(Constants.DEVICE_RATIO>1.6?1:0.7);
+  static final h4 = 15.sp*(Constants.DEVICE_RATIO>1.6?1:0.7);
+  static final h5 = 13.sp*(Constants.DEVICE_RATIO>1.6?1:0.7);
+  static final h6 = 11.sp*(Constants.DEVICE_RATIO>1.6?1:0.7);
   static double size(double value){
-    return value*Constants.DEVICE_RATIO;
+    return value*Constants.DEVICE_RATIO*(Constants.DEVICE_RATIO>1.6?1:2.5);
   }
 
   static final default_1 = size(0.4);
