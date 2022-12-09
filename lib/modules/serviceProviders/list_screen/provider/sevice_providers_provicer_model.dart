@@ -45,7 +45,6 @@ class ServiceProvidersProviderModel with ChangeNotifier {
       if(page>1){
         serviceProviderModel!.data!.addAll(model.data!);
         notifyListeners();
-
       }else{
         setServiceProviderModel(response.data);
       }

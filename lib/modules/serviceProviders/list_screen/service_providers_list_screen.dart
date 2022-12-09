@@ -29,6 +29,8 @@ class _ServiceProviderListScreenState extends State<ServiceProviderListScreen>  
   BottomBarProviderModel?bottomBarProviderModel;
   ServiceProvidersProviderModel? serviceProvidersProviderModel;
   int _currentLoadedPage=1;
+  ScrollController? controller;
+
   RefreshController _refreshController =
   RefreshController(initialRefresh: false);
   GlobalKey _contentKey = GlobalKey();
@@ -37,6 +39,8 @@ class _ServiceProviderListScreenState extends State<ServiceProviderListScreen>  
   @override
   void initState() {
     super.initState();
+    controller = ScrollController()..addListener(_scrollListener);
+
     ///bottom bar selection
     bottomBarProviderModel=Provider.of<BottomBarProviderModel>(context,listen: false);
     bottomBarProviderModel!.setSelectedScreen(0);
@@ -65,7 +69,7 @@ class _ServiceProviderListScreenState extends State<ServiceProviderListScreen>  
           loadStyle: LoadStyle.ShowWhenLoading,
           completeDuration: Duration(milliseconds: 500),
         ),
-        onRefresh: () async {
+        /*onRefresh: () async {
           _currentLoadedPage=1;
           serviceProvidersProviderModel!.getServiceProvidersList(widget.selectedCategory!.id!, _currentLoadedPage);
         },
@@ -73,47 +77,33 @@ class _ServiceProviderListScreenState extends State<ServiceProviderListScreen>  
           _currentLoadedPage=_currentLoadedPage+1;
           await serviceProvidersProviderModel!.getServiceProvidersList(widget.selectedCategory!.id!, _currentLoadedPage);
           _refreshController.loadComplete();
-        },
+        },*/
+
+
       )
       ,)
     ],));
   }
   Widget _listitem(){
-    return serviceProvidersProviderModel!.serviceProviderModel!.data!.isNotEmpty?ListView.builder(
-        itemCount: serviceProvidersProviderModel!.serviceProviderModel!.data!.length,
+    return serviceProvidersProviderModel!.serviceProviderModel!.data!.isNotEmpty?Container(
+      margin: EdgeInsets.only(bottom: D.default_10),
+      child: ListView.builder(
+          controller: controller,
+          itemCount: serviceProvidersProviderModel!.serviceProviderModel!.data!.length,
         padding: EdgeInsets.all(D.default_10),
         itemBuilder: (context,index){
           return  ServiceProviderListItem(index,serviceProvidersProviderModel,color:Color(int.parse(widget.selectedCategory!.color!.replaceAll("#", "0xff"))) ,);
-        }):Center(child: Column(
+        }),):Center(child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(tr("no_offers"),style: S.h3(color:Color(int.parse(widget.selectedCategory!.color!.replaceAll("#", "0xff"))) ),)
       ],),);
   }
-  Widget _actionBar(){
-    return Container(
-      height: D.default_70,
-      decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(0),
-          color: Colors.white,
-          boxShadow:[BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              offset:Offset(2,2),
-              blurRadius:2,
-              spreadRadius: 2
-          )]
-      ),
-      child: Center(
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-
-            Expanded(child: Center(child: Text("${widget.title}",style: S.h1(color: C.BASE_BLUE),),))
-
-          ],),
-      ),
-    );
+  void _scrollListener() {
+    print(controller!.position.extentAfter);
+    if (controller!.position.extentAfter < serviceProvidersProviderModel!.serviceProviderModel!.data!.length-1) {
+      _currentLoadedPage=_currentLoadedPage+1;
+       serviceProvidersProviderModel!.getServiceProvidersList(widget.selectedCategory!.id!, _currentLoadedPage);
+    }
   }
-
 }
