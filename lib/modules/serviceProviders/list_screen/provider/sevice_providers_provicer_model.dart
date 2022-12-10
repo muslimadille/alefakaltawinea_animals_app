@@ -34,6 +34,7 @@ class ServiceProvidersProviderModel with ChangeNotifier {
   ServiceProviderModel? searchServiceProviderModel;
   GetServiceProvidersApi getServiceProvidersApi=GetServiceProvidersApi();
   getServiceProvidersList(int categoryId,int page,{String lat="",String long="",String keyword="",String state_id=""}) async {
+    setIsLoading(true);
     if(page==1) {
       serviceProviderModel = null;
       setIsLoading(true);

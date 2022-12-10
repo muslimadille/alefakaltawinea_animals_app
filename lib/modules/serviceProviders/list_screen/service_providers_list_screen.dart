@@ -12,6 +12,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 
@@ -56,33 +57,19 @@ class _ServiceProviderListScreenState extends State<ServiceProviderListScreen>  
       tag: "ServiceProviderListScreen",
       showBottomBar: true,
       showSettings: false,
-        body: Column(children: [
-          ActionBarWidget(widget.title, context,showSearch: serviceProvidersProviderModel!.serviceProviderModel!=null?serviceProvidersProviderModel!.serviceProviderModel!.data!.isNotEmpty:false,
-          backgroundColor: C.BASE_BLUE),
-      Expanded(child:serviceProvidersProviderModel!.isLoading?LoadingProgress():SmartRefresher(
-        key: _refresherKey,
-        controller: _refreshController,
-        enablePullUp: true,
-        child: Container(color:C.BASE_ORANGE,child: _listitem(),),
-        physics: BouncingScrollPhysics(),
-        footer: ClassicFooter(
-          loadStyle: LoadStyle.ShowWhenLoading,
-          completeDuration: Duration(milliseconds: 500),
-        ),
-        /*onRefresh: () async {
-          _currentLoadedPage=1;
-          serviceProvidersProviderModel!.getServiceProvidersList(widget.selectedCategory!.id!, _currentLoadedPage);
-        },
-        onLoading: () async {
-          _currentLoadedPage=_currentLoadedPage+1;
-          await serviceProvidersProviderModel!.getServiceProvidersList(widget.selectedCategory!.id!, _currentLoadedPage);
-          _refreshController.loadComplete();
-        },*/
+        body: Container(
+            color:C.BASE_ORANGE,
+          child: Column(children: [
+            ActionBarWidget(widget.title, context,showSearch: serviceProvidersProviderModel!.serviceProviderModel!=null?serviceProvidersProviderModel!.serviceProviderModel!.data!.isNotEmpty:false,
+            backgroundColor: C.BASE_BLUE),
 
-
-      )
-      ,)
-    ],));
+      Expanded(child:serviceProvidersProviderModel!.isLoading&&((serviceProvidersProviderModel!.serviceProviderModel)!=null?serviceProvidersProviderModel!.serviceProviderModel!.data!.isEmpty:true)?LoadingProgress():_listitem()),
+            serviceProvidersProviderModel!.serviceProviderModel!=null?serviceProvidersProviderModel!.isLoading&&serviceProvidersProviderModel!.serviceProviderModel!.data!.isNotEmpty?
+            Container(height: D.default_60,width: D.default_250,child: Center(child: SpinKitCircle(
+              color: Colors.white,
+            ),),):Container():Container()
+    ],),
+        ));
   }
   Widget _listitem(){
     return serviceProvidersProviderModel!.serviceProviderModel!.data!.isNotEmpty?Container(
@@ -96,7 +83,7 @@ class _ServiceProviderListScreenState extends State<ServiceProviderListScreen>  
         }),):Center(child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(tr("no_offers"),style: S.h3(color:Color(int.parse(widget.selectedCategory!.color!.replaceAll("#", "0xff"))) ),)
+        Text(tr("no_offers"),style: S.h3(color:Colors.white,))
       ],),);
   }
   void _scrollListener() {
