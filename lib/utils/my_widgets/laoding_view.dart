@@ -9,7 +9,7 @@ class LoadingProgress extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white.withOpacity(0.5),
+      color: Colors.transparent,
       width: double.infinity,
       height: double.infinity,
       child:Center(child: Container(
@@ -17,7 +17,7 @@ class LoadingProgress extends StatelessWidget {
         height: D.default_100,
         padding: EdgeInsets.all(D.default_10),
         decoration:  BoxDecoration(
-          color: Colors.white,
+          color: Colors.transparent,
           borderRadius: BorderRadius.all(Radius.circular(D.default_5)),
         ),
         child: const SpinKitCircle(

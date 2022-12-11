@@ -20,7 +20,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 class ServiceProviderListScreen extends StatefulWidget {
   CategoriesDataModel? selectedCategory;
   String title;
-  ServiceProviderListScreen(this.selectedCategory,this.title);
+   ServiceProviderListScreen(this.selectedCategory,this.title);
 
   @override
   _ServiceProviderListScreenState createState() => _ServiceProviderListScreenState();
@@ -42,33 +42,37 @@ class _ServiceProviderListScreenState extends State<ServiceProviderListScreen>  
     super.initState();
     controller = ScrollController()..addListener(_scrollListener);
 
-    ///bottom bar selection
-    bottomBarProviderModel=Provider.of<BottomBarProviderModel>(context,listen: false);
-    bottomBarProviderModel!.setSelectedScreen(0);
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
 
-    ///service providers data
-    serviceProvidersProviderModel=Provider.of<ServiceProvidersProviderModel>(context,listen: false);
-    serviceProvidersProviderModel!.getServiceProvidersList(widget.selectedCategory!.id!, _currentLoadedPage);
+      ///bottom bar selection
+      bottomBarProviderModel=Provider.of<BottomBarProviderModel>(context,listen: false);
+      bottomBarProviderModel!.setSelectedScreen(0);
+
+      ///service providers data
+      serviceProvidersProviderModel=Provider.of<ServiceProvidersProviderModel>(context,listen: false);
+      serviceProvidersProviderModel!.getServiceProvidersList(widget.selectedCategory!.id!, _currentLoadedPage);
+    });
+
   }
   @override
   Widget build(BuildContext context) {
     serviceProvidersProviderModel=Provider.of<ServiceProvidersProviderModel>(context,listen: true);
     return BaseScreen(
-        tag: "ServiceProviderListScreen",
-        showBottomBar: true,
-        showSettings: false,
+      tag: "ServiceProviderListScreen",
+      showBottomBar: true,
+      showSettings: false,
         body: Container(
-          color:C.BASE_ORANGE,
+            color:C.BASE_ORANGE,
           child: Column(children: [
             ActionBarWidget(widget.title, context,showSearch: serviceProvidersProviderModel!.serviceProviderModel!=null?serviceProvidersProviderModel!.serviceProviderModel!.data!.isNotEmpty:false,
-                backgroundColor: C.BASE_BLUE),
+            backgroundColor: C.BASE_BLUE),
 
-            Expanded(child:serviceProvidersProviderModel!.isLoading&&((serviceProvidersProviderModel!.serviceProviderModel)!=null?serviceProvidersProviderModel!.serviceProviderModel!.data!.isEmpty:true)?LoadingProgress():_listitem()),
+      Expanded(child:serviceProvidersProviderModel!.isLoading&&((serviceProvidersProviderModel!.serviceProviderModel)!=null?serviceProvidersProviderModel!.serviceProviderModel!.data!.isEmpty:true)?LoadingProgress():_listitem()),
             serviceProvidersProviderModel!.serviceProviderModel!=null?serviceProvidersProviderModel!.isLoading&&serviceProvidersProviderModel!.serviceProviderModel!.data!.isNotEmpty?
             Container(height: D.default_60,width: D.default_250,child: Center(child: SpinKitCircle(
               color: Colors.white,
             ),),):Container():Container()
-          ],),
+    ],),
         ));
   }
   Widget _listitem(){
@@ -77,10 +81,10 @@ class _ServiceProviderListScreenState extends State<ServiceProviderListScreen>  
       child: ListView.builder(
           controller: controller,
           itemCount: serviceProvidersProviderModel!.serviceProviderModel!.data!.length,
-          padding: EdgeInsets.all(D.default_10),
-          itemBuilder: (context,index){
-            return  ServiceProviderListItem(index,serviceProvidersProviderModel,color:Color(int.parse(widget.selectedCategory!.color!.replaceAll("#", "0xff"))) ,);
-          }),):Center(child: Column(
+        padding: EdgeInsets.all(D.default_10),
+        itemBuilder: (context,index){
+          return  ServiceProviderListItem(index,serviceProvidersProviderModel,color:Color(int.parse(widget.selectedCategory!.color!.replaceAll("#", "0xff"))) ,);
+        }),):Center(child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(tr("no_offers"),style: S.h3(color:Colors.white,))
@@ -90,7 +94,7 @@ class _ServiceProviderListScreenState extends State<ServiceProviderListScreen>  
     print(controller!.position.extentAfter);
     if (controller!.position.extentAfter < serviceProvidersProviderModel!.serviceProviderModel!.data!.length-1) {
       _currentLoadedPage=_currentLoadedPage+1;
-      serviceProvidersProviderModel!.getServiceProvidersList(widget.selectedCategory!.id!, _currentLoadedPage);
+       serviceProvidersProviderModel!.getServiceProvidersList(widget.selectedCategory!.id!, _currentLoadedPage);
     }
   }
 }
