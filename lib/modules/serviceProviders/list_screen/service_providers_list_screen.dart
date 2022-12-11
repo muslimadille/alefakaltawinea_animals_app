@@ -42,13 +42,17 @@ class _ServiceProviderListScreenState extends State<ServiceProviderListScreen>  
     super.initState();
     controller = ScrollController()..addListener(_scrollListener);
 
-    ///bottom bar selection
-    bottomBarProviderModel=Provider.of<BottomBarProviderModel>(context,listen: false);
-    bottomBarProviderModel!.setSelectedScreen(0);
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
 
-    ///service providers data
-    serviceProvidersProviderModel=Provider.of<ServiceProvidersProviderModel>(context,listen: false);
-    serviceProvidersProviderModel!.getServiceProvidersList(widget.selectedCategory!.id!, _currentLoadedPage);
+      ///bottom bar selection
+      bottomBarProviderModel=Provider.of<BottomBarProviderModel>(context,listen: false);
+      bottomBarProviderModel!.setSelectedScreen(0);
+
+      ///service providers data
+      serviceProvidersProviderModel=Provider.of<ServiceProvidersProviderModel>(context,listen: false);
+      serviceProvidersProviderModel!.getServiceProvidersList(widget.selectedCategory!.id!, _currentLoadedPage);
+    });
+
   }
   @override
   Widget build(BuildContext context) {

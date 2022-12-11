@@ -34,15 +34,17 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) async {
+      ///bottom bar selection
+      bottomBarProviderModel =
+          Provider.of<BottomBarProviderModel>(context, listen: false);
 
-    ///bottom bar selection
-    bottomBarProviderModel =
-        Provider.of<BottomBarProviderModel>(context, listen: false);
+      ///notifications data
+      notificationProvider =
+          Provider.of<NotificationProvider>(context, listen: false);
+      notificationProvider!.getNotificationsList();
+    });
 
-    ///notifications data
-    notificationProvider =
-        Provider.of<NotificationProvider>(context, listen: false);
-    notificationProvider!.getNotificationsList();
   }
 
   @override
@@ -53,65 +55,69 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
         tag: "NotificationsScreen",
         showBottomBar: true,
         showSettings: false,
-        body: Column(
-          children: [
-            ActionBarWidget(tr('noti_screen_title'), context),
-            Expanded(
-              child: notificationProvider!.isLoading
-                  ? LoadingProgress()
-                  : _listitem(),
-            )
-          ],
-        ));
+        body: Consumer<NotificationProvider>(builder: (context,provider,child){
+          return Column(
+            children: [
+              ActionBarWidget(tr('noti_screen_title'), context),
+              Expanded(
+                child: provider.isLoading
+                    ? LoadingProgress()
+                    : _listitem(),
+              )
+            ],
+          );
+        },));
   }
 
   Widget _listitem() {
-    return notificationProvider!.notificationsList.isNotEmpty
-        ? ListView.builder(
-            itemCount: notificationProvider!.notificationsList.length,
-            padding: EdgeInsets.only(top: D.default_10, bottom: D.default_10),
-            itemBuilder: (context, index) {
-              return InkWell(
-                onTap: () {
-                  MyUtils.navigate(
-                      context,
-                      NotificationDetailsScreen(
-                          notificationProvider!.notificationsList[index]));
-                },
-                child: Container(
-                  margin:
-                      EdgeInsets.only(top: D.default_10, bottom: D.default_10),
-                  height: D.default_80,
-                  width: double.infinity,
-                  color: C.BASE_BLUE,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: EdgeInsets.only(
-                            left: D.default_10, right: D.default_10),
-                        child: TransitionImage(
-                          notificationProvider!
-                                  .notificationsList[index].shop!.photo ??
-                              "",
-                          fit: BoxFit.cover,
-                          width: D.default_80,
-                          height: D.default_80,
-                          padding: EdgeInsets.all(D.default_10),
-                          backgroundColor: Colors.white,
-                        ),
+    return Consumer<NotificationProvider>(builder: (context,provider,child){
+      return provider.notificationsList.isNotEmpty
+          ? ListView.builder(
+          itemCount: provider.notificationsList.length,
+          padding: EdgeInsets.only(top: D.default_10, bottom: D.default_10),
+          itemBuilder: (context, index) {
+            return InkWell(
+              onTap: () {
+                MyUtils.navigate(
+                    context,
+                    NotificationDetailsScreen(
+                        provider.notificationsList[index]));
+              },
+              child: Container(
+                margin:
+                EdgeInsets.only(top: D.default_10, bottom: D.default_10),
+                height: D.default_80,
+                width: double.infinity,
+                color: C.BASE_BLUE,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      margin: EdgeInsets.only(
+                          left: D.default_10, right: D.default_10),
+                      child: TransitionImage(
+                        provider
+                            .notificationsList[index].shop!.photo ??
+                            "",
+                        fit: BoxFit.cover,
+                        width: D.default_80,
+                        height: D.default_80,
+                        padding: EdgeInsets.all(D.default_10),
+                        backgroundColor: Colors.white,
                       ),
-                      Expanded(
-                          child: Text(
-                        notificationProvider!.notificationsList[index].title!,
-                        style: S.h4(color:Colors.white,font: MyFonts.VazirBlack),
-                      ))
-                    ],
-                  ),
+                    ),
+                    Expanded(
+                        child: Text(
+                          provider.notificationsList[index].title!,
+                          style: S.h4(color:Colors.white,font: MyFonts.VazirBlack),
+                        ))
+                  ],
                 ),
-              );
-            })
-        : _noData();
+              ),
+            );
+          })
+          : _noData();
+    },);
   }
 
   Widget _noData() {
