@@ -57,10 +57,10 @@ class _SplashScreenState extends State<SplashScreen> with TickerProviderStateMix
     appStataProviderModel=Provider.of<AppStataProviderModel>(context,listen:false);
     userProviderModel=Provider.of<UserProviderModel>(context,listen: false);
     adsSliderProviderModel=Provider.of<AdsSliderProviderModel>(context,listen: false);
-    adsSliderProviderModel!.getAdsSlider();
     WidgetsBinding.instance!.addPostFrameCallback((_) async {
       _initPref(context);
       //setLocal();
+      adsSliderProviderModel!.getAdsSlider();
       await appStataProviderModel!.getAppActiveState(context);
       await appStataProviderModel!.getApplePayState();
       login();
