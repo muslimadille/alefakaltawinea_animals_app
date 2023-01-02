@@ -1,6 +1,7 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/categories_screen/data/categories_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/homeTabsScreen/provider/bottom_bar_provider_model.dart';
+import 'package:alefakaltawinea_animals_app/modules/notifications/notification_offers_details_screen.dart';
 import 'package:alefakaltawinea_animals_app/modules/notifications/provider/notification_provider.dart';
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/details_screen/service_provider_details_screen.dart';
 import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen/items/service_provider_list_item.dart';
@@ -78,10 +79,15 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
           itemBuilder: (context, index) {
             return InkWell(
               onTap: () {
-                MyUtils.navigate(
+                /*MyUtils.navigate(
                     context,
                     NotificationDetailsScreen(
-                        provider.notificationsList[index]));
+                        provider.notificationsList[index]));*/
+                for(int i=0;i<provider.notificationsList[index].shop!.offers!.length;i++){
+                  if(provider.notificationsList[index].id==provider.notificationsList[index].shop!.offers![i].id){
+                    MyUtils.navigate(context, NotificationOfferDetailsScreen(provider.notificationsList[index].shop!,i));
+                  }
+                }
               },
               child: Container(
                 margin:
