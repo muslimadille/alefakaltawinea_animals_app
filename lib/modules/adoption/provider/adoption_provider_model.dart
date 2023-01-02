@@ -30,6 +30,8 @@ class AdoptionProviderModel with ChangeNotifier{
   AnimalPagerListModel? animalPagerListModel;
   AnimalPagerListModel? myAnimalsPagerListModel;
   List<AnimalData> myAnimalsFilteredList=[];
+  List<AnimalData> animalsFilteredList=[];
+
   setMyAnimalsFilteredList(String categoryId){
     myAnimalsFilteredList.clear();
     for(int i=0;i<myAnimalsPagerListModel!.data!.length;i++){
@@ -57,12 +59,21 @@ class AdoptionProviderModel with ChangeNotifier{
     notifyListeners();
 
   }
-  getAnimals(int categoryId) async {
+  getAnimals(int categoryId,int page) async {
     setIsLoading(true);
+    if(page==1) {
+      animalPagerListModel = null;
+      setIsLoading(true);
+    }
     MyResponse<AnimalPagerListModel> response =
-    await adoptionApi.getAnimals(categoryId);
+    await adoptionApi.getAnimals(categoryId,page);
     if (response.status == Apis.CODE_SUCCESS &&response.data!=null){
-      setAnimalsPager(response.data);
+      if(page>1){
+        animalPagerListModel!.data!.addAll(response.data.data);
+        notifyListeners();
+      }else{
+        setAnimalsPager(response.data);
+      }
       setIsLoading(false);
     }else if(response.status == Apis.CODE_SUCCESS &&response.data==null){
       setIsLoading(false);
@@ -94,7 +105,7 @@ class AdoptionProviderModel with ChangeNotifier{
     await adoptionApi.setAdoptionAnimal(body);
     if (response.status == Apis.CODE_SUCCESS){
       setIsLoading(false);
-      getAnimals(categoryId);
+      getAnimals(categoryId,1);
       Navigator.of(ctx).pop();
       await Fluttertoast.showToast(msg: "${response.msg}");
     }else if(response.status == Apis.CODE_SUCCESS &&response.data==null){
@@ -144,7 +155,7 @@ class AdoptionProviderModel with ChangeNotifier{
   void setCategoriesList(List<AdoptionCategoriesModel> value){
     categoriesList.addAll(value);
     if(categoriesList.isNotEmpty){
-      getAnimals(categoriesList[0].id!);
+      getAnimals(categoriesList[0].id!,1);
     }
     getMyAnimals();
     notifyListeners();

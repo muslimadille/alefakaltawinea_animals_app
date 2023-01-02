@@ -13,6 +13,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.da
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
 
 import 'add_adoption_screen.dart';
@@ -29,10 +30,12 @@ class AdoptionScreen extends StatefulWidget {
 
 class _AdoptionScreenState extends State<AdoptionScreen> {
   AdoptionProviderModel? adoptionProviderModel;
-  int selectedTab=0;
+  int _currentLoadedPage=1;
+  ScrollController? controller;
   @override
   void initState() {
     super.initState();
+    controller = ScrollController()..addListener(_scrollListener);
     adoptionProviderModel=Provider.of<AdoptionProviderModel>(context,listen: false);
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       adoptionProviderModel!.getCategoriesList();
@@ -68,7 +71,18 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                           Expanded(child: _addBtn(),),
                           Expanded(child: _myOffersBtn(),),
                         ],),
-                        adoptionProviderModel!.isLoading||adoptionProviderModel!.animalPagerListModel==null?Expanded(child: LoadingProgress()): Expanded(flex: 1,child: _animalsList())
+                        adoptionProviderModel!.isLoading&&adoptionProviderModel!.animalPagerListModel==null?Expanded(child: LoadingProgress()):
+                        adoptionProviderModel!.animalPagerListModel==null?Container():Expanded(flex: 1,child: Stack(children: [
+                          _animalsList(),
+                          (adoptionProviderModel!.isLoading&&(adoptionProviderModel!.animalPagerListModel!.data??[]).isNotEmpty)?Container(
+                            height: MediaQuery.of(context).size.height,
+                            width: MediaQuery.of(context).size.width,
+                          ):Container()
+                        ],)),
+                        adoptionProviderModel!.animalPagerListModel==null?Container():
+                        (adoptionProviderModel!.isLoading&&(adoptionProviderModel!.animalPagerListModel!.data??[]).isNotEmpty)?Container(height: D.default_60,width: D.default_250,child: Center(child: SpinKitCircle(
+                          color: C.ADAPTION_COLOR,
+                        ),),):Container()
                       ],
                     ),))
             ],
@@ -145,8 +159,9 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
                 margin: EdgeInsets.all(D.default_10),
                 child: InkWell(
                   onTap: (){
+                    _currentLoadedPage=1;
                     adoptionProviderModel!.setSelectedCategoryIndex(index);
-                    adoptionProviderModel!.getAnimals(adoptionProviderModel!.categoriesList[index].id!);
+                    adoptionProviderModel!.getAnimals(adoptionProviderModel!.categoriesList[index].id!,1);
                   },
                   child:
                   TransitionImage(
@@ -166,7 +181,9 @@ class _AdoptionScreenState extends State<AdoptionScreen> {
   Widget _animalsList() {
     return adoptionProviderModel!.animalPagerListModel!.data!.isNotEmpty?Container(
       padding: EdgeInsets.all(D.default_10),
-      child: CustomScrollView(slivers: [
+      child: CustomScrollView(
+        controller: controller,
+          slivers: [
       SliverGrid(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
@@ -242,22 +259,15 @@ Widget _noData(){
       ),
     ));
   }
-
-  List<adoptionCategory> categories = [
-    adoptionCategory(),
-    adoptionCategory(),
-    adoptionCategory(),
-    adoptionCategory(),
-    adoptionCategory(),
-    adoptionCategory(),
-    adoptionCategory()
-  ];
+  void _scrollListener() {
+    print(controller!.position.extentAfter);
+    if (controller!.position.extentAfter <1) {
+      _currentLoadedPage=_currentLoadedPage+1;
+      adoptionProviderModel!.getAnimals(adoptionProviderModel!.categoriesList[adoptionProviderModel!.selectedCategoryIndex??0].id!,_currentLoadedPage);
+    }
+  }
 }
-Widget _registerPopUp(){
-  return Container(
 
-  );
-}
 
 class adoptionCategory {
   String name = "test";

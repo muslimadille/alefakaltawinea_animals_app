@@ -11,8 +11,8 @@ import 'animal_pager_list_model.dart';
 
 class AdaptionApi{
 
-  Future<MyResponse<AnimalPagerListModel>> getAnimals(int categoryId) async {
-    final url = "${Apis.GET_ADOPTION_ANIMALS}?category_id=$categoryId";
+  Future<MyResponse<AnimalPagerListModel>> getAnimals(int categoryId,int page) async {
+    final url = "${Apis.GET_ADOPTION_ANIMALS}?category_id=$categoryId&page=$page";
     final response = await BaseDioUtils.request(BaseDioUtils.REQUEST_GET, url);
     if (response != null && response.statusCode == 200) {
       return MyResponse<AnimalPagerListModel>.fromJson(
