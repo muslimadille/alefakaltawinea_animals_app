@@ -24,6 +24,14 @@ class Apis{
   static String FORGET_PASSWORD="${BASE_URL}/set-new-password";//used after GET_AUTH_CODE
   static String UPDATE_PROFILE="${BASE_URL}/update-profile";//used after GET_AUTH_CODE
   static String CHANGE_PASSWORD="${BASE_URL}/change-password";//used after GET_AUTH_CODE
+  static String DELETE_ACCOUNT="${BASE_URL}/delete-account";//used after GET_AUTH_CODE
+  static String CONTACT_US="${BASE_URL}/contact-us";
+  static String REGISTER_SHOP="${BASE_URL}/register-shop";
+
+
+
+
+
 
 
   ///......... adoption...............................
@@ -52,6 +60,7 @@ class Apis{
   static String USE_OFFER="${BASE_URL}/use-offer";
   static String SCAN_CODE="${BASE_URL}/scan-code";
   static String CHECK_COBON="${BASE_URL}/check-cobon";
+
 
 
 

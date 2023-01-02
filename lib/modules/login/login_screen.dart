@@ -1,6 +1,7 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/provider/user_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/otp/phone_screen.dart';
+import 'package:alefakaltawinea_animals_app/modules/registeration/registration_screen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
@@ -10,7 +11,10 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+
+import '../../utils/my_widgets/action_bar_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -37,29 +41,54 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
     userProviderModel=Provider.of<UserProviderModel>(context,listen: true);
 
     return BaseScreen( showSettings: false, showBottomBar: false, tag: "LoginScreen",
-      body: userProviderModel!.isLoading?LoadingProgress():SingleChildScrollView(child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Container(
-            margin: EdgeInsets.only(top:D.default_50,bottom: D.default_30),
-              child: Center(child: Text(tr("welcome_back"),style: S.h1Bold(color: C.BASE_BLUE),textAlign: TextAlign.center,),)),
-          _header(),
-          Container(
-            padding: EdgeInsets.all(D.default_50),
-            child: Form(
-              key: _loginFormGlobalKey,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  _phone(),
-                  _password(),
-                  SizedBox(height: D.default_10,),
-                  _forgetPassword(),
-                  _loginBtn()
+      body: userProviderModel!.isLoading?LoadingProgress():
+      Column(children: [
+        ActionBarWidget(
+            "", context,
+            enableShadow:false,
+            showSetting:false,
+            textColor:C.BASE_BLUE,
+            backgroundColor:Colors.white
 
-                ],),),)
-        ],),));
+        ),
+        SingleChildScrollView(child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Container(
+                margin: EdgeInsets.only(top:D.default_50,bottom: D.default_30),
+                child: Center(child: Text(tr("welcome_back"),style: S.h1Bold(color: C.BASE_BLUE),textAlign: TextAlign.center,),)),
+            _header(),
+            Container(
+              padding: EdgeInsets.all(D.default_50),
+              child: Form(
+                key: _loginFormGlobalKey,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    _phone(),
+                    _password(),
+                    SizedBox(height: D.default_10,),
+                    _forgetPassword(),
+                    _loginBtn(),
+                    dont_have_account()
+
+                  ],),),)
+          ],),)
+      ],));
+  }
+  Widget dont_have_account(){
+    return Container(child:Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(tr("dont_have_acout"),style: S.h5(color: Colors.grey,fontSize: D.textSize(5)),),
+        SizedBox(width: D.default_10,),
+        InkWell(
+          onTap: (){
+            MyUtils.navigateReplaceCurrent(context, RegistrationScreen());
+          },
+          child: Text(tr("register"),style: S.h1(color: C.BASE_BLUE,fontSize: D.textSize(5)),),)
+      ],));
   }
   Widget _loginBtn(){
     return Center(child: InkWell(
@@ -103,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
               return tr("enter_password");
             }
           } ,
-          style: S.h4(color: Colors.black),
+          style: S.h2(color: Colors.black),
           decoration:  InputDecoration(
             labelText: tr("enter_password"),
             labelStyle:S.h2(color: Colors.grey) ,
@@ -164,9 +193,11 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
 
           ),
           keyboardType: TextInputType.phone,
+
           obscureText: false,
           cursorColor: C.BASE_BLUE,
           autofocus: false,
+
         )
     );
   }
@@ -182,7 +213,9 @@ class _LoginScreenState extends State<LoginScreen> with  InputValidationMixin{
     if (_loginFormGlobalKey.currentState!.validate()) {
       _loginFormGlobalKey.currentState!.save();
       //call login api
-      userProviderModel!.login(_phoneController.text, _passwordController.text,context,false);
+      userProviderModel!.login(
+        MyUtils.replaceArabicNumber(_phoneController.text)
+          , _passwordController.text,context,false);
     }
   }
  initSavedUser(){

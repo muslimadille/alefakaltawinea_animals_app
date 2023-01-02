@@ -12,6 +12,7 @@ import 'package:alefakaltawinea_animals_app/utils/my_utils/myUtils.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/resources.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/laoding_view.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -71,7 +72,7 @@ class _NearToYouScreenState extends State<NearToYouScreen> {
                               child: serviceProvidersProviderModel!.isLoading
                                   ? _buildMap()
                                   : _buildMap()),
-                          _categories()
+                          _newTabsContainer()
                         ],
                       )
                     : LoadingProgress(),
@@ -140,7 +141,7 @@ class _NearToYouScreenState extends State<NearToYouScreen> {
               ),
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
-                  return _categoriesIem(index);
+                  return _newIem(index);
                 },
                 childCount: categoriesProviderModel!.categoriesList.length,
                 semanticIndexOffset: 1,
@@ -239,5 +240,124 @@ class _NearToYouScreenState extends State<NearToYouScreen> {
             ],
           )),
     ):Container();
+  }
+  Widget _newIem(int index) {
+    return InkWell(
+      onTap: (){
+        onItemClick(index);
+      },
+      child: Container(
+      margin: EdgeInsets.all(D.default_10),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(D.default_10),
+          color: C.BASE_BLUE,
+          boxShadow:[BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              offset:Offset(1,1),
+              blurRadius:1,
+              spreadRadius: 1
+          )]
+      ),
+      child: Column(children: [
+        Expanded(
+            child: TransitionImage(
+              getItemImage(index),
+              width: double.infinity,
+              fit: index==0?BoxFit.fitHeight:BoxFit.fill,
+            )),
+        Container(
+          height: D.default_1,
+          color: C.BASE_ORANGE,
+          margin: EdgeInsets.only(top:D.default_5),
+        ),
+        Container(
+          height: D.default_30,
+          child: Center(
+            child: Text(getItemTitle(index),
+                style: S.h2(color: Colors.white)),
+          ),)],),),);
+  }
+  String getItemImage(int index){
+    switch(index){
+      case 0:{
+        return "assets/images/logo_new_img.png";
+      };
+      case 1:{
+        return "assets/images/clinics_img.png";
+      };
+      case 2:{
+        return "assets/images/shops_img.png";
+      };
+      case 3:{
+        return "assets/images/home_care-img.png";
+      };
+      default :{
+        return "assets/images/logo_new_img.png";
+      };
+
+    }
+
+  }
+  String getItemTitle(int index){
+    switch(index){
+      case 0:{
+        return tr("all");
+      };
+      case 1:{
+        return tr("clinic");
+      };
+      case 2:{
+        return tr("shops");
+      };
+      case 3:{
+        return tr("home_care");
+      };
+      default :{
+        return "";
+      };
+
+    }
+
+  }
+  onItemClick(int index){
+    if(index>0){
+      setState(() {
+        selectedCategory = categoriesProviderModel!.categoriesList[index-1];
+        serviceProvidersProviderModel!.getClosestList(
+            context,
+            categoriesProviderModel!.categoriesList[index-1].id!,
+            _position!.latitude.toString(),
+            _position!.longitude.toString(),
+            int.parse(categoriesProviderModel!.categoriesList[index].color!.replaceAll("#", "0xff")),
+            false
+        );
+      });
+    }else{
+      for(int index=0;index< categoriesProviderModel!.categoriesList.length;index++){
+        serviceProvidersProviderModel!.getClosestList(
+            context,
+            categoriesProviderModel!.categoriesList[index].id!,
+            _position!.latitude.toString(),
+            _position!.longitude.toString(),
+            int.parse(categoriesProviderModel!.categoriesList[index].color!.replaceAll("#", "0xff")),
+            true
+        );}
+    }
+  }
+  Widget _newTabsContainer(){
+    return Container(
+      color: Colors.white.withOpacity(0.90),
+      height: D.size(110),
+      child: Column(children: [
+      Expanded(child: Row(children: [
+        Expanded(child: _newIem(0)),
+        Expanded(child: _newIem(1),)
+      ],),),
+      Expanded(child: Row(children: [
+        Expanded(child: _newIem(2),),
+        Expanded(child: _newIem(3),)
+      ],),),
+
+    ]),);
   }
 }

@@ -124,7 +124,12 @@ class _CodeScannerScreenState extends State<CodeScannerScreen> {
     return Center(
       child: InkWell(
         onTap: () {
-          scanCodeProvider!.scanCode(context, _scanBarcode, 1);
+          scanCodeProvider!.scanCode(context, _scanBarcode, 1).then((value){
+            if(value){
+              bottomBarProviderModel!.setSelectedScreen(0);
+              MyUtils.navigateAsFirstScreen(context, SpHomeScreen());
+            }
+          });
         },
         child: Container(
           width: D.default_130,

@@ -31,7 +31,7 @@
     </queries>
     <application
 
-        android:label="Alefak"
+        android:label="أليفك التعاونية"
         android:name="${applicationName}"
         android:requestLegacyExternalStorage="true"
         android:icon="@mipmap/ic_launcher">

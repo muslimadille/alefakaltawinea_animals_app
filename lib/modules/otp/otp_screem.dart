@@ -23,7 +23,8 @@ class OtpScreen extends StatefulWidget {
   String title;
   String code;
   String? phone;
-   OtpScreen(this.otpFalge,this.title,{this.code="",this.phone});
+  bool?fromaddcard;
+   OtpScreen(this.otpFalge,this.title,{this.code="",this.phone,this.fromaddcard});
 
   @override
   _OtpScreenState createState() => _OtpScreenState();
@@ -79,7 +80,8 @@ class _OtpScreenState extends State<OtpScreen> {
         if(widget.otpFalge=="ForgetPasswordScreen"){
           MyUtils.navigate(context, ForgetPasswordScreen(widget.phone!, _userCode));
         }else{
-          otpProviderModel!.activeAccount(Constants.currentUser!=null?Constants.currentUser!.phone!:widget.phone!, _userCode, context);
+          bool fromaddcard=widget.fromaddcard??false;
+          otpProviderModel!.activeAccount(Constants.currentUser!=null?Constants.currentUser!.phone!:widget.phone!, _userCode, context,fromaddcard: widget.fromaddcard??false);
         }
         //MyUtils.navigateAsFirstScreen(context, MainCategoriesScreen());
         ///call api here

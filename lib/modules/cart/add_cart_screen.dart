@@ -12,6 +12,7 @@ import 'package:provider/provider.dart';
 import '../../utils/my_utils/baseDimentions.dart';
 import '../../utils/my_utils/myColors.dart';
 import '../../utils/my_utils/resources.dart';
+import '../../utils/my_widgets/action_bar_widget.dart';
 import '../../utils/my_widgets/cobon_widget.dart';
 import '../../utils/my_widgets/laoding_view.dart';
 import '../../utils/my_widgets/transition_image.dart';
@@ -88,6 +89,14 @@ class _AddCartScreenState extends State<AddCartScreen> {
         children: [
         Column(
           children: [
+            ActionBarWidget(
+                "", context,
+                enableShadow:false,
+                showSetting:false,
+                textColor:Colors.white,
+                backgroundColor:C.BASE_BLUE
+
+            ),
             Expanded(
                 child: Container(
                     decoration: BoxDecoration(
@@ -395,7 +404,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
             width: D.default_130,
             height: D.default_130,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(D.default_200)),
+                borderRadius: BorderRadius.all(Radius.circular(D.default_5)),
                 color: Colors.white,
                 boxShadow: [
                   BoxShadow(
@@ -408,7 +417,7 @@ class _AddCartScreenState extends State<AddCartScreen> {
                 ? TransitionImage(Res.DEFAULT_ADD_IMAGE,
                     fit: BoxFit.cover,
                     file: _imagesFiles[index],
-                    radius: D.default_300,
+                    radius: D.default_5,
                     width: D.default_130,
                     height: D.default_130,
                     padding: EdgeInsets.all(D.default_10),

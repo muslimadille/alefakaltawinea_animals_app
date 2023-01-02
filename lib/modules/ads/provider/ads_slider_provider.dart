@@ -17,7 +17,6 @@ class AdsSliderProviderModel with ChangeNotifier {
   List<Data> adsSliderModelList=[];
   GetAds_sliderApi getAds_sliderApi=GetAds_sliderApi();
   getAdsSlider() async {
-    adsSliderModelList.clear();
     setIsLoading(true);
     MyResponse<List<Data>> response =
     await getAds_sliderApi.getAdsSlider();
@@ -33,6 +32,7 @@ class AdsSliderProviderModel with ChangeNotifier {
     notifyListeners();
   }
   void setAdsSliderModel(List<Data> value){
+    adsSliderModelList.clear();
     adsSliderModelList.addAll(value);
     notifyListeners();
   }

@@ -1,4 +1,5 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
+import 'package:alefakaltawinea_animals_app/modules/login/login_screen.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/provider/user_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/otp/otp_screem.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
@@ -43,49 +44,61 @@ class _RegisterationPopState extends State<RegisterationPop> with InputValidatio
   @override
   Widget build(BuildContext context) {
     userProviderModel = Provider.of<UserProviderModel>(context, listen: true);
+    return Column(children: [
+      ActionBarWidget(
+          "", context,
+          enableShadow:false,
+          showSetting:false,
+          textColor:C.ADAPTION_COLOR,
+          showBack: true,
+          backgroundColor:Colors.transparent
 
-    return Container(
-      color: Colors.white.withOpacity(0.93),
-      child: userProviderModel!.isLoading
-          ? LoadingProgress()
-          : SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Container(
-                margin: EdgeInsets.only(top: D.default_120,bottom: D.default_30,left: D.default_50,right: D.default_50),
-                child: Center(
-                  child: Text(
-                    tr("register_header2"),
-                    style: S.h1Bold(color: C.ADAPTION_COLOR),
-                    textAlign: TextAlign.center,
-                  ),
-                )),
-            Container(
-              padding: EdgeInsets.only(top: D.default_20,bottom: D.default_20,left: D.default_50,right: D.default_50),
-              child: Form(
-                key: _registerFormGlobalKey,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    _name(),
-                    _alifakName(),
-                    _email(),
-                    _phone(),
-                    _password(),
-                    _confirmPassword(),
-                    SizedBox(height: D.default_20,),
-                    _registerBtn(),
-                  ],
-                ),
-              ),
-            )
-          ],
-        ),
       ),
-    );
+      Expanded(child: SingleChildScrollView(child: Container(
+        color: Colors.white.withOpacity(0.93),
+        child: userProviderModel!.isLoading
+            ? LoadingProgress()
+            : SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Container(
+                  margin: EdgeInsets.only(top: D.default_40,bottom: D.default_30,left: D.default_50,right: D.default_50),
+                  child: Center(
+                    child: Text(
+                      tr("register_header2"),
+                      style: S.h1Bold(color: C.ADAPTION_COLOR),
+                      textAlign: TextAlign.center,
+                    ),
+                  )),
+              Container(
+                padding: EdgeInsets.only(top: D.default_20,bottom: D.default_20,left: D.default_50,right: D.default_50),
+                child: Form(
+                  key: _registerFormGlobalKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      _name(),
+                      //_alifakName(),
+                      _email(),
+                      _phone(),
+                      _password(),
+                      _confirmPassword(),
+                      SizedBox(height: D.default_20,),
+                      _registerBtn(),
+                      have_account()
+
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),))
+    ],);
   }
 
   Widget _coditions() {
@@ -121,6 +134,19 @@ class _RegisterationPopState extends State<RegisterationPop> with InputValidatio
                 : Container()
           ],
         ));
+  }
+  Widget have_account(){
+    return Container(child:Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(tr("have_acout"),style: S.h5(color: Colors.grey,fontSize: D.textSize(5)),),
+        SizedBox(width: D.default_10,),
+        InkWell(
+          onTap: (){
+            MyUtils.navigateReplaceCurrent(context, LoginScreen());
+          },
+          child: Text(tr("login"),style: S.h1(color: C.ADAPTION_COLOR,fontSize: D.textSize(5)),),)
+      ],));
   }
 
   Widget _name() {
@@ -387,6 +413,40 @@ class _RegisterationPopState extends State<RegisterationPop> with InputValidatio
       ),
     );
   }
+  Widget _loginBtn() {
+    return Center(
+      child: InkWell(
+        onTap: () {
+          MyUtils.navigate(context, LoginScreen());
+        },
+        child: Container(
+          width: D.default_250,
+          margin: EdgeInsets.all(D.default_30),
+          padding: EdgeInsets.only(
+              left: D.default_20,
+              right: D.default_20,
+              top: D.default_10,
+              bottom: D.default_10),
+          decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(D.default_10),
+              color: C.ADAPTION_COLOR,
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    offset: Offset(2, 2),
+                    blurRadius: 4,
+                    spreadRadius: 2)
+              ]),
+          child: Text(
+            tr("login"),
+            style: S.h1Bold(color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      ),
+    );
+  }
+
 
   Widget _header() {
     return Container(

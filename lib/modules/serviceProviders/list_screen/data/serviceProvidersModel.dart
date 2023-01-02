@@ -98,6 +98,8 @@ class Data {
   String? categoryId;
   String? website;
   int? is_fav;
+  String?type_id;
+  String?url;
   List<OfferModel>? offers;
   List<PhotoModel>? photos;
 
@@ -123,7 +125,9 @@ class Data {
         this.website,
         this.is_fav,
       this.offers,
-        this.photos
+        this.photos,
+        this.type_id,
+        this.url
       });
 
   Data.fromJson(Map<String, dynamic> json) {
@@ -144,6 +148,8 @@ class Data {
     categoryId = json['category_id'];
     website = json['website'];
     is_fav=json['is_fav'];
+    type_id=json['type_id'];
+    url=json['url'];
     if (json['offers'] != null) {
       offers = <OfferModel>[];
       json['offers'].forEach((v) {
@@ -177,6 +183,8 @@ class Data {
     data['category_id'] = this.categoryId;
     data['website'] = this.website;
     data['is_fav'] = this.is_fav;
+    data['type_id']=this.type_id;
+    data['url']=this.url;
     if (this.offers != null) {
       data['offers'] = this.offers!.map((v) => v.toJson()).toList();
     }

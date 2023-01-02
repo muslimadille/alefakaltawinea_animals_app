@@ -20,8 +20,8 @@ class ScanCodeProvider with ChangeNotifier{
   }
   ScanCodeModel? scanCodeModel;
   ScanCodeApi scanCodeApi=ScanCodeApi();
-  scanCode(BuildContext ctx,String code,int confirm) async {
-
+  Future<bool> scanCode(BuildContext ctx,String code,int confirm) async {
+    bool value=false;
     scanCodeModel=null;
      isFirst=true;
     setIsLoading(true);
@@ -33,18 +33,22 @@ class ScanCodeProvider with ChangeNotifier{
       }
       else{
         setIsLoading(false);
+
         await Fluttertoast.showToast(msg: "${response.msg}");
+        value=true;
       }
 
     }else if(response.status == Apis.CODE_SUCCESS &&response.data==null){
+      isFirst=false;
       setIsLoading(false);
       await Fluttertoast.showToast(msg: "${response.msg}");
     }else{
+      isFirst=false;
       setIsLoading(false);
       await Fluttertoast.showToast(msg: "${response.msg}");
     }
-    isFirst=false;
     notifyListeners();
+    return value;
   }
 
 

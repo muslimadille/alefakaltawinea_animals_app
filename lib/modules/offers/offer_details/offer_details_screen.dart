@@ -13,6 +13,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import '../../registeration/registration_screen.dart';
 import 'offer_code_screen.dart';
 
 class OfferDetailsScreen extends StatefulWidget {
@@ -62,7 +63,7 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
       if(Constants.currentUser!=null){
         MyUtils.navigate(context, OfferCodeScreen(widget.serviceProviderData,widget.serviceProviderData.offers![widget.index]));
       }else{
-        MyUtils.navigate(context, NoProfileScreen());
+        MyUtils.navigate(context, RegistrationScreen());
       }
     },
     child: Container(

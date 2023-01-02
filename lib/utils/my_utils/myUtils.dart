@@ -8,6 +8,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../modules/categories_screen/mainCategoriesScreen.dart';
@@ -66,26 +67,8 @@ class MyUtils{
       },
     );
   }
-  static regionsDialog(BuildContext context,UtilsProviderModel? utilsProviderModel,
-  UserProviderModel?userProviderModel,
-
-      {bool isDismissible = true,}) {
-    userProviderModel=Provider.of<UserProviderModel>(context,listen: false);
-    // flutter defined function
-    showDialog(
-      context: context,
-      barrierDismissible: false,
-      builder: (BuildContext context) {
-
-        // return object of type Dialog
-        return WillPopScope(
-            onWillPop: isDismissible ? _onWillPop : _onWillNotPop,
-            child: AlertDialog(
-              contentPadding: EdgeInsets.all(0),
-              content:RegionsDialogWidget(),
-            ));
-      },
-    );
+  static regionsDialog(BuildContext context) {
+    basePopup(context, body: RegionsDialogWidget(onItemSelect: (Get_states ) {  },)) ;
   }
   static Future<bool> _onWillPop() async {
     return  true;
@@ -120,9 +103,36 @@ class MyUtils{
       }
     }
   }
+  static void basePopup(BuildContext context,{required Widget body, EdgeInsetsGeometry? padding}) {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        opaque: false, // set to false
+        pageBuilder: (_, __, ___) {
+          return
+            Scaffold(
+                backgroundColor: Colors.white.withOpacity(0.5),
+              body:SafeArea(child: Container(
+              color: Colors.black.withOpacity(0.5),
+              padding: padding ?? EdgeInsets.all(D.default_20),
+              child: Center(child:Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  body
+                ],)),)));
+        },
+      ),
+    );
+  }
+  static String replaceArabicNumber(String input) {
+    const english = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+    const arabic = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
 
+    for (int i = 0; i < english.length; i++) {
+      input = input.replaceAll(arabic[i], english[i]);
+    }
+    print("$input");
+    return input;
+  }
 
 }
 
-class ChangeLangageDialogWidget {
-}

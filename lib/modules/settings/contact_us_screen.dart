@@ -1,6 +1,7 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
 import 'package:alefakaltawinea_animals_app/modules/login/provider/user_provider_model.dart';
 import 'package:alefakaltawinea_animals_app/modules/otp/phone_screen.dart';
+import 'package:alefakaltawinea_animals_app/modules/settings/provider/settings_provider.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/constants.dart';
@@ -12,6 +13,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+
+import '../../utils/my_widgets/action_bar_widget.dart';
 
 class ContactUsScreen extends StatefulWidget {
   const ContactUsScreen({Key? key}) : super(key: key);
@@ -27,20 +30,32 @@ class _ContactUsScreenState extends State<ContactUsScreen> with  InputValidation
   TextEditingController _timeController=TextEditingController();
   bool isLoading=false;
   final _loginFormGlobalKey = GlobalKey < FormState > ();
+  SettingsProvider? settingsProvider;
   @override
   void initState() {
     super.initState();
+    settingsProvider=Provider.of<SettingsProvider>(context,listen: false);
   }
 
 
   @override
   Widget build(BuildContext context) {
-
+    settingsProvider=Provider.of<SettingsProvider>(context,listen: true);
     return BaseScreen( showSettings: false, showBottomBar: false, tag: "ContactUsScreen",
         body: Stack(children: [
+          
           SingleChildScrollView(child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              ActionBarWidget(
+                  tr("contact_us"), context,
+                  enableShadow:false,
+                  showSetting:true,
+                  textColor:Colors.white,
+                  showBack: true,
+                  backgroundColor:C.BASE_BLUE
+
+              ),
               Container(
                   margin: EdgeInsets.only(top:D.default_150,bottom: D.default_30),
                   child: Center(child: Text(tr("contact_header1"),style: S.h1(color: C.BASE_BLUE),textAlign: TextAlign.center,),)),
@@ -64,13 +79,13 @@ class _ContactUsScreenState extends State<ContactUsScreen> with  InputValidation
 
                     ],),),)
             ],),),
-          isLoading?LoadingProgress():Container()
+          settingsProvider!.isLoading?LoadingProgress():Container()
         ],));
   }
   Widget _sendBtn(){
     return Center(child: InkWell(
       onTap: (){
-        _onLoginClicked();
+        onSendClicked();
       },
       child: Container(
         width: D.default_200,
@@ -238,22 +253,10 @@ class _ContactUsScreenState extends State<ContactUsScreen> with  InputValidation
     );
   }
   
-  void _onLoginClicked(){
-    fff();
+  void onSendClicked(){
+   settingsProvider!.contactUs(context, _nameController.text, _problimController.text, _phoneController.text, _timeController.text);
   }
-  void fff(){
-    setState(() {
-      isLoading=true;
-    });
-    Future.delayed(Duration(milliseconds: 2000)).then((value)async{
-      setState(() {
-        isLoading=false;
-      });
-      await Fluttertoast.showToast(msg: "تم إرسال الطلب");
-      Navigator.pop(context);
-    });
 
-  }
 }
 
 

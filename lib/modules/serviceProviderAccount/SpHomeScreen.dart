@@ -206,7 +206,8 @@ class _SpHomeScreenState extends State<SpHomeScreen> {
         Container(child:
         Column(children: [
           Expanded(child: TransitionImage(
-            Constants.currentUser!.bannerPhoto!,
+            (Constants.currentUser!.bannerPhoto??"").contains("https")?Constants.currentUser!.bannerPhoto!:
+            "https://alefak.com/uploads/${Constants.currentUser!.bannerPhoto!}",
             fit: BoxFit.cover,
             width: double.infinity,
           )),
@@ -218,7 +219,8 @@ class _SpHomeScreenState extends State<SpHomeScreen> {
           Container(child:
           Column(children: [
             Expanded(child: TransitionImage(
-              Constants.currentUser!.photos![i].photo!,
+              (Constants.currentUser!.photos![i].photo??"").contains("https")?Constants.currentUser!.photos![i].photo!:
+              "https://alefak.com/uploads/${Constants.currentUser!.photos![i].photo!}",
               fit: BoxFit.cover,
               width: double.infinity,
             )),

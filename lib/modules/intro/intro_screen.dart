@@ -12,13 +12,21 @@ import '../cart/add_cart_screen.dart';
 import '../categories_screen/mainCategoriesScreen.dart';
 
 class IntroScreen extends StatefulWidget {
-  const IntroScreen({Key? key}) : super(key: key);
+  bool fromaddcard;
+  IntroScreen({Key? key,this.fromaddcard=false}) : super(key: key);
 
   @override
   _IntroScreenState createState() => _IntroScreenState();
 }
 
 class _IntroScreenState extends State<IntroScreen> {
+  @override
+  void initState() {
+    if(widget.fromaddcard){
+      MyUtils.navigate(context, AddCartScreen());
+    }
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return  BaseScreen(
@@ -79,8 +87,8 @@ class _IntroScreenState extends State<IntroScreen> {
                         Container(
                           padding: EdgeInsets.only(left:D.default_60,right: D.default_60,top: D.default_10),
                           width:MediaQuery.of(context).size.width,child: Text(tr("intro_offer_for_u"),style: S.h2(color: C.BASE_BLUE)),),
-                        Container(
-                          padding: EdgeInsets.only(top: D.default_30,left:D.default_50,right: D.default_50),child: Text(tr("intro_cost_title"),style: S.h1Bold(color: C.BASE_BLUE)),)
+                        /*Container(
+                          padding: EdgeInsets.only(top: D.default_30,left:D.default_50,right: D.default_50),child: Text(tr("intro_cost_title"),style: S.h1Bold(color: C.BASE_BLUE)),)*/
                       ],),top:D.default_200),
                       Positioned(child: InkWell(
                         onTap: ()async{
@@ -128,7 +136,7 @@ class _IntroScreenState extends State<IntroScreen> {
           MyUtils.navigate(context, AddCartScreen());
         },
         child: Container(
-          width: D.default_130,
+          width: D.size(60),
           margin: EdgeInsets.all(D.default_30),
           padding: EdgeInsets.only(
               left: D.default_10,

@@ -17,7 +17,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
+import '../cart/add_cart_screen.dart';
+import '../my_cards/my_cards_screen.dart';
 import '../notifications/notifications_screen.dart';
+import '../registeration/registration_screen.dart';
 import '../serviceProviderAccount/SpHomeScreen.dart';
 import '../serviceProviderAccount/code_scanner_screen.dart';
 import 'provider/intro_provider_model.dart';
@@ -35,15 +38,11 @@ class HomeTabsScreen extends StatefulWidget {
 }
 
 class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStateMixin{
-  PersistentTabController? _controller;
-  AnimationController? _animationController;
-  Animation<double>? _animation;
   BottomBarProviderModel?bottomBarProviderModel;
   bool isServiceProvider=false;
 @override
   void initState() {
     super.initState();
-    _controller = PersistentTabController(initialIndex: 0);
 }
 
   @override
@@ -83,7 +82,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
           _homeBtn(),
           _favBtn(),
           _closestBtn(),
-          _notificationsBtn(),
+          _myCardsBtn(),
           _profileBtn()
 
         ],
@@ -100,7 +99,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
           TransitionImage(bottomBarProviderModel!.selectedScreen==0?Res.IC_HOME_BLUE:Res.IC_HOME_GREY,width: D.default_25,height: D.default_25,),
-          Center(child:Text(tr("home"),style: S.h5(color: bottomBarProviderModel!.selectedScreen==0?C.BASE_BLUE:Colors.grey),),)
+          Center(child:Text(tr("home"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==0?C.BASE_BLUE:Colors.grey),),)
         ]
     ),));
   }
@@ -111,7 +110,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         if(Constants.currentUser!=null){
           MyUtils.navigate(context, FavScreen());
         }else{
-          MyUtils.navigate(context, NoProfileScreen());
+          MyUtils.navigate(context, RegistrationScreen());
         }
 
       }
@@ -119,21 +118,25 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
           TransitionImage(bottomBarProviderModel!.selectedScreen==1?Res.IC_FAV_BLUE:Res.IC_FAV_GREY,width: D.default_25,height: D.default_25,),
-          Center(child:Text(tr("fav"),style: S.h5(color: bottomBarProviderModel!.selectedScreen==1?C.BASE_BLUE:Colors.grey),),)
+          Center(child:Text(tr("fav"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==1?C.BASE_BLUE:Colors.grey),),)
         ]
     ),));
   }
-  Widget _notificationsBtn(){
+  Widget _myCardsBtn(){
     return Expanded(
       child: InkWell(onTap: (){
         bottomBarProviderModel!.setSelectedScreen(3);
-        MyUtils.navigate(context, NotificationsScreen());
+        if(Constants.currentUser!=null){
+          MyUtils.navigate(context, MyCardsScreen());
+        }else{
+          MyUtils.navigate(context, RegistrationScreen());
+        }
       }
         ,child:Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
-          TransitionImage(bottomBarProviderModel!.selectedScreen==3?Res.IC_NOTIFICATIONS_BLUE:Res.IC_NOTIFICATIONS_GREY,width: D.default_25,height: D.default_25,),
-          Center(child:Text(tr("notifications"),style: S.h5(color: bottomBarProviderModel!.selectedScreen==3?C.BASE_BLUE:Colors.grey),),)
+          TransitionImage("assets/images/card_ic.png",width: D.default_25,height: D.default_25,),
+          Center(child:Text(tr("card"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==3?C.BASE_BLUE:Colors.grey),),)
         ]
     ),));
   }
@@ -144,7 +147,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         if(Constants.currentUser!=null){
           MyUtils.navigate(context, ProfileScreen());
         }else{
-          MyUtils.navigate(context, NoProfileScreen());
+          MyUtils.navigate(context, RegistrationScreen());
         }
         //bottomBarProviderModel!.setSelectedScreen(4);
 
@@ -153,7 +156,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
         mainAxisAlignment: MainAxisAlignment.center,
         children:[
           TransitionImage(bottomBarProviderModel!.selectedScreen==4?Res.IC_PROFILE_BLUE:Res.IC_PROFILE_GREY,width: D.default_25,height: D.default_25,),
-          Center(child:Text(tr("profile"),style: S.h5(color: bottomBarProviderModel!.selectedScreen==4?C.BASE_BLUE:Colors.grey),),)
+          Center(child:Text(tr("profile"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==4?C.BASE_BLUE:Colors.grey),),)
         ]
     ),));
   }
@@ -167,7 +170,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
           mainAxisAlignment: MainAxisAlignment.center,
           children:[
             TransitionImage(bottomBarProviderModel!.selectedScreen==2?Res.IC_NEAR_BLUE:Res.IC_NEAR_GREY,width: D.default_25,height: D.default_25,),
-            Center(child:Text(tr("closest"),style: S.h5(color: bottomBarProviderModel!.selectedScreen==2?C.BASE_BLUE:Colors.grey),),)
+            Center(child:Text(tr("closest"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==2?C.BASE_BLUE:Colors.grey),),)
           ]
       ),));
   }
@@ -181,7 +184,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
               mainAxisAlignment: MainAxisAlignment.center,
               children:[
                 TransitionImage(bottomBarProviderModel!.selectedScreen==0?Res.IC_HOME_BLUE:Res.IC_HOME_GREY,width: D.default_25,height: D.default_25,),
-                Center(child:Text(tr("home"),style: S.h5(color: bottomBarProviderModel!.selectedScreen==0?C.BASE_BLUE:Colors.grey),),)
+                Center(child:Text(tr("home"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==0?C.BASE_BLUE:Colors.grey),),)
               ]
           ),));
   }
@@ -195,7 +198,7 @@ class _HomeTabsScreenState extends State<HomeTabsScreen> with TickerProviderStat
               mainAxisAlignment: MainAxisAlignment.center,
               children:[
                 TransitionImage(bottomBarProviderModel!.selectedScreen==1?"assets/images/qr_icon_blue.png":"assets/images/qr_icon_black.png",width: D.default_25,height: D.default_25,),
-                Center(child:Text(tr("code_tap"),style: S.h5(color: bottomBarProviderModel!.selectedScreen==1?C.BASE_BLUE:Colors.grey),),)
+                Center(child:Text(tr("code_tap"),style: S.h3(color: bottomBarProviderModel!.selectedScreen==1?C.BASE_BLUE:Colors.grey),),)
               ]
           ),));
   }

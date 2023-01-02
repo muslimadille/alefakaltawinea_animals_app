@@ -4,12 +4,15 @@ import 'package:alefakaltawinea_animals_app/modules/serviceProviders/list_screen
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/myColors.dart';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/my_fonts.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_widgets/transition_image.dart';
 import 'package:dots_indicator/dots_indicator.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import '../../../utils/my_widgets/action_bar_widget.dart';
 
 
 class ServiceProviderDetailsScreen extends StatefulWidget {
@@ -27,10 +30,12 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
   Widget build(BuildContext context) {
     return BaseScreen(
       tag: "ServiceProviderDetailsScreen",
-      showSettings: true,
+      showSettings: false,
       showBottomBar: true,
       showIntro: false,
       body:Column(children: [
+        ActionBarWidget("", context,textColor:C.BASE_BLUE,showSearch:false,
+            backgroundColor: Colors.white),
         _infoCard(),
         Expanded(child: ServiceProviderOffersScreen(widget.serviceProviderData))
       ],)
@@ -55,6 +60,17 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
           Column(children: [
             Expanded(child: Container(child: Column(children: [
               Expanded(child: Container(
+                  margin: EdgeInsets.only(left: D.default_10,right: D.default_10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(D.default_10),
+                      color: Colors.white,
+                      boxShadow:[BoxShadow(
+                          color: Colors.grey.withOpacity(0.5),
+                          offset:Offset(3,3),
+                          blurRadius:3,
+                          spreadRadius: 0.5
+                      )]
+                  ),
                   child:PageView(
                     children: _sliderItem(),
                     controller: _controller,
@@ -65,9 +81,11 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
                     },
                   )
               )),
-              Container(child: Center(child: Text(
+              Container(
+                margin: EdgeInsets.only(top: D.default_10),
+                  child: Center(child: Text(
                 widget.serviceProviderData.name!
-                ,style: S.h1(color:C.BASE_BLUE),),)),
+                ,style: S.h4(color:C.BASE_BLUE,font: MyFonts.VazirBlack),),)),
               Container(
                 color: Colors.white,
                 width: double.infinity,
@@ -137,7 +155,7 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
                   Container(
                     padding:EdgeInsets.only(left:D.default_10,right:D.default_10),
                     child: Text(widget.serviceProviderData.phone!,style: S.h4(color: C.BASE_BLUE),),),
-                  widget.serviceProviderData.website!.isNotEmpty?InkWell(onTap: ()async{
+                  (widget.serviceProviderData.website??"").isNotEmpty?InkWell(onTap: ()async{
                     await _launchURLBrowser();
                   },
                     child: Container(
@@ -151,11 +169,11 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
           ],),
           Positioned(child: Container(
             padding: EdgeInsets.all(D.default_5),
-            margin: EdgeInsets.all(D.default_10),
+            margin: EdgeInsets.only(left:D.default_10,right: D.default_10),
             width: D.default_60,
             height: D.default_60,
             decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(D.default_10),
+                borderRadius: BorderRadius.circular(D.default_5),
                 color: Colors.white,
                 boxShadow:[BoxShadow(
                     color: Colors.grey.withOpacity(0.5),
@@ -165,7 +183,7 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
                 )]
             ),
             child:TransitionImage(
-              widget.serviceProviderData.photo!,
+              (widget.serviceProviderData.photo??"").contains("https")?(widget.serviceProviderData.photo??""):"https://alefak.com/uploads/${(widget.serviceProviderData.photo??"")}",
               radius: D.default_10,
               fit: BoxFit.cover,
               width: double.infinity,
@@ -198,12 +216,14 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
   List<Widget >_sliderItem(){
     List<Widget>items=[];
     items.add(
-        Container(child:
+        Container(
+          child:
         Column(children: [
           Expanded(child: TransitionImage(
-            widget.serviceProviderData.bannerPhoto??'',
+            (widget.serviceProviderData.bannerPhoto??"").contains("https")?(widget.serviceProviderData.bannerPhoto??""):"https://alefak.com/uploads/${(widget.serviceProviderData.bannerPhoto??"")}",
             fit: BoxFit.cover,
             width: double.infinity,
+            radius: D.default_10,
           )),
 
         ],),)
@@ -216,6 +236,7 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
               widget.serviceProviderData.photos![i].photo!,
               fit: BoxFit.cover,
               width: double.infinity,
+              radius: D.default_10,
             )),
 
           ],),)
@@ -223,4 +244,5 @@ class _ServiceProviderDetailsScreenState extends State<ServiceProviderDetailsScr
     }
     return items;
   }
+
 }

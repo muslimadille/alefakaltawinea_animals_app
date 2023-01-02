@@ -18,12 +18,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class BaseScreen extends StatefulWidget {
+  bool showWhatsIcon;
   String tag;
   Widget body;
   bool showSettings;
   bool showBottomBar;
   bool showIntro;
-   BaseScreen({required this.body,required this.showSettings,required this.showBottomBar,this.showIntro=false,required this.tag});
+   BaseScreen({this.showWhatsIcon=true,required this.body,required this.showSettings,required this.showBottomBar,this.showIntro=false,required this.tag});
 
 
   @override
@@ -48,7 +49,7 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
      SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
     ]);
-    Constants.utilsProviderModel!.setCurrentLocal(context,Constants.utilsProviderModel!.currentLocal);
+    //Constants.utilsProviderModel!.setCurrentLocal(context,Constants.utilsProviderModel!.currentLocal);
 
 
   }
@@ -60,6 +61,10 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
 
   @override
   Widget build(BuildContext context) {
+    Constants.DEVICE_RATIO=MediaQuery.of(context).size.height/MediaQuery.of(context).size.width;
+    Constants.DEVICE_HEIGHT=MediaQuery.of(context).size.height;
+    Constants.DEVICE_WIDTH=MediaQuery.of(context).size.width;
+
     utilsProviderModel=Provider.of<UtilsProviderModel>(context,listen: true);
     introProviderModel =Provider.of<IntroProviderModel>(context, listen: true);
     return SafeArea(child: Scaffold(
@@ -71,7 +76,7 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
               alignment:AlignmentDirectional.center,
               children: [
               widget.body,
-              Positioned(child: InkWell(
+                widget.showWhatsIcon?Positioned(child: InkWell(
                 onTap: (){
                   MyUtils.openwhatsapp(context);
                 },
@@ -84,7 +89,7 @@ class _BaseScreenState extends State<BaseScreen> with TickerProviderStateMixin{
 
                 ),
                 child: Center(child: TransitionImage("assets/images/whatsapp.png",width: D.default_50,height: D.default_50,fit: BoxFit.fitWidth,),),
-              ),),bottom: 0,left: utilsProviderModel!.isArabic?0:null,right: utilsProviderModel!.isEnglish?0:null)
+              ),),bottom: 0,left: utilsProviderModel!.isArabic?0:null,right: utilsProviderModel!.isEnglish?0:null):Container()
             ],),),
           widget.showBottomBar?HomeTabsScreen(introProviderModel,introProviderModel!=null&&widget.tag=="MainCategoriesScreen"):Container()
         ],),

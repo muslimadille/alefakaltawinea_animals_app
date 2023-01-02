@@ -1,4 +1,5 @@
 import 'package:alefakaltawinea_animals_app/modules/baseScreen/baseScreen.dart';
+import 'package:alefakaltawinea_animals_app/modules/registeration/registration_screen.dart';
 import 'package:alefakaltawinea_animals_app/modules/settings/terms_screen.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseDimentions.dart';
 import 'package:alefakaltawinea_animals_app/utils/my_utils/baseTextStyle.dart';
@@ -13,6 +14,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../utils/my_utils/apis.dart';
+import '../cart/add_cart_screen.dart';
 import '../login/provider/user_provider_model.dart';
 import '../spalshScreen/spalshScreen.dart';
 import 'about_screen.dart';
@@ -87,7 +89,13 @@ class _SettingScreenState extends State<SettingScreen> {
 
                             )
                           ],),
-                        _itemText(tr("subscrib"), () {}),
+                        _itemText(tr("buy_card"), () {
+                          if(Constants.currentUser==null){
+                            MyUtils.navigate(context, RegistrationScreen());
+                          }else{
+                            MyUtils.navigate(context, AddCartScreen());
+                          }
+                        }),
                         _itemText(tr("add_your_shop"), (){
                           MyUtils.navigate(context, AddStoreScreen());
                         }),

@@ -1,5 +1,6 @@
 
 import 'dart:ui';
+import 'package:alefakaltawinea_animals_app/utils/my_utils/my_fonts.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'baseDimentions.dart';
@@ -7,76 +8,76 @@ import 'baseDimentions.dart';
 class S {
   
 
-  static h1({Color? color, bool underline = false,TextDecoration? decoration,Color? decorationColor,double? decorationThickness, Color? shadowColor ,String? font}) =>
+  static h1({double? fontSize,Color? color, bool underline = false,TextDecoration? decoration,Color? decorationColor,double? decorationThickness, Color? shadowColor ,String? font}) =>
       TextStyle(
-          fontFamily: "ArabicUiTextLight",
+          fontFamily: font??MyFonts.MYRIAD_ARABIC,
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
           decorationColor:decorationColor!=null?decorationColor:Colors.black ,
           decorationThickness:decorationThickness,
-          fontSize: D.h1);
-  static h1Bold({Color? color, bool underline = false,TextDecoration? decoration,Color? decorationColor,double? decorationThickness, Color? shadowColor ,String? font}) =>
+          fontSize: fontSize??D.h1);
+  static h1Bold({double? fontSize,Color? color, bool underline = false,TextDecoration? decoration,Color? decorationColor,double? decorationThickness, Color? shadowColor ,String? font}) =>
       TextStyle(
-          fontFamily: "ArabicUiTextLight",
+          fontFamily: font??MyFonts.MYRIAD_ARABIC,
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
           decorationColor:decorationColor!=null?decorationColor:Colors.black ,
           decorationThickness:decorationThickness,
           fontWeight: FontWeight.bold,
-          fontSize: D.h1);
+          fontSize: fontSize??D.h1);
 
 
-  static h2({Color? color, bool underline = false, TextDecoration? decoration,Color? decorationColor,double? decorationThickness,Color? shadowColor,String? font}) =>
+  static h2({double? fontSize,Color? color, bool underline = false, TextDecoration? decoration,Color? decorationColor,double? decorationThickness,Color? shadowColor,String? font}) =>
       TextStyle(
-          fontFamily: "ArabicUiTextLight",
+          fontFamily: font??MyFonts.MYRIAD_ARABIC,
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
           decorationColor:decorationColor!=null?decorationColor:Colors.black ,
           decorationThickness:decorationThickness,
-          fontSize: D.h2);
+          fontSize: fontSize??D.h2);
 
-  static h3({Color? color, bool underline = false,TextDecoration? decoration, Color? decorationColor,double? decorationThickness,Color? shadowColor,String? font}) =>
+  static h3({double? fontSize,Color? color, bool underline = false,TextDecoration? decoration, Color? decorationColor,double? decorationThickness,Color? shadowColor,String? font}) =>
       TextStyle(
-          fontFamily: "ArabicUiTextLight",
+          fontFamily: font??MyFonts.MYRIAD_ARABIC,
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
           decorationColor:decorationColor!=null?decorationColor:Colors.black ,
           decorationThickness:decorationThickness,
-          fontSize: D.h3);
+          fontSize: fontSize??D.h3);
 
-  static h4({Color? color, bool underline = false,TextDecoration? decoration,Color? decorationColor,double? decorationThickness, Color? shadowColor,String? font}) =>
+  static h4({double? fontSize,Color? color, bool underline = false,TextDecoration? decoration,Color? decorationColor,double? decorationThickness, Color? shadowColor,String? font}) =>
       TextStyle(
-          fontFamily: "ArabicUiTextLight",
+          fontFamily: font??MyFonts.MYRIAD_ARABIC,
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
           decorationColor:decorationColor!=null?decorationColor:Colors.black ,
           decorationThickness:decorationThickness,
-          fontSize: D.h4);
+          fontSize: fontSize??D.h4);
 
-  static h5({Color? color, bool underline = false,TextDecoration? decoration,Color? decorationColor,double? decorationThickness, Color? shadowColor,String? font}) =>
+  static h5({double? fontSize,Color? color, bool underline = false,TextDecoration? decoration,Color? decorationColor,double? decorationThickness, Color? shadowColor,String? font}) =>
       TextStyle(
-          fontFamily: "ArabicUiTextLight",
+          fontFamily: font??MyFonts.MYRIAD_ARABIC,
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
           decorationColor:decorationColor!=null?decorationColor:Colors.black ,
           decorationThickness:decorationThickness,
-          fontSize: D.h5);
+          fontSize: fontSize??D.h5);
 
-  static h6({Color? color, bool underline = false, TextDecoration? decoration,Color? decorationColor,double? decorationThickness,Color? shadowColor,String? font}) =>
+  static h6({double? fontSize,Color? color, bool underline = false, TextDecoration? decoration,Color? decorationColor,double? decorationThickness,Color? shadowColor,String? font}) =>
       TextStyle(
-          fontFamily: "ArabicUiTextLight",
+          fontFamily: font??MyFonts.MYRIAD_ARABIC,
           shadows: shadowColor == null ? null : shadow(color: shadowColor),
           color: color == null ? Colors.black : color,
           decoration:decoration!=null?decoration: underline ? TextDecoration.underline : null,
           decorationColor:decorationColor!=null?decorationColor:Colors.black ,
           decorationThickness:decorationThickness,
-          fontSize: D.h6);
+          fontSize: fontSize??D.h6);
 
   static shadow({Color? color}) => [
     Shadow(

@@ -74,8 +74,10 @@ class CartProvider with ChangeNotifier{
       OfferCodeModel offerCodeModel=response.data;
       offerCode=offerCodeModel.code!;
     }else if(response.status == Apis.CODE_SUCCESS &&response.data==null){
+      offerCode="";
       setIsLoading(false);
     }else{
+      offerCode="";
       setIsLoading(false);
     }
     notifyListeners();

@@ -9,6 +9,7 @@ import '../../utils/my_utils/myColors.dart';
 import '../../utils/my_utils/myUtils.dart';
 import '../../utils/my_utils/providers.dart';
 import '../categories_screen/mainCategoriesScreen.dart';
+import '../spalshScreen/spalshScreen.dart';
 
 class ChangeLanguageDialogWidget extends StatefulWidget {
   const ChangeLanguageDialogWidget({Key? key}) : super(key: key);
@@ -70,14 +71,14 @@ setState(() {
             Container(child:Row(mainAxisAlignment: MainAxisAlignment.end,children: [
               InkWell(onTap: ()async{
                 if(_utilsProviderModel!.isArabic){
-                  await Constants.utilsProviderModel!.setCurrentLocal(Constants.mainContext!, Locale("ar","EG"));
+                  await _utilsProviderModel!.setCurrentLocal(Constants.mainContext!, Locale("ar","EG"));
                   //Navigator.pop(context);
-                  MyUtils.navigate(context, MainCategoriesScreen());
+                  MyUtils.navigate(context, SplashScreen(toHome: true,));
 
                 }else{
-                  await Constants.utilsProviderModel!.setCurrentLocal(Constants.mainContext!, Locale("en","US"));
+                  await _utilsProviderModel!.setCurrentLocal(Constants.mainContext!, Locale("en","US"));
                   //Navigator.pop(context);
-                  MyUtils.navigate(context, MainCategoriesScreen());
+                  MyUtils.navigate(context, SplashScreen(toHome: true,));
                 }
               },child: Container(
                   padding: EdgeInsets.all(D.default_15),

@@ -76,12 +76,14 @@ class _FavScreenState extends State<FavScreen>  {
         ],));
   }
   Widget _listitem(){
-    return serviceProvidersProviderModel!.favList.isNotEmpty?ListView.builder(
+    return serviceProvidersProviderModel!.favList.isNotEmpty?Container(
+      color: C.BASE_ORANGE,
+      child: ListView.builder(
         itemCount: serviceProvidersProviderModel!.favList.length,
         padding: EdgeInsets.all(D.default_10),
         itemBuilder: (context,index){
           return  FavListItem(index,serviceProvidersProviderModel);
-        }):_noData();
+        }),):_noData();
   }
 Widget _noData(){
     return Center(child: Column(

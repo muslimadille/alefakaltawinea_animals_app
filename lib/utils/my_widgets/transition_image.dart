@@ -164,7 +164,9 @@ class _TransitionImageState extends State<TransitionImage> {
           fit: widget.fit ?? BoxFit.contain,
           progressIndicatorBuilder:
               (context, url, progress) {
-            return Container();
+            return
+              Container();
+
           },
           /*placeholder: (context, url) {
                                       return widget.placeHolderImage != null
